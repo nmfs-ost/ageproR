@@ -10,6 +10,16 @@
 ageproR is a R-package designed to handle input data to and from Jon
 Brodizak’s AGEPRO (Age Structured Projection Model).
 
+> \[!IMPORTANT\]
+>
+> **If you using AGEPRO for production, please use:**
+> <!-- Leave links to PIFSC until repos are migrated to nmfs-ost -->
+>
+> - [Jon Brodziak’s original AGEPRO program (source
+>   code)](https://github.com/PIFSCstockassessments/AGEPRO)  
+> - [GUI interface for AGEPRO (installer &
+>   source)](https://github.com/PIFSCstockassessments/AGEPRO-GUI)
+
 ## Note
 
 **ageproR** is still in development. These features will be implemented
@@ -26,27 +36,19 @@ in future updates.
 Importing Stock Synthesis report data as AGEPRO input data is being
 developed as a separate R-package: ss3agepro
 
-**If you using AGEPRO for production, please use:**
-
-- [Jon Brodziak’s original AGEPRO program (source
-  code)](https://github.com/PIFSCstockassessments/AGEPRO)
-- [GUI interface for AGEPRO (installer &
-  source)](https://github.com/PIFSCstockassessments/AGEPRO-GUI)
-
 ## Installation
 
-You can install the development version of ageproR from
-[PIFSCstockassessments GitHub
-Repository](https://github.com/PIFSCstockassessments/ageproR) with:
+You can install the development version of ageproR from [NOAA Fisheries
+OST Repository](https://github.com/nmfs-ost/ageproR) with:
 
 ``` r
 # via `pak`
 install.packages("pak")
-pak::pkg_install("PIFSCstockassessments/ageproR")
+pak::pkg_install("nmfs-ost/ageproR")
 
-# alternative\legacy method
+# alternative method
 install.packages("remotes")
-remotes::install_github("PIFSCstockassessments/ageproR")
+remotes::install_github("nmfs-ost/ageproR")
 ```
 
 ## AGEPRO input file format
