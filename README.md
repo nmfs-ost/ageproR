@@ -13,11 +13,12 @@ Brodizak’s AGEPRO (Age Structured Projection Model).
 > \[!IMPORTANT\]
 >
 > **If you using AGEPRO for production, please use:**
-> <!-- Leave links to PIFSC until repos are migrated to nmfs-ost --> -
-> [Jon Brodziak’s original AGEPRO program (source
-> code)](https://github.com/PIFSCstockassessments/AGEPRO) - [GUI
-> interface for AGEPRO (installer &
-> source)](https://github.com/PIFSCstockassessments/AGEPRO-GUI)
+> <!-- Leave links to PIFSC until repos are migrated to nmfs-ost -->
+>
+> - [Jon Brodziak’s original AGEPRO program (source
+>   code)](https://github.com/PIFSCstockassessments/AGEPRO)  
+> - [GUI interface for AGEPRO (installer &
+>   source)](https://github.com/PIFSCstockassessments/AGEPRO-GUI)
 
 ## Note
 
