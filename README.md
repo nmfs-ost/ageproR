@@ -60,7 +60,7 @@ writes to the `AGEPRO VERSION 4.0` Input File Format.
 Please refer to the *AGEPRO Reference Manual* for more technical
 details.
 
-## Hawaiian Uku Projection Projection base example
+## Hawaiian Uku Projection base example
 
 TODO
 
