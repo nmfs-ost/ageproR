@@ -27,15 +27,18 @@ options_output <- R6Class(
     #' and auxiliary data. The following options allow the user to select which
     #' output from the AGEPRO calculation engine is returned:
     #' \describe{
-    #'  \item{0}{Do not output Stock Distribution Summary File, but output
-    #'  all auxiliary data files.}
-    #'  \item{1}{Output Stock Distribution Summary File and all auxiliary data
+    #'  \item{0}{Do not output Stock of Age Distribution Summary File, but output
+    #'  auxiliary data files EXCEPT the Stock Numbers of Age Auxiliary File.}
+    #'  \item{1}{Output Stock of Age Distribution Summary File and
+    #'  all auxiliary data files
     #'  files.}
-    #'  \item{2}{Output Stock Distribution Summary, but discard all auxiliary
-    #'  files for output.}
-    #'  \item{3}{Output Stock Distribution summary and auxiliary files, except
-    #'  large Auxiliary files, such as the Auxiliary Stock Distribution
-    #'  dataset.}
+    #'  \item{2}{Do not output Stock of Age Distribution Summary and Auxiliary
+    #'  files.}
+    #'  \item{3}{Output Stock of Age Distribution Summary, but do not output
+    #'  any auxiliary files.}
+    #'  \item{4}{Output Stock of Age Distribution Summary and Auxiliary files
+    #'  EXCEPT the Stock Numbers of Age Auxiliary File
+    #'  }
     #' }
     #'
     #' @param process_error_aux_files
@@ -235,12 +238,13 @@ options_output <- R6Class(
     aux_flag_string = function(value) {
 
       #Validation
-      checkmate::assert_choice(value, choices = c(0,1,2,3))
+      checkmate::assert_choice(value, choices = c(0,1,2,3,4))
 
-      list_aux_flag <- list("No Stock Distribution Summary, All Auxiliary Files",
-                            "Stock Distribution Summary and All Auxiliary Files",
-                            "Stock Distribution Summary, NO Auxiliary Files",
-                            "Stock Distribution Summary, and Auxiliary Files EXCEPT Auxiliary Stock File")
+      list_aux_flag <- list("No Stock of Age Distribution Summary, Output Auxiliary Files EXCEPT Stock Numbers of Age",
+                            "Output Stock of Age Distribution Summary and All Auxiliary Files",
+                            "No Stock Of Age Distribution Summary and Auxiliary Files",
+                            "Output Stock Distribution Summary, but NO Auxiliary Files",
+                            "Output Stock Distribution Summary and Auxiliary Files EXCEPT Auxiliary Stock File")
 
       #Add 1 to value to match up with list_aux_flag indexing
       return(list_aux_flag[[value+1]])

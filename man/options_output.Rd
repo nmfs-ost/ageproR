@@ -58,15 +58,18 @@ Initializes the class
 and auxiliary data. The following options allow the user to select which
 output from the AGEPRO calculation engine is returned:
 \describe{
-\item{0}{Do not output Stock Distribution Summary File, but output
-all auxiliary data files.}
-\item{1}{Output Stock Distribution Summary File and all auxiliary data
+\item{0}{Do not output Stock of Age Distribution Summary File, but output
+auxiliary data files EXCEPT the Stock Numbers of Age Auxiliary File.}
+\item{1}{Output Stock of Age Distribution Summary File and
+all auxiliary data files
 files.}
-\item{2}{Output Stock Distribution Summary, but discard all auxiliary
-files for output.}
-\item{3}{Output Stock Distribution summary and auxiliary files, except
-large Auxiliary files, such as the Auxiliary Stock Distribution
-dataset.}
+\item{2}{Do not output Stock of Age Distribution Summary and Auxiliary
+files.}
+\item{3}{Output Stock of Age Distribution Summary, but do not output
+any auxiliary files.}
+\item{4}{Output Stock of Age Distribution Summary and Auxiliary files
+EXCEPT the Stock Numbers of Age Auxiliary File
+}
 }}
 
 \item{\code{process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
