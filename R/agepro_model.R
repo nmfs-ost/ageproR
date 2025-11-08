@@ -787,8 +787,8 @@ agepro_model <- R6Class(
     .ver_rpackage = NULL,
 
     #AGEPRO Input File version
-    .currentver_inpfile_string = "AGEPRO VERSION 4.0",
-
+    .currentver_inpfile_string = "AGEPRO VERSION 4.25",
+    .agepro40_inpfile_string = "AGEPRO VERSION 4.0",
 
     # AGEPRO keyword parameters
     .case_id = NULL,
