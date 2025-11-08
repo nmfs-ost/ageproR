@@ -204,6 +204,13 @@ options_output <- R6Class(
       }
     },
 
+    #' @field valid_aux_output_flags
+    #' Returns a list of valid numerical flags to enable _Stock of Age _
+    #' _Distribution Summary and Auxiliary Files_.
+    valid_aux_output_flags = function () {
+      return(private$.valid_aux_output_flags)
+    },
+
     #' @field json_list_object
     #' Returns JSON list object of containing options_output values
     json_list_object = function() {
@@ -234,11 +241,12 @@ options_output <- R6Class(
     .output_stock_summary = NULL,
     .output_process_error_aux_files = NULL,
     .output_data_frame = NULL,
+    .valid_aux_output_flags = c(0,1,2,3,4),
 
     aux_flag_string = function(value) {
 
       #Validation
-      checkmate::assert_choice(value, choices = c(0,1,2,3,4))
+      checkmate::assert_choice(value, choices = private$.valid_aux_output_flags)
 
       list_aux_flag <- list("No Stock of Age Distribution Summary, Output Auxiliary Files EXCEPT Stock Numbers of Age",
                             "Output Stock of Age Distribution Summary and All Auxiliary Files",

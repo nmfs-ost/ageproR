@@ -20,6 +20,9 @@ auxiliary output files}
 projection results to R \link[base:data.frame]{data.frame}. Default is
 \code{1} (or TRUE) at initialization.}
 
+\item{\code{valid_aux_output_flags}}{Returns a list of valid numerical flags to enable _Stock of Age _
+\emph{Distribution Summary and Auxiliary Files}.}
+
 \item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
 
 \item{\code{keyword_name}}{AGEPRO keyword parameter name}
