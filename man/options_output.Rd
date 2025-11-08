@@ -16,7 +16,7 @@ options to export AGEPRO output
 simulated with lognormal process error (process_error parameters) to
 auxiliary output files}
 
-\item{\code{output_data_frame}}{\link[base:logical]{Logical} flag to output AGEPRO calculation engine
+\item{\code{export_df}}{\link[base:logical]{Logical} flag to output AGEPRO calculation engine
 projection results to R \link[base:data.frame]{data.frame}. Default is
 \code{1} (or TRUE) at initialization.}
 
@@ -50,7 +50,7 @@ Initializes the class
 \if{html}{\out{<div class="r">}}\preformatted{options_output$new(
   summary_report = 0,
   output_process_error_aux_files = FALSE,
-  export_r_data_frame = TRUE
+  export_df = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -78,7 +78,7 @@ EXCEPT the Stock Numbers of Age Auxiliary File
 \item{\code{output_process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
 auxiliary files}
 
-\item{\code{export_r_data_frame}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
+\item{\code{export_df}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
 }
 \if{html}{\out{</div>}}
 }

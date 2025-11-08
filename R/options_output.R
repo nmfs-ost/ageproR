@@ -45,19 +45,19 @@ options_output <- R6Class(
     #' [Logical][base::logical] flag to enable output of process_error
     #' auxiliary files
     #'
-    #' @param export_r_data_frame
+    #' @param export_df
     #' [Logical][base::logical] flag to enable AGEPRO output to data.frame
     #'
     initialize = function(summary_report = 0,
                           output_process_error_aux_files = FALSE,
-                          export_r_data_frame = TRUE) {
+                          export_df = TRUE) {
 
       div_keyword_header(private$.keyword_name)
       cli_alert("Setting AGEPRO projection output options ...")
 
       self$output_stock_summary <- summary_report
       self$output_process_error_aux_files <- output_process_error_aux_files
-      self$output_data_frame <- export_r_data_frame
+      self$export_df <- export_df
     },
 
     #' @description
@@ -76,9 +76,9 @@ options_output <- R6Class(
           "{.emph ({as.logical(private$.output_process_error_aux_files)})}"))
       cli::cli_alert_info(
         paste0(
-          "output_data_frame {.emph (export output as data.frame)}: ",
-          "{.val {private$.output_data_frame}} ",
-          "{.emph ({as.logical(private$.output_data_frame)})}"))
+          "export_df {.emph (export output as data.frame)}: ",
+          "{.val {private$.export_df}} ",
+          "{.emph ({as.logical(private$.export_df)})}"))
 
 
     },
@@ -96,7 +96,7 @@ options_output <- R6Class(
 
       suppressMessages(self$output_stock_summary <- inp_line[1])
       suppressMessages(self$output_process_error_aux_files <- inp_line[2])
-      suppressMessages(self$output_data_frame <- inp_line[3])
+      suppressMessages(self$export_df <- inp_line[3])
 
       cli::cli_alert(paste0("Line {nline} : ",
                             "Reading AGEPRO projection output options ..."))
@@ -120,7 +120,7 @@ options_output <- R6Class(
         self$inp_keyword,
         paste(self$output_stock_summary,
               self$output_process_error_aux_files,
-              self$output_data_frame,
+              self$export_df,
               sep = delimiter)
       ))
     }
@@ -177,14 +177,14 @@ options_output <- R6Class(
       }
     },
 
-    #' @field output_data_frame
+    #' @field export_df
     #' [Logical][base::logical] flag to output AGEPRO calculation engine
     #' projection results to R [data.frame][base::data.frame]. Default is
     #' `1` (or TRUE) at initialization.
     #'
-    output_data_frame = function(value) {
+    export_df = function(value) {
       if(missing(value)){
-        return(private$.output_data_frame)
+        return(private$.export_df)
       }else{
 
         # Calling Handler to wrap field name w/ validate_logical_parameter
@@ -192,13 +192,13 @@ options_output <- R6Class(
         withCallingHandlers(
           message = function(cnd) {
             cli::cli_alert_info(
-              paste0("output_data_frame ",
+              paste0("export_df ",
                      "{.emph (AGEPRO output as data.frame)}: ",
                      "{sub('\u2192 ', '', conditionMessage(cnd))}"))
             rlang::cnd_muffle(cnd)
           },
 
-          private$.output_data_frame <- validate_logical_parameter(value)
+          private$.export_df <- validate_logical_parameter(value)
         )
 
       }
@@ -217,7 +217,7 @@ options_output <- R6Class(
       return(list(
         stock_summary_flag = self$output_stock_summary,
         process_error_aux_data_flag = self$output_process_error_aux_files,
-        export_R_flag = self$output_data_frame
+        export_R_flag = self$export_df
       ))
     },
 
@@ -240,7 +240,7 @@ options_output <- R6Class(
 
     .output_stock_summary = NULL,
     .output_process_error_aux_files = NULL,
-    .output_data_frame = NULL,
+    .export_df = NULL,
     .valid_aux_output_flags = c(0,1,2,3,4),
 
     aux_flag_string = function(value) {

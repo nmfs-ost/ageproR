@@ -764,7 +764,7 @@ agepro_model <- R6Class(
         checkmate::check_r6(value,
                             public = c("output_stock_summary",
                                        "output_process_error_aux_files",
-                                       "output_data_frame"))
+                                       "export_df"))
         private$.options_output <- value
       }
     },
