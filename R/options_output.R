@@ -48,9 +48,14 @@ options_output <- R6Class(
     #' @param export_df
     #' [Logical][base::logical] flag to enable AGEPRO output to data.frame
     #'
+    #' @param enable_agepro40_format
+    #' [Logical][base::logical] flag to indicate model is using the
+    #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
+    #'
     initialize = function(summary_report = 0,
                           output_process_error_aux_files = FALSE,
-                          export_df = TRUE) {
+                          export_df = TRUE,
+                          enable_agepro40_format = FALSE) {
 
       div_keyword_header(private$.keyword_name)
       cli_alert("Setting AGEPRO projection output options ...")
@@ -58,6 +63,8 @@ options_output <- R6Class(
       self$output_stock_summary <- summary_report
       self$output_process_error_aux_files <- output_process_error_aux_files
       self$export_df <- export_df
+
+
     },
 
     #' @description
@@ -211,6 +218,19 @@ options_output <- R6Class(
       return(private$.valid_aux_output_flags)
     },
 
+    #' @field enable_agepro40_format
+    #' [Logical][base::logical] flag to indicate model is using the
+    #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
+    enable_agepro40_format = function(value) {
+      if(missing(value)){
+        return(private$.enable_agepro40_format)
+      }
+      else{
+        stop("Function Not Implemented")
+      }
+    },
+
+
     #' @field json_list_object
     #' Returns JSON list object of containing options_output values
     json_list_object = function() {
@@ -242,6 +262,7 @@ options_output <- R6Class(
     .output_process_error_aux_files = NULL,
     .export_df = NULL,
     .valid_aux_output_flags = c(0,1,2,3,4),
+    .enable_agepro40_format = FALSE,
 
     aux_flag_string = function(value) {
 

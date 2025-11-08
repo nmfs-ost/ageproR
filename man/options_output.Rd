@@ -23,6 +23,9 @@ projection results to R \link[base:data.frame]{data.frame}. Default is
 \item{\code{valid_aux_output_flags}}{Returns a list of valid numerical flags to enable _Stock of Age _
 \emph{Distribution Summary and Auxiliary Files}.}
 
+\item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
+\verb{AGEPRO VERSION 4.0} format for setting auxiliary files.}
+
 \item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
 
 \item{\code{keyword_name}}{AGEPRO keyword parameter name}
@@ -50,7 +53,8 @@ Initializes the class
 \if{html}{\out{<div class="r">}}\preformatted{options_output$new(
   summary_report = 0,
   output_process_error_aux_files = FALSE,
-  export_df = TRUE
+  export_df = TRUE,
+  enable_agepro40_format = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -79,6 +83,9 @@ EXCEPT the Stock Numbers of Age Auxiliary File
 auxiliary files}
 
 \item{\code{export_df}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
+
+\item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
+\verb{AGEPRO VERSION 4.0} format for setting auxiliary files.}
 }
 \if{html}{\out{</div>}}
 }
