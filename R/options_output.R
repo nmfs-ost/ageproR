@@ -41,7 +41,7 @@ options_output <- R6Class(
     #'  }
     #' }
     #'
-    #' @param process_error_aux_files
+    #' @param output_process_error_aux_files
     #' [Logical][base::logical] flag to enable output of process_error
     #' auxiliary files
     #'
@@ -49,14 +49,14 @@ options_output <- R6Class(
     #' [Logical][base::logical] flag to enable AGEPRO output to data.frame
     #'
     initialize = function(summary_report = 0,
-                          process_error_aux_files = FALSE,
+                          output_process_error_aux_files = FALSE,
                           export_r_data_frame = TRUE) {
 
       div_keyword_header(private$.keyword_name)
       cli_alert("Setting AGEPRO projection output options ...")
 
       self$output_stock_summary <- summary_report
-      self$output_process_error_aux_files <- process_error_aux_files
+      self$output_process_error_aux_files <- output_process_error_aux_files
       self$output_data_frame <- export_r_data_frame
     },
 

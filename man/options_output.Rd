@@ -49,7 +49,7 @@ Initializes the class
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{options_output$new(
   summary_report = 0,
-  process_error_aux_files = FALSE,
+  output_process_error_aux_files = FALSE,
   export_r_data_frame = TRUE
 )}\if{html}{\out{</div>}}
 }
@@ -75,7 +75,7 @@ EXCEPT the Stock Numbers of Age Auxiliary File
 }
 }}
 
-\item{\code{process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
+\item{\code{output_process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
 auxiliary files}
 
 \item{\code{export_r_data_frame}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
