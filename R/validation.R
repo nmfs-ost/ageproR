@@ -286,37 +286,7 @@ validate_proj_years_parameter <- function (proj_years) {
   return(proj_years_class)
 }
 
-#' @title
-#' Validate parameters formatted as logical values
-#'
-#' @description
-#' Generalized validation method to check input value of parameter formatted
-#' as a logical. AGEPRO, and its input file format, reads logical values as
-#' `0` (FALSE) and  `1` (TRUE). In R, these numeric values can be interpreted
-#' as logical values.
-#'
-#' @param x Object to Check
-#'
-validate_logical_parameter <- function(x) {
 
-  #Convert logical values as numeric
-  if(checkmate::test_logical(x)){
-    logical_x <- x
-    x <- as.numeric(x)
-    cli::cli_alert(c("{.val {x}}"," ({.val {logical_x}})"))
-  }else{
-    cli::cli_alert("{.val {x}}")
-  }
-
-  validation_error <- checkmate::makeAssertCollection()
-  checkmate::assert_numeric(x, add = validation_error)
-  checkmate::assert_choice(x, choices = c(0, 1),
-                           add = validation_error)
-  checkmate::reportAssertions(validation_error)
-
-  return(x)
-
-}
 
 #' Checks the validity of filetype key-value pair.
 #'

@@ -154,7 +154,8 @@ options_output <- R6Class(
             rlang::cnd_muffle(cnd)
           },
 
-          private$.output_stock_summary <- validate_logical_parameter(value)
+          ## TODO: Replace validate_logical_parameter
+          private$.output_stock_summary <- private$validate_logical_parameter(value)
         )
       }
     },
@@ -180,7 +181,7 @@ options_output <- R6Class(
             rlang::cnd_muffle(cnd)
           },
           private$.output_process_error_aux_files <-
-            validate_logical_parameter(value)
+            private$validate_logical_parameter(value)
         )
       }
     },
@@ -206,7 +207,7 @@ options_output <- R6Class(
             rlang::cnd_muffle(cnd)
           },
 
-          private$.export_df <- validate_logical_parameter(value)
+          private$.export_df <- private$validate_logical_parameter(value)
         )
 
       }
@@ -278,6 +279,34 @@ options_output <- R6Class(
 
       #Add 1 to value to match up with list_aux_flag indexing
       return(list_aux_flag[[value+1]])
+
+    },
+
+    # Validate parameters formatted as logical values
+    #
+    # Generalized validation method to check input value of parameter formatted
+    # as a logical. AGEPRO, and its input file format, reads logical values as
+    # `0` (FALSE) and  `1` (TRUE). In R, these numeric values can be interpreted
+    # as logical values.
+    #
+    validate_logical_parameter = function(x) {
+
+      #Convert logical values as numeric
+      if(checkmate::test_logical(x)){
+        logical_x <- x
+        x <- as.numeric(x)
+        cli::cli_alert(c("{.val {x}}"," ({.val {logical_x}})"))
+      }else{
+        cli::cli_alert("{.val {x}}")
+      }
+
+      validation_error <- checkmate::makeAssertCollection()
+      checkmate::assert_numeric(x, add = validation_error)
+      checkmate::assert_choice(x, choices = c(0, 1),
+                               add = validation_error)
+      checkmate::reportAssertions(validation_error)
+
+      return(x)
 
     }
   )
