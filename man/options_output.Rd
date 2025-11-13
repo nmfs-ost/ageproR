@@ -51,7 +51,7 @@ projection results to R \link[base:data.frame]{data.frame}. Default is
 Initializes the class
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{options_output$new(
-  summary_report = 0,
+  auxiliary_flag = 0,
   output_process_error_aux_files = FALSE,
   export_df = TRUE,
   enable_agepro40_format = FALSE
@@ -61,7 +61,7 @@ Initializes the class
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{summary_report}}{\link[base:numeric]{Numeric} flag to enable Stock Distribution Summary file
+\item{\code{auxiliary_flag}}{\link[base:numeric]{Numeric} flag to enable Stock Distribution Summary file
 and auxiliary data. The following options allow the user to select which
 output from the AGEPRO calculation engine is returned:
 \describe{

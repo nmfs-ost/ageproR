@@ -22,7 +22,7 @@ options_output <- R6Class(
     #' @description
     #' Initializes the class
     #'
-    #' @param summary_report
+    #' @param auxiliary_flag
     #' [Numeric][base::numeric] flag to enable Stock Distribution Summary file
     #' and auxiliary data. The following options allow the user to select which
     #' output from the AGEPRO calculation engine is returned:
@@ -52,7 +52,7 @@ options_output <- R6Class(
     #' [Logical][base::logical] flag to indicate model is using the
     #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
     #'
-    initialize = function(summary_report = 0,
+    initialize = function(auxiliary_flag = 0,
                           output_process_error_aux_files = FALSE,
                           export_df = TRUE,
                           enable_agepro40_format = FALSE) {
@@ -60,7 +60,8 @@ options_output <- R6Class(
       div_keyword_header(private$.keyword_name)
       cli_alert("Setting AGEPRO projection output options ...")
 
-      self$output_stock_summary <- summary_report
+      #ensure
+      self$output_stock_summary <- auxiliary_flag
       self$output_process_error_aux_files <- output_process_error_aux_files
       self$export_df <- export_df
 
@@ -279,8 +280,6 @@ options_output <- R6Class(
       return(list_aux_flag[[value+1]])
 
     }
-
-
   )
 
 )
