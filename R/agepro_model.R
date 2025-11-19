@@ -946,9 +946,10 @@ agepro_inp_model <- R6Class(
         },
         error = function(cond) {
           message("There was an error reading this file. \n", cond)
+
           #Reset projection_analyses_type
           self$projection_analyses_type <- "standard"
-          self$perc$set_enable_percentile_summary(FALSE)
+          self$perc$enable_percentile_summary <- FALSE
           return(invisible())
         },
         finally = {
