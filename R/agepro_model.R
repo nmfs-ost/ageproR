@@ -966,7 +966,9 @@ agepro_inp_model <- R6Class(
     #'
     read_inpfile_values = function(inp_con) {
 
-      #assert_inpfile_version: assume line 1 is version string
+      ## TODO: Refactor to read inpfile version
+
+      # Assume line 1 is version string
       self$nline <- 1
 
       div_line1_alert = function() {
@@ -977,7 +979,16 @@ agepro_inp_model <- R6Class(
       }
       div_line1_alert()
 
-      private$assert_inpfile_version(readLines(inp_con, n = 1, warn = FALSE))
+      # Read line 1 from file connection
+      inp_line1 <- readLines(inp_con, n = 1, warn = FALSE)
+      cli::cli_alert_info("Version: '{inp_line1}'")
+
+      # Validate Line 1 for Input File VERSION format.
+      # - Non-valid/Non-Supported Strings returns Error
+      # - Warn if AGEPRO VERSION 4.0 was found
+      if(isTRUE(private$check_inpfile_version(inp_line1))) {
+        inp_line <- inp_line1
+      }
 
       #loop through inpfile to read in value fore each parameter keyword
       while (TRUE) {
@@ -1410,13 +1421,12 @@ agepro_inp_model <- R6Class(
     },
 
 
+
     # Helper function to validate AGEPRO Input File Version format is
     # supported_inpfile_version
-    assert_inpfile_version = function(inp_line) {
+    check_inpfile_version = function(inp_line) {
 
       checkmate::assert_character(inp_line, len = 1)
-
-      cli::cli_alert_info("Version: '{inp_line}'")
 
       # Throw Error if VERSION string doesn't match supported
       # AGEPRO Input File Version string formats
@@ -1426,6 +1436,7 @@ agepro_inp_model <- R6Class(
           "\n - Supported verion(s): ",
           paste(self$supported_inpfile_versions,collapse=", ")),
           call.= FALSE)
+
       }
 
       # Throw Warning if (supported) VERSION string doesn't match
@@ -1438,12 +1449,13 @@ agepro_inp_model <- R6Class(
                        " Input File format: ",
                        private$.currentver_inpfile_string),
                 call. = FALSE)
+        return()
+
       }
-
-      self$ver_inpfile_string <- inp_line
-
+      return(TRUE)
 
     },
+
 
 
     # Set Input File String based on preference on current AGEPRO input file
