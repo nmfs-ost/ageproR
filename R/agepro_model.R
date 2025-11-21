@@ -986,9 +986,9 @@ agepro_inp_model <- R6Class(
       # Validate Line 1 for Input File VERSION format.
       # - Non-valid/Non-Supported Strings returns Error
       # - Warn if AGEPRO VERSION 4.0 was found
-      if(isTRUE(private$check_inpfile_version(inp_line1))) {
-        inp_line <- inp_line1
-      }
+      private$check_inpfile_version(inp_line1)
+      self$ver_inpfile_string <- inp_line1
+
 
       #loop through inpfile to read in value fore each parameter keyword
       while (TRUE) {
