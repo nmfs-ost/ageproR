@@ -228,7 +228,8 @@ options_output <- R6Class(
         return(private$.enable_agepro40_format)
       }
       else{
-        stop("Function Not Implemented")
+        checkmate::assert_logical(value)
+        private$.enable_agepro40_format <- value
       }
     },
 

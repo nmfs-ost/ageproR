@@ -782,6 +782,7 @@ agepro_model <- R6Class(
   ),
   private = list(
 
+    #Version
     .ver_inpfile_string = NULL,
     .ver_jsonfile_format = NULL,
     .ver_rpackage = NULL,
@@ -1390,6 +1391,11 @@ agepro_inp_model <- R6Class(
 
     read_options_output = function(con, nline) {
 
+      # Is Input File Version String matches agepro40 Input File Format string:
+      # "AGEPRO VERSION 4.0"
+      self$options$enable_agepro40_format <-
+        private$check_agepro40_inpfile_string(self$ver_inpfile_string)
+
       self$nline <- self$options$read_inp_lines(con, nline)
     },
 
@@ -1424,7 +1430,8 @@ agepro_inp_model <- R6Class(
 
     # Helper function to validate AGEPRO Input File Version format is
     # supported_inpfile_version
-    check_inpfile_version = function(inp_line) {
+    check_inpfile_version = function(inp_line,
+                                     check_currentver = TRUE) {
 
       checkmate::assert_character(inp_line, len = 1)
 
@@ -1439,23 +1446,43 @@ agepro_inp_model <- R6Class(
 
       }
 
-      # Throw Warning if (supported) VERSION string doesn't match
-      # "current version" AGEPRO Input file format
-      if(isFALSE(identical(inp_line,
-                    private$.currentver_inpfile_string))){
-        warning(paste0(inp_line,
-                       " (Line 1 read from input file) found,",
-                       " but does not match current version of the AGEPRO",
-                       " Input File format: ",
-                       private$.currentver_inpfile_string),
-                call. = FALSE)
-        return()
-
+      if(check_currentver) {
+        return(invisible(private$check_currentver_inpfile_string(inp_line)))
       }
       return(TRUE)
 
     },
 
+
+    # Helper function to check if the string matches AGEPRO VERSION 4.0
+    # input file version format
+    check_agepro40_inpfile_string = function(inp_line) {
+
+      return(identical(inp_line, private$.agepro40_inpfile_string))
+    },
+
+    # Throw Warning if (supported) VERSION string doesn't match
+    # "current version" AGEPRO Input file format
+    check_currentver_inpfile_string = function (inp_line, line1_msg = TRUE) {
+
+      # In case this is used outside checking/reading line1 of input files
+      msg_wasfound <- ifelse(line1_msg,
+                    " (Line 1 read from input file) found,",
+                    " was found,")
+
+      if(isFALSE(identical(inp_line,
+                           private$.currentver_inpfile_string))){
+        warning(paste0(inp_line,
+                       msg_wasfound,
+                       " but does not match current version of the AGEPRO",
+                       " Input File format: ",
+                       private$.currentver_inpfile_string),
+                call. = FALSE)
+
+        return(FALSE)
+      }
+      return(TRUE)
+    },
 
 
     # Set Input File String based on preference on current AGEPRO input file
