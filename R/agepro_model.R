@@ -949,7 +949,7 @@ agepro_inp_model <- R6Class(
 
           #Reset projection_analyses_type
           self$projection_analyses_type <- "standard"
-          self$perc$enable_percentile_summary <- FALSE
+          suppressMessages(self$perc$enable_percentile_summary <- FALSE)
           return(invisible())
         },
         finally = {
