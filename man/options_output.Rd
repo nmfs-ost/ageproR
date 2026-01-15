@@ -16,9 +16,15 @@ options to export AGEPRO output
 simulated with lognormal process error (process_error parameters) to
 auxiliary output files}
 
-\item{\code{output_data_frame}}{\link[base:logical]{Logical} flag to output AGEPRO calculation engine
+\item{\code{export_df}}{\link[base:logical]{Logical} flag to output AGEPRO calculation engine
 projection results to R \link[base:data.frame]{data.frame}. Default is
 \code{1} (or TRUE) at initialization.}
+
+\item{\code{valid_aux_output_flags}}{Returns a list of valid numerical flags to enable _Stock of Age _
+\emph{Distribution Summary and Auxiliary Files}.}
+
+\item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
+\verb{AGEPRO VERSION 4.0} format for setting auxiliary files.}
 
 \item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
 
@@ -45,34 +51,41 @@ projection results to R \link[base:data.frame]{data.frame}. Default is
 Initializes the class
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{options_output$new(
-  summary_report = 0,
-  process_error_aux_files = FALSE,
-  export_r_data_frame = TRUE
+  auxiliary_flag = 0,
+  output_process_error_aux_files = FALSE,
+  export_df = TRUE,
+  enable_agepro40_format = FALSE
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{summary_report}}{\link[base:numeric]{Numeric} flag to enable Stock Distribution Summary file
+\item{\code{auxiliary_flag}}{\link[base:numeric]{Numeric} flag to enable Stock Distribution Summary file
 and auxiliary data. The following options allow the user to select which
 output from the AGEPRO calculation engine is returned:
 \describe{
-\item{0}{Do not output Stock Distribution Summary File, but output
-all auxiliary data files.}
-\item{1}{Output Stock Distribution Summary File and all auxiliary data
+\item{0}{Do not output Stock of Age Distribution Summary File, but output
+auxiliary data files EXCEPT the Stock Numbers of Age Auxiliary File.}
+\item{1}{Output Stock of Age Distribution Summary File and
+all auxiliary data files
 files.}
-\item{2}{Output Stock Distribution Summary, but discard all auxiliary
-files for output.}
-\item{3}{Output Stock Distribution summary and auxiliary files, except
-large Auxiliary files, such as the Auxiliary Stock Distribution
-dataset.}
+\item{2}{Do not output Stock of Age Distribution Summary and Auxiliary
+files.}
+\item{3}{Output Stock of Age Distribution Summary, but do not output
+any auxiliary files.}
+\item{4}{Output Stock of Age Distribution Summary and Auxiliary files
+EXCEPT the Stock Numbers of Age Auxiliary File
+}
 }}
 
-\item{\code{process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
+\item{\code{output_process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
 auxiliary files}
 
-\item{\code{export_r_data_frame}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
+\item{\code{export_df}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
+
+\item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
+\verb{AGEPRO VERSION 4.0} format for setting auxiliary files.}
 }
 \if{html}{\out{</div>}}
 }

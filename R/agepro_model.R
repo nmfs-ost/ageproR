@@ -764,7 +764,7 @@ agepro_model <- R6Class(
         checkmate::check_r6(value,
                             public = c("output_stock_summary",
                                        "output_process_error_aux_files",
-                                       "output_data_frame"))
+                                       "export_df"))
         private$.options_output <- value
       }
     },
@@ -782,13 +782,14 @@ agepro_model <- R6Class(
   ),
   private = list(
 
+    #Version
     .ver_inpfile_string = NULL,
     .ver_jsonfile_format = NULL,
     .ver_rpackage = NULL,
 
     #AGEPRO Input File version
-    .currentver_inpfile_string = "AGEPRO VERSION 4.0",
-
+    .currentver_inpfile_string = "AGEPRO VERSION 4.25",
+    .agepro40_inpfile_string = "AGEPRO VERSION 4.0",
 
     # AGEPRO keyword parameters
     .case_id = NULL,
@@ -946,9 +947,10 @@ agepro_inp_model <- R6Class(
         },
         error = function(cond) {
           message("There was an error reading this file. \n", cond)
+
           #Reset projection_analyses_type
           self$projection_analyses_type <- "standard"
-          self$perc$set_enable_percentile_summary(FALSE)
+          suppressMessages(self$perc$enable_percentile_summary <- FALSE)
           return(invisible())
         },
         finally = {
@@ -965,7 +967,9 @@ agepro_inp_model <- R6Class(
     #'
     read_inpfile_values = function(inp_con) {
 
-      #assert_inpfile_version: assume line 1 is version string
+      ## TODO: Refactor to read inpfile version
+
+      # Assume line 1 is version string
       self$nline <- 1
 
       div_line1_alert = function() {
@@ -976,7 +980,16 @@ agepro_inp_model <- R6Class(
       }
       div_line1_alert()
 
-      private$assert_inpfile_version(readLines(inp_con, n = 1, warn = FALSE))
+      # Read line 1 from file connection
+      inp_line1 <- readLines(inp_con, n = 1, warn = FALSE)
+      cli::cli_alert_info("Version: '{inp_line1}'")
+
+      # Validate Line 1 for Input File VERSION format.
+      # - Non-valid/Non-Supported Strings returns Error
+      # - Warn if AGEPRO VERSION 4.0 was found
+      private$check_inpfile_version(inp_line1)
+      self$ver_inpfile_string <- inp_line1
+
 
       #loop through inpfile to read in value fore each parameter keyword
       while (TRUE) {
@@ -1378,6 +1391,11 @@ agepro_inp_model <- R6Class(
 
     read_options_output = function(con, nline) {
 
+      # Is Input File Version String matches agepro40 Input File Format string:
+      # "AGEPRO VERSION 4.0"
+      self$options$enable_agepro40_format <-
+        private$check_agepro40_inpfile_string(self$ver_inpfile_string)
+
       self$nline <- self$options$read_inp_lines(con, nline)
     },
 
@@ -1409,13 +1427,13 @@ agepro_inp_model <- R6Class(
     },
 
 
+
     # Helper function to validate AGEPRO Input File Version format is
     # supported_inpfile_version
-    assert_inpfile_version = function(inp_line) {
+    check_inpfile_version = function(inp_line,
+                                     check_currentver = TRUE) {
 
       checkmate::assert_character(inp_line, len = 1)
-
-      cli::cli_alert_info("Version: '{inp_line}'")
 
       # Throw Error if VERSION string doesn't match supported
       # AGEPRO Input File Version string formats
@@ -1425,22 +1443,45 @@ agepro_inp_model <- R6Class(
           "\n - Supported verion(s): ",
           paste(self$supported_inpfile_versions,collapse=", ")),
           call.= FALSE)
+
       }
 
-      # Throw Warning if (supported) VERSION string doesn't match
-      # "current version" AGEPRO Input file format
+      if(check_currentver) {
+        return(invisible(private$check_currentver_inpfile_string(inp_line)))
+      }
+      return(TRUE)
+
+    },
+
+
+    # Helper function to check if the string matches AGEPRO VERSION 4.0
+    # input file version format
+    check_agepro40_inpfile_string = function(inp_line) {
+
+      return(identical(inp_line, private$.agepro40_inpfile_string))
+    },
+
+    # Throw Warning if (supported) VERSION string doesn't match
+    # "current version" AGEPRO Input file format
+    check_currentver_inpfile_string = function (inp_line, line1_msg = TRUE) {
+
+      # In case this is used outside checking/reading line1 of input files
+      msg_wasfound <- ifelse(line1_msg,
+                    " (Line 1 read from input file) found,",
+                    " was found,")
+
       if(isFALSE(identical(inp_line,
-                    private$.currentver_inpfile_string))){
+                           private$.currentver_inpfile_string))){
         warning(paste0(inp_line,
-                       " (Line 1 read from input file),",
-                       " does not match current version",
-                       " format string: ",private$.currentver_inpfile_string),
+                       msg_wasfound,
+                       " but does not match current version of the AGEPRO",
+                       " Input File format: ",
+                       private$.currentver_inpfile_string),
                 call. = FALSE)
+
+        return(FALSE)
       }
-
-      self$ver_inpfile_string <- inp_line
-
-
+      return(TRUE)
     },
 
 
