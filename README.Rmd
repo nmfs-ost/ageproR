@@ -24,10 +24,10 @@ AGEPRO (Age Structured Projection Model) calculation engine.
 > [!IMPORTANT]
 >
 > **If you using AGEPRO for production, please use:**
-> <!-- Leave links to PIFSC until repos are migrated to nmfs-ost -->
 >
-> - [Original AGEPRO command-line calculation engine (source code)](https://github.com/PIFSCstockassessments/AGEPRO)  
-> - [GUI interface for AGEPRO (installer & source)](https://github.com/PIFSCstockassessments/AGEPRO-GUI)
+> - [AGEPRO-GUI, includes binary for AGEPRO calculation engine](https://github.com/nmfs-ost/AGEPRO-GUI)
+> - [AGEPRO Command Line based Calculation Engine source code repo](https://github.com/noaa-pifsc/AGEPRO) 
+> 
 
 ## Note
 
