@@ -946,7 +946,7 @@ agepro_inp_model <- R6Class(
 
         },
         error = function(cond) {
-          message("There was an error reading this file. \n", cond)
+          cli::cli_alert_danger("There was an error reading this file. \n  {cond}")
 
           #Reset projection_analyses_type
           self$projection_analyses_type <- "standard"
