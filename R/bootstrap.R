@@ -219,7 +219,8 @@ bootstrap <- R6Class(
       warning(paste0(invalid_path_message(value),
                      "Please save AGEPRO input files with a vaild ",
                      "bootstrap_file, especially with running models with ",
-                     "the calculation engine.", call. = FALSE))
+                     "the calculation engine."),
+              call. = FALSE)
     }
 
   )
