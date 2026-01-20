@@ -155,7 +155,12 @@ options_output <- R6Class(
           },
 
           ## TODO: Replace validate_logical_parameter
-          private$.output_stock_summary <- private$validate_logical_parameter(value)
+          if(self$enable_agepro40_format){
+            private$.output_stock_summary <- private$validate_logical_parameter(value)
+          }else{
+            private$.output_stock_summary <- checkmate::assert_choice(value, self$valid_aux_output_flags)
+          }
+
         )
       }
     },
