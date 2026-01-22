@@ -10,7 +10,7 @@ options to export AGEPRO output
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{output_stock_summary}}{\link[base:logical]{Logical} flag to output stock summary information}
+\item{\code{auxfile_output_flag}}{\link[base:logical]{Logical} flag to output stock summary information}
 
 \item{\code{output_process_error_aux_files}}{\link[base:logical]{Logical} flag to output population and fishery processes
 simulated with lognormal process error (process_error parameters) to

@@ -61,7 +61,7 @@ options_output <- R6Class(
       cli_alert("Setting AGEPRO projection output options ...")
 
       #ensure
-      self$output_stock_summary <- auxiliary_flag
+      self$auxfile_output_flag <- auxiliary_flag
       self$output_process_error_aux_files <- output_process_error_aux_files
       self$export_df <- export_df
 
@@ -74,9 +74,9 @@ options_output <- R6Class(
     print = function() {
       cli::cli_alert_info(
         paste0(
-          "output_stock_summary: ",
-          "{.val {private$.output_stock_summary}} ",
-          "{.emph ({private$aux_flag_string(private$.output_stock_summary)})}"))
+          "auxfile_output_flag: ",
+          "{.val {private$.auxfile_output_flag}} ",
+          "{.emph ({private$aux_flag_string(private$.auxfile_output_flag)})}"))
       cli::cli_alert_info(
         paste0(
           "output_process_error_aux_files: ",
@@ -102,7 +102,7 @@ options_output <- R6Class(
       nline <- nline + 1
       inp_line <- read_inp_numeric_line(inp_con)
 
-      suppressMessages(self$output_stock_summary <- inp_line[1])
+      suppressMessages(self$auxfile_output_flag <- inp_line[1])
       suppressMessages(self$output_process_error_aux_files <- inp_line[2])
       suppressMessages(self$export_df <- inp_line[3])
 
@@ -126,7 +126,7 @@ options_output <- R6Class(
     get_inp_lines = function(delimiter = " "){
       return(list(
         self$inp_keyword,
-        paste(self$output_stock_summary,
+        paste(self$auxfile_output_flag,
               self$output_process_error_aux_files,
               self$export_df,
               sep = delimiter)
@@ -136,11 +136,11 @@ options_output <- R6Class(
   ),
   active = list(
 
-    #' @field output_stock_summary
+    #' @field auxfile_output_flag
     #' [Logical][base::logical] flag to output stock summary information
-    output_stock_summary = function(value) {
+    auxfile_output_flag = function(value) {
       if(missing(value)) {
-        return(private$.output_stock_summary)
+        return(private$.auxfile_output_flag)
       }else{
 
         # Calling Handler to wrap field name w/ validate_logical_parameter
@@ -156,9 +156,9 @@ options_output <- R6Class(
 
           ## TODO: Replace validate_logical_parameter
           if(self$enable_agepro40_format){
-            private$.output_stock_summary <- private$validate_logical_parameter(value)
+            private$.auxfile_output_flag <- private$validate_logical_parameter(value)
           }else{
-            private$.output_stock_summary <- checkmate::assert_choice(value, self$valid_aux_output_flags)
+            private$.auxfile_output_flag <- checkmate::assert_choice(value, self$valid_aux_output_flags)
           }
 
         )
@@ -185,6 +185,7 @@ options_output <- R6Class(
 
             rlang::cnd_muffle(cnd)
           },
+
           private$.output_process_error_aux_files <-
             private$validate_logical_parameter(value)
         )
@@ -243,7 +244,7 @@ options_output <- R6Class(
     #' Returns JSON list object of containing options_output values
     json_list_object = function() {
       return(list(
-        stock_summary_flag = self$output_stock_summary,
+        stock_summary_flag = self$auxfile_output_flag,
         process_error_aux_data_flag = self$output_process_error_aux_files,
         export_R_flag = self$export_df
       ))
@@ -266,7 +267,7 @@ options_output <- R6Class(
 
     .keyword_name = "options",
 
-    .output_stock_summary = NULL,
+    .auxfile_output_flag = NULL,
     .output_process_error_aux_files = NULL,
     .export_df = NULL,
     .valid_aux_output_flags = c(0,1,2,3,4),
