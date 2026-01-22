@@ -19,6 +19,15 @@ test_that("New agepro_model (Year: 2019-2026, Age: 1-32, num_pop_sims: 1000, num
 
 #Note: The bootstrap_file output is masked to a fixed value to fix varying outputs using testthat and running tests
 #with devtools::check()
+test_that("example/test-example4.inp exists", {
+  inpfile_path <- file.path(testthat::test_path(),"example","test-example4.inp")
+  expect_true(file.exists(inpfile_path))
+})
+test_that("example/Example1.BSN exists", {
+  bsnfile_path <- file.path(testthat::test_path(),"example","Example1.BSN")
+  expect_true(file.exists(bsnfile_path))
+})
+
 
 #Test that Opening inst/test-example4,inp works
 test_that("Opening inst/test-example4.inp is imported to test agepro_inp_model", {
