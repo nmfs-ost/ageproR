@@ -41,9 +41,9 @@ options_output <- R6Class(
     #'  }
     #' }
     #'
-    #' @param output_process_error_aux_files
-    #' [Logical][base::logical] flag to enable output of process_error
-    #' auxiliary files
+    #' @param process_error_datafiles
+    #' [Logical][base::logical] flag to enable output of population and fishery
+    #' process error results as auxiliary files
     #'
     #' @param export_df
     #' [Logical][base::logical] flag to enable AGEPRO output to data.frame
@@ -53,7 +53,7 @@ options_output <- R6Class(
     #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
     #'
     initialize = function(auxiliary_flag = 0,
-                          output_process_error_aux_files = FALSE,
+                          process_error_datafiles = FALSE,
                           export_df = TRUE,
                           enable_agepro40_format = FALSE) {
 
@@ -62,7 +62,7 @@ options_output <- R6Class(
 
       #ensure
       self$auxfile_output_flag <- auxiliary_flag
-      self$output_process_error_aux_files <- output_process_error_aux_files
+      self$process_error_datafiles <- process_error_datafiles
       self$export_df <- export_df
 
 
@@ -79,9 +79,9 @@ options_output <- R6Class(
           "{.emph ({private$aux_flag_string(private$.auxfile_output_flag)})}"))
       cli::cli_alert_info(
         paste0(
-          "output_process_error_aux_files: ",
-          "{.val {private$.output_process_error_aux_files}} ",
-          "{.emph ({as.logical(private$.output_process_error_aux_files)})}"))
+          "process_error_datafiles: ",
+          "{.val {private$.process_error_datafiles}} ",
+          "{.emph ({as.logical(private$.process_error_datafiles)})}"))
       cli::cli_alert_info(
         paste0(
           "export_df {.emph (export output as data.frame)}: ",
@@ -103,7 +103,7 @@ options_output <- R6Class(
       inp_line <- read_inp_numeric_line(inp_con)
 
       suppressMessages(self$auxfile_output_flag <- inp_line[1])
-      suppressMessages(self$output_process_error_aux_files <- inp_line[2])
+      suppressMessages(self$process_error_datafiles <- inp_line[2])
       suppressMessages(self$export_df <- inp_line[3])
 
       cli::cli_alert(paste0("Line {nline} : ",
@@ -127,7 +127,7 @@ options_output <- R6Class(
       return(list(
         self$inp_keyword,
         paste(self$auxfile_output_flag,
-              self$output_process_error_aux_files,
+              self$process_error_datafiles,
               self$export_df,
               sep = delimiter)
       ))
@@ -165,13 +165,13 @@ options_output <- R6Class(
       }
     },
 
-    #' @field output_process_error_aux_files
+    #' @field process_error_datafiles
     #' [Logical][base::logical] flag to output population and fishery processes
     #' simulated with lognormal process error (process_error parameters) to
     #' auxiliary output files
-    output_process_error_aux_files = function(value) {
+    process_error_datafiles = function(value) {
       if(missing(value)) {
-        return(private$.output_process_error_aux_files)
+        return(private$.process_error_datafiles)
       }else {
 
         # Calling Handler to wrap field name w/ validate_logical_parameter
@@ -179,14 +179,14 @@ options_output <- R6Class(
         withCallingHandlers(
           message = function(cnd) {
             cli::cli_alert_info(
-              paste0("output_process_error_aux_files ",
+              paste0("process_error_datafiles ",
                      "{.emph (Auxillary output files)}: ",
                      "{sub('\u2192 ', '', conditionMessage(cnd))}"))
 
             rlang::cnd_muffle(cnd)
           },
 
-          private$.output_process_error_aux_files <-
+          private$.process_error_datafiles <-
             private$validate_logical_parameter(value)
         )
       }
@@ -245,7 +245,7 @@ options_output <- R6Class(
     json_list_object = function() {
       return(list(
         stock_summary_flag = self$auxfile_output_flag,
-        process_error_aux_data_flag = self$output_process_error_aux_files,
+        process_error_aux_data_flag = self$process_error_datafiles,
         export_R_flag = self$export_df
       ))
     },
@@ -268,7 +268,7 @@ options_output <- R6Class(
     .keyword_name = "options",
 
     .auxfile_output_flag = NULL,
-    .output_process_error_aux_files = NULL,
+    .process_error_datafiles = NULL,
     .export_df = NULL,
     .valid_aux_output_flags = c(0,1,2,3,4),
     .enable_agepro40_format = FALSE,

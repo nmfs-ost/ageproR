@@ -763,7 +763,7 @@ agepro_model <- R6Class(
       }else {
         checkmate::check_r6(value,
                             public = c("auxfile_output_flag",
-                                       "output_process_error_aux_files",
+                                       "process_error_datafiles",
                                        "export_df"))
         private$.options_output <- value
       }
