@@ -1605,7 +1605,7 @@ agepro_json_model <- R6Class(
         "rebuild" = self$rebuild$json_list_object,
         "options" = self$options$json_list_object,
         "perc" = {
-          if(self$perc$flag$op$enable_percentile_summary){
+          if(self$perc$enable_percentile_summary){
             self$perc$json_list_object
           }else{
             NA
