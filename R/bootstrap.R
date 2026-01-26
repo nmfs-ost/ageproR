@@ -196,27 +196,35 @@ bootstrap <- R6Class(
     .keyword_name = "bootstrap",
 
     #Helper function to construct bootstrap_file with
-    setup_bootstrap_path = function(inp_con, relative = TRUE){
-
-      if(relative) {
-        inpfile_path <- normalizePath(summary(inp_con)$description, mustWork = TRUE)
-        inpfile_dir <- dirname(inpfile_path)
-      }else{
-        # Assume working directory
-        inpfile_dir <- here::here()
-      }
+    setup_bootstrap_path = function(inp_con){
 
       # Import Bootstrap file path from file connection
       suppressMessages(invisible(capture.output(
         inpline_bootstrap_path <- readLines(inp_con, n = 1, warn = FALSE))))
 
-      #Construct bootstrap file path.
-      #Active function self$boostrap_file includes validate_bootstrap_file.
-      self$bootstrap_file <- file.path(inpfile_dir,
-                                       inpline_bootstrap_path)
+      #Check that bootstrap is in the same path as in input file
+      # Get Input file path by using the file connection "description" value
+      inpfile_path <-
+        dirname(normalizePath(summary(inp_con)$description, mustWork = TRUE))
 
+      relative_inpfile <-
+        checkmate::test_file_exists(file.path(inpfile_path,inpline_bootstrap_path))
 
+      #If bootstrap file is relative to the input file path
+      if(isTRUE(relative_inpfile)){
 
+        #Append the Input file directory path to Validate
+        private$validate_bootstrap_file(file.path(inpfile_path,
+                                                  inpline_bootstrap_path))
+        private$.bootstrap_file <- inpline_bootstrap_path
+
+        return()
+      }
+
+      # Assume working directory
+      # Construct bootstrap file path.
+      # Active function self$boostrap_file includes validate_bootstrap_file.
+      self$bootstrap_file <- file.path(inpline_bootstrap_path)
 
     },
 
