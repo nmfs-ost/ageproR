@@ -244,7 +244,7 @@ options_output <- R6Class(
     #' Returns JSON list object of containing options_output values
     json_list_object = function() {
       return(list(
-        stock_summary_flag = self$auxfile_output_flag,
+        auxfile_output_flag = self$auxfile_output_flag,
         process_error_aux_data_flag = self$process_error_datafiles,
         export_R_flag = self$export_df
       ))
