@@ -54,7 +54,7 @@ agepro_model <- R6Class(
 
       #Current Input File Version
       private$.ver_inpfile_string = private$.currentver_inpfile_string
-      private$.ver_jsonfile_format = 0
+      private$.ver_json_format = 2
       private$setup_ver_rpackage()
 
       #Set GENERAL
@@ -784,7 +784,7 @@ agepro_model <- R6Class(
 
     #Version
     .ver_inpfile_string = NULL,
-    .ver_jsonfile_format = NULL,
+    .ver_json_format = NULL,
     .ver_rpackage = NULL,
 
     #AGEPRO Input File version
@@ -1575,7 +1575,7 @@ agepro_json_model <- R6Class(
       version_json <- list(
 
         inpfile_string = self$ver_inpfile_string,
-        jsonfile_format = self$ver_jsonfile_format
+        json_format = self$ver_json_format
       )
 
       agepro_json <- list(
