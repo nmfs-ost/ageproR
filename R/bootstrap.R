@@ -234,7 +234,7 @@ bootstrap <- R6Class(
       #Validate that 'value' points to a existing file.
       if (test_file_exists(value, access = "r", extension = "bsn")) {
         #If validated, assign value
-        cli_alert_success("bootstrap_file: {.val {value}}")
+        cli_alert_success("validated bootstrap_file")
         return()
       }
 
