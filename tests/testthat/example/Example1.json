@@ -169,8 +169,8 @@
   "pstar": {},
   "rebuild": {},
   "options": {
-    "auxfile_output_flag": 3,
-    "process_error_aux_data_flag": 0,
+    "auxliary_output_flag": 3,
+    "process_dataflag": 0,
     "export_R_flag": 1
   },
   "perc": null,
