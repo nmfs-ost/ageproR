@@ -48,7 +48,7 @@ bootstrap <- R6Class(
             open_file_dialog(c("AGEPRO Bootstrap File", ".bsn"))
       }
 
-      if (test_file_exists(bsn_path, access = "r", extension = "bsn")) {
+      if (checkmate::test_file_exists(bsn_path, access = "r", extension = "bsn")) {
         self$bootstrap_file <- bsn_path
       }else{
         local({
@@ -86,11 +86,10 @@ bootstrap <- R6Class(
       #Read another line from the file connection, and
       #assign it as bootstrap filename
       nline <- nline + 1
-      suppressMessages(invisible(capture.output(
-        self$bootstrap_file <- readLines(inp_con, n = 1, warn = FALSE))))
+      private$setup_bootstrap_path(inp_con)
+
       cli::cli_alert(paste0("Line {nline}: bootstrap_file: ",
                             "{.val {self$bootstrap_file}}"))
-
 
       return(nline)
 
@@ -196,13 +195,46 @@ bootstrap <- R6Class(
     .bootstrap_file = NULL,
     .keyword_name = "bootstrap",
 
+    #Helper function to construct bootstrap_file with
+    setup_bootstrap_path = function(inp_con){
+
+      # Import Bootstrap file path from file connection
+      suppressMessages(invisible(capture.output(
+        inpline_bootstrap_path <- readLines(inp_con, n = 1, warn = FALSE))))
+
+      #Check that bootstrap is in the same path as in input file
+      # Get Input file path by using the file connection "description" value
+      inpfile_path <-
+        dirname(normalizePath(summary(inp_con)$description, mustWork = TRUE))
+
+      relative_inpfile <-
+        checkmate::test_file_exists(file.path(inpfile_path,inpline_bootstrap_path))
+
+      #If bootstrap file is relative to the input file path
+      if(isTRUE(relative_inpfile)){
+
+        #Append the Input file directory path to Validate
+        private$validate_bootstrap_file(file.path(inpfile_path,
+                                                  inpline_bootstrap_path))
+        private$.bootstrap_file <- inpline_bootstrap_path
+
+        return()
+      }
+
+      # Assume working directory
+      # Construct bootstrap file path.
+      # Active function self$boostrap_file includes validate_bootstrap_file.
+      self$bootstrap_file <- file.path(inpline_bootstrap_path)
+
+    },
+
     #Validate bootstrap_file
     validate_bootstrap_file = function(value) {
 
       #Validate that 'value' points to a existing file.
       if (test_file_exists(value, access = "r", extension = "bsn")) {
         #If validated, assign value
-        cli_alert_success("bootstrap_file: {.val {value}}")
+        cli_alert_success("validated bootstrap_file")
         return()
       }
 
@@ -219,7 +251,8 @@ bootstrap <- R6Class(
       warning(paste0(invalid_path_message(value),
                      "Please save AGEPRO input files with a vaild ",
                      "bootstrap_file, especially with running models with ",
-                     "the calculation engine.", call. = FALSE))
+                     "the calculation engine."),
+              call. = FALSE)
     }
 
   )

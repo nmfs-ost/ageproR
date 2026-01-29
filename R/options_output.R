@@ -41,9 +41,9 @@ options_output <- R6Class(
     #'  }
     #' }
     #'
-    #' @param output_process_error_aux_files
-    #' [Logical][base::logical] flag to enable output of process_error
-    #' auxiliary files
+    #' @param process_error_datafiles
+    #' [Logical][base::logical] flag to enable output of population and fishery
+    #' process error results as auxiliary files
     #'
     #' @param export_df
     #' [Logical][base::logical] flag to enable AGEPRO output to data.frame
@@ -53,7 +53,7 @@ options_output <- R6Class(
     #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
     #'
     initialize = function(auxiliary_flag = 0,
-                          output_process_error_aux_files = FALSE,
+                          process_error_datafiles = FALSE,
                           export_df = TRUE,
                           enable_agepro40_format = FALSE) {
 
@@ -61,8 +61,8 @@ options_output <- R6Class(
       cli_alert("Setting AGEPRO projection output options ...")
 
       #ensure
-      self$output_stock_summary <- auxiliary_flag
-      self$output_process_error_aux_files <- output_process_error_aux_files
+      self$auxfile_output_flag <- auxiliary_flag
+      self$process_error_datafiles <- process_error_datafiles
       self$export_df <- export_df
 
 
@@ -74,14 +74,14 @@ options_output <- R6Class(
     print = function() {
       cli::cli_alert_info(
         paste0(
-          "output_stock_summary: ",
-          "{.val {private$.output_stock_summary}} ",
-          "{.emph ({private$aux_flag_string(private$.output_stock_summary)})}"))
+          "auxfile_output_flag: ",
+          "{.val {private$.auxfile_output_flag}} ",
+          "{.emph ({private$aux_flag_string(private$.auxfile_output_flag)})}"))
       cli::cli_alert_info(
         paste0(
-          "output_process_error_aux_files: ",
-          "{.val {private$.output_process_error_aux_files}} ",
-          "{.emph ({as.logical(private$.output_process_error_aux_files)})}"))
+          "process_error_datafiles: ",
+          "{.val {private$.process_error_datafiles}} ",
+          "{.emph ({as.logical(private$.process_error_datafiles)})}"))
       cli::cli_alert_info(
         paste0(
           "export_df {.emph (export output as data.frame)}: ",
@@ -102,8 +102,8 @@ options_output <- R6Class(
       nline <- nline + 1
       inp_line <- read_inp_numeric_line(inp_con)
 
-      suppressMessages(self$output_stock_summary <- inp_line[1])
-      suppressMessages(self$output_process_error_aux_files <- inp_line[2])
+      suppressMessages(self$auxfile_output_flag <- inp_line[1])
+      suppressMessages(self$process_error_datafiles <- inp_line[2])
       suppressMessages(self$export_df <- inp_line[3])
 
       cli::cli_alert(paste0("Line {nline} : ",
@@ -126,8 +126,8 @@ options_output <- R6Class(
     get_inp_lines = function(delimiter = " "){
       return(list(
         self$inp_keyword,
-        paste(self$output_stock_summary,
-              self$output_process_error_aux_files,
+        paste(self$auxfile_output_flag,
+              self$process_error_datafiles,
               self$export_df,
               sep = delimiter)
       ))
@@ -136,11 +136,11 @@ options_output <- R6Class(
   ),
   active = list(
 
-    #' @field output_stock_summary
+    #' @field auxfile_output_flag
     #' [Logical][base::logical] flag to output stock summary information
-    output_stock_summary = function(value) {
+    auxfile_output_flag = function(value) {
       if(missing(value)) {
-        return(private$.output_stock_summary)
+        return(private$.auxfile_output_flag)
       }else{
 
         # Calling Handler to wrap field name w/ validate_logical_parameter
@@ -155,18 +155,23 @@ options_output <- R6Class(
           },
 
           ## TODO: Replace validate_logical_parameter
-          private$.output_stock_summary <- private$validate_logical_parameter(value)
+          if(self$enable_agepro40_format){
+            private$.auxfile_output_flag <- private$validate_logical_parameter(value)
+          }else{
+            private$.auxfile_output_flag <- checkmate::assert_choice(value, self$valid_aux_output_flags)
+          }
+
         )
       }
     },
 
-    #' @field output_process_error_aux_files
+    #' @field process_error_datafiles
     #' [Logical][base::logical] flag to output population and fishery processes
     #' simulated with lognormal process error (process_error parameters) to
     #' auxiliary output files
-    output_process_error_aux_files = function(value) {
+    process_error_datafiles = function(value) {
       if(missing(value)) {
-        return(private$.output_process_error_aux_files)
+        return(private$.process_error_datafiles)
       }else {
 
         # Calling Handler to wrap field name w/ validate_logical_parameter
@@ -174,13 +179,14 @@ options_output <- R6Class(
         withCallingHandlers(
           message = function(cnd) {
             cli::cli_alert_info(
-              paste0("output_process_error_aux_files ",
+              paste0("process_error_datafiles ",
                      "{.emph (Auxillary output files)}: ",
                      "{sub('\u2192 ', '', conditionMessage(cnd))}"))
 
             rlang::cnd_muffle(cnd)
           },
-          private$.output_process_error_aux_files <-
+
+          private$.process_error_datafiles <-
             private$validate_logical_parameter(value)
         )
       }
@@ -238,8 +244,8 @@ options_output <- R6Class(
     #' Returns JSON list object of containing options_output values
     json_list_object = function() {
       return(list(
-        stock_summary_flag = self$output_stock_summary,
-        process_error_aux_data_flag = self$output_process_error_aux_files,
+        auxliary_output_flag = self$auxfile_output_flag,
+        process_dataflag = self$process_error_datafiles,
         export_R_flag = self$export_df
       ))
     },
@@ -261,8 +267,8 @@ options_output <- R6Class(
 
     .keyword_name = "options",
 
-    .output_stock_summary = NULL,
-    .output_process_error_aux_files = NULL,
+    .auxfile_output_flag = NULL,
+    .process_error_datafiles = NULL,
     .export_df = NULL,
     .valid_aux_output_flags = c(0,1,2,3,4),
     .enable_agepro40_format = FALSE,

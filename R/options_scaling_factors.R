@@ -273,9 +273,9 @@ scaling_factors <-R6Class(
     #' Returns JSON list object of containing SCALE values
     json_list_object = function() {
       return(list(
-        biomass_scale = self$biomass_scale,
-        recruitment_scale = self$recruitment_scale,
-        stock_size_scale = self$stock_size_scale
+        scale_biomass = self$biomass_scale,
+        scale_recruitment = self$recruitment_scale,
+        scale_stock_size = self$stock_size_scale
       ))
     },
 

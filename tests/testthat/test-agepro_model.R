@@ -17,23 +17,32 @@ test_that("New agepro_model (Year: 2019-2026, Age: 1-32, num_pop_sims: 1000, num
 })
 
 
-#Test that Opening inst/test-example4,inp works
-test_that("Opening inst/test-example4.inp is imported to test agepro_inp_model", {
-  expect_snapshot(test <- ageproR::agepro_inp_model$new(seed=300), cnd_class = TRUE)
-  expect_snapshot(test$read_inp(file.path(testthat::test_path(),"example/test-example4.inp")), cnd_class = TRUE)
+#Note: The bootstrap_file output is masked to a fixed value to fix varying outputs using testthat and running tests
+#with devtools::check()
+test_that("example/Example1.INP exists", {
+  inpfile_path <- file.path(testthat::test_path(),"example","Example1.INP")
+  expect_true(file.exists(inpfile_path))
+})
+test_that("example/Example1.BSN exists", {
+  bsnfile_path <- file.path(testthat::test_path(),"example","Example1.BSN")
+  expect_true(file.exists(bsnfile_path))
 })
 
-#Test that Opening inst/test-example4.inp works, and Set to Bootstrap file
-test_that("Setting inst/Example1.BSN to test agepro_inp_model works",{
+
+#Opening Agepro Model with Example1.INP works
+#TODO: Mockup file dialog workflow
+test_that("Opening example/Example1.INP is imported to test agepro_inp_model", {
   expect_snapshot(test <- ageproR::agepro_inp_model$new(seed=300), cnd_class = TRUE)
-  expect_snapshot(test$read_inp(file.path(testthat::test_path(),"example/test-example4.inp")), cnd_class = TRUE)
-  expect_snapshot(test$set_bootstrap_filename(file.path(testthat::test_path(),"example/Example1.BSN")), cnd_class = TRUE)
+  expect_snapshot(test$read_inp(file.path(testthat::test_path(),"example/Example1.inp")), cnd_class = TRUE,
+                  transform = \(lines) gsub(test$bootstrap$bootstrap_file, "<path>", lines, fixed = TRUE))
 })
 
-#Can that Opening inst/test-example4.inp works, and Set to Bootstrap file be exported to agepro_json_model class?
+#Test that importing agepro_inp_model data from example/Example1.INP (with bootstrap_file)
+#is exported to a new to agepro_json_model class instance.
 test_that("Import 'test' agepro_inp_model class data to 'json_test' agepro_json_model class",{
   expect_snapshot(test <- ageproR::agepro_inp_model$new(seed=300), cnd_class = TRUE)
-  expect_snapshot(test$read_inp(file.path(testthat::test_path(),"example/test-example4.inp")), cnd_class = TRUE)
+  expect_snapshot(test$read_inp(file.path(testthat::test_path(),"example/Example1.INP")), cnd_class = TRUE,
+                  transform = \(lines) gsub(test$bootstrap$bootstrap_file, "<path>", lines, fixed = TRUE))
   expect_snapshot(test_json <- ageproR::agepro_json_model$new(0,9,0,1,1000,4,1,0,300), cnd_class = TRUE)
   expect_snapshot(test_json$import_agepro_inp_model(test), cnd_class = TRUE)
 })

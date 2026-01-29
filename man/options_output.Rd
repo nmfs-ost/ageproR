@@ -10,9 +10,9 @@ options to export AGEPRO output
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{output_stock_summary}}{\link[base:logical]{Logical} flag to output stock summary information}
+\item{\code{auxfile_output_flag}}{\link[base:logical]{Logical} flag to output stock summary information}
 
-\item{\code{output_process_error_aux_files}}{\link[base:logical]{Logical} flag to output population and fishery processes
+\item{\code{process_error_datafiles}}{\link[base:logical]{Logical} flag to output population and fishery processes
 simulated with lognormal process error (process_error parameters) to
 auxiliary output files}
 
@@ -52,7 +52,7 @@ Initializes the class
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{options_output$new(
   auxiliary_flag = 0,
-  output_process_error_aux_files = FALSE,
+  process_error_datafiles = FALSE,
   export_df = TRUE,
   enable_agepro40_format = FALSE
 )}\if{html}{\out{</div>}}
@@ -79,8 +79,8 @@ EXCEPT the Stock Numbers of Age Auxiliary File
 }
 }}
 
-\item{\code{output_process_error_aux_files}}{\link[base:logical]{Logical} flag to enable output of process_error
-auxiliary files}
+\item{\code{process_error_datafiles}}{\link[base:logical]{Logical} flag to enable output of population and fishery
+process error results as auxiliary files}
 
 \item{\code{export_df}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
 

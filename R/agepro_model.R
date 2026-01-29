@@ -54,7 +54,7 @@ agepro_model <- R6Class(
 
       #Current Input File Version
       private$.ver_inpfile_string = private$.currentver_inpfile_string
-      private$.ver_jsonfile_format = 0
+      private$.ver_json_format = 2
       private$setup_ver_rpackage()
 
       #Set GENERAL
@@ -762,8 +762,8 @@ agepro_model <- R6Class(
         return(private$.options_output)
       }else {
         checkmate::check_r6(value,
-                            public = c("output_stock_summary",
-                                       "output_process_error_aux_files",
+                            public = c("auxfile_output_flag",
+                                       "process_error_datafiles",
                                        "export_df"))
         private$.options_output <- value
       }
@@ -784,7 +784,7 @@ agepro_model <- R6Class(
 
     #Version
     .ver_inpfile_string = NULL,
-    .ver_jsonfile_format = NULL,
+    .ver_json_format = NULL,
     .ver_rpackage = NULL,
 
     #AGEPRO Input File version
@@ -946,7 +946,7 @@ agepro_inp_model <- R6Class(
 
         },
         error = function(cond) {
-          message("There was an error reading this file. \n", cond)
+          cli::cli_alert_danger("There was an error reading this file. \n  {cond}")
 
           #Reset projection_analyses_type
           self$projection_analyses_type <- "standard"
@@ -1575,7 +1575,7 @@ agepro_json_model <- R6Class(
       version_json <- list(
 
         inpfile_string = self$ver_inpfile_string,
-        jsonfile_format = self$ver_jsonfile_format
+        json_format = self$ver_json_format
       )
 
       agepro_json <- list(
@@ -1605,7 +1605,7 @@ agepro_json_model <- R6Class(
         "rebuild" = self$rebuild$json_list_object,
         "options" = self$options$json_list_object,
         "perc" = {
-          if(self$perc$flag$op$enable_percentile_summary){
+          if(self$perc$enable_percentile_summary){
             self$perc$json_list_object
           }else{
             NA
