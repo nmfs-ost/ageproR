@@ -53,7 +53,7 @@ remotes::install_github("nmfs-ost/ageproR")
 
 **ageproR** is compatible with the AGEPRO input file formats
 `AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
-saves to the `AGEPRO VERSION 4.0` Input File Format.
+saves to the `AGEPRO VERSION 4.25` Input File Format.
 
 Please refer to the *AGEPRO Reference Manual* for more technical
 details.
