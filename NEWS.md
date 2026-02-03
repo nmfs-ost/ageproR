@@ -8,24 +8,24 @@
 - Auxiliary Output Flag (`auxfile_output_flag`)
   - All remaining instances of `output_stock_summary` was renamed to `auxfile_output_flag`. 
     - options_output: param `summary_report` -> `auxiliary_flag`
-  - An additional Auxiliary Output Flag parameter is added (`valid_aux_output_flags = c(0,1,2,3,4)`) to match AGEPRO-GUI 4.3.6 and December 2025 version of the AGEPRO Reference Manual (#98)
+  - Additional Auxiliary Output Flag parameter is added (`valid_aux_output_flags = c(0,1,2,3,4)`) to match AGEPRO-GUI 4.3.6 and December 2025 version of the AGEPRO Reference Manual (#98)
   - Supported Input File format validation is based on "Current Version" and `AGEPRO VERSION 4.0` Input File Format (`enable_agepro40_format`):
     - If `enable_agepro40_format` is TRUE, check if value is _logical_ or (`0`,`1`); if FALSE, checks if value matches `valid_aux_output_flags`.
 - Refactor out `validate_logical_parameter` function from validation.R to as a `options_output` private helper method
 - Updated **testthat** example to use AGEPRO Calculation Model's 4.25 updated Example 1 Input Model: 
   - Added [AGEPRO Example 1](https://github.com/noaa-pifsc/AGEPRO/tree/main/examples/Example%201) (`AGEPRO VERSION 4.25` input format); 
     - Exported Example 1 Model data to new example JSON file `Example1.json`
-  - `test-agepro_model.R`: Added checks to see if **Example1** Input File and Bootstrap File Exists 
+  - `test-agepro_model.R`: Added checks to see if **Example1** Input File and Bootstrap File Exists. Removed `set_bootstrap_file` test 
   - Previous example test example file `ageproInput.INP` is replaced by [AGEPRO_GUI Example 4](https://github.com/nmfs-ost/AGEPRO-GUI/tree/master/examples/example4) (`AGEPRO VERSION 4.0`)
     - Added Example 4 Bootstrap File; `Example4_UKU.INP`: Modified **bootstrap_file** to be a relative path.
-- **bootstrap_file** written in the relative filepath will verified to see if it is on the same directory location as the imported input file being read via file connection.
-  - If not valid, use **working directory**.
+- **bootstrap_file** relative filepaths can be verified: 
+  - Check the path of dirname of the input file, being read via file connection, plus the **bootstrap_file** relative filepath exists. 
+    If found save relative filepath to **bootstrap_file**. Otherwise, use **working directory** and use original bootstrap path validation.
   - This has a side effect of printing out absolute paths which affects **testthat** snapshots, that varies the output of the **`bootstrap_file`** causing test snapshot errors.
     - Fixup `test-agepro_model.R` : Substitute **`bootstrap_file`** output value path w/ fixed value `<path>`
-    - Removed `set_bootstrap_file` test, primarily because this the bootstrap file is expected to be loaded with the input file. 
 - JSON inupt file
-  - JSON input file: Fix inconsistencies (`ver_jsonfile_format` -> `ver_json_format`) causing **NULL** values
   - `ver_json_format` is now 2 (Changes to the JSON input format will increment up +1)
+    - Fix inconsistencies (`ver_jsonfile_format` -> `ver_json_format`) causing **NULL** values
   - JSON fields renamed to be more consistent with the _AGEPRO Reference Manual_ Table 3
     - **`summary_output_flag`** **->** **`auxiliary_output_flag`**
     - `process_error_aux_data_flag` -> `process_dataflag`
@@ -38,11 +38,10 @@
   - parameter `process_error_aux_files` -> `process_error_datafiles`
   - function `output_data_frame` -> `export_df`
   - param `export_r_data_frame` -> `export_df`
-- bugfixes
-  - Fixes to `read_inp_file` **trycatch** error handling. 
-    - cli tweaks to show "error conditions"
-    - Suppress `enable_percentile_summary` setup messages when resetting projection analysis types.  
-    - Fixed an erroneous call resetting `enable_percentage_summary` value.
+- Bugfixes to `read_inp_file` **trycatch** error handling. 
+  - cli tweaks to show "error conditions"
+  - Suppress `enable_percentile_summary` setup messages when resetting projection analysis types.  
+  - Fixed an erroneous call resetting `enable_percentage_summary` value.
 - Updated README: Fixes and updated links from nmfs-ost migration (#96, #95)
 - Update roxygen to 7.3.3
 
