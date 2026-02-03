@@ -9,11 +9,11 @@ Authors@R: c(
   )
 Maintainer: Eric Fletcher <eric.fletcher@noaa.gov>
 Description: Object-oriented data structures based on the input file format 
-    defined in the Age Structured Projection Model Reference Manual, by Jon 
-    Brodziak. Includes support modules for AGEPRO input file support, and 
-    experimental JSON input file format.
-URL: https://github.com/PIFSCstockassessments/ageproR
-BugReports: https://github.com/PIFSCstockassessments/ageproR/issues
+    defined in the Age Structured Projection Model Reference Manual. Includes 
+    support modules for AGEPRO input file support, and experimental JSON input 
+    file format.
+URL: https://github.com/nmfs-ost/ageproR
+BugReports: https://github.com/nmfs-ost/ageproR/issues
 Depends:
   R (>= 4.1.0)
 Imports:
