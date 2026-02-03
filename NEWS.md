@@ -1,4 +1,4 @@
-# ageproR 0.9.0 2026-02-00
+# ageproR 0.9.0 2026-02-03
 
 - Default current version AGEPRO input file format is set to `AGEPRO VERSION 4.25`. 
   - Added `agepro40_inpfile_string` for `AGEPRO VERSION 4.0` compatibility.
@@ -6,9 +6,11 @@
     - Warning message is more clarified if `AGEPRO VERSION 4.0` was detected.
     - Assert for valid strings and supported input file formats
 - Auxiliary Output Flag (`auxfile_output_flag`)
-  - All remaining instances of `output_stock_summary` was renamed to `auxfile_output_flag`. 
+  - All remaining instances of `output_stock_summary` were renamed to `auxfile_output_flag`.
+    - Renamed JSON field **`summary_output_flag`** **->** **`auxiliary_output_flag`**
     - options_output: param `summary_report` -> `auxiliary_flag`
-  - Additional Auxiliary Output Flag parameter is added (`valid_aux_output_flags = c(0,1,2,3,4)`) to match AGEPRO-GUI 4.3.6 and December 2025 version of the AGEPRO Reference Manual (#98)
+  - Additional Auxiliary Output Flag parameter added (`valid_aux_output_flags = c(0,1,2,3,4)`) to match specifications introduced in **AGEPRO-GUI 4.3.6** 
+    and the December 2025 version of the _AGEPRO Reference Manual_ (#98)
   - Supported Input File format validation is based on "Current Version" and `AGEPRO VERSION 4.0` Input File Format (`enable_agepro40_format`):
     - If `enable_agepro40_format` is TRUE, check if value is _logical_ or (`0`,`1`); if FALSE, checks if value matches `valid_aux_output_flags`.
 - Updated **testthat** example to use AGEPRO Calculation Model's 4.25 updated Example 1 Input Model: 
