@@ -11,7 +11,6 @@
   - Additional Auxiliary Output Flag parameter is added (`valid_aux_output_flags = c(0,1,2,3,4)`) to match AGEPRO-GUI 4.3.6 and December 2025 version of the AGEPRO Reference Manual (#98)
   - Supported Input File format validation is based on "Current Version" and `AGEPRO VERSION 4.0` Input File Format (`enable_agepro40_format`):
     - If `enable_agepro40_format` is TRUE, check if value is _logical_ or (`0`,`1`); if FALSE, checks if value matches `valid_aux_output_flags`.
-- Refactor out `validate_logical_parameter` function from validation.R to as a `options_output` private helper method
 - Updated **testthat** example to use AGEPRO Calculation Model's 4.25 updated Example 1 Input Model: 
   - Added [AGEPRO Example 1](https://github.com/noaa-pifsc/AGEPRO/tree/main/examples/Example%201) (`AGEPRO VERSION 4.25` input format); 
     - Exported Example 1 Model data to new example JSON file `Example1.json`
@@ -23,6 +22,7 @@
     If found save relative filepath to **bootstrap_file**. Otherwise, use **working directory** and use original bootstrap path validation.
   - This has a side effect of printing out absolute paths which affects **testthat** snapshots, that varies the output of the **`bootstrap_file`** causing test snapshot errors.
     - Fixup `test-agepro_model.R` : Substitute **`bootstrap_file`** output value path w/ fixed value `<path>`
+- Refactor out `validate_logical_parameter` function from validation.R to as a `options_output` private helper method
 - JSON inupt file
   - `ver_json_format` is now 2 (Changes to the JSON input format will increment up +1)
     - Fix inconsistencies (`ver_jsonfile_format` -> `ver_json_format`) causing **NULL** values
