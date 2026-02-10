@@ -58,6 +58,29 @@ saves to the `AGEPRO VERSION 4.0` Input File Format.
 Please refer to the *AGEPRO Reference Manual* for more technical
 details.
 
+## Citation
+
+Please cite this AGEPRO project as:
+
+    Brodziak, Jon and Rago, Paul J. and Conser, Ramon. (1998). A General Approach for Making Short-Term 
+    Stochastic Projections from an Age-Structured Fisheries Assessment Model. Fishery Stock Assessment 
+    Models, 933–954. https://doi.org/10.4027/fsam.1998.52
+
+The following [BibTeX](http://www.bibtex.org/) entry can be copied and
+used in a .bib file:
+
+``` bibtex
+@article{article,
+author = {Brodziak, Jon and Rago, Paul J. and Conser, Ramon},
+year = {1998},
+month = {01},
+pages = {933-954},
+title = {A General Approach for Making Short-Term Stochastic Projections from an Age-Structured Fisheries Assessment Model},
+isbn = {9781566120579},
+doi = {10.4027/fsam.1998.52}
+}
+```
+
 ## Hawaiian Uku Projection base example
 
 TODO
