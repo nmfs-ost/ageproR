@@ -6,13 +6,13 @@
 \alias{ageproR-package}
 \title{ageproR: R package interface for AGEPRO (Age Structured Projection Model) data}
 \description{
-Object-oriented data structures based on the input file format defined in the Age Structured Projection Model Reference Manual, by Jon Brodziak. Includes support modules for AGEPRO input file support, and experimental JSON input file format.
+Object-oriented data structures based on the input file format defined in the Age Structured Projection Model Reference Manual. Includes support modules for AGEPRO input file support, and experimental JSON input file format.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/PIFSCstockassessments/ageproR}
-  \item Report bugs at \url{https://github.com/PIFSCstockassessments/ageproR/issues}
+  \item \url{https://github.com/nmfs-ost/ageproR}
+  \item Report bugs at \url{https://github.com/nmfs-ost/ageproR/issues}
 }
 
 }
