@@ -375,7 +375,23 @@ general_params <- R6Class(
     set_seed = function(value){
       checkmate::assert_numeric(value, len = 1,
                                 .var.name = "seed")
+      private$assert_nonzero_seed(value)
       private$.seed <- value
+    },
+
+    #check random number seed is non-zero
+    check_nonzero_seed = function(value) {
+      if(isTRUE(all.equal(value,0))) {
+        return(paste0("Random Seed value must be a non-zero"))
+      }
+      return(TRUE)
+    },
+
+    #Checkmate assertion wrapper for check_nonzero_seed
+    assert_nonzero_seed = function(x, .var.name = checkmate::vname(x),
+                                   add = NULL){
+      result = private$check_nonzero_seed(x)
+      checkmate::makeAssertion(x, result, .var.name, add)
     }
 
   )
