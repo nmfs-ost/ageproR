@@ -4,6 +4,6 @@
 .Ruserdata
 *_snaps
 inst/doc
-**/.quarto/
+/.quarto/
 /doc/
 /Meta/
