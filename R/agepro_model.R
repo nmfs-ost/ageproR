@@ -1,4 +1,3 @@
-
 #' @title R6 class representing AGEPRO model
 #'
 #' @description
@@ -25,7 +24,6 @@
 agepro_model <- R6Class(
   classname = "agepro_model",
   public = list(
-
     #' @description
     #' Initializes the instance of the AGEPRO Model
     #'
@@ -39,50 +37,55 @@ agepro_model <- R6Class(
     #' also used to print verbose information about the the initialized object.
     #' By default, this is set to TRUE.
     #'
-    initialize = function(yr_start,
-                           yr_end,
-                           age_begin,
-                           age_end,
-                           num_pop_sims,
-                           num_fleets,
-                           num_rec_models,
-                           discards_present = FALSE,
-                           seed = sample.int(1e8, 1),
-                          show_general_params = TRUE,
-                          enable_cat_print = TRUE,
-                          ...) {
-
+    initialize = function(
+      yr_start,
+      yr_end,
+      age_begin,
+      age_end,
+      num_pop_sims,
+      num_fleets,
+      num_rec_models,
+      discards_present = FALSE,
+      seed = sample.int(1e8, 1),
+      show_general_params = TRUE,
+      enable_cat_print = TRUE,
+      ...
+    ) {
       #Current Input File Version
       private$.ver_inpfile_string = private$.currentver_inpfile_string
       private$.ver_json_format = 2
       private$setup_ver_rpackage()
 
       #Set GENERAL
-      self$general <- general_params$new(yr_start,
-                                         yr_end,
-                                         age_begin,
-                                         age_end,
-                                         num_pop_sims,
-                                         num_fleets,
-                                         num_rec_models,
-                                         discards_present,
-                                         seed,
-                                         enable_cat_print = show_general_params)
+      self$general <- general_params$new(
+        yr_start,
+        yr_end,
+        age_begin,
+        age_end,
+        num_pop_sims,
+        num_fleets,
+        num_rec_models,
+        discards_present,
+        seed,
+        enable_cat_print = show_general_params
+      )
 
       ## Helper function to create a new instance of agepro_model
-      if(enable_cat_print){
-
-        self$default_agepro_keyword_params(self$general,
-                                           enable_cat_print = enable_cat_print,
-                                           ...)
-      }else{
-
+      if (enable_cat_print) {
+        self$default_agepro_keyword_params(
+          self$general,
+          enable_cat_print = enable_cat_print,
+          ...
+        )
+      } else {
         suppressMessages(
-          self$default_agepro_keyword_params(self$general,
-                                           enable_cat_print = enable_cat_print,
-                                           ...))
+          self$default_agepro_keyword_params(
+            self$general,
+            enable_cat_print = enable_cat_print,
+            ...
+          )
+        )
       }
-
 
       cli::cli_alert_success("Agepro Model Initialized")
       invisible(self)
@@ -100,22 +103,28 @@ agepro_model <- R6Class(
     #'
     #' @template enable_cat_print
     #'
-    default_agepro_keyword_params = function (x, projection_analyses_type =
-                                                "standard",
-                                              enable_cat_print = TRUE,
-                                              ...) {
-
+    default_agepro_keyword_params = function(
+      x,
+      projection_analyses_type = "standard",
+      enable_cat_print = TRUE,
+      ...
+    ) {
       #Verify general param
-      checkmate::assert_r6(x, public = c("yr_start",
-                                         "yr_end",
-                                         "age_begin",
-                                         "age_end",
-                                         "num_pop_sims",
-                                         "num_fleets",
-                                         "num_rec_models",
-                                         "discards_present",
-                                         "seed"),
-                           .var.name = "general")
+      checkmate::assert_r6(
+        x,
+        public = c(
+          "yr_start",
+          "yr_end",
+          "age_begin",
+          "age_end",
+          "num_pop_sims",
+          "num_fleets",
+          "num_rec_models",
+          "discards_present",
+          "seed"
+        ),
+        .var.name = "general"
+      )
 
       #Assign and verify projection_analyses_type
       self$setup_projection_analyses_values(projection_analyses_type)
@@ -125,85 +134,106 @@ agepro_model <- R6Class(
       self$case_id <- case_id$new("Unnamed AGEPRO model")
 
       #TODO: rename cat_verbose to enable_cat_print
-      self$recruit <- recruitment$new(rep(0, x$num_rec_models),
-                                      x$seq_years,
-                                      num_recruit_models = x$num_rec_models,
-                                      enable_cat_print = enable_cat_print,
-                                      ...)
+      self$recruit <- recruitment$new(
+        rep(0, x$num_rec_models),
+        x$seq_years,
+        num_recruit_models = x$num_rec_models,
+        enable_cat_print = enable_cat_print,
+        ...
+      )
 
       self$bootstrap <- bootstrap$new()
 
       self$natmort <-
-        natural_mortality$new(x$seq_years,
-                              x$num_ages,
-                              enable_cat_print = enable_cat_print)
+        natural_mortality$new(
+          x$seq_years,
+          x$num_ages,
+          enable_cat_print = enable_cat_print
+        )
 
       self$maturity <-
-        maturity_fraction$new(x$seq_years,
-                              x$num_ages,
-                              enable_cat_print = enable_cat_print)
+        maturity_fraction$new(
+          x$seq_years,
+          x$num_ages,
+          enable_cat_print = enable_cat_print
+        )
 
       self$fishery <-
-        fishery_selectivity$new(x$seq_years,
-                                x$num_ages,
-                                x$num_fleets,
-                                enable_cat_print = enable_cat_print)
+        fishery_selectivity$new(
+          x$seq_years,
+          x$num_ages,
+          x$num_fleets,
+          enable_cat_print = enable_cat_print
+        )
 
       self$stock_weight <-
-        jan_stock_weight_age$new(x$seq_years,
-                                 x$num_ages,
-                                 enable_cat_print = enable_cat_print)
+        jan_stock_weight_age$new(
+          x$seq_years,
+          x$num_ages,
+          enable_cat_print = enable_cat_print
+        )
 
       self$ssb_weight <-
-        spawning_stock_weight_age$new(x$seq_years,
-                                      x$num_ages,
-                                      enable_cat_print = enable_cat_print)
+        spawning_stock_weight_age$new(
+          x$seq_years,
+          x$num_ages,
+          enable_cat_print = enable_cat_print
+        )
 
       self$mean_weight <-
-        mean_population_weight_age$new(x$seq_years,
-                                       x$num_ages,
-                                       enable_cat_print = enable_cat_print)
+        mean_population_weight_age$new(
+          x$seq_years,
+          x$num_ages,
+          enable_cat_print = enable_cat_print
+        )
 
       self$catch_weight <-
-        landed_catch_weight_age$new(x$seq_years,
-                                    x$num_ages,
-                                    x$num_fleets,
-                                    enable_cat_print = enable_cat_print)
+        landed_catch_weight_age$new(
+          x$seq_years,
+          x$num_ages,
+          x$num_fleets,
+          enable_cat_print = enable_cat_print
+        )
 
-      if(as.logical(x$discards_present)) {
-
+      if (as.logical(x$discards_present)) {
         self$discard <-
-          discard_fraction$new(x$seq_years,
-                               x$num_ages,
-                               x$num_fleets,
-                               enable_cat_print = enable_cat_print)
+          discard_fraction$new(
+            x$seq_years,
+            x$num_ages,
+            x$num_fleets,
+            enable_cat_print = enable_cat_print
+          )
 
         self$disc_weight <-
-          discard_weight_age$new(x$seq_years,
-                                 x$num_ages,
-                                 x$num_fleets,
-                                 enable_cat_print = enable_cat_print)
+          discard_weight_age$new(
+            x$seq_years,
+            x$num_ages,
+            x$num_fleets,
+            enable_cat_print = enable_cat_print
+          )
       }
 
       self$harvest <-
-        harvest_scenario$new(x$seq_years,
-                             x$num_fleets,
-                             enable_cat_print = enable_cat_print)
+        harvest_scenario$new(
+          x$seq_years,
+          x$num_fleets,
+          enable_cat_print = enable_cat_print
+        )
 
       self$biological <-
-        mortality_fraction_prior_spawn$new(x$seq_years,
-                                           enable_cat_print = enable_cat_print)
+        mortality_fraction_prior_spawn$new(
+          x$seq_years,
+          enable_cat_print = enable_cat_print
+        )
 
       self$options <- options_output$new()
 
-
-      if(self$projection_analyses_type == "pstar") {
+      if (self$projection_analyses_type == "pstar") {
         self$pstar <-
-          pstar_projection$new(x$seq_years,
-                               enable_cat_print = enable_cat_print)
+          pstar_projection$new(x$seq_years, enable_cat_print = enable_cat_print)
       }
 
-      if(self$projection_analyses_type == "rebuild") {
+      if (self$projection_analyses_type == "rebuild") {
         self$rebuild <-
           rebuild_projection$new(x$seq_years)
       }
@@ -218,9 +248,8 @@ agepro_model <- R6Class(
 
       self$retroadjust <- retrospective_adjustments$new(
         enable_cat_print = enable_cat_print,
-        retro_flag = options_flags$new())
-
-
+        retro_flag = options_flags$new()
+      )
     },
 
     #' @description
@@ -236,52 +265,59 @@ agepro_model <- R6Class(
     #'
     #'
     set_recruit_model = function(..., enable_cat_print = TRUE) {
-
       validation_error <- checkmate::makeAssertCollection()
       # Custom Validation check to input format
-      assert_model_num_vector_format(list(...), add = validation_error,
-                                   .var.name = "model_num")
+      assert_model_num_vector_format(
+        list(...),
+        add = validation_error,
+        .var.name = "model_num"
+      )
 
       # TODO: Check for Multiple Recruitment Model number "1"
 
       list_is_numeric <- checkmate::check_list(list(...), types = "numeric")
-      if(isTRUE(list_is_numeric)) {
-
+      if (isTRUE(list_is_numeric)) {
         #Combines lists elements as a vector
         model_num <- purrr::list_c(list(...))
         # Throw informative error if model_num count doesn't match
         # num_recruit_models
-        assert_model_num_vector_count(model_num, self$general$num_rec_models,
-                                      add = validation_error)
-
+        assert_model_num_vector_count(
+          model_num,
+          self$general$num_rec_models,
+          add = validation_error
+        )
 
         sapply(model_num, function(.X) {
-          checkmate::assert_choice(.X,
-                                   choices = self$recruit$valid_recruit_models,
-                                   add = validation_error,
-                                   .var.name = deparse(.X))
+          checkmate::assert_choice(
+            .X,
+            choices = self$recruit$valid_recruit_models,
+            add = validation_error,
+            .var.name = deparse(.X)
+          )
         })
-      } else{
+      } else {
         #Throw the error message to the validation_error assertion
         validation_error$push(list_is_numeric)
-        sapply(list(...),function(.X){
-          checkmate::assert_numeric(.X, .var.name=deparse(.X),
-                                    add = validation_error )})
+        sapply(list(...), function(.X) {
+          checkmate::assert_numeric(
+            .X,
+            .var.name = deparse(.X),
+            add = validation_error
+          )
+        })
       }
 
       checkmate::reportAssertions(validation_error)
 
-
       cli_alert("{.emph Recruitment Data Setup}")
       cli_alert("{.emph Using Model Number {.field {model_num}}}")
 
-      self$recruit <- recruitment$new(model_num,
-                      seq_years = self$general$seq_years,
-                      num_recruit_models = self$general$num_rec_models,
-                      enable_cat_print = enable_cat_print)
-
-
-
+      self$recruit <- recruitment$new(
+        model_num,
+        seq_years = self$general$seq_years,
+        num_recruit_models = self$general$num_rec_models,
+        enable_cat_print = enable_cat_print
+      )
     },
 
     #' @description
@@ -289,10 +325,8 @@ agepro_model <- R6Class(
     #'
     #' @param bsnfile bootstrap filename
     set_bootstrap_filename = function(bsnfile) {
-
       self$bootstrap$set_bootstrap_filename(bsnfile)
     },
-
 
     #' @description
     #' Helper Function to setup agepro model's projection analyses type. agepro
@@ -308,64 +342,59 @@ agepro_model <- R6Class(
     #'
     #'
     #'
-    setup_projection_analyses_values = function(type,
-                                            enable_cat_print = FALSE) {
-
+    setup_projection_analyses_values = function(
+      type,
+      enable_cat_print = FALSE
+    ) {
       previous_projection_type <- self$projection_analyses_type
 
-      cli::cli_alert(paste0("AGEPRO Model Projection analyses type set ",
-                                 "to {.field {type}}"))
-      tryCatch({
-
+      cli::cli_alert(paste0(
+        "AGEPRO Model Projection analyses type set ",
+        "to {.field {type}}"
+      ))
+      tryCatch(
+        {
           #Clean PSTAR and REBULD
-          if(isFALSE(is.null(self$pstar)))  {
+          if (isFALSE(is.null(self$pstar))) {
             self$pstar <- NULL
           }
-          if(isFALSE(is.null(self$rebuild))) {
+          if (isFALSE(is.null(self$rebuild))) {
             self$rebuild <- NULL
           }
 
           #if(self$projection_analyses_type == "pstar") {
-          if(type == "pstar"){
-
+          if (type == "pstar") {
             self$pstar <- pstar_projection$new(self$general$seq_years)
             cli::cli_alert("Default values for PStar projection created.")
 
-          #}else if(self$projection_analyses_type == "rebuild") {
-          }else if(type =="rebuild") {
-
+            #}else if(self$projection_analyses_type == "rebuild") {
+          } else if (type == "rebuild") {
             self$rebuild <- rebuild_projection$new(self$general$seq_years)
             cli::cli_alert("Default values for Rebuild Projection created.")
-
           }
 
           # projection_analyses_type active binding will verify input value
           # `type` is "standard", "pstar", or "rebuild" before being assiged
           self$projection_analyses_type <- type
-
         },
         error = function(cond) {
-
-          message(paste0("Revert to previous value: ",
-                         previous_projection_type))
-
+          message(paste0(
+            "Revert to previous value: ",
+            previous_projection_type
+          ))
         }
       )
-
     }
-
   ),
   active = list(
-
     #' @field ver_inpfile_string
     #' Version string on AGEPRO input files (*.inp) for version compatibility
     #' with Jon Brodiak's AGEPRO calculation engine.
-    ver_inpfile_string = function(value){
-      if(missing(value)){
+    ver_inpfile_string = function(value) {
+      if (missing(value)) {
         return(private$.ver_inpfile_string)
       } else {
-        checkmate::assert_character(value,
-                                    pattern="AGEPRO VERSION")
+        checkmate::assert_character(value, pattern = "AGEPRO VERSION")
         private$.ver_inpfile_string <- value
       }
     },
@@ -373,20 +402,20 @@ agepro_model <- R6Class(
     #' @field ver_json_format
     #' JSON Input File Format version.
     ver_json_format = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.ver_json_format)
-      }else{
-        checkamate::as.numeric(value)
+      } else {
+        checkmate::as.numeric(value)
         cli::cli_alert("JSON Version:")
       }
     },
 
     #' @field ver_rpackage
     #' Returns ageproR r package version.
-    ver_rpackage = function(value){
-      if(missing(value)){
+    ver_rpackage = function(value) {
+      if (missing(value)) {
         return(private$.ver_rpackage)
-      }else{
+      } else {
         #use as.numeric_version to validate
         cli::cli_alert_info("Version: {as.numeric_version(value)}")
         private$.ver_rpackage <- value
@@ -396,12 +425,14 @@ agepro_model <- R6Class(
     #' @field projection_analyses_type
     #' Type of projection analyses: standard, rebuilding, pstar.
     projection_analyses_type = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.projection_analyses_type)
-      } else{
-        checkmate::assert_choice(value,
-                                 choices = c("standard","rebuild", "pstar"),
-                                 .var.name = "projection_analyses_type")
+      } else {
+        checkmate::assert_choice(
+          value,
+          choices = c("standard", "rebuild", "pstar"),
+          .var.name = "projection_analyses_type"
+        )
         private$.projection_analyses_type <- value
       }
     },
@@ -409,32 +440,33 @@ agepro_model <- R6Class(
     #' @field case_id
     #' Title identifying AGEPRO model attributes
     case_id = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.case_id)
-      }else {
-        tryCatch({
+      } else {
+        tryCatch(
+          {
+            # Validate value as case_id R6class if value includes the "model_name"
+            # (active binding) public field
+            assert_case_id_active_binding(value, .var.name = "case_id")
 
-          # Validate value as case_id R6class if value includes the "model_name"
-          # (active binding) public field
-          assert_case_id_active_binding(value, .var.name = "case_id")
-
-          private$.case_id <- value
-
-        },
-        error = function(err) {
-
-          message(paste0("Error: \n", gsub("\\.$","",conditionMessage(err)) ))
-        })
-
+            private$.case_id <- value
+          },
+          error = function(err) {
+            message(paste0(
+              "Error: \n",
+              gsub("\\.$", "", conditionMessage(err))
+            ))
+          }
+        )
       }
     },
 
     #' @field general
     #' General Options
     general = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.general_options)
-      }else {
+      } else {
         checkmate::assert_r6(value)
         private$.general_options <- value
       }
@@ -443,21 +475,20 @@ agepro_model <- R6Class(
     #' @field bootstrap
     #' Bootstrapping
     bootstrap = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.bootstrap)
-      }else {
+      } else {
         checkmate::assert_r6(value, .var.name = "bootstrap")
         private$.bootstrap <- value
       }
     },
 
-
     #' @field natmort
     #' Natural Mortality
-    natmort = function(value){
-      if(missing(value)){
+    natmort = function(value) {
+      if (missing(value)) {
         return(private$.natural_mortality)
-      }else {
+      } else {
         checkmate::assert_r6(value, classes = "process_error")
         private$.natural_mortality <- value
       }
@@ -465,11 +496,11 @@ agepro_model <- R6Class(
 
     #' @field maturity
     #' Maturity Fraction
-    maturity = function(value){
-      if(missing(value)){
+    maturity = function(value) {
+      if (missing(value)) {
         return(private$.maturity_fraction)
-      }else {
-        checkmate::assert_r6(value, classes= "process_error")
+      } else {
+        checkmate::assert_r6(value, classes = "process_error")
         private$.maturity_fraction <- value
       }
     },
@@ -477,9 +508,9 @@ agepro_model <- R6Class(
     #' @field fishery \cr
     #' Fishery Selectivity
     fishery = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.fishery_selectivity)
-      }else {
+      } else {
         checkmate::assert_r6(value, classes = "process_error")
         private$.fishery_selectivity <- value
       }
@@ -488,14 +519,15 @@ agepro_model <- R6Class(
     #' @field discard \cr
     #' Discard Fraction
     discard = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.discard_fraction)
-      }else {
-        checkmate::assert_r6(value,
-                             classes = c("process_error",
-                                         "discard_fraction"),
-                             null.ok = TRUE,
-                             .var.name = "discard")
+      } else {
+        checkmate::assert_r6(
+          value,
+          classes = c("process_error", "discard_fraction"),
+          null.ok = TRUE,
+          .var.name = "discard"
+        )
         private$.discard_fraction <- value
       }
     },
@@ -503,9 +535,9 @@ agepro_model <- R6Class(
     #' @field stock_weight
     #' Stock weight on January 1st at age
     stock_weight = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.jan_stock_weight_age)
-      }else {
+      } else {
         checkmate::assert_r6(value, classes = "process_error")
         private$.jan_stock_weight_age <- value
       }
@@ -514,9 +546,9 @@ agepro_model <- R6Class(
     #' @field ssb_weight
     #' Spawning Stock Weight of Age
     ssb_weight = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.spawning_stock_weight_age)
-      }else {
+      } else {
         checkmate::assert_r6(value, classes = "process_error")
         private$.spawning_stock_weight_age <- value
       }
@@ -525,9 +557,9 @@ agepro_model <- R6Class(
     #' @field mean_weight
     #' Midyear mean population weight at age
     mean_weight = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.mean_population_weight_age)
-      } else{
+      } else {
         checkmate::assert_r6(value, classes = "process_error")
         private$.mean_population_weight_age <- value
       }
@@ -536,9 +568,9 @@ agepro_model <- R6Class(
     #' @field catch_weight
     #' Landed catch weight at age by fleet
     catch_weight = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.landed_catch_weight_age)
-      } else{
+      } else {
         checkmate::assert_r6(value, classes = "process_error")
         private$.landed_catch_weight_age <- value
       }
@@ -547,14 +579,15 @@ agepro_model <- R6Class(
     #' @field disc_weight
     #' Discard weight of age by fleet
     disc_weight = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.discard_weight_age)
       } else {
-        checkmate::assert_r6(value,
-                             classes = c("process_error",
-                                         "discard_weight_age"),
-                             null.ok = TRUE,
-                             .var.name = "disc_weight")
+        checkmate::assert_r6(
+          value,
+          classes = c("process_error", "discard_weight_age"),
+          null.ok = TRUE,
+          .var.name = "disc_weight"
+        )
         private$.discard_weight_age <- value
       }
     },
@@ -562,77 +595,84 @@ agepro_model <- R6Class(
     #' @field harvest
     #' Harvest intensity (of fishing mortality or landings quota) by fleet
     harvest = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.harvest_scenario)
-      }else{
-        checkmate::assert_r6(value,
-                             public = c("harvest_specifications",
-                                        "harvest_value"),
-                             .var.name = "harvest")
+      } else {
+        checkmate::assert_r6(
+          value,
+          public = c("harvest_specifications", "harvest_value"),
+          .var.name = "harvest"
+        )
 
         private$.harvest_scenario <- value
       }
     },
 
-
     #' @field recruit
     #' AGEPRO Recruitment Model information
     recruit = function(value) {
-     if(missing(value)) {
-       return(private$.recruitment)
-     }else {
-       #Check
-       checkmate::assert_r6(value, public = c("recruit_scaling_factor",
-                                              "ssb_scaling_factor",
-                                              "recruit_probability"),
-                            .var.name = "recruit")
-       private$.recruitment <- value
-     }
+      if (missing(value)) {
+        return(private$.recruitment)
+      } else {
+        #Check
+        checkmate::assert_r6(
+          value,
+          public = c(
+            "recruit_scaling_factor",
+            "ssb_scaling_factor",
+            "recruit_probability"
+          ),
+          .var.name = "recruit"
+        )
+        private$.recruitment <- value
+      }
     },
-
 
     #' @field perc
     #' User-selected percentile summary of the key results in the output file.
     #'
     perc = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.percentile_summary)
-      }else{
-        tryCatch({
+      } else {
+        tryCatch(
+          {
+            #Validate value as percentile_summary R6class
+            assert_perc_active_binding(value, .var.name = "perc")
 
-          #Validate value as percentile_summary R6class
-          assert_perc_active_binding(value, .var.name = "perc")
-
-          private$.percentile_summary <- value
-
-        },
-        error = function(err) {
-
-          message(paste0("Error: \n", gsub("\\.$","",conditionMessage(err)) ))
-        })
+            private$.percentile_summary <- value
+          },
+          error = function(err) {
+            message(paste0(
+              "Error: \n",
+              gsub("\\.$", "", conditionMessage(err))
+            ))
+          }
+        )
       }
     },
-
 
     #' @field bounds
     #' Bounds on simulated fish weights and natural mortality rates
     #'
     bounds = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.max_bounds)
-      }else{
-        tryCatch({
+      } else {
+        tryCatch(
+          {
+            #Validate value as percentile_summary R6class
+            assert_bounds_active_binding(value, .var.name = "bounds")
 
-          #Validate value as percentile_summary R6class
-          assert_bounds_active_binding(value, .var.name = "bounds")
-
-          private$.max_bounds <- value
-
-        },
-        error = function(err) {
-
-          message(paste0("Error: \n", gsub("\\.$","",conditionMessage(err)) ))
-        })
+            private$.max_bounds <- value
+          },
+          error = function(err) {
+            message(paste0(
+              "Error: \n",
+              gsub("\\.$", "", conditionMessage(err))
+            ))
+          }
+        )
       }
     },
 
@@ -640,20 +680,23 @@ agepro_model <- R6Class(
     #' Reference points for optional AGEPRO output threshold report.
     #'
     refpoint = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.reference_points)
-      }else{
-
+      } else {
         #validate if input value is reference_points class
-        refpoint_fields <- c("ssb_threshold",
-                             "stock_biomass_threshold",
-                             "mean_biomass_threshold",
-                             "fishing_mortality_threshold")
-        checkmate::assert_r6(value, public = refpoint_fields,
-                             .var.name = "refpoint")
+        refpoint_fields <- c(
+          "ssb_threshold",
+          "stock_biomass_threshold",
+          "mean_biomass_threshold",
+          "fishing_mortality_threshold"
+        )
+        checkmate::assert_r6(
+          value,
+          public = refpoint_fields,
+          .var.name = "refpoint"
+        )
 
         private$.reference_points <- value
-
       }
     },
 
@@ -661,14 +704,15 @@ agepro_model <- R6Class(
     #' Scaling factors for biomass, recruitment, and stock size
     #'
     scale = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.scaling_factors)
-      }else {
-        scale_fields <- c("biomass_scale",
-                          "recruitment_scale",
-                          "stock_size_scale")
-        checkmate::assert_r6(value, public = scale_fields,
-                             .var.name = "scale")
+      } else {
+        scale_fields <- c(
+          "biomass_scale",
+          "recruitment_scale",
+          "stock_size_scale"
+        )
+        checkmate::assert_r6(value, public = scale_fields, .var.name = "scale")
 
         private$.scaling_factors <- value
       }
@@ -677,11 +721,14 @@ agepro_model <- R6Class(
     #' @field retroadjust
     #' Retrospective bias Adjustment
     retroadjust = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.retrospective_adjustments)
-      }else {
-        checkmate::assert_r6(value, public = c("retro_adjust"),
-                             .var.name = "retroadjust")
+      } else {
+        checkmate::assert_r6(
+          value,
+          public = c("retro_adjust"),
+          .var.name = "retroadjust"
+        )
 
         private$.retrospective_adjustments <- value
       }
@@ -691,49 +738,59 @@ agepro_model <- R6Class(
     #' Calculating Total Allowable Catch \eqn{TAC} to produce \eqn{P*}, the
     #' probability of overfishing in the target year.
     pstar = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.pstar_projection)
-      }else {
+      } else {
         #Check if current projection_analyses_type is not REBUILD
-        if(self$projection_analyses_type == "rebuild"){
-          stop(paste0("Assigning value PSTAR projection object but ",
-                    "current projection_analyses_type is REBUILD"))
+        if (self$projection_analyses_type == "rebuild") {
+          stop(paste0(
+            "Assigning value PSTAR projection object but ",
+            "current projection_analyses_type is REBUILD"
+          ))
         }
-        checkmate::assert_r6(value, public = c("target_year",
-                                               "num_pstar_levels",
-                                               "pstar_levels_table",
-                                               "pstar_overfishing_f"),
-                             null.ok = TRUE,
-                             .var.name = "pstar")
+        checkmate::assert_r6(
+          value,
+          public = c(
+            "target_year",
+            "num_pstar_levels",
+            "pstar_levels_table",
+            "pstar_overfishing_f"
+          ),
+          null.ok = TRUE,
+          .var.name = "pstar"
+        )
         private$.pstar_projection <- value
       }
     },
-
 
     #' @field rebuild
     #' calculation of the constant total Fishing Mortality \eqn{F}
     #' calculated across all fleets with the rebuild spawning biomass.
     rebuild = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.rebuild_projection)
-      }else {
+      } else {
         #Check if current active projection_analyses_type is not PSTAR
-        if(self$projection_analyses_type == "pstar"){
-          stop(paste0("Assigning value to REBUILD projection object but ",
-                      "current projection_analyses_type is PSTAR"))
+        if (self$projection_analyses_type == "pstar") {
+          stop(paste0(
+            "Assigning value to REBUILD projection object but ",
+            "current projection_analyses_type is PSTAR"
+          ))
         }
-        checkmate::assert_r6(value,
-                             public = c("target_year",
-                                        "target_biomass_value",
-                                        "target_biomass_type",
-                                        "target_percent"),
-                             null.ok = TRUE,
-                             .var.name = "rebuild")
+        checkmate::assert_r6(
+          value,
+          public = c(
+            "target_year",
+            "target_biomass_value",
+            "target_biomass_type",
+            "target_percent"
+          ),
+          null.ok = TRUE,
+          .var.name = "rebuild"
+        )
 
         private$.rebuild_projection <- value
-
       }
-
     },
 
     #' @field biological
@@ -741,30 +798,33 @@ agepro_model <- R6Class(
     #' mortality (\eqn{M})
     #'
     biological = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.mortality_fraction_prior_spawn)
-      }else{
-        checkmate::check_r6(value,
-                            public = c("time_varying",
-                                       "proportion_total_mortality"))
+      } else {
+        checkmate::check_r6(
+          value,
+          public = c("time_varying", "proportion_total_mortality")
+        )
 
         private$.mortality_fraction_prior_spawn <- value
       }
-
     },
-
 
     #' @field options
     #' Options for AGEPRO projection output
     #'
     options = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.options_output)
-      }else {
-        checkmate::check_r6(value,
-                            public = c("auxfile_output_flag",
-                                       "process_error_datafiles",
-                                       "export_df"))
+      } else {
+        checkmate::check_r6(
+          value,
+          public = c(
+            "auxfile_output_flag",
+            "process_error_datafiles",
+            "export_df"
+          )
+        )
         private$.options_output <- value
       }
     },
@@ -772,16 +832,15 @@ agepro_model <- R6Class(
     #' @field supported_inpfile_versions
     #' Supported AGEPRO Input File formats
     #'
-    supported_inpfile_versions = function(){
-      return(c(private$.currentver_inpfile_string,
-               "AGEPRO VERSION 4.0",
-               "AGEPRO VERSION 4.25"))
+    supported_inpfile_versions = function() {
+      return(c(
+        private$.currentver_inpfile_string,
+        "AGEPRO VERSION 4.0",
+        "AGEPRO VERSION 4.25"
+      ))
     }
-
-
   ),
   private = list(
-
     #Version
     .ver_inpfile_string = NULL,
     .ver_json_format = NULL,
@@ -822,9 +881,7 @@ agepro_model <- R6Class(
     setup_ver_rpackage = function() {
       private$.ver_rpackage = utils::packageVersion("ageproR")
     }
-
   )
-
 )
 
 
@@ -846,7 +903,6 @@ agepro_inp_model <- R6Class(
   "agepro_inp_model",
   inherit = agepro_model,
   public = list(
-
     #' @description
     #' Initializes an instance of the AGEPRO model with AGEPRO input file
     #' format functions. A default model can be initialized without setting
@@ -871,45 +927,48 @@ agepro_inp_model <- R6Class(
     #' Logical flag to show AGEPRO model's general parameters on R console.
     #' TRUE, by default.
     #'
-    initialize = function(yr_start = 0,
-                          yr_end = 2,
-                          age_begin = 1,
-                          age_end = 6,
-                          num_pop_sims = 1000,
-                          num_fleets = 1,
-                          num_rec_models = 1,
-                          discards_present = 0,
-                          seed = sample.int(1e8, 1),
-                          enable_cat_print = TRUE,
-                          show_general_params = TRUE,
-                          ...) {
-
-
-      if(all(isTRUE(c(
-        missing(yr_start),
-        missing(yr_end),
-        missing(age_begin),
-        missing(age_end),
-        missing(num_pop_sims),
-        missing(num_fleets),
-        missing(num_rec_models)
-      )))){
+    initialize = function(
+      yr_start = 0,
+      yr_end = 2,
+      age_begin = 1,
+      age_end = 6,
+      num_pop_sims = 1000,
+      num_fleets = 1,
+      num_rec_models = 1,
+      discards_present = 0,
+      seed = sample.int(1e8, 1),
+      enable_cat_print = TRUE,
+      show_general_params = TRUE,
+      ...
+    ) {
+      if (
+        all(isTRUE(c(
+          missing(yr_start),
+          missing(yr_end),
+          missing(age_begin),
+          missing(age_end),
+          missing(num_pop_sims),
+          missing(num_fleets),
+          missing(num_rec_models)
+        )))
+      ) {
         cli::cli_alert("Setting up defualt AGEPRO model w/ default values")
       }
 
-      super$initialize(yr_start,
-                       yr_end,
-                       age_begin,
-                       age_end,
-                       num_pop_sims,
-                       num_fleets,
-                       num_rec_models,
-                       discards_present,
-                       seed,
-                       enable_cat_print = enable_cat_print,
-                       show_general_params = show_general_params,
-                       ...)
-
+      super$initialize(
+        yr_start,
+        yr_end,
+        age_begin,
+        age_end,
+        num_pop_sims,
+        num_fleets,
+        num_rec_models,
+        discards_present,
+        seed,
+        enable_cat_print = enable_cat_print,
+        show_general_params = show_general_params,
+        ...
+      )
     },
 
     #' @description
@@ -917,10 +976,7 @@ agepro_inp_model <- R6Class(
     #'
     #' @param inpfile input file name
     read_inp = function(inpfile) {
-
-
       if (missing(inpfile)) {
-
         inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"))
         #Exit Function if user cancels out of file dialog
         if (!test_file_exists(inpfile, access = "r", extension = "inp")) {
@@ -943,10 +999,11 @@ agepro_inp_model <- R6Class(
 
           #Cleanup and close file connections
           cli::cli_alert("Input File Read")
-
         },
         error = function(cond) {
-          cli::cli_alert_danger("There was an error reading this file. \n  {cond}")
+          cli::cli_alert_danger(
+            "There was an error reading this file. \n  {cond}"
+          )
 
           #Reset projection_analyses_type
           self$projection_analyses_type <- "standard"
@@ -966,16 +1023,18 @@ agepro_inp_model <- R6Class(
     #' @export
     #'
     read_inpfile_values = function(inp_con) {
-
       ## TODO: Refactor to read inpfile version
 
       # Assume line 1 is version string
       self$nline <- 1
 
       div_line1_alert = function() {
-        cli::cli_div(class = "tmp",
-                     theme = list(.tmp = list(color="darkorange",
-                                              "font-weight" = "bold")))
+        cli::cli_div(
+          class = "tmp",
+          theme = list(
+            .tmp = list(color = "darkorange", "font-weight" = "bold")
+          )
+        )
         cli::cli_alert("line {self$nline}:", class = "tmp")
       }
       div_line1_alert()
@@ -990,7 +1049,6 @@ agepro_inp_model <- R6Class(
       private$check_inpfile_version(inp_line1)
       self$ver_inpfile_string <- inp_line1
 
-
       #loop through inpfile to read in value fore each parameter keyword
       while (TRUE) {
         inp_line <- readLines(inp_con, n = 1, warn = FALSE)
@@ -1000,39 +1058,37 @@ agepro_inp_model <- R6Class(
 
         self$nline <- self$nline + 1
         self$match_keyword(inp_line, inp_con)
-
       }
-
     },
 
     #' @description
     #' Match Keyword
     #'
     match_keyword = function(inp_line, inp_con) {
-
       #Tidy evaluation evaluate wrapper functions
       keyword_dict <- dict(list(
         "[CASEID]" = {
           rlang::expr(private$read_case_id(inp_con, self$nline))
         },
         "[GENERAL]" = {
-            rlang::expr(private$read_general_params(inp_con, self$nline))
+          rlang::expr(private$read_general_params(inp_con, self$nline))
         },
         "[RECRUIT]" = {
-            rlang::expr(private$read_recruit(inp_con, self$nline))
+          rlang::expr(private$read_recruit(inp_con, self$nline))
         },
         "[BOOTSTRAP]" = {
           rlang::expr(private$read_bootstrap(inp_con, self$nline))
         },
         "[NATMORT]" = {
-            rlang::expr(private$read_natural_mortality(inp_con, self$nline))
+          rlang::expr(private$read_natural_mortality(inp_con, self$nline))
         },
         "[MATURITY]" = {
           rlang::expr(private$read_maturity_fraction(inp_con, self$nline))
         },
         "[BIOLOGICAL]" = {
           rlang::expr(
-            private$read_mortality_fraction_prior_spawn(inp_con, self$nline))
+            private$read_mortality_fraction_prior_spawn(inp_con, self$nline)
+          )
         },
         "[FISHERY]" = {
           rlang::expr(private$read_fishery_selectivity(inp_con, self$nline))
@@ -1044,12 +1100,16 @@ agepro_inp_model <- R6Class(
           rlang::expr(private$read_jan_stock_weight_age(inp_con, self$nline))
         },
         "[SSB_WEIGHT]" = {
-          rlang::expr(private$read_spawning_stock_weight_age(inp_con,
-                                                               self$nline))
+          rlang::expr(private$read_spawning_stock_weight_age(
+            inp_con,
+            self$nline
+          ))
         },
         "[MEAN_WEIGHT]" = {
-          rlang::expr(private$read_mean_population_weight_age(inp_con,
-                                                              self$nline))
+          rlang::expr(private$read_mean_population_weight_age(
+            inp_con,
+            self$nline
+          ))
         },
         "[CATCH_WEIGHT]" = {
           rlang::expr(private$read_landed_catch_weight_age(inp_con, self$nline))
@@ -1075,40 +1135,44 @@ agepro_inp_model <- R6Class(
         "[BOUNDS]" = {
           rlang::expr(private$read_max_bounds(inp_con, self$nline))
         },
-        "[REFPOINT]"= {
+        "[REFPOINT]" = {
           rlang::expr(private$read_reference_points(inp_con, self$nline))
         },
         "[SCALE]" = {
           rlang::expr(private$read_scaling_factors(inp_con, self$nline))
         },
         "[RETROADJUST]" = {
-          rlang::expr(private$read_retrospective_adjustments(inp_con,
-                                                             self$nline))
+          rlang::expr(private$read_retrospective_adjustments(
+            inp_con,
+            self$nline
+          ))
         }
-
       ))
 
       div_keyword_line_alert <- function() {
-        cli::cli_div(class = "tmp",
-                     theme = list(.tmp = list(color="darkorange",
-                                              "font-weight" = "bold")))
+        cli::cli_div(
+          class = "tmp",
+          theme = list(
+            .tmp = list(color = "darkorange", "font-weight" = "bold")
+          )
+        )
         cli::cli_alert("line {self$nline}: {inp_line}", class = "tmp")
       }
       div_keyword_line_alert()
 
-
       if (rlang::eval_tidy(!keyword_dict$has(inp_line))) {
-        message(c("Input line ", self$nline,
-                  " does not match AGEPRO keyword parameter"))
+        message(c(
+          "Input line ",
+          self$nline,
+          " does not match AGEPRO keyword parameter"
+        ))
         invisible() #next
-      }else {
+      } else {
         #If there is a match w/ keyword_dict then use the keyword's own
         #readLine function
         data <- list(inp_con = inp_con)
         rlang::eval_tidy(keyword_dict$get(inp_line), data)
-
       }
-
     },
 
     #' @description
@@ -1126,11 +1190,12 @@ agepro_inp_model <- R6Class(
     #' @param overwrite_as_currentver As default, overwrites version value to
     #' to the current version of the AGEPRO input file format.
     #'
-    write_inp = function(inpfile, delimiter = "  ",
-                         overwrite_as_currentver = TRUE) {
-
+    write_inp = function(
+      inpfile,
+      delimiter = "  ",
+      overwrite_as_currentver = TRUE
+    ) {
       if (missing(inpfile)) {
-
         inpfile <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
@@ -1152,45 +1217,40 @@ agepro_inp_model <- R6Class(
             self$ssb_weight$get_inp_lines(delimiter),
             self$mean_weight$get_inp_lines(delimiter),
             self$catch_weight$get_inp_lines(delimiter),
-            if(as.logical(self$general$discards_present)){
+            if (as.logical(self$general$discards_present)) {
               self$disc_weight$get_inp_lines(delimiter)
             },
             self$natmort$get_inp_lines(delimiter),
             self$maturity$get_inp_lines(delimiter),
             self$biological$get_inp_lines(delimiter),
             self$fishery$get_inp_lines(delimiter),
-            if(as.logical(self$general$discards_present)){
+            if (as.logical(self$general$discards_present)) {
               self$discard$get_inp_lines(delimiter)
             },
             self$recruit$get_inp_lines(delimiter),
             self$harvest$get_inp_lines(delimiter),
-            if(self$projection_analyses_type == "pstar"){
+            if (self$projection_analyses_type == "pstar") {
               self$pstar$get_inp_lines(delimiter)
             },
-            if(self$projection_analyses_type == "rebuild"){
+            if (self$projection_analyses_type == "rebuild") {
               self$rebuild$get_inp_lines(delimiter)
             },
             self$options$get_inp_lines(delimiter),
-            if(self$retroadjust$flag$op$enable_retrospective_adjustments){
+            if (self$retroadjust$flag$op$enable_retrospective_adjustments) {
               self$retroadjust$get_inp_lines(delimiter)
             },
-            if(self$bounds$flag$op$enable_max_bounds){
+            if (self$bounds$flag$op$enable_max_bounds) {
               self$bounds$get_inp_lines(delimiter)
             },
-            if(self$scale$flag$op$enable_scaling_factors){
+            if (self$scale$flag$op$enable_scaling_factors) {
               self$scale$get_inp_lines(delimiter)
             },
-            if(self$perc$flag$op$enable_percentile_summary){
+            if (self$perc$flag$op$enable_percentile_summary) {
               self$perc$get_inp_lines(delimiter)
             }
-
           )
-
         },
-        error = function(cond) {
-
-        }
-
+        error = function(cond) {}
       )
 
       #Write list_inp_lines to inpfile
@@ -1198,40 +1258,36 @@ agepro_inp_model <- R6Class(
       cat(unlist(list_inp_lines), sep = "\n")
       sink()
       cli::cli_alert_info("Saved to {.file {inpfile}}")
-
     }
-
-
   ),
   active = list(
-
     #' @field nline nlines
     nline = function(val) {
       if (missing(val)) {
         return(private$.nline)
-      }else {
+      } else {
         private$.nline <- val
       }
     },
 
     #' @field inp_filepath Filepath of AGEPRO input file
     inp_filepath = function(val) {
-      if(isFALSE(missing(val))){
+      if (isFALSE(missing(val))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.inp_filepath
     }
-
   ),
   private = list(
-
     .nline = NULL,
     .inp_filepath = NULL,
 
     set_inp_filepath = function(value) {
-      if(isFALSE(checkmate::test_file_exists(value))) {
+      if (isFALSE(checkmate::test_file_exists(value))) {
         warning(paste0(
-          "Input file '", value, "' is an invalid path or doesn't exist in ",
+          "Input file '",
+          value,
+          "' is an invalid path or doesn't exist in ",
           "current working directory. \n",
         ))
         return()
@@ -1252,14 +1308,20 @@ agepro_inp_model <- R6Class(
     read_recruit = function(con, nline) {
       # Set Recruitment's observation year sequence array using GENERAL's
       # year names from the projection time period
-      cli::cli_alert(paste0("Reading {.strong recruit}: ",
-                            "Recruitment for time period from ",
-                            "{.val {self$general$yr_start}}"," to ",
-                            "{.val {self$general$yr_end}} ..."))
+      cli::cli_alert(paste0(
+        "Reading {.strong recruit}: ",
+        "Recruitment for time period from ",
+        "{.val {self$general$yr_start}}",
+        " to ",
+        "{.val {self$general$yr_end}} ..."
+      ))
 
-      self$nline <- self$recruit$read_inp_lines(con, nline,
-                                                self$general$seq_years,
-                                                self$general$num_rec_models)
+      self$nline <- self$recruit$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_rec_models
+      )
     },
 
     read_bootstrap = function(con, nline) {
@@ -1267,107 +1329,130 @@ agepro_inp_model <- R6Class(
     },
 
     read_natural_mortality = function(con, nline) {
-      self$nline <- self$natmort$read_inp_lines(con,
-                                                nline,
-                                                self$general$seq_years,
-                                                self$general$num_ages)
+      self$nline <- self$natmort$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages
+      )
     },
 
     read_maturity_fraction = function(con, nline) {
-      self$nline <- self$maturity$read_inp_lines(con,
-                                                 nline,
-                                                 self$general$seq_years,
-                                                 self$general$num_ages)
+      self$nline <- self$maturity$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages
+      )
     },
 
-    read_mortality_fraction_prior_spawn = function(con, nline){
-      self$nline <- self$biological$read_inp_lines(con,
-                                                   nline,
-                                                   self$general$seq_years)
+    read_mortality_fraction_prior_spawn = function(con, nline) {
+      self$nline <- self$biological$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years
+      )
     },
 
     read_fishery_selectivity = function(con, nline) {
       self$nline <-
-        self$fishery$read_inp_lines(con,
-                                    nline,
-                                    self$general$seq_years,
-                                    self$general$num_ages,
-                                    self$general$num_fleets)
+        self$fishery$read_inp_lines(
+          con,
+          nline,
+          self$general$seq_years,
+          self$general$num_ages,
+          self$general$num_fleets
+        )
     },
 
     read_discard_fraction = function(con, nline) {
-
-      if(!(as.logical(self$general$discards_present))){
-        stop(paste0("Reading Discard Fraction data but ",
-                    "'Discards are present' option is FALSE"))
+      if (!(as.logical(self$general$discards_present))) {
+        stop(paste0(
+          "Reading Discard Fraction data but ",
+          "'Discards are present' option is FALSE"
+        ))
       }
-      self$nline <- self$discard$read_inp_lines(con,
-                                                nline,
-                                                self$general$seq_years,
-                                                self$general$num_ages,
-                                                self$general$num_fleets)
-
+      self$nline <- self$discard$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages,
+        self$general$num_fleets
+      )
     },
 
     read_jan_stock_weight_age = function(con, nline) {
-      self$nline <- self$stock_weight$read_inp_lines(con,
-                                                     nline,
-                                                     self$general$seq_years,
-                                                     self$general$num_ages)
+      self$nline <- self$stock_weight$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages
+      )
     },
 
     read_spawning_stock_weight_age = function(con, nline) {
-      self$nline <- self$ssb_weight$read_inp_lines(con,
-                                                   nline,
-                                                   self$general$seq_years,
-                                                   self$general$num_ages)
+      self$nline <- self$ssb_weight$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages
+      )
     },
 
     read_mean_population_weight_age = function(con, nline) {
-      self$nline <- self$mean_weight$read_inp_lines(con,
-                                                    nline,
-                                                    self$general$seq_years,
-                                                    self$general$num_ages)
+      self$nline <- self$mean_weight$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages
+      )
     },
 
     read_landed_catch_weight_age = function(con, nline) {
-      self$nline <- self$catch_weight$read_inp_lines(con,
-                                                     nline,
-                                                     self$general$seq_years,
-                                                     self$general$num_ages,
-                                                     self$general$num_fleets)
+      self$nline <- self$catch_weight$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages,
+        self$general$num_fleets
+      )
     },
 
     read_discard_weight_age = function(con, nline) {
-
-      if(!as.logical(self$general$discards_present)){
-        stop(paste0("Reading Discard Fraction data but ",
-                    "'Discards are present' option is FALSE"))
+      if (!as.logical(self$general$discards_present)) {
+        stop(paste0(
+          "Reading Discard Fraction data but ",
+          "'Discards are present' option is FALSE"
+        ))
       }
-      self$nline <- self$disc_weight$read_inp_lines(con,
-                                                    nline,
-                                                    self$general$seq_years,
-                                                    self$general$num_ages,
-                                                    self$general$num_fleets)
-
+      self$nline <- self$disc_weight$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_ages,
+        self$general$num_fleets
+      )
     },
 
-    read_harvest_scenario = function(con,nline) {
-
-      self$nline <- self$harvest$read_inp_lines(con,
-                                                nline,
-                                                self$general$seq_years,
-                                                self$general$num_fleets)
-
+    read_harvest_scenario = function(con, nline) {
+      self$nline <- self$harvest$read_inp_lines(
+        con,
+        nline,
+        self$general$seq_years,
+        self$general$num_fleets
+      )
     },
 
     read_pstar_projection = function(con, nline) {
-
-      if(self$projection_analyses_type == "rebuild"){
-        stop(paste0("Read REBUILD projection data prevents ",
-                    "PSTAR projections to be read from file. ",
-                    "(current projection_analyses_type is 'rebuild')"),
-             call. = FALSE)
+      if (self$projection_analyses_type == "rebuild") {
+        stop(
+          paste0(
+            "Read REBUILD projection data prevents ",
+            "PSTAR projections to be read from file. ",
+            "(current projection_analyses_type is 'rebuild')"
+          ),
+          call. = FALSE
+        )
       }
 
       self$setup_projection_analyses_values("pstar")
@@ -1376,12 +1461,15 @@ agepro_inp_model <- R6Class(
     },
 
     read_rebuild_projection = function(con, nline) {
-
-      if(self$projection_analyses_type == "pstar"){
-        stop(paste0("Read PSTAR projection data prevents ",
-                    "REBUILD projection data to be read from file. ",
-                    "(current projection_analyses_type is 'pstar')"),
-             call. = FALSE)
+      if (self$projection_analyses_type == "pstar") {
+        stop(
+          paste0(
+            "Read PSTAR projection data prevents ",
+            "REBUILD projection data to be read from file. ",
+            "(current projection_analyses_type is 'pstar')"
+          ),
+          call. = FALSE
+        )
       }
 
       self$setup_projection_analyses_values("rebuild")
@@ -1390,7 +1478,6 @@ agepro_inp_model <- R6Class(
     },
 
     read_options_output = function(con, nline) {
-
       # Is Input File Version String matches agepro40 Input File Format string:
       # "AGEPRO VERSION 4.0"
       self$options$enable_agepro40_format <-
@@ -1400,7 +1487,6 @@ agepro_inp_model <- R6Class(
     },
 
     read_percentile_summary = function(con, nline) {
-
       self$perc$enable_percentile_summary <- TRUE
       self$nline <- self$perc$read_inp_lines(con, nline)
     },
@@ -1421,95 +1507,98 @@ agepro_inp_model <- R6Class(
     },
     read_retrospective_adjustments = function(con, nline) {
       self$retroadjust$enable_retrospective_adjustments <- TRUE
-      self$nline <- self$retroadjust$read_inp_lines(con,
-                                                    nline,
-                                                    self$general$num_ages)
+      self$nline <- self$retroadjust$read_inp_lines(
+        con,
+        nline,
+        self$general$num_ages
+      )
     },
-
-
 
     # Helper function to validate AGEPRO Input File Version format is
     # supported_inpfile_version
-    check_inpfile_version = function(inp_line,
-                                     check_currentver = TRUE) {
-
+    check_inpfile_version = function(inp_line, check_currentver = TRUE) {
       checkmate::assert_character(inp_line, len = 1)
 
       # Throw Error if VERSION string doesn't match supported
       # AGEPRO Input File Version string formats
-      if(isFALSE(inp_line %in% self$supported_inpfile_versions)){
-        stop(paste0(
-          "This version of this input file is not supported: ",inp_line,
-          "\n - Supported verion(s): ",
-          paste(self$supported_inpfile_versions,collapse=", ")),
-          call.= FALSE)
-
+      if (isFALSE(inp_line %in% self$supported_inpfile_versions)) {
+        stop(
+          paste0(
+            "This version of this input file is not supported: ",
+            inp_line,
+            "\n - Supported verion(s): ",
+            paste(self$supported_inpfile_versions, collapse = ", ")
+          ),
+          call. = FALSE
+        )
       }
 
-      if(check_currentver) {
+      if (check_currentver) {
         return(invisible(private$check_currentver_inpfile_string(inp_line)))
       }
       return(TRUE)
-
     },
-
 
     # Helper function to check if the string matches AGEPRO VERSION 4.0
     # input file version format
     check_agepro40_inpfile_string = function(inp_line) {
-
       return(identical(inp_line, private$.agepro40_inpfile_string))
     },
 
     # Throw Warning if (supported) VERSION string doesn't match
     # "current version" AGEPRO Input file format
-    check_currentver_inpfile_string = function (inp_line, line1_msg = TRUE) {
-
+    check_currentver_inpfile_string = function(inp_line, line1_msg = TRUE) {
       # In case this is used outside checking/reading line1 of input files
-      msg_wasfound <- ifelse(line1_msg,
-                    " (Line 1 read from input file) found,",
-                    " was found,")
+      msg_wasfound <- ifelse(
+        line1_msg,
+        " (Line 1 read from input file) found,",
+        " was found,"
+      )
 
-      if(isFALSE(identical(inp_line,
-                           private$.currentver_inpfile_string))){
-        warning(paste0(inp_line,
-                       msg_wasfound,
-                       " but does not match current version of the AGEPRO",
-                       " Input File format: ",
-                       private$.currentver_inpfile_string),
-                call. = FALSE)
+      if (isFALSE(identical(inp_line, private$.currentver_inpfile_string))) {
+        warning(
+          paste0(
+            inp_line,
+            msg_wasfound,
+            " but does not match current version of the AGEPRO",
+            " Input File format: ",
+            private$.currentver_inpfile_string
+          ),
+          call. = FALSE
+        )
 
         return(FALSE)
       }
       return(TRUE)
     },
 
-
     # Set Input File String based on preference on current AGEPRO input file
     # version. Warn for agepro model's version string doesn't match current
     # version
-    write_inpfile_version = function(overwrite_as_currentver = TRUE){
-
+    write_inpfile_version = function(overwrite_as_currentver = TRUE) {
       # Check agepro_model VERSION string matches "current version"
       # of input file version format
-      is_model_currentver <- identical(self$ver_inpfile_string,
-                                     private$.currentver_inpfile_string)
+      is_model_currentver <- identical(
+        self$ver_inpfile_string,
+        private$.currentver_inpfile_string
+      )
 
-      if(isFALSE(is_model_currentver)) {
-
-
+      if (isFALSE(is_model_currentver)) {
         cli::cli_alert_warning(paste0(
           "Model's input file format ",
           "{.strong {self$ver_inpfile_string}} does not match ",
           "{.emph current version} ",
-          "{.strong {private$.currentver_inpfile_string}} "))
+          "{.strong {private$.currentver_inpfile_string}} "
+        ))
 
-
-        if(isFALSE(overwrite_as_currentver)){
+        if (isFALSE(overwrite_as_currentver)) {
           #Return/Escape function and send warning
-          warning(paste0("AGEPRO input file version does not match",
-                         "current input file version ",
-                         private$.currentver_inpfile_string,".")    )
+          warning(paste0(
+            "AGEPRO input file version does not match",
+            "current input file version ",
+            private$.currentver_inpfile_string,
+            "."
+          ))
           return()
         }
 
@@ -1517,19 +1606,18 @@ agepro_inp_model <- R6Class(
         cli::cli_alert_info(paste0(
           "Overwiting model's input file format (ver_inpfile_string) to ",
           "{.emph current version} ",
-          " {.val {private$.currentver_inpfile_string}}"))
+          " {.val {private$.currentver_inpfile_string}}"
+        ))
         self$ver_inpfile_string <- private$.currentver_inpfile_string
-
       }
 
-      cli::cli_alert_info(paste0("Input file format (ver_inpfile_string): ",
-                                   "{.val {self$ver_inpfile_string}}"))
+      cli::cli_alert_info(paste0(
+        "Input file format (ver_inpfile_string): ",
+        "{.val {self$ver_inpfile_string}}"
+      ))
 
       return()
-
     }
-
-
   )
 )
 
@@ -1548,7 +1636,6 @@ agepro_json_model <- R6Class(
   "agepro_json_model",
   inherit = agepro_model,
   public = list(
-
     #' @description
     #' Initializes the instances of the AGEPRO Model
     #'
@@ -1558,7 +1645,6 @@ agepro_json_model <- R6Class(
     initialize = function(...) {
       super$initialize(...)
     },
-
 
     #' @description
     #' Return a json formatted object.
@@ -1571,9 +1657,7 @@ agepro_json_model <- R6Class(
     #' `NA`. Single `NA` values will be reconverted to `NULL`.
     #'
     get_json = function() {
-
       version_json <- list(
-
         inpfile_string = self$ver_inpfile_string,
         json_format = self$ver_json_format
       )
@@ -1587,66 +1671,63 @@ agepro_json_model <- R6Class(
         "maturity" = self$maturity$json_list_object,
         "biological" = self$biological$json_list_object,
         "fishery" = self$fishery$json_list_object,
-        "discard" =
-            ifelse(!is.null(self$discard),
-                  self$discard$json_list_object,
-                  NA),
+        "discard" = ifelse(
+          !is.null(self$discard),
+          self$discard$json_list_object,
+          NA
+        ),
         "stock_weight" = self$stock_weight$json_list_object,
         "ssb_weight" = self$ssb_weight$json_list_object,
         "mean_weight" = self$mean_weight$json_list_object,
         "catch_weight" = self$catch_weight$json_list_object,
-        "disc_weight" =
-            ifelse(!is.null(self$disc_weight),
-                  self$disc_weight$json_list_object,
-                  NA),
+        "disc_weight" = ifelse(
+          !is.null(self$disc_weight),
+          self$disc_weight$json_list_object,
+          NA
+        ),
         "recruit" = self$recruit$json_list_object,
         "harvest" = self$harvest$json_list_object,
         "pstar" = self$pstar$json_list_object,
         "rebuild" = self$rebuild$json_list_object,
         "options" = self$options$json_list_object,
         "perc" = {
-          if(self$perc$enable_percentile_summary){
+          if (self$perc$enable_percentile_summary) {
             self$perc$json_list_object
-          }else{
+          } else {
             NA
           }
         },
         "bounds" = {
-          if(self$bounds$enable_max_bounds){
+          if (self$bounds$enable_max_bounds) {
             self$bounds$json_list_object
-          }else{
+          } else {
             NA
           }
         },
         "retroadjust" = {
-          if(self$retroadjust$enable_retrospective_adjustments){
+          if (self$retroadjust$enable_retrospective_adjustments) {
             self$retroadjust$json_list_object
-           }else{
-             NA
-           }
-         },
-         "refpoint" = {
-           if(self$refpoint$enable_reference_points){
-             self$refpoint$json_list_object
-           }else{
-             NA
-           }
-         },
-         "scale" = {
-           if(self$scale$enable_scaling_factors){
-             self$scale$json_list_object
-           }else{
-             NA
-           }
-         }
+          } else {
+            NA
+          }
+        },
+        "refpoint" = {
+          if (self$refpoint$enable_reference_points) {
+            self$refpoint$json_list_object
+          } else {
+            NA
+          }
+        },
+        "scale" = {
+          if (self$scale$enable_scaling_factors) {
+            self$scale$json_list_object
+          } else {
+            NA
+          }
+        }
       )
 
-
-
-      toJSON(agepro_json,
-             pretty = TRUE,
-             auto_unbox = TRUE)
-
+      toJSON(agepro_json, pretty = TRUE, auto_unbox = TRUE)
     },
 
     #' @description
@@ -1656,9 +1737,7 @@ agepro_json_model <- R6Class(
     #' @param show_dir Option to show directory after JSON file is written.
     #'
     write_json = function(file, show_dir = FALSE) {
-
       if (missing(file)) {
-
         file <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
@@ -1666,7 +1745,6 @@ agepro_json_model <- R6Class(
           return(invisible(NULL))
         }
       }
-
 
       write(self$get_json(), file)
 
@@ -1691,33 +1769,36 @@ agepro_json_model <- R6Class(
     #' (`agepro_inp_model`).
     #'
     #' @param inp_model AGEPRO model with AGEPRO Input File (*.INP) functions
-    import_agepro_inp_model = function(inp_model){
-
+    import_agepro_inp_model = function(inp_model) {
       #Validate agepro_inp_model
-      checkmate::assert_r6(inp_model,
-                           classes = c("agepro_inp_model","agepro_model"),
-                           public = c("case_id",
-                                      "general",
-                                      "bootstrap",
-                                      "natmort",
-                                      "maturity",
-                                      "biological",
-                                      "fishery",
-                                      "discard",
-                                      "stock_weight",
-                                      "ssb_weight",
-                                      "mean_weight",
-                                      "catch_weight",
-                                      "disc_weight",
-                                      "recruit",
-                                      "harvest",
-                                      "pstar",
-                                      "options",
-                                      "refpoint",
-                                      "bounds",
-                                      "retroadjust",
-                                      "refpoint",
-                                      "scale"))
+      checkmate::assert_r6(
+        inp_model,
+        classes = c("agepro_inp_model", "agepro_model"),
+        public = c(
+          "case_id",
+          "general",
+          "bootstrap",
+          "natmort",
+          "maturity",
+          "biological",
+          "fishery",
+          "discard",
+          "stock_weight",
+          "ssb_weight",
+          "mean_weight",
+          "catch_weight",
+          "disc_weight",
+          "recruit",
+          "harvest",
+          "pstar",
+          "options",
+          "refpoint",
+          "bounds",
+          "retroadjust",
+          "refpoint",
+          "scale"
+        )
+      )
 
       cli::cli_alert_info("Importing from agepro_inp_model ...")
       self$projection_analyses_type <-
@@ -1725,11 +1806,11 @@ agepro_json_model <- R6Class(
 
       tryCatch(
         {
-          if(as.logical(inp_model$general$discards_present)){
+          if (as.logical(inp_model$general$discards_present)) {
             cli::cli_alert("Discard and Discard Weights ...")
             self$discard <- inp_mode$discard
             self$disc_weight <- inp_model$disc_weight
-          }else {
+          } else {
             self$discard <- NULL
             self$disc_weight <- NULL
           }
@@ -1758,21 +1839,21 @@ agepro_json_model <- R6Class(
 
           self$harvest <- inp_model$harvest
           cli::cli_alert_success("Harvest Scenario")
-          if(self$projection_analyses_type == "pstar"){
-
+          if (self$projection_analyses_type == "pstar") {
             self$setup_projection_analyses_values("pstar")
-            cli::cli_alert_info(paste0("Importing PStar Projection values ",
-                                       "from AGEPRO Input Data format ..."))
+            cli::cli_alert_info(paste0(
+              "Importing PStar Projection values ",
+              "from AGEPRO Input Data format ..."
+            ))
             self$pstar <- inp_model$pstar
-
           }
-          if(self$projection_analyses_type == "rebuild"){
-
+          if (self$projection_analyses_type == "rebuild") {
             self$setup_projection_analyses_values("rebuild")
-            cli::cli_alert_info(paste0("Importing Rebuling Projection values ",
-                                       "from AGEPRO Input Data format ..."))
+            cli::cli_alert_info(paste0(
+              "Importing Rebuling Projection values ",
+              "from AGEPRO Input Data format ..."
+            ))
             self$rebuild <- inp_model$rebuild
-
           }
 
           self$options <- inp_model$options
@@ -1782,22 +1863,16 @@ agepro_json_model <- R6Class(
           self$refpoint <- inp_model$refpoint
           self$scale <- inp_model$scale
           cli::cli_alert_success("AGEPRO model and output options")
-
         },
-        error = function(err){
+        error = function(err) {
           message(conditionMessage(err))
-
         },
-        finally ={
+        finally = {
           cli::cli_alert("Done")
         }
       )
 
-
-
       invisible(inp_model)
-
     }
-
   )
 )
