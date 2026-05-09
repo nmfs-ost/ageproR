@@ -68,7 +68,7 @@ Please refer to the *AGEPRO Reference Manual* for more technical details.
 
 ## Citation
 
-Please cite this AGEPRO project as: 
+Please cite AGEPRO as: 
 
 ```
 Brodziak, Jon and Rago, Paul J. and Conser, Ramon. (1998). A General Approach for Making Short-Term 
