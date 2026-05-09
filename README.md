@@ -53,7 +53,7 @@ remotes::install_github("nmfs-ost/ageproR")
 
 **ageproR** is compatible with the AGEPRO input file formats
 `AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
-saves to the `AGEPRO VERSION 4.25` Input File Format.
+saves to the `AGEPRO VERSION 4.0` Input File Format.
 
 Please refer to the [*AGEPRO Reference
 Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
@@ -143,7 +143,7 @@ test2$write_inp(outfile)
 
 ## Citation
 
-Please cite this AGEPRO project as:
+Please cite AGEPRO as:
 
     Brodziak, Jon and Rago, Paul J. and Conser, Ramon. (1998). A General Approach for Making Short-Term 
     Stochastic Projections from an Age-Structured Fisheries Assessment Model. Fishery Stock Assessment 
