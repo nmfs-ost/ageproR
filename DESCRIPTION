@@ -53,6 +53,7 @@ Collate:
     'projection_years.R'
     'recruit_model.R'
     'recruitment.R'
+    'run_model.R'
     'utils.R'
     'validation.R'
 Suggests: 
