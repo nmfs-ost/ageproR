@@ -27,18 +27,18 @@ run_model <- function(
   verbose = TRUE,
   ...
 ) {
-  # Reset wd on.exit
-  orig_wd <- getwd()
-  withr::defer(setwd(orig_wd))
+  # Valadate outdir
+  if (isFALSE(checkmate::test_directory_exists(outdir))) {
+    stop("Invalid AGEPRO Output Directory")
+  }
+
+  # Validate exepath
+  checkmate::assert_character(exepath, len = 1)
+  validate_calc_engine_binary(exepath, verbose)
 
   cout <- tryCatch(
     {
-      # Validate exepath
-      checkmate::assert_character(exepath, len = 1)
-      validate_calc_engine_binary(exepath)
-
-      #TODO:Valadate outdir
-
+      # System Call to AGEPRO Calcuation Engine Binary
       system2(
         command = exepath,
         args = agepro_args,
@@ -90,5 +90,7 @@ validate_calc_engine_binary <- function(
   verbose = FALSE
 ) {
   #Validate exepath: The path
-  checkmate::assert_file_exists(exepath, extension = "exe")
+  if (isFALSE(checkmate::test_file_exists(exepath, extension = "exe"))) {
+    stop("AGEPRO Calcuation Engine Binary was not found")
+  }
 }
