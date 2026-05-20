@@ -2,16 +2,14 @@
 % Please edit documentation in R/run_model.R
 \name{run_model}
 \alias{run_model}
-\title{Run an AGEPRO Input File}
+\title{Run the AGEPRO Cacluation Engine Binary with a AGEPRO Input File}
 \usage{
 run_model(
   exepath = "agepro.exe",
   agepro_args = "",
   outdir = getwd(),
   save_logfile = FALSE,
-  fn_logfile = tempfile(format(Sys.time(), "\%Y\%m\%d_\%H\%M_"), fileext = ".txt"),
-  verbose = TRUE,
-  ...
+  fn_logfile = tempfile(format(Sys.time(), "\%Y\%m\%d_\%H\%M_"), fileext = ".txt")
 )
 }
 \arguments{
@@ -24,19 +22,23 @@ run_model(
 \item{save_logfile}{Option to save AGEPRO Calcuation Engine ouput to logfile}
 
 \item{fn_logfile}{Logfile Filename}
-
-\item{verbose}{Option to show verbose output}
-
-\item{...}{further arguments passed to or from other methods}
 }
 \description{
-Function
+Wrapper function to call the Binary
 }
 \examples{
 \dontrun{
 
-wdir <- here::here()
-inpfile <- file.path(wdir,)
-ageproR::run_model(wdir,"AGEPRO.EXE",)
+inp_file <- file.path(find.package("ageproR"),"Example_UKU.INP")
+
+# For this example, save the Agepro Calcuation Engine Binary in
+# the 'agepro' subdirectory of home directory 'R_USER'
+exepath <- path.expand("~/agepro/AGEPRO.EXE")
+if(.Platform$OS.type == "windows") {
+  exepath <- normalizePath(exepath, winslash="/")
 }
+
+ageproR::run_model(exepath, inp_file, tempdir())
+}
+
 }

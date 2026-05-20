@@ -4,15 +4,10 @@
 \alias{validate_calc_engine_binary}
 \title{Validates file path for AGEPRO Calcuation Engine Binary}
 \usage{
-validate_calc_engine_binary(
-  exepath = file.path(getwd(), "agepro.exe"),
-  verbose = FALSE
-)
+validate_calc_engine_binary(exepath = file.path(getwd(), "agepro.exe"))
 }
 \arguments{
 \item{exepath}{AGEPRO Calcuuation Path Binary}
-
-\item{verbose}{Logical option to output to RConsole.}
 }
 \description{
 Validates file path for AGEPRO Calcuation Engine Binary
