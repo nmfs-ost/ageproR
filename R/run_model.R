@@ -95,3 +95,70 @@ validate_calc_engine_binary <- function(
     stop("AGEPRO Calcuation Engine Binary was not found")
   }
 }
+
+
+launch_model <- function(model, out_dir) {
+  #Validate agepro_model
+  assert_agepro_model_class(model)
+
+  if (missing(out_dir)) {
+    out_dir <- ifelse(
+      .Platform$OS.type == "windows",
+      normalizePath(file.path(Sys.getenv("R_USER"), "AGEPRO"), winslash = "/"),
+      file.path(Sys.getenv("R_USER"), "AGEPRO")
+    )
+    if (isFALSE(dir.exists(out_dir))) {
+      dir.create(out_dir)
+      cli::cli_alert("{out_dir} created")
+    }
+  }
+
+  #Default to User Home directory
+  run_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+  #Check if Model's CASE_ID is blank
+
+  blank_caseid <- checkmate::test_character(
+    model$case_id$model_name,
+    pattern = "^$|^[:blank:]]+$",
+    null.ok = FALSE
+  )
+
+  if (checkmate::test_character(blank_caseid)) {
+    inp_file <- "untitled_"
+  } else {
+    regex_invalid_fschars <- '[\\/:*?"<>|-]'
+    #Check if inp_file has invalid char pattterns.
+    if (
+      checkmate::test_character(
+        model$case_id$model_name,
+        pattern = regex_invalid_fschars
+      )
+    ) {
+      #TODO: Give a option to replace invalid char, or to give an error.
+      msg_regex_invalid_fschars <- trimws(gsub(
+        "\\[*\\]*\\\\",
+        " ",
+        regex_invalid_fschars
+      ))
+
+      stop(paste0(
+        "Model Case Id has an invalid character: '",
+        msg_regex_invalid_fschars,
+        "'"
+      ))
+    }
+    inp_file <- inp_file
+  }
+
+  #Set INP and BSN
+
+  #Set run directory
+
+  #Check for Bootstrap?
+
+  #Save to INP file?
+
+  #run AGEPRO
+
+  #AGEPRO output
+}
