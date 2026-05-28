@@ -96,10 +96,11 @@ validate_calc_engine_binary <- function(
   }
 }
 
-
 launch_model <- function(model, out_dir) {
   #Validate agepro_model
   assert_agepro_model_class(model)
+
+  #Assert agepro_model bootstrap file exists
 
   if (missing(out_dir)) {
     out_dir <- ifelse(
