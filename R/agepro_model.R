@@ -1236,16 +1236,16 @@ agepro_inp_model <- R6Class(
               self$rebuild$get_inp_lines(delimiter)
             },
             self$options$get_inp_lines(delimiter),
-            if (self$retroadjust$flag$op$enable_retrospective_adjustments) {
+            if (self$retroadjust$enable_retrospective_adjustments) {
               self$retroadjust$get_inp_lines(delimiter)
             },
-            if (self$bounds$flag$op$enable_max_bounds) {
+            if (self$bounds$enable_max_bounds) {
               self$bounds$get_inp_lines(delimiter)
             },
-            if (self$scale$flag$op$enable_scaling_factors) {
+            if (self$scale$enable_scaling_factors) {
               self$scale$get_inp_lines(delimiter)
             },
-            if (self$perc$flag$op$enable_percentile_summary) {
+            if (self$perc$enable_percentile_summary) {
               self$perc$get_inp_lines(delimiter)
             }
           )
