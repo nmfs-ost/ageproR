@@ -10,15 +10,15 @@
 #' @importFrom checkmate assert_character
 #'
 open_file_dialog <- function(filetype) {
-
   filetype <- validate_filetype(filetype)
   err_msg_dialog_cancelled <- "File choice cancelled"
 
-  if(is_rstudio_desktop()) {
-    path <- rstudioapi::selectFile(caption = "Open File",
-                                   existing = TRUE,
-                                   filter = paste0(filetype[1],
-                                                   " (*", filetype[2], ")"))
+  if (is_rstudio_desktop()) {
+    path <- rstudioapi::selectFile(
+      caption = "Open File",
+      existing = TRUE,
+      filter = paste0(filetype[1], " (*", filetype[2], ")")
+    )
     #Check if user cancels file dialog window
     tryCatch(
       {
@@ -30,13 +30,13 @@ open_file_dialog <- function(filetype) {
         return(invisible())
       }
     )
-
-  }else if (capabilities("tcltk")) {
-
+  } else if (capabilities("tcltk")) {
     path <- tcltk::tclvalue(
-      tcltk::tkgetOpenFile(initialdir = here::here(),
-                           filetypes = paste0("{{", filetype[1], "} {",
-                                               filetype[2], "}}")))
+      tcltk::tkgetOpenFile(
+        initialdir = here::here(),
+        filetypes = paste0("{{", filetype[1], "} {", filetype[2], "}}")
+      )
+    )
     #Check if user cancels file dialog window
     tryCatch(
       {
@@ -47,8 +47,7 @@ open_file_dialog <- function(filetype) {
         return(invisible())
       }
     )
-
-  }else {
+  } else {
     #fallback on file.choose
     path <- file.choose()
   }
@@ -67,16 +66,16 @@ open_file_dialog <- function(filetype) {
 #' @importFrom checkmate assert_character
 #'
 save_file_dialog <- function() {
-
   filetype <- validate_filetype() # Defaults to "All Files (*)"
   err_msg_dialog_cancelled <- "File choice cancelled"
 
-  if(is_rstudio_desktop()) {
-    target <- rstudioapi::selectFile(caption = "Save File",
-                                     label = "Save",
-                                     existing = FALSE,
-                                     filter = paste0(filetype[1],
-                                                   " (*", filetype[2], ")"))
+  if (is_rstudio_desktop()) {
+    target <- rstudioapi::selectFile(
+      caption = "Save File",
+      label = "Save",
+      existing = FALSE,
+      filter = paste0(filetype[1], " (*", filetype[2], ")")
+    )
 
     #Check if user cancels file dialog window
     tryCatch(
@@ -88,14 +87,14 @@ save_file_dialog <- function() {
         message(err_msg_dialog_cancelled)
         return(invisible())
       }
-
     )
-
-  }else if (capabilities("tcltk")) {
+  } else if (capabilities("tcltk")) {
     target <- tcltk::tclvalue(
-      tcltk::tkgetSaveFile(initialdir = here::here(),
-                           filetypes = paste0("{{", filetype[1], "} {",
-                                                       filetype[2], "}}")))
+      tcltk::tkgetSaveFile(
+        initialdir = here::here(),
+        filetypes = paste0("{{", filetype[1], "} {", filetype[2], "}}")
+      )
+    )
     #Check if user cancels file dialog window
     tryCatch(
       {
@@ -106,10 +105,7 @@ save_file_dialog <- function() {
         return(invisible())
       }
     )
-
-
-
-  }else {
+  } else {
     #fallback on file.choose
     target <- file.choose()
   }
@@ -122,12 +118,38 @@ save_file_dialog <- function() {
 #' implemented. vscode's rstudio version information is set to '0'.
 #' For Rstudio specific code, check for mode "desktop", and version > '0'
 #'
-is_rstudio_desktop <- function(){
-  return(rstudioapi::versionInfo()$mode == "desktop" &&
-           rstudioapi::versionInfo()$version > as.character(0) )
+is_rstudio_desktop <- function() {
+  return(
+    rstudioapi::versionInfo()$mode == "desktop" &&
+      rstudioapi::versionInfo()$version > as.character(0)
+  )
 }
 
+#' Retruns GUI Frontend of current R process.
+#'
+#' Helper function to get the GUI frontend attached to the current Rconsole process.
+#' This informtion will be used to determine the rstudioapi, windows native base R, or
+#' muiltiplatform tcl/tk.
+#'
+get_r_frontend <- function() {
+  # Positron : Check for POSITRON env first. Positron shares the same vscode terminal.
+  if (Sys.getenv("POSITRON") == 1) {
+    return("Positron")
+  }
 
+  # VS Code
+  if (Sys.getenv("TERM_PROGRAM") == "vscode") {
+    return("vscode")
+  }
+
+  # RStudio
+  if (Sys.getenv("RSTUDIO") == 1) {
+    return("RStudio")
+  }
+
+  # Fallback
+  return(.Platform$GUI)
+}
 
 
 #' Reads a line of numeric strings from the AGEPRO input file connection.
@@ -144,7 +166,6 @@ is_rstudio_desktop <- function(){
 #' @keywords internal
 #'
 read_inp_numeric_line <- function(inp_con) {
-
   if (!isOpen(inp_con)) {
     stop("No open file Connection to AGEPRO input file")
   }
@@ -157,13 +178,12 @@ read_inp_numeric_line <- function(inp_con) {
   numeric_regex <- "^[-]?[[:digit:]]"
 
   if (!all(grepl(numeric_regex, inp_line))) {
-
     non_numerics <- inp_line[!grepl(numeric_regex, inp_line)]
-    stop("Line contains a Non Numeric Substring",
-         paste(non_numerics, collapse = ", "))
+    stop(
+      "Line contains a Non Numeric Substring",
+      paste(non_numerics, collapse = ", ")
+    )
   }
 
   return(invisible(as.numeric(inp_line)))
-
 }
-
