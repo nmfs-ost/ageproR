@@ -1,3 +1,11 @@
+# ageproR 0.9.1 2026-06-01
+
+- Fixes write_inp error when detecting options_flags (#109)
+  - **write_inp**: Removes unused options_flag references remainining (due to undocumented agepro_flag depencency changes in ageproR 0.8.0) with "options with option flags" classes.
+- Format agepro_model.R and docs with air R formatter
+- Added CITATION to README
+- README: Updated Input File Format to `AGEPRO VERSION 4.25`
+
 # ageproR 0.9.0 2026-02-03
 
 - Default current version AGEPRO input file format is set to `AGEPRO VERSION 4.25`. 
