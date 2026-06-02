@@ -1,3 +1,130 @@
+#' Choose a file to open or save a file interactively.
+#'
+#' This function allows the user to open a File Dialog interface to interatively choose to load or save a file.
+#' Completion of this function will only return the filepath; it will not load nor save files by itself. TODO: RStudio/tcltk/vscode
+#'
+#' @param type Character option to request a "Open" or "Save file Dialog
+#' @param ext Two item vector describing the filename description and filename extension respecively. By default it is assigned to `c("All Files", "*")`
+#'
+#' @importFrom checkmate assert_character
+#'
+#' @returns A Character vector representing the filepath of the chosen path frpm the file dialog.
+#' @keywords internal
+#'
+file_dialog <- function(type = c("open", "save"), ext = c("All Files", "*")) {
+  #Validate Parameters
+  type <- match.arg(type)
+  ext <- validate_filetype(ext)
+
+  #Dialog msg
+  err_msg_dialog_cancelled <- "File choice cancelled"
+  msg_caption_open <- "Open File"
+  msg_caption_save <- "Save File As"
+  pattern_ext <- paste0(ext[1], " (*", ext[2], ")")
+  tcltk_pattern_ext <- paste0("{{", ext[1], "} {", ext[2], "}}")
+
+  #Detect frontend
+  r_frontend <- get_r_frontend()
+
+  # RSTUDIO (rstudioapi) dialogs
+  #
+  if (
+    r_frontend == "RStudio" && requireNamespace("rstudioapi", quietly = TRUE)
+  ) {
+    #Open Dialog
+    if (type == "open") {
+      path <- rstudioapi::selectFile(
+        caption = msg_caption_open,
+        existing = TRUE,
+        filter = pattern_ext
+      )
+    } else {
+      path <- rstudioapi::selectFile(
+        caption = msg_caption_save,
+        label = "Save",
+        existing = FALSE,
+        filter = pattern_ext
+      )
+    }
+    #Check if user cancels file dialog window
+    tryCatch(
+      {
+        checkmate::assert_character(path, len = 1)
+        return(path.expand(path))
+      },
+      error = function(cond) {
+        message(err_msg_dialog_cancelled)
+        return(invisible())
+      }
+    )
+  }
+
+  # POSITRON, VSCODE, R for Windows (choose.files)
+  # Windows native dialogs work with Postiron/Vs Code/Rgui
+  if (.Platform$OS.type == "windows") {
+    if (type == "open") {
+      return(utils::choose.files(
+        caption = msg_caption_open,
+        multi = FALSE,
+        pattern = pattern_ext
+      ))
+    } else {
+      return(utils::choose.files(
+        caption = msg_caption_save,
+        multi = FALSE,
+        pattern = pattern_ext
+      ))
+    }
+  }
+  #Check if user cancels file dialog window
+  tryCatch(
+    {
+      checkmate::assert_character(path, len = 1)
+      return(path.expand(path))
+    },
+    error = function(cond) {
+      message(err_msg_dialog_cancelled)
+      return(invisible())
+    }
+  )
+
+  # TCL/TK fallback (Mac/Linux): 'tcltk' package
+  #
+  if (isFALSE(requireNamespace("tcltk", quietly = TRUE))) {
+    stop(
+      "Package 'tcltk' is required for file dialogs windows for Mac and Linux systems"
+    )
+  }
+  if (type == "open") {
+    path <- tcltk::tclvalue(
+      tcltk::tkgetOpenFile(
+        initialdir = here::here(),
+        filetypes = tcltk_pattern_ext
+      )
+    )
+  } else {
+    path <- tcltk::tclvalue(
+      tcltk::tkgetSaveFile(
+        initialdir = here::here(),
+        filetypes = tcltk_pattern_ext
+      )
+    )
+  }
+  # Validation
+  tryCatch(
+    {
+      checkmate::assert_character(path, min.chars = 1, .var.name = "path")
+      return(path)
+    },
+    error = function(cond) {
+      message(err_msg_dialog_cancelled)
+      return(invisible())
+    }
+  )
+}
+
+
+## TODO: Refactor as function wrapper
 #' Open file dialog or interface to interactively return file path.
 #'
 #' If Rconsole is currently running in Rstudio, it will use the rstudioapi
@@ -13,6 +140,7 @@ open_file_dialog <- function(filetype) {
   filetype <- validate_filetype(filetype)
   err_msg_dialog_cancelled <- "File choice cancelled"
 
+  #RSTUDIO
   if (is_rstudio_desktop()) {
     path <- rstudioapi::selectFile(
       caption = "Open File",
@@ -55,7 +183,7 @@ open_file_dialog <- function(filetype) {
   return(path)
 }
 
-
+## TODO: Refactor as Function wrapper
 #' Save file dialog or interface to interactively return file path.
 #'
 #' If Rconsole is currently running in Rstudio, it will use the rstudioapi
