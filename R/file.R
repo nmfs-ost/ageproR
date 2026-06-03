@@ -11,7 +11,7 @@
 #' @returns A Character vector representing the filepath of the chosen path frpm the file dialog.
 #' @keywords internal
 #'
-file_dialog <- function(type = c("open", "save"), ext = c("All Files", "*")) {
+file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
   #Validate Parameters
   type <- match.arg(type)
   ext <- validate_filetype(ext)
@@ -124,7 +124,6 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", "*")) {
 }
 
 
-## TODO: Refactor as function wrapper
 #' Open file dialog or interface to interactively return file path.
 #'
 #' If Rconsole is currently running in Rstudio, it will use the rstudioapi
@@ -138,52 +137,10 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", "*")) {
 #'
 open_file_dialog <- function(filetype) {
   filetype <- validate_filetype(filetype)
-  err_msg_dialog_cancelled <- "File choice cancelled"
 
-  #RSTUDIO
-  if (is_rstudio_desktop()) {
-    path <- rstudioapi::selectFile(
-      caption = "Open File",
-      existing = TRUE,
-      filter = paste0(filetype[1], " (*", filetype[2], ")")
-    )
-    #Check if user cancels file dialog window
-    tryCatch(
-      {
-        assert_character(path, null.ok = FALSE)
-        path <- path.expand(path)
-      },
-      error = function(cond) {
-        message(err_msg_dialog_cancelled)
-        return(invisible())
-      }
-    )
-  } else if (capabilities("tcltk")) {
-    path <- tcltk::tclvalue(
-      tcltk::tkgetOpenFile(
-        initialdir = here::here(),
-        filetypes = paste0("{{", filetype[1], "} {", filetype[2], "}}")
-      )
-    )
-    #Check if user cancels file dialog window
-    tryCatch(
-      {
-        assert_character(path, min.chars = 1, .var.name = "path")
-      },
-      error = function(cond) {
-        message(err_msg_dialog_cancelled)
-        return(invisible())
-      }
-    )
-  } else {
-    #fallback on file.choose
-    path <- file.choose()
-  }
-
-  return(path)
+  return(file_dialog(type = "open", ext = filetype))
 }
 
-## TODO: Refactor as Function wrapper
 #' Save file dialog or interface to interactively return file path.
 #'
 #' If Rconsole is currently running in Rstudio, it will use the rstudioapi
@@ -194,64 +151,10 @@ open_file_dialog <- function(filetype) {
 #' @importFrom checkmate assert_character
 #'
 save_file_dialog <- function() {
-  filetype <- validate_filetype() # Defaults to "All Files (*)"
-  err_msg_dialog_cancelled <- "File choice cancelled"
-
-  if (is_rstudio_desktop()) {
-    target <- rstudioapi::selectFile(
-      caption = "Save File",
-      label = "Save",
-      existing = FALSE,
-      filter = paste0(filetype[1], " (*", filetype[2], ")")
-    )
-
-    #Check if user cancels file dialog window
-    tryCatch(
-      {
-        checkmate::assert_character(target, null.ok = FALSE)
-        target <- path.expand(target)
-      },
-      error = function(cond) {
-        message(err_msg_dialog_cancelled)
-        return(invisible())
-      }
-    )
-  } else if (capabilities("tcltk")) {
-    target <- tcltk::tclvalue(
-      tcltk::tkgetSaveFile(
-        initialdir = here::here(),
-        filetypes = paste0("{{", filetype[1], "} {", filetype[2], "}}")
-      )
-    )
-    #Check if user cancels file dialog window
-    tryCatch(
-      {
-        checkmate::assert_character(target, min.chars = 1, .var.name = "target")
-      },
-      error = function(cond) {
-        message(err_msg_dialog_cancelled)
-        return(invisible())
-      }
-    )
-  } else {
-    #fallback on file.choose
-    target <- file.choose()
-  }
-  return(target)
+  # Defaults to "All Files"
+  return(file_dialog(type = "save"))
 }
 
-#' Checks Rstudioapi if Rstudio Desktop is used.
-#'
-#' vscode uses/emulates rstudioapi but not all features rstudioapi are
-#' implemented. vscode's rstudio version information is set to '0'.
-#' For Rstudio specific code, check for mode "desktop", and version > '0'
-#'
-is_rstudio_desktop <- function() {
-  return(
-    rstudioapi::versionInfo()$mode == "desktop" &&
-      rstudioapi::versionInfo()$version > as.character(0)
-  )
-}
 
 #' Retruns GUI Frontend of current R process.
 #'
