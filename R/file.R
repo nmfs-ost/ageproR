@@ -50,77 +50,81 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
     tryCatch(
       {
         checkmate::assert_character(path, len = 1)
-        return(path.expand(path))
       },
       error = function(cond) {
         message(err_msg_dialog_cancelled)
         return(invisible())
       }
     )
+    return(path.expand(path))
   }
 
   # POSITRON, VSCODE, R for Windows (choose.files)
   # Windows native dialogs work with Postiron/Vs Code/Rgui
+  # Using "All Files" Filter
   if (.Platform$OS.type == "windows") {
     if (type == "open") {
-      return(utils::choose.files(
+      path <- utils::choose.files(
         caption = msg_caption_open,
         multi = FALSE,
-        pattern = pattern_ext
-      ))
+        filters = Filters["All", ]
+      )
     } else {
-      return(utils::choose.files(
+      path <- utils::choose.files(
+        default = "untitled.inp",
         caption = msg_caption_save,
         multi = FALSE,
-        pattern = pattern_ext
-      ))
+        filters = Filters["All", ]
+      )
     }
+    #Check if user cancels file dialog window
+    tryCatch(
+      {
+        checkmate::assert_character(path, len = 1)
+      },
+      error = function(cond) {
+        message(err_msg_dialog_cancelled)
+        return(invisible())
+      }
+    )
+    return(path.expand(path))
   }
-  #Check if user cancels file dialog window
-  tryCatch(
-    {
-      checkmate::assert_character(path, len = 1)
-      return(path.expand(path))
-    },
-    error = function(cond) {
-      message(err_msg_dialog_cancelled)
-      return(invisible())
-    }
-  )
 
   # TCL/TK fallback (Mac/Linux): 'tcltk' package
   #
+  # TODO: Need to Close Tcltk mangager after it is done. Refactor to own function.
   if (isFALSE(requireNamespace("tcltk", quietly = TRUE))) {
     stop(
       "Package 'tcltk' is required for file dialogs windows for Mac and Linux systems"
     )
-  }
-  if (type == "open") {
-    path <- tcltk::tclvalue(
-      tcltk::tkgetOpenFile(
-        initialdir = here::here(),
-        filetypes = tcltk_pattern_ext
-      )
-    )
   } else {
-    path <- tcltk::tclvalue(
-      tcltk::tkgetSaveFile(
-        initialdir = here::here(),
-        filetypes = tcltk_pattern_ext
+    if (type == "open") {
+      path <- tcltk::tclvalue(
+        tcltk::tkgetOpenFile(
+          initialdir = here::here(),
+          filetypes = tcltk_pattern_ext
+        )
       )
-    )
-  }
-  # Validation
-  tryCatch(
-    {
-      checkmate::assert_character(path, min.chars = 1, .var.name = "path")
-      return(path)
-    },
-    error = function(cond) {
-      message(err_msg_dialog_cancelled)
-      return(invisible())
+    } else {
+      path <- tcltk::tclvalue(
+        tcltk::tkgetSaveFile(
+          initialdir = here::here(),
+          filetypes = tcltk_pattern_ext
+        )
+      )
     }
-  )
+    # Validation
+    tryCatch(
+      {
+        checkmate::assert_character(path, min.chars = 1, .var.name = "path")
+      },
+      error = function(cond) {
+        message(err_msg_dialog_cancelled)
+        return(invisible())
+      }
+    )
+    return(path)
+  }
 }
 
 
@@ -136,8 +140,6 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
 #' @importFrom checkmate assert_character
 #'
 open_file_dialog <- function(filetype) {
-  filetype <- validate_filetype(filetype)
-
   return(file_dialog(type = "open", ext = filetype))
 }
 
