@@ -7,6 +7,7 @@
 #' @param ext Two item vector describing the filename description and filename extension respecively. By default it is assigned to `c("All Files", "*")`
 #'
 #' @importFrom checkmate assert_character
+#' @importFrom utils Filters
 #'
 #' @returns A Character vector representing the filepath of the chosen path frpm the file dialog.
 #' @keywords internal
