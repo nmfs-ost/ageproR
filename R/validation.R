@@ -346,36 +346,3 @@ validate_proj_years_parameter <- function(proj_years) {
 
   return(proj_years_class)
 }
-
-
-#' Checks the validity of filetype key-value pair.
-#'
-#' Checks the filetype as a 2 length vector without missing values. If filetype
-#' as not passed in the parameter, it will return the default `All files (*.*)`
-#' string vector.
-#'
-#' @details
-#' The filetype key-value pair is defined as _fileTypeName_ _extension_. This
-#' is used to [specifying flie
-#' patterns](https://www.tcl.tk/man/tcl8.0/TkCmd/getOpenFile.html#M11) for
-#' Tcl/TK file modules.
-#'
-#' @param filetype filename extension.
-#'
-#' @keywords internal
-#'
-validate_filetype <- function(filetype) {
-  if (missing(filetype)) {
-    #Default "All Files (*)" file type
-    filetype <- c("All Files", "*")
-  }
-
-  #Validate filetype string
-  checkmate::assert_vector(
-    filetype,
-    all.missing = FALSE,
-    len = 2,
-    null.ok = FALSE
-  )
-  return(filetype)
-}
