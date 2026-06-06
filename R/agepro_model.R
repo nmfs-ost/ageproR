@@ -976,7 +976,7 @@ agepro_inp_model <- R6Class(
     #'
     #' @param inpfile input file name
     read_inp = function(inpfile) {
-      if (missing(inpfile)) {
+      if (missing(inpfile) && interactive()) {
         inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"))
         #Exit Function if user cancels out of file dialog
         if (!test_file_exists(inpfile, access = "r", extension = "inp")) {
@@ -1195,7 +1195,7 @@ agepro_inp_model <- R6Class(
       delimiter = "  ",
       overwrite_as_currentver = TRUE
     ) {
-      if (missing(inpfile)) {
+      if (missing(inpfile) && interactive()) {
         inpfile <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
@@ -1737,7 +1737,7 @@ agepro_json_model <- R6Class(
     #' @param show_dir Option to show directory after JSON file is written.
     #'
     write_json = function(file, show_dir = FALSE) {
-      if (missing(file)) {
+      if (missing(file) && interactive()) {
         file <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
