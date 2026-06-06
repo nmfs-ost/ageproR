@@ -17,6 +17,13 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
   type <- match.arg(type)
   ext <- validate_filetype(ext)
 
+  #Throw error if system is not interactive.
+  if (isFALSE(interactive())) {
+    stop(
+      "Non interactive R session found. This function requires user interaction for filepaths."
+    )
+  }
+
   #Dialog msg
   err_msg_dialog_cancelled <- "File choice cancelled"
   msg_caption_open <- "Open File"
