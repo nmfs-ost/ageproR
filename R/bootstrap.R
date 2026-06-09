@@ -1,4 +1,3 @@
-
 #' @title Input information for bootstrap numbers at age file
 #'
 #' @description
@@ -19,12 +18,10 @@
 bootstrap <- R6Class(
   "bootstrap",
   public = list(
-
     #' @description
     #' Initializes the Bootstrap Class
     #'
     initialize = function() {
-
       div_keyword_header(self$keyword_name)
       cli_alert("Setting up Default Values")
 
@@ -34,7 +31,6 @@ bootstrap <- R6Class(
       suppressWarnings(self$bootstrap_file <- NULL)
 
       self$print()
-
     },
 
     #' @description
@@ -42,24 +38,24 @@ bootstrap <- R6Class(
     #'
     #' @param bsn_path Bootstrap Filename (*.bsn) path
     set_bootstrap_filename = function(bsn_path) {
-
-      if(missing(bsn_path)){
+      if (missing(bsn_path) && interactive()) {
         bsn_path <-
-            open_file_dialog(c("AGEPRO Bootstrap File", ".bsn"))
+          open_file_dialog(c("AGEPRO Bootstrap File", ".bsn"))
       }
 
-      if (checkmate::test_file_exists(bsn_path, access = "r", extension = "bsn")) {
+      if (
+        checkmate::test_file_exists(bsn_path, access = "r", extension = "bsn")
+      ) {
         self$bootstrap_file <- bsn_path
-      }else{
+      } else {
         local({
           #Disable cli hyperlinking
           withr::local_options(cli.hyperlink = FALSE)
           cli::cli_alert_danger(
-            "Falied to reconzise as bootstrap file: {.path {bsn_path}}.")
+            "Falied to reconzise as bootstrap file: {.path {bsn_path}}."
+          )
         })
-
       }
-
     },
 
     #' @description
@@ -76,11 +72,15 @@ bootstrap <- R6Class(
 
       nline <- nline + 1
       cli_alert("Line {nline}: ")
-      cli::cli_div(id = "bootstrap_fields",
-                   theme = list(".alert-info" = list("margin-left" = 2)))
+      cli::cli_div(
+        id = "bootstrap_fields",
+        theme = list(".alert-info" = list("margin-left" = 2))
+      )
       cli::cli_alert_info("num_bootstraps: {.val {self$num_bootstraps}}")
-      cli::cli_alert_info(paste0("pop_scale_factor {.emph (BootFac)}: ",
-                                 "{.val {self$pop_scale_factor}}"))
+      cli::cli_alert_info(paste0(
+        "pop_scale_factor {.emph (BootFac)}: ",
+        "{.val {self$pop_scale_factor}}"
+      ))
       cli::cli_end("bootstrap_fields")
 
       #Read another line from the file connection, and
@@ -88,11 +88,12 @@ bootstrap <- R6Class(
       nline <- nline + 1
       private$setup_bootstrap_path(inp_con)
 
-      cli::cli_alert(paste0("Line {nline}: bootstrap_file: ",
-                            "{.val {self$bootstrap_file}}"))
+      cli::cli_alert(paste0(
+        "Line {nline}: bootstrap_file: ",
+        "{.val {self$bootstrap_file}}"
+      ))
 
       return(nline)
-
     },
 
     #' @description
@@ -116,24 +117,22 @@ bootstrap <- R6Class(
     print = function(...) {
       cli::cli_par()
       cli_alert_info("num_bootstraps: {.val {self$num_bootstraps}}")
-      cli_alert_info(paste0("pop_scale_factor {.emph (BootFac)}: ",
-               "{.val {self$pop_scale_factor}}"))
-      cli_alert_info(paste0("bootstrap_file:",
-                            "{.val {self$bootstrap_file}}"))
+      cli_alert_info(paste0(
+        "pop_scale_factor {.emph (BootFac)}: ",
+        "{.val {self$pop_scale_factor}}"
+      ))
+      cli_alert_info(paste0("bootstrap_file:", "{.val {self$bootstrap_file}}"))
 
       cli_end()
     }
-
-
-
-  ), active = list(
-
+  ),
+  active = list(
     #' @field num_bootstraps
     #' Number of bootstraps replicates of initial popualion size
     num_bootstraps = function(value) {
       if (missing(value)) {
         private$.num_bootstraps
-      }else {
+      } else {
         assert_numeric(value, lower = 0)
         private$.num_bootstraps <- value
       }
@@ -146,7 +145,7 @@ bootstrap <- R6Class(
     pop_scale_factor = function(value) {
       if (missing(value)) {
         private$.pop_scale_factor
-      }else {
+      } else {
         assert_numeric(value, lower = 0)
         private$.pop_scale_factor <- value
       }
@@ -157,7 +156,7 @@ bootstrap <- R6Class(
     bootstrap_file = function(value) {
       if (missing(value)) {
         private$.bootstrap_file
-      }else {
+      } else {
         #Validate that 'value' points to a existing bootstrap file.
         private$validate_bootstrap_file(value)
         private$.bootstrap_file <- value
@@ -184,23 +183,21 @@ bootstrap <- R6Class(
     #' @field inp_keyword
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
-      paste0("[",toupper(private$.keyword_name),"]")
+      paste0("[", toupper(private$.keyword_name), "]")
     }
-
   ),
   private = list(
-
     .num_bootstraps = NULL,
     .pop_scale_factor = NULL,
     .bootstrap_file = NULL,
     .keyword_name = "bootstrap",
 
     #Helper function to construct bootstrap_file with
-    setup_bootstrap_path = function(inp_con){
-
+    setup_bootstrap_path = function(inp_con) {
       # Import Bootstrap file path from file connection
       suppressMessages(invisible(capture.output(
-        inpline_bootstrap_path <- readLines(inp_con, n = 1, warn = FALSE))))
+        inpline_bootstrap_path <- readLines(inp_con, n = 1, warn = FALSE)
+      )))
 
       #Check that bootstrap is in the same path as in input file
       # Get Input file path by using the file connection "description" value
@@ -208,14 +205,18 @@ bootstrap <- R6Class(
         dirname(normalizePath(summary(inp_con)$description, mustWork = TRUE))
 
       relative_inpfile <-
-        checkmate::test_file_exists(file.path(inpfile_path,inpline_bootstrap_path))
+        checkmate::test_file_exists(file.path(
+          inpfile_path,
+          inpline_bootstrap_path
+        ))
 
       #If bootstrap file is relative to the input file path
-      if(isTRUE(relative_inpfile)){
-
+      if (isTRUE(relative_inpfile)) {
         #Append the Input file directory path to Validate
-        private$validate_bootstrap_file(file.path(inpfile_path,
-                                                  inpline_bootstrap_path))
+        private$validate_bootstrap_file(file.path(
+          inpfile_path,
+          inpline_bootstrap_path
+        ))
         private$.bootstrap_file <- inpline_bootstrap_path
 
         return()
@@ -225,12 +226,10 @@ bootstrap <- R6Class(
       # Construct bootstrap file path.
       # Active function self$boostrap_file includes validate_bootstrap_file.
       self$bootstrap_file <- file.path(inpline_bootstrap_path)
-
     },
 
     #Validate bootstrap_file
     validate_bootstrap_file = function(value) {
-
       #Validate that 'value' points to a existing file.
       if (test_file_exists(value, access = "r", extension = "bsn")) {
         #If validated, assign value
@@ -240,21 +239,27 @@ bootstrap <- R6Class(
 
       #Warn if file path is NULL
       if (is.null(value)) {
-        warning(paste0("NULL bootstrap_file path. Please provide valid ",
-                       "bootstrap (*.bsn) filepath before saving input file ",
-                       "or running model to calcuation engine."),
-                call. = FALSE)
+        warning(
+          paste0(
+            "NULL bootstrap_file path. Please provide valid ",
+            "bootstrap (*.bsn) filepath before saving input file ",
+            "or running model to calcuation engine."
+          ),
+          call. = FALSE
+        )
         return()
       }
 
       #Else, warn bootstrap file name does not exist
-      warning(paste0(invalid_path_message(value),
-                     "Please save AGEPRO input files with a vaild ",
-                     "bootstrap_file, especially with running models with ",
-                     "the calculation engine."),
-              call. = FALSE)
+      warning(
+        paste0(
+          invalid_path_message(value),
+          "Please save AGEPRO input files with a vaild ",
+          "bootstrap_file, especially with running models with ",
+          "the calculation engine."
+        ),
+        call. = FALSE
+      )
     }
-
   )
-
 )

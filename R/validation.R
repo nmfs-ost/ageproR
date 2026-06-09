@@ -1,5 +1,3 @@
-
-
 #' Recruitment Model Number Parameter validation
 #'
 #' @description
@@ -17,33 +15,33 @@
 #' @param x object to check
 #'
 check_model_num_vector_format <- function(x) {
-
   # Catch "Empty" argument
-  if(isTRUE(all.equal(length(x), 0))){
+  if (isTRUE(all.equal(length(x), 0))) {
     return(paste0("No recruitment model numbers passed"))
   }
 
   # Catch Multiple parameters and return validation message
-  if(!isTRUE(all.equal(length(x),1))){
-    return(paste0("Multiple parameters detected, ",
-                  "please pass multiple recruitment models as a single vector"))
+  if (!isTRUE(all.equal(length(x), 1))) {
+    return(paste0(
+      "Multiple parameters detected, ",
+      "please pass multiple recruitment models as a single vector"
+    ))
   }
 
   return(TRUE)
-
 }
 
 
 #' @rdname check_model_num_vector_format
 #'
 #' @template assert
-assert_model_num_vector_format <- function(x,
-                                      .var.name = checkmate::vname(x),
-                                      add = NULL) {
-
+assert_model_num_vector_format <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
   res = check_model_num_vector_format(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
 
 
@@ -59,28 +57,33 @@ assert_model_num_vector_format <- function(x,
 #' @param num_recruit_models
 #' Number of recruitment models AGEPRO model at initialization
 #'
-check_model_num_vector_count <- function(x, num_recruit_models){
-
+check_model_num_vector_count <- function(x, num_recruit_models) {
   #Throw Error if vector length doesn't match num_recruit_models
-  if(!isTRUE(all.equal(length(x), num_recruit_models))){
-    return(paste0("Recruitment Model vector (model_num) object count ",
-                "does not match number of recruits. ",
-                "(count: ", length(x), ", number of recruits: ",
-                num_recruit_models, ")"))
+  if (!isTRUE(all.equal(length(x), num_recruit_models))) {
+    return(paste0(
+      "Recruitment Model vector (model_num) object count ",
+      "does not match number of recruits. ",
+      "(count: ",
+      length(x),
+      ", number of recruits: ",
+      num_recruit_models,
+      ")"
+    ))
   }
 
   return(TRUE)
-
 }
 
 #' @rdname check_model_num_vector_count
 #'
 #' @template assert
 #'
-assert_model_num_vector_count <- function(x, num_recruit_models,
-                                          .var.name = checkmate::vname(x),
-                                          add = NULL) {
-
+assert_model_num_vector_count <- function(
+  x,
+  num_recruit_models,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
   res = check_model_num_vector_count(x, num_recruit_models)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
@@ -96,12 +99,14 @@ assert_model_num_vector_count <- function(x, num_recruit_models,
 #' Object to check
 #'
 check_proj_years_sequence <- function(x) {
-  if(isFALSE(all(diff(x) %in% 1))) {
-    paste0("Invalid projection_years Sequence: ",
-           "Sequence does not increment by 1 or ",
-           "not a valid interaction (no colon) of two numeric ",
-           "elements.")
-  }else {
+  if (isFALSE(all(diff(x) %in% 1))) {
+    paste0(
+      "Invalid projection_years Sequence: ",
+      "Sequence does not increment by 1 or ",
+      "not a valid interaction (no colon) of two numeric ",
+      "elements."
+    )
+  } else {
     TRUE
   }
 }
@@ -110,8 +115,11 @@ check_proj_years_sequence <- function(x) {
 #'
 #' @template assert
 #'
-assert_proj_years_sequence <- function(x, .var.name = checkmate::vname(x),
-                                   add = NULL) {
+assert_proj_years_sequence <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
   res = check_proj_years_sequence(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
@@ -128,8 +136,7 @@ assert_proj_years_sequence <- function(x, .var.name = checkmate::vname(x),
 #' Object to Check
 #'
 check_perc_active_binding <- function(x) {
-
-  if(checkmate::test_numeric(x, len = 1)) {
+  if (checkmate::test_numeric(x, len = 1)) {
     return(paste0(
       "Input value found as a numeric, not a percentile_summary class. ",
       "Did you mean to set report_percentile field?"
@@ -138,8 +145,7 @@ check_perc_active_binding <- function(x) {
 
   perc_fields <- c("report_percentile")
 
-  return(checkmate::check_r6(x, public = perc_fields) )
-
+  return(checkmate::check_r6(x, public = perc_fields))
 }
 
 
@@ -147,11 +153,13 @@ check_perc_active_binding <- function(x) {
 #'
 #' @template assert
 #'
-assert_perc_active_binding <- function(x, .var.name = checkmate::vname(x),
-                                       add = NULL) {
+assert_perc_active_binding <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
   res = check_perc_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
 
 
@@ -166,16 +174,14 @@ assert_perc_active_binding <- function(x, .var.name = checkmate::vname(x),
 #' Object to Check
 #'
 check_case_id_active_binding <- function(x) {
-
-  if(checkmate::test_string(x)) {
+  if (checkmate::test_string(x)) {
     return(paste0(
       "Input value found as a string, not a case_id class. ",
       "Did you mean to set model_name field?"
     ))
   }
 
-  return(checkmate::check_r6(x, public = "model_name") )
-
+  return(checkmate::check_r6(x, public = "model_name"))
 }
 
 
@@ -183,13 +189,14 @@ check_case_id_active_binding <- function(x) {
 #'
 #' @template assert
 #'
-assert_case_id_active_binding <- function(x, .var.name = checkmate::vname(x),
-                                       add = NULL) {
+assert_case_id_active_binding <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
   res = check_case_id_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
-
 
 
 #' Validation for BOUNDS active binding in agepro_model
@@ -202,23 +209,79 @@ assert_case_id_active_binding <- function(x, .var.name = checkmate::vname(x),
 #' Object to Check
 #'
 check_bounds_active_binding <- function(x) {
-
-  bounds_fields <- c("max_weight",
-                     "max_natural_mortality")
-  return(checkmate::check_r6(x, public = bounds_fields) )
+  bounds_fields <- c("max_weight", "max_natural_mortality")
+  return(checkmate::check_r6(x, public = bounds_fields))
 }
 
 #' @rdname check_bounds_active_binding
 #'
 #' @template assert
 #'
-assert_bounds_active_binding <- function(x, .var.name = checkmate::vname(x),
-                                       add = NULL) {
+assert_bounds_active_binding <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
   res = check_bounds_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
 
+
+#' Agepro Model R6 class object validation
+#'
+#' Wrapper of checkmate::checkR6 function, to check the input object is a
+#' "agepro_model" type R6class that includes the public fields as defined
+#' in agepro_model.
+#'
+#' @param x
+#' Object To Check
+#'
+check_agepro_model_class <- function(x) {
+  class_types <- c(
+    "agepro_inp_model",
+    "agepro_json_model",
+    "agepro_model"
+  )
+  public_fields <- c(
+    "case_id",
+    "general",
+    "bootstrap",
+    "natmort",
+    "maturity",
+    "biological",
+    "fishery",
+    "discard",
+    "stock_weight",
+    "ssb_weight",
+    "mean_weight",
+    "catch_weight",
+    "disc_weight",
+    "recruit",
+    "harvest",
+    "pstar",
+    "options",
+    "refpoint",
+    "bounds",
+    "retroadjust",
+    "refpoint",
+    "scale"
+  )
+
+  return(checkmate::test_r6(x, classes = class_types, public = public_fields))
+}
+
+#' @rdname check_agepro_model_class
+#'
+#' @template assert
+#'
+assert_agepro_model_class <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res = check_bounds_active_binding(x)
+  checkmate::makeAssertion(x, res, .var.name, add)
+}
 
 
 #' @title
@@ -236,18 +299,17 @@ assert_bounds_active_binding <- function(x, .var.name = checkmate::vname(x),
 #' @export
 #'
 validate_map = function(.xs, .fn, ...) {
-
   # Capture the defused code supplied as `.fn`
   fn_code <- substitute(.fn)
 
   out <- rlang::new_list(length(.xs))
 
-  for(i in seq_along(.xs)){
+  for (i in seq_along(.xs)) {
     rlang::try_fetch(
       out[[i]] <- .fn(.xs[[i]], ...),
       error = function(cnd) {
         # Inspect the 'call' field to detect `.fn` calls
-        if(rlang::is_call(cnd$call, ".fn")) {
+        if (rlang::is_call(cnd$call, ".fn")) {
           # Replace ".fn" by the defused code
           # and Keep existing Arguemnts
           cnd$call[[1]] <- fn_code
@@ -274,10 +336,9 @@ validate_map = function(.xs, .fn, ...) {
 #' @param proj_years Projection year parameter. May be a numeric vector or a
 #' [`projection_years`][ageproR::projection_years]
 #'
-validate_proj_years_parameter <- function (proj_years) {
-
+validate_proj_years_parameter <- function(proj_years) {
   #Validate parameters
-  if (checkmate::test_r6(proj_years, public = c("count","sequence") )) {
+  if (checkmate::test_r6(proj_years, public = c("count", "sequence"))) {
     proj_years_class <- proj_years
   } else {
     proj_years_class <- ageproR::projection_years$new(proj_years)
@@ -285,38 +346,3 @@ validate_proj_years_parameter <- function (proj_years) {
 
   return(proj_years_class)
 }
-
-
-
-#' Checks the validity of filetype key-value pair.
-#'
-#' Checks the filetype as a 2 length vector without missing values. If filetype
-#' as not passed in the parameter, it will return the default `All files (*.*)`
-#' string vector.
-#'
-#' @details
-#' The filetype key-value pair is defined as _fileTypeName_ _extension_. This
-#' is used to [specifying flie
-#' patterns](https://www.tcl.tk/man/tcl8.0/TkCmd/getOpenFile.html#M11) for
-#' Tcl/TK file modules.
-#'
-#' @param filetype filename extension.
-#'
-#' @keywords internal
-#'
-validate_filetype <- function(filetype) {
-
-  if (missing(filetype)) {
-    #Default "All Files (*)" file type
-    filetype <- c("All Files", "*")
-  }
-
-  #Validate filetype string
-  checkmate::assert_vector(filetype, all.missing = FALSE, len = 2,
-                           null.ok = FALSE)
-  return(filetype)
-
-}
-
-
-

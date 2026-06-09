@@ -976,7 +976,7 @@ agepro_inp_model <- R6Class(
     #'
     #' @param inpfile input file name
     read_inp = function(inpfile) {
-      if (missing(inpfile)) {
+      if (missing(inpfile) && interactive()) {
         inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"))
         #Exit Function if user cancels out of file dialog
         if (!test_file_exists(inpfile, access = "r", extension = "inp")) {
@@ -1195,7 +1195,7 @@ agepro_inp_model <- R6Class(
       delimiter = "  ",
       overwrite_as_currentver = TRUE
     ) {
-      if (missing(inpfile)) {
+      if (missing(inpfile) && interactive()) {
         inpfile <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
@@ -1236,16 +1236,16 @@ agepro_inp_model <- R6Class(
               self$rebuild$get_inp_lines(delimiter)
             },
             self$options$get_inp_lines(delimiter),
-            if (self$retroadjust$flag$op$enable_retrospective_adjustments) {
+            if (self$retroadjust$enable_retrospective_adjustments) {
               self$retroadjust$get_inp_lines(delimiter)
             },
-            if (self$bounds$flag$op$enable_max_bounds) {
+            if (self$bounds$enable_max_bounds) {
               self$bounds$get_inp_lines(delimiter)
             },
-            if (self$scale$flag$op$enable_scaling_factors) {
+            if (self$scale$enable_scaling_factors) {
               self$scale$get_inp_lines(delimiter)
             },
-            if (self$perc$flag$op$enable_percentile_summary) {
+            if (self$perc$enable_percentile_summary) {
               self$perc$get_inp_lines(delimiter)
             }
           )
@@ -1737,7 +1737,7 @@ agepro_json_model <- R6Class(
     #' @param show_dir Option to show directory after JSON file is written.
     #'
     write_json = function(file, show_dir = FALSE) {
-      if (missing(file)) {
+      if (missing(file) && interactive()) {
         file <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
