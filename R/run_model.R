@@ -122,16 +122,16 @@ validate_calc_engine_binary <- function(
 #' @param outdir Output path
 #'
 launch_model <- function(model, out_dir) {
-  #start logging runtime
+  # start logging runtime
   run_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
 
-  #Validate agepro_model
+  # Validate agepro_model
   assert_agepro_model_class(model)
 
-  #Assert agepro_model bootstrap file exists
+  # Assert agepro_model bootstrap file exists
 
-  #Set default AGEPRO output directory if out_dir is missing.
-  #Set "AGEPRO" subdirectory of User Home directory (R_USER)
+  # Set default AGEPRO output directory if out_dir is missing.
+  # Set "AGEPRO" subdirectory of User Home directory (R_USER)
   if (missing(out_dir)) {
     out_dir <- ifelse(
       .Platform$OS.type == "windows",
@@ -144,25 +144,25 @@ launch_model <- function(model, out_dir) {
     }
   }
 
-  #Check if Model's CASE_ID is blank
+  # Check if Model's CASE_ID is blank
+  # CASE_ID are used as a prefix to model run filenames
   blank_caseid <- checkmate::test_character(
     model$case_id$model_name,
     pattern = "^$|^[:blank:]]+$",
     null.ok = FALSE
   )
-
   if (checkmate::test_character(blank_caseid)) {
     inp_file <- "untitled_"
   } else {
     regex_invalid_fschars <- '[\\/:*?"<>|-]'
-    #Check if inp_file has invalid char pattterns.
+    # Check if inp_file has invalid char pattterns.
     if (
       checkmate::test_character(
         model$case_id$model_name,
         pattern = regex_invalid_fschars
       )
     ) {
-      #TODO: Give a option to replace invalid char, or to give an error.
+      # TODO: Give a option to replace invalid char, or to give an error.
       msg_regex_invalid_fschars <- trimws(gsub(
         "\\[*\\]*\\\\",
         " ",
@@ -178,14 +178,12 @@ launch_model <- function(model, out_dir) {
     inp_file <- inp_file
   }
 
-  #Set INP and BSN (Set run directory)
+  # Check the agepro_model's bootstrap filepath and then copy it to the
+  # run directory (out_dir)
 
-  #Check for Bootstrap? (Set BSN to out_dir)
+  # Save agepro_model to INP file to run directory (out_dir)
 
-  #Save to INP file?
+  # run_model to AGEPRO calculation engine
 
-  #run AGEPRO
-
-  #AGEPRO output
-  #create *.out file
+  # Create AGEPRO *.out file
 }
