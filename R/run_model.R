@@ -66,6 +66,13 @@ run_model <- function(
 }
 
 
+#' Log AGEPRO Ouput to File
+#'
+#' Saves AGEPRO Output to Logfile
+#'
+#' @param cout Output connection from console
+#' @param fn_logfile Filename path to save output
+#'
 write_logfile <- function(cout, fn_logfile) {
   #TODO: Verify type of cout
 
@@ -96,12 +103,35 @@ validate_calc_engine_binary <- function(
   }
 }
 
+#' Launches agepro_model to the calcuation engine
+#'
+#' This function will takes the [agepro_inp_model][ageproR::agepro_inp_model] class,
+#' saves it as an AGEPRO input file, launches the AGEPRO calcuation engine with it.
+#'
+#' After the calcuation engine is done, AGEPRO output file will be saved to the output
+#' directory. Function will also store AGEPRO calcuation engine logfile if requested.
+#'
+#' @details
+#' This is simlar to how AGEPRO_GUI launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
+#' in the AGEPRO Input File is relative to the directory that input file is saved; The bootstrap filepath value does not have
+#' to have directory paths if the Input file and bootstrap file is saved in the same directory.
+#'
+#' The "default directory" of the outdir will be saved at the "AGEPRO" subdirectory of the `R_USER` directory.
+#'
+#' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
+#' @param outdir Output path
+#'
 launch_model <- function(model, out_dir) {
+  #start logging runtime
+  run_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+
   #Validate agepro_model
   assert_agepro_model_class(model)
 
   #Assert agepro_model bootstrap file exists
 
+  #Set default AGEPRO output directory if out_dir is missing.
+  #Set "AGEPRO" subdirectory of User Home directory (R_USER)
   if (missing(out_dir)) {
     out_dir <- ifelse(
       .Platform$OS.type == "windows",
@@ -114,10 +144,7 @@ launch_model <- function(model, out_dir) {
     }
   }
 
-  #Default to User Home directory
-  run_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
   #Check if Model's CASE_ID is blank
-
   blank_caseid <- checkmate::test_character(
     model$case_id$model_name,
     pattern = "^$|^[:blank:]]+$",
@@ -151,15 +178,14 @@ launch_model <- function(model, out_dir) {
     inp_file <- inp_file
   }
 
-  #Set INP and BSN
+  #Set INP and BSN (Set run directory)
 
-  #Set run directory
-
-  #Check for Bootstrap?
+  #Check for Bootstrap? (Set BSN to out_dir)
 
   #Save to INP file?
 
   #run AGEPRO
 
   #AGEPRO output
+  #create *.out file
 }
