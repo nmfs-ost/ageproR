@@ -58,6 +58,78 @@ saves to the `AGEPRO VERSION 4.25` Input File Format.
 Please refer to the *AGEPRO Reference Manual* for more technical
 details.
 
+## Agepro Model Workflow Examples
+
+### Setting up a new `agepro_inp_model`
+
+``` r
+library("ageproR")
+
+# Load path of ageproR's included test Example1 Input File
+inpfile <- file.path(find.package("ageproR"),"example/Example_UKU.INP")
+
+# Load path of ageproR's included test Example1 Bootstrap File
+bsnfile <- file.path(find.package("ageproR"),"example/Example_UKU.BSN")
+
+# Create a agepro_inp_model with default values (This will 
+test <- ageproR::agepro_inp_model$new()
+# NOTE: This will give a WARNING that a NULL Recruitment Model is Found. This behavior is expected. 
+# ageproR will check to see if agepro models will have NULL or invalid Recruitment models before being saved to file
+
+# Set model with Recruit Model 14: "Empirical Cumulative Distribution Function of Recruitment". 
+test$set_recruit_model(c(14))
+
+# New agepro_models instances return NULL
+test$bootstrap$bootstrap_file
+
+# Set Path of Bootstrap File w/ 
+# Note: Leaving parameter blank may request a file dialog window.
+test$set_bootstrap_filename(bsnfile)
+```
+
+### Setting up a new `agepro_inp_model` w/ multiple recruitment models
+
+``` r
+# New instance of agepro_inp_model refreses class to default values.
+# Specify the number of recuitment models (num_rec_models) at initializtion
+test <- ageproR::agepro_inp_model$new(num_rec_models=3)
+
+# NOTE 2: Setting recruitment values depend on the number of recruits an agepro_model is initialized with. For example to set a `agepro_inp_model` with two Beverton-Holt and a single Ricker recruit:
+test$set_recruit_model(c(5,5,6)) 
+# NOTE: A valid rerun of set_recruit_model will OVERWRITE the previous [RECRUIT] values.
+```
+
+### Reading or importing from AGEPRO input file (\*.inp)
+
+> \[!NOTE\]
+>
+> Loading AGEPRO Input Files with multiple recuitment models will
+> automatically set the **number of recruits** and overwrite the
+> existing model’s recruitment data; For instance, reading a AGEPRO
+> input file with multiple recruits will overwrite newly created model’s
+> default data single NULL Recruitment.
+
+``` r
+# New instance of agepro_inp_model refreses class to default values.
+test2 <- ageproR::agepro_inp_model$new()
+
+# Importing AGEPRO input file. 
+# Leaving parameter blank may request a file dialog window.
+test2$read_inp(inpfile) 
+# Note: Input Files with `AGEPRO VERSION 4.0` can be loaded to ageproR currently, but will be deprecated in future updates. By default, AGPRO input files will be saved in the AGEPRO VERSION 4.25 format. 
+# Function read_inp will also detect non-existant bootstrap paths. If there are no warnings, check agepro model class bootstrap filepath equals intended "bsnpath". If not: test2$set_bootstrap_filename(bsnfile)
+```
+
+## Saving to AGEPRO Input File.
+
+``` r
+# Using the "test2" model .... 
+# Using tempfile() as example filepath
+outfile <- tempfile("example1_", fileext = ".inp")
+# Note: Leaving parameter blank may request a file dialog window.  
+test2$write_inp(outfile)
+```
+
 ## Citation
 
 Please cite this AGEPRO project as:
@@ -80,10 +152,6 @@ isbn = {9781566120579},
 doi = {10.4027/fsam.1998.52}
 }
 ```
-
-## Hawaiian Uku Projection base example
-
-TODO
 
 <!-- Do not edit below. This adds the Disclaimer and NMFS footer. -->
 

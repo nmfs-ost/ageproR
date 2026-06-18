@@ -48,7 +48,7 @@ You can install the development version of ageproR from
 [NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
 with:
 
-```{r, eval = FALSE}
+```{r ageproR-install, eval = FALSE}
 # via `pak`
 install.packages("pak")
 pak::pkg_install("nmfs-ost/ageproR")
@@ -62,9 +62,12 @@ remotes::install_github("nmfs-ost/ageproR")
 
 **ageproR** is compatible with the AGEPRO input file formats 
 `AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves 
-to the `AGEPRO VERSION 4.0` Input File Format.
+to the `AGEPRO VERSION 4.25` Input File Format.
 
 Please refer to the *AGEPRO Reference Manual* for more technical details.
+
+```{r example-run, child="inst/example/doc-model-workflow.Rmd"}
+```
 
 ## Citation
 
@@ -89,14 +92,6 @@ isbn = {9781566120579},
 doi = {10.4027/fsam.1998.52}
 }
 ```
-
-
-## Hawaiian Uku Projection base example
-
-TODO
-
-
-
 
 <!-- Do not edit below. This adds the Disclaimer and NMFS footer. -->
 
