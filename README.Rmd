@@ -64,7 +64,7 @@ remotes::install_github("nmfs-ost/ageproR")
 `AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves 
 to the `AGEPRO VERSION 4.25` Input File Format.
 
-Please refer to the *AGEPRO Reference Manual* for more technical details.
+Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
 
 ```{r example-run, child="inst/example/doc-model-workflow.Rmd"}
 ```

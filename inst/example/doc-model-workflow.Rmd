@@ -5,16 +5,18 @@
 ```{r set-model, eval = FALSE}
 library("ageproR")
 
-# Load path of ageproR's included test Example1 Input File
+# Load path of ageproR's included Example_UKU Input File
 inpfile <- file.path(find.package("ageproR"),"example/Example_UKU.INP")
 
-# Load path of ageproR's included test Example1 Bootstrap File
+# Load path of ageproR's included Example_UKU Bootstrap File
 bsnfile <- file.path(find.package("ageproR"),"example/Example_UKU.BSN")
 
-# Create a agepro_inp_model with default values (This will 
+# Create a agepro_inp_model with default values
 test <- ageproR::agepro_inp_model$new()
-# NOTE: This will give a WARNING that a NULL Recruitment Model is Found. This behavior is expected. 
-# ageproR will check to see if agepro models will have NULL or invalid Recruitment models before being saved to file
+# By Default, creating a new instance of agepro_inp_model with default values will include a 
+# single "NULL Recritment Model". It will also print a WARNING that NULL Recruitment Models 
+# will need to be replaced with a vaild recruitment model before saved and/or used for the 
+# AGEPRO Calcuation Engine. 
 
 # Set model with Recruit Model 14: "Empirical Cumulative Distribution Function of Recruitment". 
 test$set_recruit_model(c(14))
@@ -22,23 +24,23 @@ test$set_recruit_model(c(14))
 # New agepro_models instances return NULL
 test$bootstrap$bootstrap_file
 
-# Set Path of Bootstrap File w/ 
+# Set Path of Bootstrap File 
 # Note: Leaving parameter blank may request a file dialog window.
 test$set_bootstrap_filename(bsnfile)
-
 ```
 
 ### Setting up a new `agepro_inp_model` w/ multiple recruitment models
 
 ```{r set-multi-recruit, eval = FALSE}
 # New instance of agepro_inp_model refreses class to default values.
-# Specify the number of recuitment models (num_rec_models) at initializtion
+# Specify the "number of recuitment models" (num_rec_models) at initializtion
 test <- ageproR::agepro_inp_model$new(num_rec_models=3)
 
-# NOTE 2: Setting recruitment values depend on the number of recruits an agepro_model is initialized with. For example to set a `agepro_inp_model` with two Beverton-Holt and a single Ricker recruit:
+# Multiple recruitments depend on agepro_model's "number of recruitment models". 
+# For example, to set a 3 recruit agepro_inp_model w/ two Beverton-Holt models and a single
+# Ricker model:
 test$set_recruit_model(c(5,5,6)) 
 # NOTE: A valid rerun of set_recruit_model will OVERWRITE the previous [RECRUIT] values.
-
 ```
 
 
@@ -59,17 +61,22 @@ test2 <- ageproR::agepro_inp_model$new()
 # Importing AGEPRO input file. 
 # Leaving parameter blank may request a file dialog window.
 test2$read_inp(inpfile) 
-# Note: Input Files with `AGEPRO VERSION 4.0` can be loaded to ageproR currently, but will be deprecated in future updates. By default, AGPRO input files will be saved in the AGEPRO VERSION 4.25 format. 
-# Function read_inp will also detect non-existant bootstrap paths. If there are no warnings, check agepro model class bootstrap filepath equals intended "bsnpath". If not: test2$set_bootstrap_filename(bsnfile)
 
+# Note: Input Files with the `AGEPRO VERSION 4.0` format can be loaded to ageproR currently, 
+# but will be deprecated. In future updates. By default, AGPRO input files will be saved in the 
+# `AGEPRO VERSION 4.25` format. 
+# Function `read_inp` will also detect non-existant bootstrap paths. If there are no warnings, 
+# check the agepro model's bootstrap filepath equals the intended "bsnpath". If not: 
+# test2$set_bootstrap_filename(bsnfile)
 ```
 
-## Saving to AGEPRO Input File.
+### Saving to AGEPRO Input File.
 
 ```{r write-inp, eval = FALSE}
 # Using the "test2" model .... 
 # Using tempfile() as example filepath
 outfile <- tempfile("example1_", fileext = ".inp")
+
 # Note: Leaving parameter blank may request a file dialog window.  
 test2$write_inp(outfile)
 ```
