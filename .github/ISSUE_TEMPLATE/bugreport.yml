@@ -1,0 +1,64 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Before
+        filling out this report please search the existing issues to see
+        if the problem has already been reported. If it has, please add a
+        comment to the open issue or link to the related, but closed, issue in
+        this report.
+  - type: textarea
+    id: describe
+    attributes:
+      label: Describe the bug
+      description: Please provide a description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: To Reproduce
+      description: |
+        Please include a minimal reproducible example (i.e., a
+        [reprex]((https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html))).
+        If you have not heard of a [reprex](http://reprex.tidyverse.org/)
+        before, you can start by reading about them on the [tidyverse
+        blog](https://www.tidyverse.org/help/#reprex). Feel free to copy, paste,
+        and edit the [demo
+        vignette](https://github.com/NOAA-FIMS/FIMS/blob/4539fc4b6e65b901231c4fb66a113bb5b5d54d22/vignettes/fims-demo.Rmd)
+        for your reprex.
+      placeholder: |
+      # Type Reprex Here ...
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: Which version of ageproR are you seeing the problem on?
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+    validations:
+      required: false
+  - type: textarea
+    id: sessionInfo
+    attributes:
+      label: R Session Information
+      description: Please provide information about your R Session (R version, OS). 
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here. 
+    validations:
+      required: false
