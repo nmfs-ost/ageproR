@@ -14,9 +14,9 @@ bsnfile <- file.path(find.package("ageproR"),"example/Example_UKU.BSN")
 # Create a agepro_inp_model with default values
 test <- ageproR::agepro_inp_model$new()
 # By Default, creating a new instance of agepro_inp_model with default values will include a 
-# single "NULL Recritment Model". It will also print a WARNING that NULL Recruitment Models 
-# will need to be replaced with a vaild recruitment model before saved and/or used for the 
-# AGEPRO Calcuation Engine. 
+# single "NULL Recritment Model", a placeholder recruitment model. It will print a WARNING 
+# to replace this Model with a vaild recruitment model before saving to file. AGEPRO  
+# Calcuation Engine will not recognize NULL Recruitment models.
 
 # Set model with Recruit Model 14: "Empirical Cumulative Distribution Function of Recruitment". 
 test$set_recruit_model(c(14))
