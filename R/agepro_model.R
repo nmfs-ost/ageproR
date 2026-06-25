@@ -1560,8 +1560,10 @@ agepro_inp_model <- R6Class(
           paste0(
             inp_line,
             msg_wasfound,
-            " but does not match current version of the AGEPRO",
-            " Input File format: ",
+            " but this format is not compatable with AGEPRO (calcuation engine)",
+            " version 4.25 and above.\n",
+            " By default, AGEPRO input files will be saved under this version",
+            " format: ",
             private$.currentver_inpfile_string
           ),
           call. = FALSE
