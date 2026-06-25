@@ -52,8 +52,8 @@ agepro_model <- R6Class(
       ...
     ) {
       #Current Input File Version
-      private$.ver_inpfile_string = private$.currentver_inpfile_string
-      private$.ver_json_format = 2
+      private$.ver_inpfile_string <- private$.currentver_inpfile_string
+      private$.ver_json_format <- 2
       private$setup_ver_rpackage()
 
       #Set GENERAL
@@ -879,7 +879,7 @@ agepro_model <- R6Class(
     .projection_analyses_type = NULL,
 
     setup_ver_rpackage = function() {
-      private$.ver_rpackage = utils::packageVersion("ageproR")
+      private$.ver_rpackage <- utils::packageVersion("ageproR")
     }
   )
 )
@@ -1028,7 +1028,7 @@ agepro_inp_model <- R6Class(
       # Assume line 1 is version string
       self$nline <- 1
 
-      div_line1_alert = function() {
+      div_line1_alert <- function() {
         cli::cli_div(
           class = "tmp",
           theme = list(
