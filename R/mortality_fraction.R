@@ -322,7 +322,7 @@ mortality_fraction_prior_spawn <- R6Class(
     },
 
     # Handle proj_years that may be a single int or sequential numeric vector
-    oset_projection_years = function(value) {
+    set_projection_years = function(value) {
       # Handle instances where value is passed as projection_years class
       if (checkmate::test_r6(value, public = c("count", "sequence"))) {
         private$.projection_years <- value$clone(deep = TRUE)
