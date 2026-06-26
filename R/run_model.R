@@ -119,7 +119,7 @@ validate_calc_engine_binary <- function(
 #' The "default directory" of the outdir will be saved at the "AGEPRO" subdirectory of the `R_USER` directory.
 #'
 #' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
-#' @param outdir Output path
+#' @param out_dir Output path
 #'
 launch_model <- function(model, out_dir) {
   # start logging runtime
