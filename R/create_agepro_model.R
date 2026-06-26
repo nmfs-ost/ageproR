@@ -12,7 +12,7 @@
 #' @examples
 #' \dontrun{
 #' # General parameters for 2019-2026 Uku Projections Base (Example 4)
-#' test <- setup_agepro_model(
+#' test <- create_agepro_model(
 #'   type="inp",
 #'   yr_start=2019,
 #'   yr_end= 2026,
@@ -25,7 +25,7 @@
 #'   seed = 300)
 #' }
 #'
-setup_agepro_model <- function(type = c("inp", "json"), ...) {
+create_agepro_model <- function(type = c("inp", "json"), ...) {
   #validate type
   type <- match.arg(type)
 

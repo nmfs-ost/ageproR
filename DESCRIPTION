@@ -37,6 +37,7 @@ Collate:
     'agepro_model.R'
     'bootstrap.R'
     'case_id.R'
+    'create_agepro_model.R'
     'file.R'
     'general_params.R'
     'harvest_scenario.R'
@@ -54,7 +55,6 @@ Collate:
     'recruit_model.R'
     'recruitment.R'
     'run_model.R'
-    'setup_agepro_model.R'
     'utils.R'
     'validation.R'
 Suggests: 
