@@ -54,6 +54,7 @@ Collate:
     'recruit_model.R'
     'recruitment.R'
     'run_model.R'
+    'setup_agepro_model.R'
     'utils.R'
     'validation.R'
 Suggests: 
