@@ -31,7 +31,7 @@ create_agepro_model <- function(type = c("inp", "json"), ...) {
     json = ageproR::agepro_json_model$new(...)
   )
 
-  #TODO: add support for recuitment models?
+  #TODO: #120 Option to create recuitment models for create_agepro_model
 
   return(model)
 }
