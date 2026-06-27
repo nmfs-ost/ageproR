@@ -41,6 +41,7 @@ Collate:
     'file.R'
     'general_params.R'
     'harvest_scenario.R'
+    'import_agepro_model.R'
     'mortality_fraction.R'
     'options_flags.R'
     'options_max_bounds.R'
