@@ -2,21 +2,25 @@
 % Please edit documentation in R/create_agepro_model.R
 \name{create_agepro_model}
 \alias{create_agepro_model}
-\title{Function wrapper to create a agepro_model}
+\title{Create a agepro_model class}
 \usage{
 create_agepro_model(type = c("inp", "json"), ...)
 }
 \arguments{
-\item{type}{Create a agepro_inp_model (default), or agpepro_json_model}
+\item{type}{Determines the type of agepro_model:
+\itemize{
+\item \code{inp} By Default, Create an Agepro Model R6class for Agepro Input Files (\code{agepro_inp_model})
+\json \code{json} Create an Agepro Model R6Class for the JSON Input File Format (\code{agepro_json_model})
+}}
 
 \item{...}{further arguments passed to or from other methods}
 }
 \value{
-R6class ojject cotaining the agepro_model class object
+R6class object containing the agepro_model class object
 }
 \description{
-Functcion wrapper to create agepro_model R6class. This function retruns a
-new instance of the agepro_inp_model or agepro_json_model
+Function wrapper to create anagepro_model R6class. This function retruns a
+new instance of the agepro_inp_model or agepro_json_model.
 }
 \examples{
 \dontrun{

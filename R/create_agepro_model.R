@@ -1,12 +1,16 @@
-#' Function wrapper to create a agepro_model
+#' Create a agepro_model class
 #'
-#' Functcion wrapper to create agepro_model R6class. This function retruns a
-#' new instance of the agepro_inp_model or agepro_json_model
+#' Function wrapper to create anagepro_model R6class. This function retruns a
+#' new instance of the agepro_inp_model or agepro_json_model.
 #'
-#' @param type Create a agepro_inp_model (default), or agpepro_json_model
+#' @param type Determines the type of agepro_model:
+#' \itemize{
+#'   \item `inp` By Default, Create an Agepro Model R6class for Agepro Input Files (`agepro_inp_model`)
+#'   \json `json` Create an Agepro Model R6Class for the JSON Input File Format (`agepro_json_model`)
+#' }
 #' @template elipses
 #'
-#' @return R6class ojject cotaining the agepro_model class object
+#' @return R6class object containing the agepro_model class object
 #'
 #' @export
 #' @examples
