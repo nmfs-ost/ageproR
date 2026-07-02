@@ -9,7 +9,7 @@ launch_model(model, out_dir)
 \arguments{
 \item{model}{\link[=agepro_inp_model]{"Agepro INP File Model Class Object"}}
 
-\item{outdir}{Output path}
+\item{out_dir}{Output path}
 }
 \description{
 This function will takes the \link[=agepro_inp_model]{agepro_inp_model} class,
