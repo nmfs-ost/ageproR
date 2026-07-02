@@ -16,8 +16,8 @@
 #' # Load path of ageproR's included Example_UKU Input File
 #' inpfile <- file.path(find.package("ageproR"),"example/Example_UKU.INP")
 #'
-#' # Create agepro_inp_model (w/ and import data from inpfile
-#' test <- import_agepro_model(inpfile, num_rec_model=3)
+#' # Create agepro_inp_model and import data from inpfile
+#' test <- import_agepro_model(inpfile)
 #'
 #' }
 import_agepro_model <- function(file, ...) {
@@ -29,8 +29,9 @@ import_agepro_model <- function(file, ...) {
   # Suppress NULL recruitment warning since read_inp is
   model <- suppressWarnings(create_agepro_model(
     type = "inp",
-    ...,
-    enable_cat_print = FALSE
+    enable_cat_print = FALSE,
+    show_general_params = FALSE,
+    ...
   ))
 
   #Verify agepro_inp_model
