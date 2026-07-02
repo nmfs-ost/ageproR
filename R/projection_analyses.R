@@ -1,4 +1,3 @@
-
 #' @title
 #' Generalized structure of projection analyses keyword parameters
 #'
@@ -21,7 +20,6 @@
 projection_analyses <- R6Class(
   "projection_analyses",
   public = list(
-
     #' @description
     #' Initializes class
     #'
@@ -34,41 +32,40 @@ projection_analyses <- R6Class(
     #' assigned to the last projection year from `proj_years`
     #'
     initialize = function(proj_years, target_year = NULL) {
-
       # Handle `proj_years` that may be a single int or vector of sequential
       # values or an instance of ageproR::projection_years
-      private$.projection_years <- validate_proj_years_parameter(proj_years)
+      private$.projection_years <- private$validate_proj_years_parameter(
+        proj_years
+      )
 
-      if(is.null(target_year)){
+      if (is.null(target_year)) {
         # Set default target_year to last projection year
         self$target_year <-
           private$.projection_years$sequence[private$.projection_years$count]
-      }else{
+      } else {
         self$target_year <- target_year
       }
-
-
     }
-
   ),
   active = list(
-
     #' @field target_year
     #' User-Selected target year for rebuilder and pstar projection analyses
-    target_year = function(value){
-      if(missing(value)){
+    target_year = function(value) {
+      if (missing(value)) {
         private$.target_year
-      }else{
+      } else {
         #Check target_year is within projection years
         first_projection_year <- private$.projection_years$sequence[1]
         last_projection_year <-
           private$.projection_years$sequence[private$.projection_years$count]
 
-        checkmate::assert_numeric(value,
-                                  len = 1,
-                                  lower = first_projection_year,
-                                  upper = last_projection_year,
-                                  .var.name = "target_year")
+        checkmate::assert_numeric(
+          value,
+          len = 1,
+          lower = first_projection_year,
+          upper = last_projection_year,
+          .var.name = "target_year"
+        )
 
         private$.target_year <- value
       }
@@ -83,20 +80,16 @@ projection_analyses <- R6Class(
     #' @field inp_keyword
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
-      paste0("[",toupper(private$.keyword_name),"]")
+      paste0("[", toupper(private$.keyword_name), "]")
     }
-
   ),
   private = list(
-
     .target_year = NULL,
 
     .keyword_name = NULL,
 
     #setup variables at initialization
     .projection_years = NULL
-
-
   ),
 )
 
@@ -119,17 +112,13 @@ standard_projection <- R6Class(
   "standard_projection",
   inherit = projection_analyses,
   public = list(
-
     #' @description
     #' Initializes class
     #'
     initialize = function(proj_years) {
-
       super$initialize(proj_years)
-
     }
   )
-
 )
 
 #' @title
@@ -164,7 +153,6 @@ pstar_projection <- R6Class(
   "pstar_projection",
   inherit = projection_analyses,
   public = list(
-
     #' @description
     #' Initializes class
     #'
@@ -173,11 +161,12 @@ pstar_projection <- R6Class(
     #' @param ... Other parameters to pass to
     #' [`projection_analyses`][ageproR::projection_analyses]
     #'
-    initialize = function(proj_years,
-                          num_pstar_levels = 1,
-                          pstar_f = 0.0,
-                          ...) {
-
+    initialize = function(
+      proj_years,
+      num_pstar_levels = 1,
+      pstar_f = 0.0,
+      ...
+    ) {
       super$initialize(proj_years)
 
       self$num_pstar_levels <- num_pstar_levels
@@ -187,7 +176,6 @@ pstar_projection <- R6Class(
         self$create_blank_pstar_levels_table(self$num_pstar_levels)
 
       #TODO: implement enable_cat_print argument
-
     },
 
     #' @description
@@ -196,24 +184,22 @@ pstar_projection <- R6Class(
     #'
     #' @param num_pstar_levels Number of pstar values
     #'
-    create_blank_pstar_levels_table = function(num_pstar_levels = 1){
-
+    create_blank_pstar_levels_table = function(num_pstar_levels = 1) {
       dimnames_pstar_levels_table <-
         list(NULL, paste("Level", 1:num_pstar_levels))
 
-      return(create_blank_parameter_table(num_rows = 1,
-                                     num_cols = num_pstar_levels,
-                                     dimnames = dimnames_pstar_levels_table))
-
+      return(create_blank_parameter_table(
+        num_rows = 1,
+        num_cols = num_pstar_levels,
+        dimnames = dimnames_pstar_levels_table
+      ))
     },
-
 
     #' @description
     #' Reads in the values from the keyword parameter PSTAR from the
     #' AGEPRO Input file
     #'
-    read_inp_lines = function (inp_con, nline) {
-
+    read_inp_lines = function(inp_con, nline) {
       cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
@@ -224,10 +210,12 @@ pstar_projection <- R6Class(
 
       self$num_pstar_levels <- inp_line
 
-      cli::cli_alert(paste0("Line {nline}: ",
-                            "num_pstar_levels ",
-                            "(Number of Pstar Levels, {.emph KPStar}): ",
-                            "{.val {self$num_pstar_levels}}"))
+      cli::cli_alert(paste0(
+        "Line {nline}: ",
+        "num_pstar_levels ",
+        "(Number of Pstar Levels, {.emph KPStar}): ",
+        "{.val {self$num_pstar_levels}}"
+      ))
 
       # Create new pstar_level_table matrix based on num_pstar_levels
       self$pstar_levels_table <-
@@ -238,12 +226,14 @@ pstar_projection <- R6Class(
       nline <- nline + 1
       inp_line <- read_inp_numeric_line(inp_con)
 
-      self$pstar_levels_table[1,] <- inp_line
+      self$pstar_levels_table[1, ] <- inp_line
 
-      cli::cli_alert(c("Line {nline}: ",
-                       "pstar_levels_table ",
-                       "({.emph PStar}): ",
-                       "{.val {self$pstar_levels_table[1,]}} "))
+      cli::cli_alert(c(
+        "Line {nline}: ",
+        "pstar_levels_table ",
+        "({.emph PStar}): ",
+        "{.val {self$pstar_levels_table[1,]}} "
+      ))
 
       # Read an additional line from the file connection, and assign it to
       # pstar_overfishing_f(PStarF)
@@ -251,10 +241,12 @@ pstar_projection <- R6Class(
       inp_line <- read_inp_numeric_line(inp_con)
 
       self$pstar_overfishing_f <- inp_line
-      cli::cli_alert(paste0("Line {nline}: ",
-                            "pstar_overfsihing_f ",
-                            "(Overfishing Rate, {.emph PStarF}): ",
-                            "{.val {self$pstar_overfishing_f}}"))
+      cli::cli_alert(paste0(
+        "Line {nline}: ",
+        "pstar_overfsihing_f ",
+        "(Overfishing Rate, {.emph PStarF}): ",
+        "{.val {self$pstar_overfishing_f}}"
+      ))
 
       # Read an additional line from the file connection, and assign it to
       # target_year(TargetYear)
@@ -262,12 +254,13 @@ pstar_projection <- R6Class(
       inp_line <- read_inp_numeric_line(inp_con)
 
       self$target_year <- inp_line
-      cli::cli_alert(paste0("Line {nline}: ",
-                            "target_year: ",
-                            "{.val {self$target_year}}"))
+      cli::cli_alert(paste0(
+        "Line {nline}: ",
+        "target_year: ",
+        "{.val {self$target_year}}"
+      ))
 
       return(nline)
-
     },
 
     #' @description
@@ -275,14 +268,14 @@ pstar_projection <- R6Class(
     #'
     #' @template delimiter
     #'
-    get_inp_lines = function(delimiter = " "){
-
+    get_inp_lines = function(delimiter = " ") {
       return(c(
         self$inp_keyword,
         self$num_pstar_levels,
         paste(self$pstar_levels_table, collapse = delimiter),
         self$pstar_overfishing_f,
-        self$target_year))
+        self$target_year
+      ))
     },
 
     #' @description
@@ -292,36 +285,41 @@ pstar_projection <- R6Class(
     #'
     print = function(enable_cat_print = TRUE) {
       cli::cli_ul()
-      cli::cli_li(paste0("num_pstar_levels ({.emph KPStar}): ",
-                         "{.val {self$num_pstar_levels}}"))
-      cli::cli_li(paste0("pstar_overfsihing_f ({.emph PStarF}): ",
-                         "{.val {self$pstar_overfishing_f}}"))
+      cli::cli_li(paste0(
+        "num_pstar_levels ({.emph KPStar}): ",
+        "{.val {self$num_pstar_levels}}"
+      ))
+      cli::cli_li(paste0(
+        "pstar_overfsihing_f ({.emph PStarF}): ",
+        "{.val {self$pstar_overfishing_f}}"
+      ))
       cli::cli_li("target_year: {.val {self$target_year}}")
 
-
-      ifelse(enable_cat_print,
-             private$cat_print_pstar_levels_table(),
-             #suppresses cli::cat_print
-             capture.output(x <- private$cat_print_pstar_levels_table()))
+      ifelse(
+        enable_cat_print,
+        private$cat_print_pstar_levels_table(),
+        #suppresses cli::cat_print
+        capture.output(x <- private$cat_print_pstar_levels_table())
+      )
       cli::cli_end()
-
     }
-
   ),
   active = list(
-
     #' @field num_pstar_levels
     #' Number of pstar values to be evaluated
     #'
     num_pstar_levels = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         private$.num_pstar_levels
-      }else{
-        checkmate::assert_numeric(value, len = 1, lower = 1,
-                                  .var.name = "num_pstar_levels")
+      } else {
+        checkmate::assert_numeric(
+          value,
+          len = 1,
+          lower = 1,
+          .var.name = "num_pstar_levels"
+        )
 
         private$.num_pstar_levels <- value
-
       }
     },
 
@@ -329,26 +327,33 @@ pstar_projection <- R6Class(
     #' The vector of probabilities of overfishing or PStar values to be used
     #'
     pstar_levels_table = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         private$.pstar_levels_table
-      }else{
-        checkmate::assert_matrix(value, mode = "numeric",
-                                 nrows = 1, min.cols = 1,
-                                  .var.name = "pstar_levels_table")
+      } else {
+        checkmate::assert_matrix(
+          value,
+          mode = "numeric",
+          nrows = 1,
+          min.cols = 1,
+          .var.name = "pstar_levels_table"
+        )
 
         private$.pstar_levels_table <- value
       }
     },
 
-
     #' @field pstar_overfishing_f
     #' Fishing mortality rate that defines the overfishing level
     pstar_overfishing_f = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         private$.pstar_overfishing_f
-      }else{
-        checkmate::assert_numeric(value, len = 1, lower = 0,
-                                  .var.name = "pstar_overfishing_f")
+      } else {
+        checkmate::assert_numeric(
+          value,
+          len = 1,
+          lower = 0,
+          .var.name = "pstar_overfishing_f"
+        )
 
         private$.pstar_overfishing_f <- value
       }
@@ -357,7 +362,6 @@ pstar_projection <- R6Class(
     #' @field json_list_object
     #' Returns JSON list object of PStar Projection values
     json_list_object = function() {
-
       return(list(
         k_pstar = self$num_pstar_levels,
         pstar_values = self$pstar_levels_table,
@@ -365,10 +369,8 @@ pstar_projection <- R6Class(
         target_year = self$target_year
       ))
     }
-
   ),
   private = list(
-
     .keyword_name = "pstar",
 
     .num_pstar_levels = NULL,
@@ -376,14 +378,12 @@ pstar_projection <- R6Class(
     .pstar_overfishing_f = NULL,
 
     #Helper Function to printout num_pstar_levels to Rconsole
-    cat_print_pstar_levels_table = function (){
+    cat_print_pstar_levels_table = function() {
       cli::cli_text("{symbol$bullet} pstar_levels_table ({.emph PStar}):")
       checkmate::assert_matrix(self$pstar_levels_table)
       cli::cat_print(self$pstar_levels_table)
     }
-
   )
-
 )
 
 
@@ -409,191 +409,221 @@ pstar_projection <- R6Class(
 #'
 #' @export
 rebuild_projection <- R6Class(
-    "rebuild_projection",
-    inherit = projection_analyses,
-    public = list(
+  "rebuild_projection",
+  inherit = projection_analyses,
+  public = list(
+    #' @description
+    #' Initializes class
+    #'
+    #' @param proj_years May be a single numeric value: the number of years in the
+    #' time projection; a vector of sequential values: Sequence of years in from
+    #' first to last year of the time projection; or an instance of
+    #' [Projection years][ageproR::projection_years]
+    #' @param target_biomass Target biomass value in units of thousands
+    #' of metric tons (MT). Default set to 0.
+    #' @param target_type Target population biomass:
+    #' \describe{
+    #'   \item{0}{Spawning Stock Biomass. Set as Default}
+    #'   \item{1}{January 1st Stock Biomass}
+    #'   \item{2}{Mid-Year (Mean) Biomass}
+    #' }
+    #' @param target_percent The percent frequency that `target_year` reaches
+    #' `target_biomass` from 0 to 100. Default set to 0.
+    #' @param ... Other parameters to pass to
+    #' [`projection_analyses`][ageproR::projection_analyses]
+    #'
+    initialize = function(
+      proj_years,
+      target_biomass = 0,
+      target_type = 0,
+      target_percent = 0,
+      ...
+    ) {
+      super$initialize(proj_years, ...)
 
-      #' @description
-      #' Initializes class
-      #'
-      #' @param proj_years May be a single numeric value: the number of years in the
-      #' time projection; a vector of sequential values: Sequence of years in from
-      #' first to last year of the time projection; or an instance of
-      #' [Projection years][ageproR::projection_years]
-      #' @param target_biomass Target biomass value in units of thousands
-      #' of metric tons (MT). Default set to 0.
-      #' @param target_type Target population biomass:
-      #' \describe{
-      #'   \item{0}{Spawning Stock Biomass. Set as Default}
-      #'   \item{1}{January 1st Stock Biomass}
-      #'   \item{2}{Mid-Year (Mean) Biomass}
-      #' }
-      #' @param target_percent The percent frequency that `target_year` reaches
-      #' `target_biomass` from 0 to 100. Default set to 0.
-      #' @param ... Other parameters to pass to
-      #' [`projection_analyses`][ageproR::projection_analyses]
-      #'
-      initialize = function (proj_years,
-                             target_biomass = 0,
-                             target_type = 0,
-                             target_percent = 0,
-                             ...) {
+      self$target_biomass_value <- target_biomass
+      self$target_biomass_type <- target_type
+      self$target_percent <- target_percent
+    },
 
-        super$initialize(proj_years, ...)
+    #' @description
+    #' Reads in the values from the keyword parameter REBUILD from the
+    #' AGEPRO Input file
+    #'
+    read_inp_lines = function(inp_con, nline) {
+      cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
 
-        self$target_biomass_value <- target_biomass
-        self$target_biomass_type <- target_type
-        self$target_percent <- target_percent
+      nline <- nline + 1
 
-      },
+      #Read an additional line from the file connection, and split into
+      #substrings by whitespace
+      inp_line <- read_inp_numeric_line(inp_con)
+      cli::cli_alert("Line {nline}: Reading Rebuilding Projection fields: ")
 
-      #' @description
-      #' Reads in the values from the keyword parameter REBUILD from the
-      #' AGEPRO Input file
-      #'
-      read_inp_lines = function(inp_con, nline) {
+      self$target_year <- inp_line[1]
+      self$target_biomass_value <- inp_line[2]
+      self$target_biomass_type <- inp_line[3]
+      self$target_percent <- inp_line[4]
 
-        cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
+      self$print()
 
-        nline <- nline + 1
+      return(nline)
+    },
 
-        #Read an additional line from the file connection, and split into
-        #substrings by whitespace
-        inp_line <- read_inp_numeric_line(inp_con)
-        cli::cli_alert("Line {nline}: Reading Rebuilding Projection fields: ")
+    #' @description
+    #' Returns rebuild projection Values formatted as AGEPRO input file lines.
+    #'
+    #' @template delimiter
+    #'
+    get_inp_lines = function(delimiter) {
+      return(paste(
+        c(
+          self$target_year,
+          self$target_biomass_value,
+          self$target_biomass_type,
+          self$target_percent
+        ),
+        collapse = delimiter
+      ))
+    },
 
-        self$target_year <- inp_line[1]
-        self$target_biomass_value <- inp_line[2]
-        self$target_biomass_type <- inp_line[3]
-        self$target_percent <- inp_line[4]
+    #' @description
+    #' Prints out the rebuild projections fields to console
+    #'
+    print = function(...) {
+      cli::cli_ul()
+      cli::cli_li("target_year: {.val {self$target_year}}")
+      cli::cli_li(paste0(
+        "target_biomass_value: ",
+        "{.val {self$target_biomass_value}} MT"
+      ))
+      cli::cli_li(paste0(
+        "target_biomass_type: ",
+        "{.val {self$target_biomass_type}}"
+      ))
+      private$print_name_target_biomass_type()
+      cli::cli_li("target_percent: {.val {self$target_percent}} %")
+      cli::cli_end()
+    }
+  ),
+  active = list(
+    #' @field json_list_object
+    #' Returns JSON list object of rebuilder Projection values
+    json_list_object = function() {
+      return(list(
+        target_year = self$target_year,
+        target_value = self$target_biomass_value,
+        target_type = self$target_biomass_type,
+        target_percent = self$target_percent
+      ))
+    },
 
-        self$print()
+    #' @field target_biomass_value
+    #' Rebuilding projection's target biomass value in units of thousands
+    #' of metric tons (MT)
+    target_biomass_value = function(value) {
+      if (missing(value)) {
+        private$.target_biomass_value
+      } else {
+        checkmate::assert_numeric(
+          value,
+          lower = 0,
+          len = 1,
+          .var.name = "target_biomass_value"
+        )
 
-        return(nline)
-      },
-
-      #' @description
-      #' Returns rebuild projection Values formatted as AGEPRO input file lines.
-      #'
-      #' @template delimiter
-      #'
-      get_inp_lines = function(delimiter) {
-        return(paste(
-          c(self$target_year,
-            self$target_biomass_value,
-            self$target_biomass_type,
-            self$target_percent),
-          collapse = delimiter))
-      },
-
-      #' @description
-      #' Prints out the rebuild projections fields to console
-      #'
-      print = function (...) {
-        cli::cli_ul()
-        cli::cli_li("target_year: {.val {self$target_year}}")
-        cli::cli_li(paste0("target_biomass_value: ",
-                           "{.val {self$target_biomass_value}} MT"))
-        cli::cli_li(paste0("target_biomass_type: ",
-                           "{.val {self$target_biomass_type}}"))
-        private$print_name_target_biomass_type()
-        cli::cli_li("target_percent: {.val {self$target_percent}} %")
-        cli::cli_end()
+        private$.target_biomass_value <- value
       }
+    },
 
+    #' @field target_biomass_type
+    #' Index for the type of population biomass as the target:
+    #' \describe{
+    #'   \item{0}{Spawning Stock Biomass}
+    #'   \item{1}{January 1st Stock Biomass}
+    #'   \item{2}{Mid-Year (Mean) Biomass}
+    #' }
+    target_biomass_type = function(value) {
+      if (missing(value)) {
+        private$.target_biomass_type
+      } else {
+        checkmate::assert_numeric(
+          value,
+          len = 1,
+          .var.name = "target_biomass_type"
+        )
+        checkmate::assert_choice(
+          value,
+          choices = c(0, 1, 2),
+          .var.name = "target_biomass_type"
+        )
+        private$.target_biomass_type <- value
+      }
+    },
+
+    #' @field target_percent
+    #' The percent frequency of achieving the target value by the target
+    #' year. The percent frequency is a value between 0 (a zero
+    #' chance of achieving target) and 100 (indicating a 100 percent chance
+    #' of achieving target).
+    target_percent = function(value) {
+      if (missing(value)) {
+        private$.target_percent
+      } else {
+        checkmate::assert_numeric(
+          value,
+          len = 1,
+          lower = 0,
+          upper = 100,
+          .var.name = "target_percent"
+        )
+
+        private$.target_percent <- value
+      }
+    }
+  ),
+  private = list(
+    .keyword_name = "rebuild",
+
+    .target_biomass_value = NULL,
+    .target_biomass_type = NULL,
+    .target_percent = NULL,
+
+    .names_target_biomass_type = list(
+      "0" = "Spawning Stock Biomass",
+      "1" = "January 1st Stock Biomass",
+      "2" = "Mid-Year (Mean) Biomass"
     ),
-    active = list(
 
-      #' @field json_list_object
-      #' Returns JSON list object of rebuilder Projection values
-      json_list_object = function() {
+    print_name_target_biomass_type = function() {
+      target_biomass_type_name <-
+        private$.names_target_biomass_type[[
+          as.character(self$target_biomass_type)
+        ]]
 
-        return(list(
-          target_year = self$target_year,
-          target_value = self$target_biomass_value,
-          target_type = self$target_biomass_type,
-          target_percent = self$target_percent
-        ))
-      },
+      li_nested <-
+        cli::cli_div(
+          class = "target_type",
+          theme = list(.target_type = list("margin-left" = 2))
+        )
+      cli::cli_text("{.emph {.field {target_biomass_type_name}}}")
+      cli::cli_end(li_nested)
+    },
 
-      #' @field target_biomass_value
-      #' Rebuilding projection's target biomass value in units of thousands
-      #' of metric tons (MT)
-      target_biomass_value = function (value) {
-        if(missing(value)){
-          private$.target_biomass_value
-        }else{
-          checkmate::assert_numeric(value, lower = 0, len = 1,
-                                    .var.name = "target_biomass_value")
-
-          private$.target_biomass_value <- value
-        }
-      },
-
-      #' @field target_biomass_type
-      #' Index for the type of population biomass as the target:
-      #' \describe{
-      #'   \item{0}{Spawning Stock Biomass}
-      #'   \item{1}{January 1st Stock Biomass}
-      #'   \item{2}{Mid-Year (Mean) Biomass}
-      #' }
-      target_biomass_type = function(value) {
-        if(missing(value)){
-          private$.target_biomass_type
-        }else{
-          checkmate::assert_numeric(value, len = 1,
-                                    .var.name = "target_biomass_type")
-          checkmate::assert_choice(value, choices = c(0,1,2),
-                                   .var.name = "target_biomass_type")
-          private$.target_biomass_type <- value
-        }
-      },
-
-      #' @field target_percent
-      #' The percent frequency of achieving the target value by the target
-      #' year. The percent frequency is a value between 0 (a zero
-      #' chance of achieving target) and 100 (indicating a 100 percent chance
-      #' of achieving target).
-      target_percent = function(value) {
-        if(missing(value)){
-          private$.target_percent
-        }else{
-          checkmate::assert_numeric(value, len = 1,
-                                    lower = 0, upper = 100,
-                                    .var.name = "target_percent")
-
-          private$.target_percent <- value
-        }
+    # Validates the usage of the 'projection years' parameter.
+    #
+    # If `proj_years` parameter is a projection_years class, then it will return
+    # that value. Otherwise, it will create a new `projection_years` class based
+    # on the param value passed.
+    validate_proj_years_parameter = function(proj_years) {
+      #Validate parameters
+      if (checkmate::test_r6(proj_years, public = c("count", "sequence"))) {
+        proj_years_class <- proj_years
+      } else {
+        proj_years_class <- ageproR::projection_years$new(proj_years)
       }
 
-    ),
-    private = list(
-
-      .keyword_name = "rebuild",
-
-      .target_biomass_value = NULL,
-      .target_biomass_type = NULL,
-      .target_percent = NULL,
-
-      .names_target_biomass_type = list(
-        "0" = "Spawning Stock Biomass",
-        "1" = "January 1st Stock Biomass",
-        "2" = "Mid-Year (Mean) Biomass"
-      ),
-
-      print_name_target_biomass_type = function() {
-
-        target_biomass_type_name <-
-          private$.names_target_biomass_type[[
-            as.character(self$target_biomass_type)]]
-
-        li_nested <-
-          cli::cli_div(class = "target_type",
-                       theme = list(.target_type = list("margin-left" = 2)))
-        cli::cli_text("{.emph {.field {target_biomass_type_name}}}")
-        cli::cli_end(li_nested)
-
-      }
-
-    )
+      return(proj_years_class)
+    }
+  )
 )

@@ -199,7 +199,7 @@ mortality_fraction_prior_spawn <- R6Class(
         add = validation_error
       )
       value |>
-        ageproR::validate_map(
+        validate_map(
           \(value) {
             checkmate::assert_numeric(
               value,

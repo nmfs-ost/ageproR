@@ -40,7 +40,7 @@ assert_model_num_vector_format <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_model_num_vector_format(x)
+  res <- check_model_num_vector_format(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -84,7 +84,7 @@ assert_model_num_vector_count <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_model_num_vector_count(x, num_recruit_models)
+  res <- check_model_num_vector_count(x, num_recruit_models)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -120,7 +120,7 @@ assert_proj_years_sequence <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_proj_years_sequence(x)
+  res <- check_proj_years_sequence(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -158,7 +158,7 @@ assert_perc_active_binding <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_perc_active_binding(x)
+  res <- check_perc_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -194,7 +194,7 @@ assert_case_id_active_binding <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_case_id_active_binding(x)
+  res <- check_case_id_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -222,7 +222,7 @@ assert_bounds_active_binding <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_bounds_active_binding(x)
+  res <- check_bounds_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -279,7 +279,7 @@ assert_agepro_model_class <- function(
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res = check_bounds_active_binding(x)
+  res <- check_bounds_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -296,9 +296,7 @@ assert_agepro_model_class <- function(
 #' @param .xs List r Atomic Vector
 #' @param .fn Function
 #'
-#' @export
-#'
-validate_map = function(.xs, .fn, ...) {
+validate_map <- function(.xs, .fn, ...) {
   # Capture the defused code supplied as `.fn`
   fn_code <- substitute(.fn)
 
@@ -322,27 +320,4 @@ validate_map = function(.xs, .fn, ...) {
     )
   }
   out
-}
-
-#' @title
-#' Validates the usage of the 'projection years' parameter.
-#'
-#' @description
-#' If `proj_years` parameter is a
-#' [projection_years class][ageproR::projection_years], then it will return
-#' that value. Otherwise, it will create a new `projection_years` class based
-#' on the param value passed.
-#'
-#' @param proj_years Projection year parameter. May be a numeric vector or a
-#' [`projection_years`][ageproR::projection_years]
-#'
-validate_proj_years_parameter <- function(proj_years) {
-  #Validate parameters
-  if (checkmate::test_r6(proj_years, public = c("count", "sequence"))) {
-    proj_years_class <- proj_years
-  } else {
-    proj_years_class <- ageproR::projection_years$new(proj_years)
-  }
-
-  return(proj_years_class)
 }
