@@ -1,5 +1,3 @@
-
-
 #' Command-line interface header for AGEPRO Keyword parameters
 #'
 #' Creates an custom header with double-lines (colored in cyan by default), via
@@ -11,9 +9,14 @@
 #' @keywords internal
 #'
 div_keyword_header <- function(keyword, header_color = "cyan") {
-  d <- cli_div(theme = list(rule = list(
-    color = header_color,
-    "line-type" = "double")))
+  d <- cli_div(
+    theme = list(
+      rule = list(
+        color = header_color,
+        "line-type" = "double"
+      )
+    )
+  )
   cli_rule(keyword)
   cli_end(d)
 }
@@ -34,20 +37,21 @@ div_keyword_header <- function(keyword, header_color = "cyan") {
 #' @importFrom utils head
 #' @export
 #'
-print_parameter_table = function (tbl, omit_rows=FALSE) {
-
-  if(omit_rows) {
-
-    omitted_num_rows <- pmax(0, nrow(tbl)-6)
+print_parameter_table <- function(tbl, omit_rows = FALSE) {
+  if (omit_rows) {
+    omitted_num_rows <- pmax(0, nrow(tbl) - 6)
 
     capture_output_as_message(cli::cat_print(head(tbl))) #first 6 rows
     cli::cli_text(
-      paste0("{symbol$info} ","Total of {nrow(tbl)} row{?s}; ",
-             "{no(omitted_num_rows)} row{?s} omitted"))
-  }else{
+      paste0(
+        "{symbol$info} ",
+        "Total of {nrow(tbl)} row{?s}; ",
+        "{no(omitted_num_rows)} row{?s} omitted"
+      )
+    )
+  } else {
     capture_output_as_message(cli::cat_print(tbl))
   }
-
 }
 
 
@@ -62,14 +66,13 @@ print_parameter_table = function (tbl, omit_rows=FALSE) {
 #' @param dimnames Matrix `dimnames`. See [`Matrix`][base::matrix] argument
 #' for more detail.
 #'
-create_blank_parameter_table = function(num_rows, num_cols,
-                                        dimnames = NULL) {
-
-  return(matrix(rep(NA, (num_rows * num_cols) ) ,
-                nrow = num_rows,
-                ncol = num_cols,
-                dimnames = dimnames))
-
+create_blank_parameter_table <- function(num_rows, num_cols, dimnames = NULL) {
+  return(matrix(
+    rep(NA, (num_rows * num_cols)),
+    nrow = num_rows,
+    ncol = num_cols,
+    dimnames = dimnames
+  ))
 }
 
 #' Invalid Path Message
@@ -79,8 +82,12 @@ create_blank_parameter_table = function(num_rows, num_cols,
 #' @param x Filepath string
 #'
 invalid_path_message <- function(x) {
-  paste0("'", x, "' is an invalid path or doesn't exist in ",
-         "working directory. \n")
+  paste0(
+    "'",
+    x,
+    "' is an invalid path or doesn't exist in ",
+    "working directory. \n"
+  )
 }
 
 
@@ -94,9 +101,45 @@ invalid_path_message <- function(x) {
 #' @importFrom utils capture.output
 #'
 capture_output_as_message <- function(x) {
-
   paste(capture.output(x), collapse = "\n") |> message()
-
 }
 
 
+#' @title
+#' Custom mapping function for error handing
+#'
+#' @description
+#' Custom mapping function used for error handling. This is based on the
+#' rlang topic "Dealing with errors thrown from the mapped function".
+#' For AgeproR, this is used primarily to capture the error assertion calls.
+#'
+#' @template elipses
+#'
+#' @param .xs List r Atomic Vector
+#' @param .fn Function
+#'
+map_errors <- function(.xs, .fn, ...) {
+  # Capture the defused code supplied as `.fn`
+  fn_code <- substitute(.fn)
+
+  out <- rlang::new_list(length(.xs))
+
+  for (i in seq_along(.xs)) {
+    rlang::try_fetch(
+      out[[i]] <- .fn(.xs[[i]], ...),
+      error = function(cnd) {
+        # Inspect the 'call' field to detect `.fn` calls
+        if (rlang::is_call(cnd$call, ".fn")) {
+          # Replace ".fn" by the defused code
+          # and Keep existing Arguemnts
+          cnd$call[[1]] <- fn_code
+        }
+        rlang::abort(
+          sprintf("Problem while mapping around element %d ", i),
+          parent = cnd
+        )
+      }
+    )
+  }
+  out
+}
