@@ -289,6 +289,12 @@ mortality_fraction_prior_spawn <- R6Class(
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
       paste0("[", toupper(private$.keyword_name), "]")
+    },
+
+    #' @field projection_years
+    #' Returns the projection_years used in the mortaliy_fraction object
+    projection_years = function() {
+      return(private$.projection_years)
     }
   ),
   private = list(

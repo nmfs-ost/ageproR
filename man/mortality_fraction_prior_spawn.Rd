@@ -27,6 +27,8 @@ mortality_fraction_prior_spawn class}
 \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
 \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+
+\item{\code{projection_years}}{Returns the projection_years used in the mortaliy_fraction object}
 }
 \if{html}{\out{</div>}}
 }
