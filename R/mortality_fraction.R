@@ -351,12 +351,17 @@ mortality_fraction_prior_spawn <- R6Class(
       checkmate::assert_numeric(value, lower = 0, upper = 1)
 
       if (time_varying) {
+        # Add prefix "y" to column names for projection years
+        colnames_projection_years <- paste0(
+          "y",
+          private$.projection_years$sequence
+        )
         return(
           matrix(
             value,
             nrow = 1,
             ncol = private$.projection_years$count,
-            dimnames = list(row_names, private$.projection_years$sequence)
+            dimnames = list(row_names, colnames_projection_years)
           )
         )
       } else {
