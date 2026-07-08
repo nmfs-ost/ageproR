@@ -22,7 +22,7 @@ spawning weight of fish in kilograms (kg)}
 
 \item{\code{recruit_model_num_list}}{Helper Function To View Recruitment Model Collection Data}
 
-\item{\code{number_recruit_models}}{Returns number of recruitment models}
+\item{\code{number_recruit_models}}{Returns number of recruitment models. This "read-only" field is set when the recruitment model is initialized.}
 
 \item{\code{recruit_probability}}{The Recruitment Probabilities.}
 
