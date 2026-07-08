@@ -376,19 +376,29 @@ recruitment <- R6Class(
     },
 
     #' @field recruit_model_num_list
-    #' Helper Function To View Recruitment Model Collection Data
+    #' Returns a list of recruitment model numbers representing the agepro model's
+    #' recruitment model instance. This "read-only" field is informative of the current
+    #' instance of the model recrutment model order. Use recruitment R6class field
+    #' `recruit_data` to access recruitment model data.
     recruit_model_num_list = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(
+          "Values for recruit_model_num_list (recruit_data) are read only",
+          call. = FALSE
+        )
       }
       return(private$.recruit_model_num_list)
     },
 
     #' @field number_recruit_models
-    #' Returns number of recruitment models. This "read-only" field is set when the recruitment model is initialized.
+    #' Returns number of recruitment models. This "read-only" field is set when the
+    #' recruitment model is initialized.
     number_recruit_models = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(
+          "Values for number_recruit_models are set when initializing recruitment model. ",
+          call. = FALSE
+        )
       }
       return(private$.number_recruit_models)
     },
