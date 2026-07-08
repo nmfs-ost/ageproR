@@ -234,15 +234,17 @@ mortality_fraction_prior_spawn <- R6Class(
       if (isFALSE(missing(value))) {
         stop(
           paste0(
-            "Active binding is read only. \n",
-            "Please use proportion_total_mortality_matrix \n",
-            "to set proportions for natural and fishing mortality ",
-            "prior to spawn."
+            "Can not set natural_mortality_prior_spawn directly. \n",
+            "Set natural_mortality_prior_spawn row values to the \n",
+            "proportion_total_mortality_matrix."
           ),
           call. = FALSE
         )
       }
-      return(private$.natural_mortality_prior_spawn)
+      #return(private$.natural_mortality_prior_spawn)
+      return(private$.proportion_total_mortality_matrix[
+        "natural_mortality_prior_spawn",
+      ])
     },
 
     #' @field fishing_mortality_prior_spawn
@@ -253,15 +255,17 @@ mortality_fraction_prior_spawn <- R6Class(
       if (isFALSE(missing(value))) {
         stop(
           paste0(
-            "Active binding is read only. \n",
-            "Please use proportion_total_mortality_matrix ",
-            "to set proportions for natural and fishing mortality ",
-            "prior to spawn."
+            "Can not set fishing_mortality_prior_spawn directly. \n",
+            "Set fishing_mortality_prior_spawn row values to the \n",
+            "proportion_total_mortality_matrix."
           ),
           call. = FALSE
         )
       }
-      return(private$.fishing_mortality_prior_spawn)
+      #return(private$.fishing_mortality_prior_spawn)
+      return(private$.proportion_total_mortality_matrix[
+        "fishing_mortality_prior_spawn",
+      ])
     },
 
     #' @field json_list_object
