@@ -185,7 +185,7 @@ general_params <- R6Class(
     #' First Year in Projection
     yr_start = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.yr_start
     },
@@ -194,7 +194,7 @@ general_params <- R6Class(
     #' Last Year in Projection
     yr_end = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.yr_end
     },
@@ -203,7 +203,7 @@ general_params <- R6Class(
     #' First Age Class
     age_begin = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.age_begin
     },
@@ -212,7 +212,7 @@ general_params <- R6Class(
     #' Last Age Class
     age_end = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.age_end
     },
@@ -221,7 +221,7 @@ general_params <- R6Class(
     #' Number of Population Simulations
     num_pop_sims = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.num_pop_sims
     },
@@ -230,7 +230,7 @@ general_params <- R6Class(
     #' Number of Fleets
     num_fleets = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.num_fleets
     },
@@ -239,7 +239,7 @@ general_params <- R6Class(
     #' Number of Recruitment Models
     num_rec_models = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.num_rec_models
     },
@@ -248,7 +248,7 @@ general_params <- R6Class(
     #' Are discards present?
     discards_present = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.discards_present
     },
@@ -257,7 +257,7 @@ general_params <- R6Class(
     #' Pseudo Random Number seed
     seed = function(value) {
       if (isFALSE(missing(value))) {
-        stop("active binding is read only", call. = FALSE)
+        stop(private$.msg_read_only_params, call. = FALSE)
       }
       private$.seed
     },
@@ -326,6 +326,12 @@ general_params <- R6Class(
     .seed = NULL,
 
     .keyword_name = "general",
+
+    .msg_read_only_params = paste0(
+      "This \"read-only\" general parameter value is used to initialize new AGEPRO models. \n",
+      " You will need to specify a new value, using this field as a parameter,",
+      " when creating a new instance agepro_model R6class instance."
+    ),
 
     ## Private setter functions w/ validation
 
