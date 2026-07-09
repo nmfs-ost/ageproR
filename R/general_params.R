@@ -1,4 +1,3 @@
-
 #' @title Input general model parameters
 #'
 #' @description Stores overall AGERPRO model project parameters including
@@ -18,7 +17,6 @@
 general_params <- R6Class(
   classname = "general_params",
   public = list(
-
     #' @description
     #' Starts an instances of the AGEPRO Model
     #'
@@ -35,19 +33,19 @@ general_params <- R6Class(
     #' Logical flag to show target function's messages on console.
     #' By Default, set to TRUE.
     #'
-    initialize = function(yr_start = 0,
-                          yr_end = 2,
-                          age_begin = 1,
-                          age_end = 6,
-                          num_pop_sims = 1000,
-                          num_fleets = 1,
-                          num_rec_models = 1,
-                          discards_present = FALSE,
-                          seed = sample.int(1e8, 1),
-                          enable_cat_print = TRUE) {
-
-
-      if(enable_cat_print){
+    initialize = function(
+      yr_start = 0,
+      yr_end = 2,
+      age_begin = 1,
+      age_end = 6,
+      num_pop_sims = 1000,
+      num_fleets = 1,
+      num_rec_models = 1,
+      discards_present = FALSE,
+      seed = sample.int(1e8, 1),
+      enable_cat_print = TRUE
+    ) {
+      if (enable_cat_print) {
         div_keyword_header(self$keyword_name)
       }
       # Discards: Assert numeric format
@@ -65,51 +63,72 @@ general_params <- R6Class(
       private$set_discards_present(discards_present)
       private$set_seed(as.numeric(seed))
 
-      if(enable_cat_print){
+      if (enable_cat_print) {
         self$print()
       }
-
     },
 
     #' @description
     #' Prints out General Parameters
     #'
     print = function(...) {
-
       cli::cli_alert_info(
-        paste0("yr_start {.emph (First Year in Projection)}: ",
-               "{.val {self$yr_start}}"))
+        paste0(
+          "yr_start {.emph (First Year in Projection)}: ",
+          "{.val {self$yr_start}}"
+        )
+      )
       cli::cli_alert_info(
-        paste0("yr_end {.emph (Last Year in Projection)}: ",
-               "{.val {self$yr_end}}"))
+        paste0(
+          "yr_end {.emph (Last Year in Projection)}: ",
+          "{.val {self$yr_end}}"
+        )
+      )
       cli::cli_alert_info(
-        paste0("age_begin {.emph (First Age Class)}: ",
-               "{.val {self$age_begin}}"))
+        paste0(
+          "age_begin {.emph (First Age Class)}: ",
+          "{.val {self$age_begin}}"
+        )
+      )
       cli::cli_alert_info(
-        paste0("age_end {.emph (Last Age Class)}: ",
-               "{.val {self$age_end}}"))
+        paste0("age_end {.emph (Last Age Class)}: ", "{.val {self$age_end}}")
+      )
       cli::cli_alert_info(
-        paste0("num_pop_sims {.emph (Number of Population Simulations)}: ",
-               "{.val {self$num_pop_sims}}"))
+        paste0(
+          "num_pop_sims {.emph (Number of Population Simulations)}: ",
+          "{.val {self$num_pop_sims}}"
+        )
+      )
       cli::cli_alert_info(
-        paste0("num_fleets {.emph (Number of Fleets)}: ",
-               "{.val {self$num_fleets}}"))
+        paste0(
+          "num_fleets {.emph (Number of Fleets)}: ",
+          "{.val {self$num_fleets}}"
+        )
+      )
       cli::cli_alert_info(
-        paste0("num_rec_models {.emph (Number of Recruitment Model(s))}: ",
-               "{.val {self$num_rec_models}}"))
+        paste0(
+          "num_rec_models {.emph (Number of Recruitment Model(s))}: ",
+          "{.val {self$num_rec_models}}"
+        )
+      )
       cli::cli_alert_info(
-        paste0("discards_present {.emph (Discards are present)}: ",
-               "{.val {as.logical(self$discards_present)}} "))
+        paste0(
+          "discards_present {.emph (Discards are present)}: ",
+          "{.val {as.logical(self$discards_present)}} "
+        )
+      )
       cli::cli_alert_info(
-        paste0("seed {.emph (Calculation Engine Random Number Seed)}: ",
-               "{.val {self$seed}}"))
+        paste0(
+          "seed {.emph (Calculation Engine Random Number Seed)}: ",
+          "{.val {self$seed}}"
+        )
+      )
       invisible(self)
     },
 
     #' @description
     #' Reads General AGEPRO parameters from AGEPRO INP Input File
     read_inp_lines = function(inp_con, nline) {
-
       # Read an additional line from the file connection and split the string
       # into substrings by whitespace
       nine <- nline + 1
@@ -128,8 +147,10 @@ general_params <- R6Class(
       private$set_seed(inp_line[9])
 
       div_general_fields <-
-        cli::cli_div(class = "input_field",
-                     theme = list(.input_field = list("margin-left" = 2)))
+        cli::cli_div(
+          class = "input_field",
+          theme = list(.input_field = list("margin-left" = 2))
+        )
       self$print()
 
       cli::cli_end(div_general_fields)
@@ -144,26 +165,26 @@ general_params <- R6Class(
     get_inp_lines = function(delimiter = "  ") {
       return(list(
         self$inp_keyword,
-        paste(self$yr_start,
-              self$yr_end,
-              self$age_begin,
-              self$age_end,
-              self$num_pop_sims,
-              self$num_fleets,
-              self$num_rec_models,
-              as.numeric(self$discards_present),
-              self$seed,
-              sep = delimiter)
+        paste(
+          self$yr_start,
+          self$yr_end,
+          self$age_begin,
+          self$age_end,
+          self$num_pop_sims,
+          self$num_fleets,
+          self$num_rec_models,
+          as.numeric(self$discards_present),
+          self$seed,
+          sep = delimiter
+        )
       ))
     }
-
   ),
   active = list(
-
     #' @field yr_start
     #' First Year in Projection
     yr_start = function(value) {
-      if(isFALSE(missing(value))){
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.yr_start
@@ -172,7 +193,7 @@ general_params <- R6Class(
     #' @field yr_end
     #' Last Year in Projection
     yr_end = function(value) {
-      if(isFALSE(missing(value))){
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.yr_end
@@ -180,8 +201,8 @@ general_params <- R6Class(
 
     #' @field age_begin
     #' First Age Class
-    age_begin = function(value){
-      if(isFALSE(missing(value))){
+    age_begin = function(value) {
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.age_begin
@@ -189,8 +210,8 @@ general_params <- R6Class(
 
     #' @field age_end
     #' Last Age Class
-    age_end = function(value){
-      if(isFALSE(missing(value))){
+    age_end = function(value) {
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.age_end
@@ -198,8 +219,8 @@ general_params <- R6Class(
 
     #' @field num_pop_sims
     #' Number of Population Simulations
-    num_pop_sims = function(value){
-      if(isFALSE(missing(value))){
+    num_pop_sims = function(value) {
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.num_pop_sims
@@ -207,8 +228,8 @@ general_params <- R6Class(
 
     #' @field num_fleets
     #' Number of Fleets
-    num_fleets = function(value){
-      if(isFALSE(missing(value))){
+    num_fleets = function(value) {
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.num_fleets
@@ -217,7 +238,7 @@ general_params <- R6Class(
     #' @field num_rec_models
     #' Number of Recruitment Models
     num_rec_models = function(value) {
-      if(isFALSE(missing(value))){
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.num_rec_models
@@ -226,7 +247,7 @@ general_params <- R6Class(
     #' @field discards_present
     #' Are discards present?
     discards_present = function(value) {
-      if(isFALSE(missing(value))){
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.discards_present
@@ -234,13 +255,12 @@ general_params <- R6Class(
 
     #' @field seed
     #' Pseudo Random Number seed
-    seed = function(value){
-      if(isFALSE(missing(value))){
+    seed = function(value) {
+      if (isFALSE(missing(value))) {
         stop("active binding is read only", call. = FALSE)
       }
       private$.seed
     },
-
 
     #' @field num_years Determines the number of years in projection by the
     #' (absolute) difference of the last and first year of projection.
@@ -269,13 +289,12 @@ general_params <- R6Class(
     #' @field inp_keyword
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
-      paste0("[",toupper(private$.keyword_name),"]")
+      paste0("[", toupper(private$.keyword_name), "]")
     },
 
     #' @field json_list_object
     #' List of GENERAL keyword fields values, exportable to JSON.
     json_list_object = function() {
-
       #If discard Flag is numeric check if it is 0 or 1
       if (!test_logical(self$discards_present)) {
         #Assert for 0 and 1
@@ -294,10 +313,8 @@ general_params <- R6Class(
         seed = self$seed
       ))
     }
-
   ),
   private = list(
-
     .yr_start = NULL,
     .yr_end = NULL,
     .age_begin = NULL,
@@ -313,72 +330,96 @@ general_params <- R6Class(
     ## Private setter functions w/ validation
 
     #yr_start
-    set_yr_start = function (value) {
-      checkmate::assert_numeric(value, lower = 0, len = 1,
-                                .var.name = "yr_start")
+    set_yr_start = function(value) {
+      checkmate::assert_numeric(
+        value,
+        lower = 0,
+        len = 1,
+        .var.name = "yr_start"
+      )
       private$.yr_start <- value
     },
 
     #yr_end
-    set_yr_end = function(value){
-      checkmate::assert_numeric(value, len = 1,
-                                lower = self$yr_start + 1,
-                                .var.name = "yr_end")
+    set_yr_end = function(value) {
+      checkmate::assert_numeric(
+        value,
+        len = 1,
+        lower = self$yr_start + 1,
+        .var.name = "yr_end"
+      )
       private$.yr_end <- value
     },
 
     #age_begin
-    set_age_begin = function(value){
-      checkmate::assert_choice(value, choices = c(0, 1),
-                               .var.name = "age_begin")
+    set_age_begin = function(value) {
+      checkmate::assert_choice(
+        value,
+        choices = c(0, 1),
+        .var.name = "age_begin"
+      )
       private$.age_begin <- value
     },
 
     #age_end
-    set_age_end = function(value){
-      checkmate::assert_numeric(value, len = 1,
-                                lower = self$age_begin + 1,
-                                .var.name = "age_end")
+    set_age_end = function(value) {
+      checkmate::assert_numeric(
+        value,
+        len = 1,
+        lower = self$age_begin + 1,
+        .var.name = "age_end"
+      )
       private$.age_end <- value
     },
 
     #num_pop_sims
-    set_num_pop_sims = function(value){
-      checkmate::assert_numeric(value, lower = 0, len = 1,
-                                .var.name = "num_pop_sims")
+    set_num_pop_sims = function(value) {
+      checkmate::assert_numeric(
+        value,
+        lower = 0,
+        len = 1,
+        .var.name = "num_pop_sims"
+      )
       private$.num_pop_sims <- value
     },
 
     #num_fleets
-    set_num_fleets = function(value){
-      checkmate::assert_numeric(value, lower = 1, len = 1,
-                                .var.name = "num_fleets")
+    set_num_fleets = function(value) {
+      checkmate::assert_numeric(
+        value,
+        lower = 1,
+        len = 1,
+        .var.name = "num_fleets"
+      )
       private$.num_fleets <- value
     },
 
     #num_rec_models
-    set_num_rec_models = function(value){
-      checkmate::assert_numeric(value, lower = 1, len = 1,
-                                .var.name = "num_rec_models")
+    set_num_rec_models = function(value) {
+      checkmate::assert_numeric(
+        value,
+        lower = 1,
+        len = 1,
+        .var.name = "num_rec_models"
+      )
       private$.num_rec_models <- value
     },
 
     #discards_present
-    set_discards_present = function(value){
+    set_discards_present = function(value) {
       #set discard_present values as int/numeric. 0=FALSE 1=TRUE
-      checkmate::assert_choice(value, choices = c(0, 1),
-                               .var.name = "discards_present")
+      checkmate::assert_choice(
+        value,
+        choices = c(0, 1),
+        .var.name = "discards_present"
+      )
       private$.discards_present <- value
     },
 
     #seed
-    set_seed = function(value){
-      checkmate::assert_numeric(value, len = 1,
-                                .var.name = "seed")
+    set_seed = function(value) {
+      checkmate::assert_numeric(value, len = 1, .var.name = "seed")
       private$.seed <- value
     }
-
   )
-
-
 )
