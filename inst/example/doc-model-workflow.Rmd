@@ -5,11 +5,11 @@
 ```{r set-model, eval = FALSE}
 library("ageproR")
 
-# Load path of ageproR's included Example_UKU Input File
-inpfile <- file.path(find.package("ageproR"),"example/Example_UKU.INP")
+# Load path of ageproR's included Example1 Input File
+inpfile <- file.path(find.package("ageproR"),"example/Example1.INP")
 
-# Load path of ageproR's included Example_UKU Bootstrap File
-bsnfile <- file.path(find.package("ageproR"),"example/Example_UKU.BSN")
+# Load path of ageproR's included Example1 Bootstrap File
+bsnfile <- file.path(find.package("ageproR"),"example/Example1.BSN")
 
 # Create a agepro_inp_model with default values
 test <- ageproR::agepro_inp_model$new()

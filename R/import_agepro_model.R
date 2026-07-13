@@ -13,8 +13,8 @@
 #' @examples
 #' \dontrun{
 #'
-#' # Load path of ageproR's included Example_UKU Input File
-#' inpfile <- file.path(find.package("ageproR"),"example/Example_UKU.INP")
+#' # Load path of ageproR's included Example1 Input File
+#' inpfile <- file.path(find.package("ageproR"),"example/Example1.INP")
 #'
 #' # Create agepro_inp_model and import data from inpfile
 #' test <- import_agepro_model(inpfile)

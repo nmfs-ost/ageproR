@@ -29,7 +29,7 @@ Wrapper function to call the Binary
 \examples{
 \dontrun{
 
-inp_file <- file.path(find.package("ageproR"),"Example_UKU.INP")
+inp_file <- file.path(find.package("ageproR"),"Example1.INP")
 
 # For this example, save the Agepro Calcuation Engine Binary in
 # the 'agepro' subdirectory of home directory 'R_USER'
