@@ -148,6 +148,7 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
 #' @importFrom checkmate assert_character
 #'
 open_file_dialog <- function(filetype) {
+  cli::cli_text("Use the File Dialog Window to open a file ... ")
   return(file_dialog(type = "open", ext = filetype))
 }
 
@@ -162,6 +163,7 @@ open_file_dialog <- function(filetype) {
 #'
 save_file_dialog <- function() {
   # Defaults to "All Files"
+  cli::cli_text("Use the File Dialog Window to save file ... ")
   return(file_dialog(type = "save"))
 }
 
