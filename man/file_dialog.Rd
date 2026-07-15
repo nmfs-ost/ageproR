@@ -4,12 +4,18 @@
 \alias{file_dialog}
 \title{Choose a file to open or save a file interactively.}
 \usage{
-file_dialog(type = c("open", "save"), ext = c("All Files", ".*"))
+file_dialog(
+  type = c("open", "save"),
+  ext = c("All Files", ".*"),
+  force_tcltk = FALSE
+)
 }
 \arguments{
 \item{type}{Character option to request a "Open" or "Save file Dialog}
 
 \item{ext}{Two item vector describing the filename description and filename extension respecively. By default it is assigned to \code{c("All Files", "*")}}
+
+\item{force_tcltk}{Logical}
 }
 \value{
 A Character vector representing the filepath of the chosen path from the file dialog.

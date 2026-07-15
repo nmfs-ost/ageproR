@@ -5,6 +5,7 @@
 #'
 #' @param type Character option to request a "Open" or "Save file Dialog
 #' @param ext Two item vector describing the filename description and filename extension respecively. By default it is assigned to `c("All Files", "*")`
+#' @param force_tcltk Logical
 #'
 #' @importFrom checkmate assert_character
 #' @importFrom utils Filters
@@ -12,10 +13,15 @@
 #' @returns A Character vector representing the filepath of the chosen path from the file dialog.
 #' @keywords internal
 #'
-file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
+file_dialog <- function(
+  type = c("open", "save"),
+  ext = c("All Files", ".*"),
+  force_tcltk = FALSE
+) {
   #Validate Parameters
   type <- match.arg(type)
   ext <- validate_filetype(ext)
+  checkmate::assert_logical(force_tcltk, .var.name = "force_tcltk")
 
   #Throw error if system is not interactive.
   if (isFALSE(interactive())) {
@@ -24,12 +30,16 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
     )
   }
 
+  # Force Tcltk if TRUE
+  if (force_tcltk) {
+    return(run_tcltk_dialog(type, ext))
+  }
+
   #Dialog msg
   err_msg_dialog_cancelled <- "File choice cancelled"
   msg_caption_open <- "Open File"
   msg_caption_save <- "Save File As"
   pattern_ext <- paste0(ext[1], " (*", ext[2], ")")
-  tcltk_pattern_ext <- paste0("{{", ext[1], "} {", ext[2], "}}")
 
   #Detect frontend
   r_frontend <- get_r_frontend()
@@ -99,40 +109,9 @@ file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {
   }
 
   # TCL/TK fallback (Mac/Linux): 'tcltk' package
-  #
-  # TODO: Need to Close Tcltk mangager after it is done. Refactor to own function.
-  if (isFALSE(requireNamespace("tcltk", quietly = TRUE))) {
-    stop(
-      "Package 'tcltk' is required for file dialogs windows for Mac and Linux systems"
-    )
-  } else {
-    if (type == "open") {
-      path <- tcltk::tclvalue(
-        tcltk::tkgetOpenFile(
-          initialdir = here::here(),
-          filetypes = tcltk_pattern_ext
-        )
-      )
-    } else {
-      path <- tcltk::tclvalue(
-        tcltk::tkgetSaveFile(
-          initialdir = here::here(),
-          filetypes = tcltk_pattern_ext
-        )
-      )
-    }
-    # Validation
-    tryCatch(
-      {
-        checkmate::assert_character(path, min.chars = 1, .var.name = "path")
-      },
-      error = function(cond) {
-        message(err_msg_dialog_cancelled)
-        return(invisible())
-      }
-    )
-    return(path)
-  }
+  # Refactor to run_tcltk_dialog function
+  # Includes vaildation for user cancellation.
+  return(run_tcltk_dialog(type, ext))
 }
 
 
@@ -281,6 +260,7 @@ run_tcltk_dialog <- function(
   # Validate Params
   type <- match.arg(type)
   ext <- validate_filetype(ext)
+  tcltk_pattern_ext <- paste0("{{", ext[1], "} {", ext[2], "}}")
 
   # Is "tcltk" package installed?
   if (isFALSE(requireNamespace("tcltk", quietly = TRUE))) {
@@ -290,15 +270,25 @@ run_tcltk_dialog <- function(
   }
 
   # File Dialog
+  # Use tclvalue to get tclObj as character filepath
   if (type == "open") {
-    # tk_choose.files returns a R character vector
-    path <- tcltk::tk_choose.files(
-      caption = "Select File to Open",
-      multi = FALSE
+    path <- tcltk::tclvalue(
+      tcltk::tkgetOpenFile(
+        title = "Open File",
+        initialdir = here::here(),
+        filetypes = tcltk_pattern_ext,
+        defaultextension = ".inp"
+      )
     )
   } else {
-    # Use tclvalue to get tkgetSaveFile's tclObj as character filepath
-    path <- tcltk::tclvalue(tcltk::tkgetSaveFile(title = "Save File As"))
+    path <- tcltk::tclvalue(
+      tcltk::tkgetSaveFile(
+        title = "Save File As",
+        initialdir = here::here(),
+        filetypes = tcltk_pattern_ext,
+        defaultextension = ".inp"
+      )
+    )
   }
 
   #Check to see if file dialog was cancelled
