@@ -262,3 +262,59 @@ validate_filetype <- function(filetype) {
   )
   return(filetype)
 }
+
+
+#' Tcltk File Dialog helpers
+#'
+#' Helper Function that allows clean Tcltk execution and teartown
+#'
+#' @param type Character option to request a "Open" or "Save file Dialog
+#' @param ext Two item vector describing the filename description and filename extension respecively. By default it is assigned to `c("All Files", "*")`
+#'
+#' @keywords internal
+#' @returns A Character vector representing the filepath of the chosen path from the file dialog.
+#'
+run_tcltk_dialog <- function(
+  type = c("open", "save"),
+  ext = c("All Files", ".*")
+) {
+  # Validate Params
+  type <- match.arg(type)
+  ext <- validate_filetype(ext)
+
+  # Is "tcltk" package installed?
+  if (isFALSE(requireNamespace("tcltk", quietly = TRUE))) {
+    stop(
+      "Package 'tcltk' is required for using this tcltk file dialog window,"
+    )
+  }
+
+  # File Dialog
+  if (type == "open") {
+    # tk_choose.files returns a R character vector
+    path <- tcltk::tk_choose.files(
+      caption = "Select File to Open",
+      multi = FALSE
+    )
+  } else {
+    # Use tclvalue to get tkgetSaveFile's tclObj as character filepath
+    path <- tcltk::tclvalue(tcltk::tkgetSaveFile(title = "Save File As"))
+  }
+
+  #Check to see if file dialog was cancelled
+  tryCatch(
+    {
+      checkmate::assert_character(path, min.chars = 1, .var.name = "path")
+    },
+    error = function(cond) {
+      message("File choice cancelled")
+      return(invisible())
+    },
+    finally = function() {
+      # Cleanup
+      tcltk::.Tcl("update")
+    }
+  )
+
+  return(path)
+}
