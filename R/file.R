@@ -9,7 +9,7 @@
 #' @importFrom checkmate assert_character
 #' @importFrom utils Filters
 #'
-#' @returns A Character vector representing the filepath of the chosen path frpm the file dialog.
+#' @returns A Character vector representing the filepath of the chosen path from the file dialog.
 #' @keywords internal
 #'
 file_dialog <- function(type = c("open", "save"), ext = c("All Files", ".*")) {

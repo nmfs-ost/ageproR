@@ -12,7 +12,7 @@ file_dialog(type = c("open", "save"), ext = c("All Files", ".*"))
 \item{ext}{Two item vector describing the filename description and filename extension respecively. By default it is assigned to \code{c("All Files", "*")}}
 }
 \value{
-A Character vector representing the filepath of the chosen path frpm the file dialog.
+A Character vector representing the filepath of the chosen path from the file dialog.
 }
 \description{
 This function allows the user to open a File Dialog interface to interatively choose to load or save a file.
