@@ -48,6 +48,8 @@ import_agepro_model <- function(file, ...) {
     checkmate::reportAssertions(coll)
   }
 
-  # Read input file
-  return(model$read_inp(file))
+  # Read input file. Function will import data from input file to agepro_inp_data
+  model$read_inp(file)
+
+  return(model)
 }
