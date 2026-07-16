@@ -129,6 +129,7 @@ launch_model <- function(model, out_dir) {
   assert_agepro_model_class(model)
 
   # Assert agepro_model bootstrap file exists
+  checkmate::assert_file_exists(model$bootstrap$bootstrap_file)
 
   # Set default AGEPRO output directory if out_dir is missing.
   # Set "AGEPRO" subdirectory of User Home directory (R_USER)
