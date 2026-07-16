@@ -86,7 +86,7 @@ bootstrap <- R6Class(
       #Read another line from the file connection, and
       #assign it as bootstrap filename
       nline <- nline + 1
-      private$setup_bootstrap_path(inp_con)
+      private$set_bsn_path_from_inp_con(inp_con)
 
       cli::cli_alert(paste0(
         "Line {nline}: bootstrap_file: ",
@@ -192,8 +192,9 @@ bootstrap <- R6Class(
     .bootstrap_file = NULL,
     .keyword_name = "bootstrap",
 
-    #Helper function to construct bootstrap_file with
-    setup_bootstrap_path = function(inp_con) {
+    # Helper function to construct bootstrap filepaths relative to the
+    # location of the input file.
+    set_bsn_path_from_inp_con = function(inp_con) {
       # Import Bootstrap file path from file connection
       suppressMessages(invisible(capture.output(
         inpline_bootstrap_path <- readLines(inp_con, n = 1, warn = FALSE)
