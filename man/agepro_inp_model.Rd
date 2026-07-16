@@ -108,6 +108,8 @@ messages to be seen on console. In this instance, this is set to TRUE}
 TRUE, by default.}
 
 \item{\code{...}}{further arguments passed to or from other methods}
+
+\item{\code{...}}{further arguments passed to or from other methods}
 }
 \if{html}{\out{</div>}}
 }
@@ -118,13 +120,17 @@ TRUE, by default.}
 \subsection{Method \code{read_inp()}}{
 Read AGEPRO INP Input Files
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$read_inp(inpfile)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$read_inp(inpfile, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{inpfile}}{input file name}
+
+\item{\code{...}}{further arguments passed to or from other methods}
+
+\item{\code{...}}{further arguments passed to or from other methods}
 }
 \if{html}{\out{</div>}}
 }

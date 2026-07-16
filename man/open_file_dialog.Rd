@@ -4,10 +4,12 @@
 \alias{open_file_dialog}
 \title{Open file dialog or interface to interactively return file path.}
 \usage{
-open_file_dialog(filetype)
+open_file_dialog(filetype, ...)
 }
 \arguments{
 \item{filetype}{filename extension}
+
+\item{...}{further arguments passed to or from other methods}
 }
 \description{
 If Rconsole is currently running in Rstudio, it will use the rstudioapi

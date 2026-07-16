@@ -123,12 +123,13 @@ file_dialog <- function(
 #' @keywords internal
 #'
 #' @param filetype filename extension
+#' @template elipses
 #'
 #' @importFrom checkmate assert_character
 #'
-open_file_dialog <- function(filetype) {
+open_file_dialog <- function(filetype, ...) {
   cli::cli_text("Use the File Dialog Window to open a file ... ")
-  return(file_dialog(type = "open", ext = filetype))
+  return(file_dialog(type = "open", ext = filetype, ...))
 }
 
 #' Save file dialog or interface to interactively return file path.

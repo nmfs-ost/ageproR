@@ -975,9 +975,10 @@ agepro_inp_model <- R6Class(
     #' Read AGEPRO INP Input Files
     #'
     #' @param inpfile input file name
-    read_inp = function(inpfile) {
+    #' @template elipses
+    read_inp = function(inpfile, ...) {
       if (missing(inpfile) && interactive()) {
-        inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"))
+        inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"), ...)
         #Exit Function if user cancels out of file dialog
         if (!test_file_exists(inpfile, access = "r", extension = "inp")) {
           return(invisible(NULL))
