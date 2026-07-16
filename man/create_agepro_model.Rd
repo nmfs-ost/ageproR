@@ -9,8 +9,8 @@ create_agepro_model(type = c("inp", "json"), ...)
 \arguments{
 \item{type}{Determines the type of agepro_model:
 \itemize{
-\item \code{inp} By Default, Create an Agepro Model R6class for Agepro Input Files (\code{agepro_inp_model})
-\item \code{json} Create an Agepro Model R6Class for the JSON Input File Format (\code{agepro_json_model})
+\item{\code{inp}} {By Default, Create an Agepro Model R6class for Agepro Input Files (\code{agepro_inp_model})}
+\item{\code{json}} {Create an Agepro Model R6Class for the JSON Input File Format (\code{agepro_json_model})}
 }}
 
 \item{...}{further arguments passed to or from other methods}

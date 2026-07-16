@@ -5,8 +5,8 @@
 #'
 #' @param type Determines the type of agepro_model:
 #' \itemize{
-#'   \item `inp` By Default, Create an Agepro Model R6class for Agepro Input Files (`agepro_inp_model`)
-#'   \item `json` Create an Agepro Model R6Class for the JSON Input File Format (`agepro_json_model`)
+#'   \item{`inp`} {By Default, Create an Agepro Model R6class for Agepro Input Files (`agepro_inp_model`)}
+#'   \item{`json`} {Create an Agepro Model R6Class for the JSON Input File Format (`agepro_json_model`)}
 #' }
 #' @template elipses
 #'
