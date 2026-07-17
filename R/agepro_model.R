@@ -878,6 +878,8 @@ agepro_model <- R6Class(
     .discards_present = NULL,
     .projection_analyses_type = NULL,
 
+    .input_filepath = NULL,
+
     setup_ver_rpackage = function() {
       private$.ver_rpackage <- utils::packageVersion("ageproR")
     }
@@ -1276,12 +1278,11 @@ agepro_inp_model <- R6Class(
       if (isFALSE(missing(val))) {
         stop("active binding is read only", call. = FALSE)
       }
-      private$.inp_filepath
+      private$.input_filepath
     }
   ),
   private = list(
     .nline = NULL,
-    .inp_filepath = NULL,
 
     set_inp_filepath = function(value) {
       if (isFALSE(checkmate::test_file_exists(value))) {
@@ -1293,7 +1294,7 @@ agepro_inp_model <- R6Class(
         ))
         return()
       }
-      private$.inp_filepath <- value
+      private$.input_filepath <- value
     },
 
     read_case_id = function(con, nline) {
