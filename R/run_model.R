@@ -128,9 +128,6 @@ launch_model <- function(model, out_dir) {
   # Validate agepro_model
   assert_agepro_model_class(model)
 
-  # Assert agepro_model bootstrap file exists
-  checkmate::assert_file_exists(model$bootstrap$bootstrap_file)
-
   # Set default AGEPRO output directory if out_dir is missing.
   # Set "AGEPRO" subdirectory of User Home directory (R_USER)
   if (missing(out_dir)) {
@@ -179,12 +176,41 @@ launch_model <- function(model, out_dir) {
     inp_file <- inp_file
   }
 
+  # Save agepro_model to INP file to run directory (out_dir).
+
+  # Assert that agepro_model bootstrap_file is not NULL.
+  # Newly creatated agepro_models will have NULL bootstrap_file values
+
+  # Assert agepro_model bootstrap file exists
+
   # Check the agepro_model's bootstrap filepath and then copy it to the
   # run directory (out_dir)
-
-  # Save agepro_model to INP file to run directory (out_dir)
 
   # run_model to AGEPRO calculation engine
 
   # Create AGEPRO *.out file
+}
+
+
+#' Helper function to check bootstrap file locations prior AGEPRO calcuation engine launch.
+#'
+#' @param model AGEPRO model class for AGEPRO Input File format (`agepro_inp_model`)
+#' @param bsn Bootstrap filepath
+#'
+#' @returns
+#'
+model_bootstrap_check <- function(model, bsn) {
+  # Check model input file path exists. Note: on
+  checkmate::assert_file_pathmodel(model$inp_filepath)
+
+  # Check is validated if bootstrap file exists
+  if (checkmate::test_file_exists(bsn)) {
+    return()
+  }
+
+  # Otherwise, check if bootstrap file path is relative, saved on the
+  # same location as the input file: Check the model's input file location
+  # is valid. After validation, copy/paste input file dirname to bsn's file.
+  # Assuming that the two files are on the same location, the path check
+  # will be valid.
 }
