@@ -197,11 +197,9 @@ launch_model <- function(model, out_dir) {
 #' @param model AGEPRO model class for AGEPRO Input File format (`agepro_inp_model`)
 #' @param bsn Bootstrap filepath
 #'
-#' @returns
-#'
 model_bootstrap_check <- function(model, bsn) {
   # Check model input file path exists. Note: on
-  checkmate::assert_file_pathmodel(model$inp_filepath)
+  checkmate::assert_file_exists(model$inp_filepath)
 
   # Check is validated if bootstrap file exists
   if (checkmate::test_file_exists(bsn)) {
