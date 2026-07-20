@@ -4,7 +4,12 @@
 \alias{create_blank_parameter_table}
 \title{Creates a table-like matrix with \code{NA} values}
 \usage{
-create_blank_parameter_table(num_rows, num_cols, dimnames = NULL)
+create_blank_parameter_table(
+  num_rows,
+  num_cols,
+  dimnames = NULL,
+  useNA = FALSE
+)
 }
 \arguments{
 \item{num_rows}{the desired number of rows}
@@ -13,6 +18,9 @@ create_blank_parameter_table(num_rows, num_cols, dimnames = NULL)
 
 \item{dimnames}{Matrix \code{dimnames}. See \code{\link[base:matrix]{Matrix}} argument
 for more detail.}
+
+\item{useNA}{\link[base:logical]{Logical} parameter to use missing value \code{NA}
+or (by default) \code{0} as default value.}
 }
 \description{
 Wrapper to \code{\link[base:matrix]{Matrix}} function, that returns the object with

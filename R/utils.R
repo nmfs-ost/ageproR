@@ -67,10 +67,19 @@ print_parameter_table <- function(tbl, omit_rows = FALSE) {
 #' @param num_cols the desired number of columns
 #' @param dimnames Matrix `dimnames`. See [`Matrix`][base::matrix] argument
 #' for more detail.
+#' @param useNA [Logical][base::logical] parameter to use missing value `NA`
+#' or (by default) `0` as default value.
 #'
-create_blank_parameter_table <- function(num_rows, num_cols, dimnames = NULL) {
+create_blank_parameter_table <- function(
+  num_rows,
+  num_cols,
+  dimnames = NULL,
+  useNA = FALSE
+) {
+  val <- ifelse(useNA, NA, 0)
+
   return(matrix(
-    rep(NA, (num_rows * num_cols)),
+    rep(val, (num_rows * num_cols)),
     nrow = num_rows,
     ncol = num_cols,
     dimnames = dimnames

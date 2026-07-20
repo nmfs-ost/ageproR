@@ -1,5 +1,3 @@
-
-
 #' @title
 #' Process Errors for Population and Fishery Processes
 #'
@@ -24,30 +22,28 @@
 #' @export
 process_error <- R6Class(
   "process_error",
-  public = list (
-
+  public = list(
     #' @description
     #' Initializes the class
     #'
-    initialize = function(proj_years,
-                          num_ages,
-                          num_fleets = 1,
-                          input_option = 0,
-                          time_varying = TRUE,
-                          ...){
-
-
+    initialize = function(
+      proj_years,
+      num_ages,
+      num_fleets = 1,
+      input_option = 0,
+      time_varying = TRUE,
+      ...
+    ) {
       # set and validate value
       self$input_option <- input_option
       self$time_varying <- time_varying
 
       # Handle instances where proj_years is passed as projection_years class
-      if (checkmate::test_r6(proj_years, public = c("count","sequence") )) {
+      if (checkmate::test_r6(proj_years, public = c("count", "sequence"))) {
         projection_years_class <- proj_years
-      } else{
-
+      } else {
         # Uncommon instance when 'proj_years' is passed as a factor
-        if(is.factor(proj_years)) {
+        if (is.factor(proj_years)) {
           proj_years <- levels(proj_years)
         }
 
@@ -55,20 +51,19 @@ process_error <- R6Class(
           ageproR::projection_years$new(as.numeric(proj_years))
       }
 
-
       #Initialize parameter and CV tables
-      private$setup_parameter_tables(projection_years_class,
-                                   num_ages,
-                                   num_fleets,
-                                   time_varying = self$time_varying)
+      private$setup_parameter_tables(
+        projection_years_class,
+        num_ages,
+        num_fleets,
+        time_varying = self$time_varying
+      )
 
       #Fallback Parameter Name
       self$parameter_title <- "Process Error Parameter At Age"
       private$.keyword_name <- "process_error"
       private$.weight_age_parameter <- FALSE
-
     },
-
 
     #' @description
     #' Creates an Population or Fishery process Parameter table
@@ -77,11 +72,11 @@ process_error <- R6Class(
     #' @param ages_cols Age Columns
     #'
     create_parameter_table = function(fleet_yr_rows, ages_cols) {
-
-      return(matrix(rep(NA, (fleet_yr_rows * ages_cols) ) ,
-                    nrow = fleet_yr_rows,
-                    ncol = ages_cols))
-
+      return(matrix(
+        rep(0, (fleet_yr_rows * ages_cols)),
+        nrow = fleet_yr_rows,
+        ncol = ages_cols
+      ))
     },
 
     #' @description
@@ -96,46 +91,53 @@ process_error <- R6Class(
       cli::cli_alert_info("parameter_table:")
       cli::cli_text("{.emph {self$parameter_title}}")
       #Verbose flag check
-      if(enable_cat_print){
+      if (enable_cat_print) {
         #Allow `cli::cat_print` message
         print_parameter_table(self$parameter_table, omit_rows = TRUE)
-      }else {
+      } else {
         #Suppress `cli::cat_print` message
-        capture.output( x <- print_parameter_table(
-          self$parameter_table, omit_rows = TRUE))
-
+        capture.output(
+          x <- print_parameter_table(
+            self$parameter_table,
+            omit_rows = TRUE
+          )
+        )
       }
       cli::cli_end()
 
       cli::cli_par()
       cli::cli_alert_info("cv_table: ")
       cli::cli_text("{.emph Coefficient of Variation}")
-      if(enable_cat_print) {
+      if (enable_cat_print) {
         #Allow `cli::cat_print` message
         print_parameter_table(self$cv_table, omit_rows = TRUE)
-      }else {
+      } else {
         #Suppress `cli::cat_print` message
-        capture.output( x <- print_parameter_table(
-          self$cv_table, omit_rows = TRUE))
+        capture.output(
+          x <- print_parameter_table(
+            self$cv_table,
+            omit_rows = TRUE
+          )
+        )
       }
 
-
       cli::cli_end()
-
     },
-
 
     #' @description
     #' Reads in Process Error keyword parameter's values from AGEPRO Input file
     #'
-    read_inp_lines = function(inp_con,
-                              nline,
-                              proj_years,
-                              num_ages,
-                              num_fleets = 1) {
-
-      cli::cli_alert(paste0("Reading {.strong {private$.keyword_name}}: ",
-                                 "{self$parameter_title}"))
+    read_inp_lines = function(
+      inp_con,
+      nline,
+      proj_years,
+      num_ages,
+      num_fleets = 1
+    ) {
+      cli::cli_alert(paste0(
+        "Reading {.strong {private$.keyword_name}}: ",
+        "{self$parameter_title}"
+      ))
 
       nline <- nline + 1
       cli::cli_alert("Line {nline}:")
@@ -149,31 +151,35 @@ process_error <- R6Class(
       self$time_varying <- as.logical(inp_line[2])
 
       #Validate input option
-      checkmate::assert_choice(self$input_option,
-                               private$.valid_input_options,
-                               .var.name = "Input Option")
+      checkmate::assert_choice(
+        self$input_option,
+        private$.valid_input_options,
+        .var.name = "Input Option"
+      )
 
       #Verbose output
-      cli::cli_div(id = "process_error_fields",
-                   theme = list(".alert-info" = list("margin-left" = 2)))
+      cli::cli_div(
+        id = "process_error_fields",
+        theme = list(".alert-info" = list("margin-left" = 2))
+      )
       private$print_process_error_fields()
       cli::cli_end("process_error_fields")
-
 
       # TODO: Setup instances where proj_years is passed as a projection_year class
       # Setup new instance of Parameter and CV tables. time_varying
       # value read from the AGEPRO input file. Including values for
       # projection_years. num_ages, and num_fleets.
-      private$setup_parameter_tables(ageproR::projection_years$new(proj_years),
-                                   num_ages,
-                                   num_fleets,
-                                   time_varying = self$time_varying)
+      private$setup_parameter_tables(
+        ageproR::projection_years$new(proj_years),
+        num_ages,
+        num_fleets,
+        time_varying = self$time_varying
+      )
 
-      if(self$input_option == 1) {
+      if (self$input_option == 1) {
         #TODO: Read from file name
         stop("NOT IMPLMENTED")
       } else if (self$input_option < 0) {
-
         return(nline)
       } else {
         #from interface
@@ -184,45 +190,44 @@ process_error <- R6Class(
       return(nline)
     },
 
-
     #' @description
     #' Helper function to set population or fishery process parameter
     #' tables from AGEPRO input files. Reads in an additional line (or lines)
     #' from the file connection to assign to the `parameter_table`
     #'
     read_inp_lines_parameter_tables = function(inp_con, nline) {
-
       #TODO: Verify inp_line is same length as num_ages
 
       #Non-time varying, single fleet data
-      if(private$.num_fleets == 1 && !(self$time_varying)) {
-
+      if (private$.num_fleets == 1 && !(self$time_varying)) {
         nline <- nline + 1
         inp_line <- read_inp_numeric_line(inp_con)
-        cli::cli_alert(c("Line {nline}: ",
-                         "parameter_table (",
-                         "{self$parameter_title}) for All Years: ",
-                         "{.val {inp_line}} ",
-                         "{.emph ({private$.num_ages} Age{?s})}"))
+        cli::cli_alert(c(
+          "Line {nline}: ",
+          "parameter_table (",
+          "{self$parameter_title}) for All Years: ",
+          "{.val {inp_line}} ",
+          "{.emph ({private$.num_ages} Age{?s})}"
+        ))
 
-        self$parameter_table["All Years",] <- inp_line
+        self$parameter_table["All Years", ] <- inp_line
 
-      #Multi-fleet or Single fleet w/ time varying
-      }else {
-
-        for(i in rownames(self$parameter_table)){
+        #Multi-fleet or Single fleet w/ time varying
+      } else {
+        for (i in rownames(self$parameter_table)) {
           nline <- nline + 1
           inp_line <- read_inp_numeric_line(inp_con)
-          cli::cli_alert(c("Line {nline}: ",
-                           "parameter_table (",
-                           "{self$parameter_title}) for {i}: ",
-                           "{.val {inp_line}} ",
-                           "{.emph ({private$.num_ages} Age{?s})}"))
+          cli::cli_alert(c(
+            "Line {nline}: ",
+            "parameter_table (",
+            "{self$parameter_title}) for {i}: ",
+            "{.val {inp_line}} ",
+            "{.emph ({private$.num_ages} Age{?s})}"
+          ))
 
-          self$parameter_table[i,] <- inp_line
+          self$parameter_table[i, ] <- inp_line
         }
       }
-
 
       return(nline)
     },
@@ -233,72 +238,76 @@ process_error <- R6Class(
     #' file connection to assign to the `cv_table`
     #'
     read_inp_lines_cv_table = function(inp_con, nline) {
-
-      if(private$.num_fleets == 1) {
+      if (private$.num_fleets == 1) {
         nline <- nline + 1
         inp_line <- read_inp_numeric_line(inp_con)
-        cli::cli_alert(c("Line {nline}: ",
-                         "cv_table (Coefficent of Variation) for All Years: ",
-                         "{.val {inp_line}} ",
-                         "{.emph ({private$.num_ages} Age{?s})}"))
+        cli::cli_alert(c(
+          "Line {nline}: ",
+          "cv_table (Coefficent of Variation) for All Years: ",
+          "{.val {inp_line}} ",
+          "{.emph ({private$.num_ages} Age{?s})}"
+        ))
 
-        self$cv_table["All Years",] <- inp_line
-
+        self$cv_table["All Years", ] <- inp_line
       } else {
-
-        for(i in rownames(self$cv_table)){
+        for (i in rownames(self$cv_table)) {
           nline <- nline + 1
           inp_line <- read_inp_numeric_line(inp_con)
-          cli::cli_alert(c("Line {nline}: ",
-                           "cv_table (Coefficent of Variation) for {i}: ",
-                           "{.val {inp_line}} ",
-                           "{.emph ({private$.num_ages} Age{?s})}"))
+          cli::cli_alert(c(
+            "Line {nline}: ",
+            "cv_table (Coefficent of Variation) for {i}: ",
+            "{.val {inp_line}} ",
+            "{.emph ({private$.num_ages} Age{?s})}"
+          ))
 
-          self$cv_table[i,] <- inp_line
+          self$cv_table[i, ] <- inp_line
         }
-
       }
 
       return(nline)
-
     },
-
 
     #' @description
     #' Returns the values for the Process Error parameter formatted
     #' to the AGEPRO input file format.
     get_inp_lines = function(delimiter = "  ") {
-
-
-      if(self$input_option < 0){
-        if(!private$.weight_age_parameter){
-          stop(paste0("Popluation or Fishing Process Error using ",
-                      "'Weight of Age' input_options"))
+      if (self$input_option < 0) {
+        if (!private$.weight_age_parameter) {
+          stop(paste0(
+            "Popluation or Fishing Process Error using ",
+            "'Weight of Age' input_options"
+          ))
         }
 
         return(list(
           self$inp_keyword,
-          paste(self$input_option,
-                as.numeric(self$time_varying),
-                sep = delimiter)
+          paste(
+            self$input_option,
+            as.numeric(self$time_varying),
+            sep = delimiter
+          )
         ))
       }
 
       return(list(
         self$inp_keyword,
-        paste(self$input_option,
-              as.numeric(self$time_varying),
-              sep = delimiter),
-        paste(apply(self$parameter_table, 1, paste,
-                     collapse = delimiter), collapse = "\n"),
-        paste(apply(self$cv_table, 1, paste,
-                    collapse = delimiter), collapse = "\n")
-
+        paste(
+          self$input_option,
+          as.numeric(self$time_varying),
+          sep = delimiter
+        ),
+        paste(
+          apply(self$parameter_table, 1, paste, collapse = delimiter),
+          collapse = "\n"
+        ),
+        paste(
+          apply(self$cv_table, 1, paste, collapse = delimiter),
+          collapse = "\n"
+        )
       ))
     }
-
-  ), active = list (
-
+  ),
+  active = list(
     #' @field input_option
     #' Option to indicate this parameter will be read:
     #' \itemize{
@@ -306,7 +315,7 @@ process_error <- R6Class(
     #'  \item `1` Imported via location of an existing data file.
     #' }
     input_option = function(input_flag) {
-      if(missing(input_flag)){
+      if (missing(input_flag)) {
         private$.input_option
       } else {
         checkmate::assert_integerish(input_flag)
@@ -319,7 +328,7 @@ process_error <- R6Class(
     #' [Logical][base::logical] flag to list parameter process data by
     #' observation year
     time_varying = function(time_flag) {
-      if(missing(time_flag)){
+      if (missing(time_flag)) {
         private$.time_varying
       } else {
         checkmate::assert_logical(time_flag)
@@ -332,7 +341,7 @@ process_error <- R6Class(
     #' fishery's processes by age (and by fleet if fleets are a
     #' factor).
     parameter_table = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         private$.parameter_table
       } else {
         checkmate::assert_matrix(value, min.cols = 1, min.rows = 1)
@@ -345,7 +354,7 @@ process_error <- R6Class(
     #' error of the average population or fishery process parameter's at age
     #' (and by fleet if fleets are a factor).
     cv_table = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         private$.cv_table
       } else {
         checkmate::assert_matrix(value, min.cols = 1, min.rows = 1)
@@ -356,7 +365,7 @@ process_error <- R6Class(
     #' @field parameter_title
     #' Name of the population or fishery process
     parameter_title = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         private$.parameter_title
       } else {
         checkmate::assert_character(value)
@@ -373,20 +382,23 @@ process_error <- R6Class(
     #' @field inp_keyword
     #' Returns AGEPRO input-file formatted Parameter name
     inp_keyword = function() {
-      paste0("[",toupper(private$.keyword_name),"]")
+      paste0("[", toupper(private$.keyword_name), "]")
     },
 
     #' @field json_list_object
     #' Returns JSON list object with Process Error Parameter values
-    json_list_object = function(){
-
-      if(self$input_option < 0){
-        if(!private$.weight_age_parameter){
-          stop(paste0("Popluation or Fishing Process Error using ",
-                      "'Weight of Age' input_options"))
+    json_list_object = function() {
+      if (self$input_option < 0) {
+        if (!private$.weight_age_parameter) {
+          stop(paste0(
+            "Popluation or Fishing Process Error using ",
+            "'Weight of Age' input_options"
+          ))
         }
-        return(list(flag = self$input_option,
-                    timeflag = as.numeric(self$time_varying)))
+        return(list(
+          flag = self$input_option,
+          timeflag = as.numeric(self$time_varying)
+        ))
       }
 
       return(list(
@@ -396,10 +408,8 @@ process_error <- R6Class(
         error = self$cv_table
       ))
     }
-
   ),
   private = list(
-
     .input_option = NULL,
     .time_varying = NULL,
     .parameter_datafile = NULL,
@@ -407,7 +417,7 @@ process_error <- R6Class(
     .cv_table = NULL,
     .upper_bounds = NULL,
 
-    .valid_input_options = c(0,1),
+    .valid_input_options = c(0, 1),
     .weight_age_parameter = NULL,
     .parameter_title = NULL,
     .keyword_name = NULL,
@@ -425,13 +435,13 @@ process_error <- R6Class(
       "-4" = "Use Catch Weights of Age"
     ),
 
-
     # Initializes Parameter and CV tables
-    setup_parameter_tables = function (projection_years,
-                                       num_ages,
-                                       num_fleets = 1,
-                                       time_varying = FALSE) {
-
+    setup_parameter_tables = function(
+      projection_years,
+      num_ages,
+      num_fleets = 1,
+      time_varying = FALSE
+    ) {
       #Initialize private values
       private$.projection_years <- projection_years
       private$.num_ages <- num_ages
@@ -446,12 +456,12 @@ process_error <- R6Class(
       private$.parameter_table <- vector("list", 1)
       private$.cv_table <- vector("list", 1)
 
-      if(time_varying){
-
+      if (time_varying) {
         self$parameter_table <- self$create_parameter_table(
-          (projection_years$count * num_fleets), num_ages)
-
-      }else{
+          (projection_years$count * num_fleets),
+          num_ages
+        )
+      } else {
         #All Years
         self$parameter_table <-
           self$create_parameter_table((1 * num_fleets), num_ages)
@@ -460,78 +470,81 @@ process_error <- R6Class(
       self$cv_table <-
         self$create_parameter_table((1 * num_fleets), num_ages)
 
-
       #Rownames: Fleet-Years
       # Fleet-year rownames for Parameter of Age table
-      rownames(self$parameter_table)  <-
-        private$setup_parameter_table_rownames(projection_years$sequence,
-                                               num_fleets,
-                                               time_varying)
+      rownames(self$parameter_table) <-
+        private$setup_parameter_table_rownames(
+          projection_years$sequence,
+          num_fleets,
+          time_varying
+        )
 
       # Fleet-year rownames for CV. Not affected by time varying
       rownames(self$cv_table) <-
-        private$setup_parameter_table_rownames(projection_years$sequence,
-                                               num_fleets)
+        private$setup_parameter_table_rownames(
+          projection_years$sequence,
+          num_fleets
+        )
 
       #Colnames: Ages
       colnames_ages <- paste0("Age", seq(num_ages))
       colnames(self$parameter_table) <- colnames_ages
       colnames(self$cv_table) <- colnames_ages
-
     },
 
-
     #Rownames: Fleet-Years
-    setup_parameter_table_rownames = function (proj_years_sequence,
-                                               num_fleets = 1,
-                                               time_varying = FALSE){
+    setup_parameter_table_rownames = function(
+      proj_years_sequence,
+      num_fleets = 1,
+      time_varying = FALSE
+    ) {
       #Validate num_fleets
       checkmate::check_integerish(num_fleets, lower = 1)
 
-      if(num_fleets > 1) {
-        if(time_varying) {
+      if (num_fleets > 1) {
+        if (time_varying) {
           # Assemble Fleet-years rownames vector by creating a sequence of
           # Fleet and projected_years sequence strings. For fleet-dependent
           # parameters, repeat each unique element of the fleet
           # sequence by the length of the time projection.
           rownames_fleetyears <-
-
-            paste(paste0("Fleet", rep(seq(num_fleets),
-                                      each = length(proj_years_sequence))),
-                  proj_years_sequence, sep = "-")
-
-
-        }else {
-          rownames_fleetyears <- paste0("Fleet",seq(num_fleets))
+            paste(
+              paste0(
+                "Fleet",
+                rep(seq(num_fleets), each = length(proj_years_sequence))
+              ),
+              proj_years_sequence,
+              sep = "-"
+            )
+        } else {
+          rownames_fleetyears <- paste0("Fleet", seq(num_fleets))
         }
-
       } else {
         # If num_fleets is 1 && use the projection_years sequence as rownames,
         # Otherwise use the "All years" rowname
-        if(time_varying){
+        if (time_varying) {
           rownames_fleetyears <- proj_years_sequence
-        }else{
+        } else {
           rownames_fleetyears <- "All Years"
         }
       }
 
       return(rownames_fleetyears)
-
     },
 
     #Change in time_varying will reset parameter and CV table
     time_varying_toggle_resets_parameter_table = function(time_flag) {
-
-      if(is.null(private$.time_varying)){
+      if (is.null(private$.time_varying)) {
         return()
       }
 
-      if(time_flag != private$.time_varying){
-
-        private$setup_parameter_tables(private$.projection_years,
-                                       private$.num_ages,
-                                       private$.num_fleets,
-                                       time_varying = time_flag)
+      if (time_flag != private$.time_varying) {
+        private$setup_parameter_tables(
+          private$.projection_years,
+          private$.num_ages,
+          private$.num_fleets,
+          time_varying = time_flag
+        )
       }
       return()
     },
@@ -540,21 +553,24 @@ process_error <- R6Class(
     # input option. Also prints time varying.
     print_process_error_fields = function() {
       #Check if input option is valid
-      checkmate::assert_choice(self$input_option,
-                               private$.valid_input_options,
-                               .var.name = "input_option")
+      checkmate::assert_choice(
+        self$input_option,
+        private$.valid_input_options,
+        .var.name = "input_option"
+      )
 
       input_option_name <-
         private$.names_input_option[[as.character(self$input_option)]]
 
       #input options
       cli::cli_alert_info(
-        paste0("input_option: {.val {self$input_option}} ",
-               "{.emph {.field ({input_option_name})}}"))
+        paste0(
+          "input_option: {.val {self$input_option}} ",
+          "{.emph {.field ({input_option_name})}}"
+        )
+      )
       #time varying
       cli::cli_alert_info("time_varying: {.val {self$time_varying}}")
-
-
     },
 
     # Function Wrapper to Print out Process Error Info at Initialization
@@ -563,12 +579,8 @@ process_error <- R6Class(
       cli_alert("Setting up Default Values")
       self$print(enable_cat_print, ...)
     }
-
-
   )
-
 )
-
 
 
 #' @title
@@ -590,33 +602,31 @@ natural_mortality <- R6Class(
   "natural_mortality",
   inherit = ageproR::process_error,
   public = list(
-
     #' @description
     #' Initializes the class
     #'
     #'
-    initialize = function(proj_years,
-                          num_ages,
-                          input_option = 0,
-                          time_varying = TRUE,
-                          enable_cat_print = TRUE) {
-
-
-      super$initialize(proj_years,
-                       num_ages,
-                       1, #Single, non-Fleet dependent parameter.
-                       input_option,
-                       time_varying)
+    initialize = function(
+      proj_years,
+      num_ages,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        1, #Single, non-Fleet dependent parameter.
+        input_option,
+        time_varying
+      )
 
       self$parameter_title <- "Natural mortality Of Age"
       private$.keyword_name <- "natmort"
 
-      private$cli_initialize(enable_cat_print, omit_rows=TRUE)
-
+      private$cli_initialize(enable_cat_print, omit_rows = TRUE)
     }
-
   )
-
 )
 
 #' @title
@@ -636,32 +646,25 @@ maturity_fraction <- R6Class(
   "maturity_fraction",
   inherit = ageproR::process_error,
   public = list(
-
     #' @description
     #' Initializes Class
     #'
-    initialize = function (proj_years,
-                           num_ages,
-                           input_option = 0,
-                           time_varying = TRUE,
-                           enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                       num_ages,
-                       1,
-                       input_option,
-                       time_varying)
+    initialize = function(
+      proj_years,
+      num_ages,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(proj_years, num_ages, 1, input_option, time_varying)
 
       self$parameter_title <- "Maturity Fraction at Age"
       private$.keyword_name <- "maturity"
 
-      private$cli_initialize(enable_cat_print, omit_rows=TRUE)
-
+      private$cli_initialize(enable_cat_print, omit_rows = TRUE)
     }
-
   )
 )
-
 
 
 #' @title
@@ -683,32 +686,31 @@ fishery_selectivity <- R6Class(
   "fishery_selectivity",
   inherit = ageproR::process_error,
   public = list(
-
     #' @description
     #' Initializes new instance
     #'
-    initialize = function(proj_years,
-                         num_ages,
-                         num_fleets,
-                         input_option = 0,
-                         time_varying = TRUE,
-                         enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                      num_ages,
-                      num_fleets,
-                      input_option,
-                      time_varying)
+    initialize = function(
+      proj_years,
+      num_ages,
+      num_fleets,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        num_fleets,
+        input_option,
+        time_varying
+      )
 
       self$parameter_title <- "Fishery Selectivity at age by fleet"
       private$.keyword_name <- "fishery"
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
     }
-
   )
-
 )
 
 
@@ -731,32 +733,32 @@ fishery_selectivity <- R6Class(
 discard_fraction <- R6Class(
   "discard_fraction",
   inherit = ageproR::process_error,
-  public = list (
-
+  public = list(
     #' @description
     #' Initializes Class
     #'
-    initialize = function(proj_years,
-                          num_ages,
-                          num_fleets,
-                          input_option = 0,
-                          time_varying = TRUE,
-                          enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                      num_ages,
-                      num_fleets,
-                      input_option,
-                      time_varying,
-                      enable_cat_print)
+    initialize = function(
+      proj_years,
+      num_ages,
+      num_fleets,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        num_fleets,
+        input_option,
+        time_varying,
+        enable_cat_print
+      )
 
       self$parameter_title <- "Discards Fraction of Numbers at Age"
       private$.keyword_name <- "discard"
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
     }
-
   )
 )
 
@@ -778,36 +780,34 @@ discard_fraction <- R6Class(
 jan_stock_weight_age <- R6Class(
   "jan_stock_weight_age",
   inherit = ageproR::process_error,
-  public = list (
-
+  public = list(
     #' @description
     #' Initializes class
     #'
-    initialize = function(proj_years,
-                          num_ages,
-                          input_option = 0,
-                          time_varying = TRUE,
-                          enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                       num_ages,
-                       1,
-                       input_option,
-                       time_varying,
-                       enable_cat_print)
+    initialize = function(
+      proj_years,
+      num_ages,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        1,
+        input_option,
+        time_varying,
+        enable_cat_print
+      )
 
       self$parameter_title <- "Stock Weights on January 1st at Age"
       private$.keyword_name <- "stock_weight"
       private$.weight_age_parameter <- TRUE
-      private$.valid_input_options <- c(0,1)
+      private$.valid_input_options <- c(0, 1)
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
     }
-
-
   )
-
 )
 
 
@@ -829,22 +829,24 @@ spawning_stock_weight_age <- R6Class(
   "spawning_stock_weight_age",
   inherit = ageproR::process_error,
   public = list(
-
     #' @description
     #' Initializes class
     #'
-    initialize = function(proj_years,
-                         num_ages,
-                         input_option = 0,
-                         time_varying = TRUE,
-                         enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                       num_ages,
-                       1,
-                       input_option,
-                       time_varying,
-                       enable_cat_print)
+    initialize = function(
+      proj_years,
+      num_ages,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        1,
+        input_option,
+        time_varying,
+        enable_cat_print
+      )
 
       self$parameter_title <- "Spawning Stock Weight of Age"
       private$.keyword_name <- "ssb_weight"
@@ -853,7 +855,6 @@ spawning_stock_weight_age <- R6Class(
       private$.valid_input_options <- c(0, 1, -1)
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
     }
   )
 )
@@ -876,22 +877,24 @@ mean_population_weight_age <- R6Class(
   "mean_population_weight_age",
   inherit = ageproR::process_error,
   public = list(
-
     #' @description
     #' Initializes class
     #'
-    initialize = function (proj_years,
-                           num_ages,
-                           input_option = 0,
-                           time_varying = TRUE,
-                           enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                       num_ages,
-                       1,
-                       input_option,
-                       time_varying,
-                       enable_cat_print)
+    initialize = function(
+      proj_years,
+      num_ages,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        1,
+        input_option,
+        time_varying,
+        enable_cat_print
+      )
 
       self$parameter_title <- "Midyear Mean Population Weight of Age"
       private$.keyword_name <- "mean_weight"
@@ -900,8 +903,6 @@ mean_population_weight_age <- R6Class(
       private$.valid_input_options <- c(0, 1, -1, -2)
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
-
     }
   )
 )
@@ -926,24 +927,25 @@ landed_catch_weight_age <- R6Class(
   "landed_catch_weight_age",
   inherit = ageproR::process_error,
   public = list(
-
-
     #' @description
     #' Initializes class
     #'
-    initialize = function (proj_years,
-                           num_ages,
-                           num_fleets,
-                           input_option = 0,
-                           time_varying = TRUE,
-                           enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                       num_ages,
-                       num_fleets,
-                       input_option,
-                       time_varying,
-                       enable_cat_print)
+    initialize = function(
+      proj_years,
+      num_ages,
+      num_fleets,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        num_fleets,
+        input_option,
+        time_varying,
+        enable_cat_print
+      )
 
       self$parameter_title <- "Catch Weights at Age by Fleet"
       private$.keyword_name <- "catch_weight"
@@ -952,9 +954,7 @@ landed_catch_weight_age <- R6Class(
       private$.valid_input_options <- c(0, 1, -1, -2, -3)
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
     }
-
   )
 )
 
@@ -977,24 +977,26 @@ landed_catch_weight_age <- R6Class(
 discard_weight_age <- R6Class(
   "discard_weight_age",
   inherit = ageproR::process_error,
-  public = list (
-
+  public = list(
     #' @description
     #' Initializes class
     #'
-    initialize = function (proj_years,
-                           num_ages,
-                           num_fleets,
-                           input_option = 0,
-                           time_varying = TRUE,
-                           enable_cat_print = TRUE) {
-
-      super$initialize(proj_years,
-                       num_ages,
-                       num_fleets,
-                       input_option,
-                       time_varying,
-                       enable_cat_print)
+    initialize = function(
+      proj_years,
+      num_ages,
+      num_fleets,
+      input_option = 0,
+      time_varying = TRUE,
+      enable_cat_print = TRUE
+    ) {
+      super$initialize(
+        proj_years,
+        num_ages,
+        num_fleets,
+        input_option,
+        time_varying,
+        enable_cat_print
+      )
 
       self$parameter_title <- "Discard Weights at Age by Fleet"
       private$.keyword_name <- "disc_weight"
@@ -1003,8 +1005,6 @@ discard_weight_age <- R6Class(
       private$.valid_input_options <- c(0, 1, -1, -2, -3, -4)
 
       private$cli_initialize(enable_cat_print, omit_rows = TRUE)
-
     }
   )
 )
-
