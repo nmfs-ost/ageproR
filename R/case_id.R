@@ -39,8 +39,15 @@ case_id <- R6Class(
       self$model_name <- readLines(inp_con, n = 1, warn = FALSE)
 
       cli::cli_alert(
-        "Line {nline}: Reading to {.strong {self$keyword_name}}: {self$model_name}"
+        "Line {nline}: Reading to {.strong {self$keyword_name}}:"
       )
+      div_model_name <-
+        cli::cli_div(
+          class = "input_field",
+          theme = list(.input_field = list("margin-left" = 2))
+        )
+      self$print()
+      cli::cli_end(div_model_name)
       return(nline)
     },
 
