@@ -200,7 +200,7 @@ pstar_projection <- R6Class(
     #' AGEPRO Input file
     #'
     read_inp_lines = function(inp_con, nline) {
-      cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
+      cli::cli_alert_info("Reading to {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
 
@@ -451,7 +451,7 @@ rebuild_projection <- R6Class(
     #' AGEPRO Input file
     #'
     read_inp_lines = function(inp_con, nline) {
-      cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
+      cli::cli_alert_info("Reading to {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
 

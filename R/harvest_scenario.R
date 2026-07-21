@@ -127,7 +127,7 @@ harvest_scenario <- R6Class(
       #Setup new instances of harvest_scenario values
       self$setup_harvest_scenario_variables(proj_years, num_fleets)
 
-      cli::cli_alert("Reading {.strong {private$.keyword_name}}")
+      cli::cli_alert("Reading to {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
 

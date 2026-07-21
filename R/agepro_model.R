@@ -1311,7 +1311,7 @@ agepro_inp_model <- R6Class(
       # Set Recruitment's observation year sequence array using GENERAL's
       # year names from the projection time period
       cli::cli_alert(paste0(
-        "Reading {.strong recruit}: ",
+        "Reading to {.strong recruit}: ",
         "Recruitment for time period from ",
         "{.val {self$general$yr_start}}",
         " to ",

@@ -80,7 +80,7 @@ mortality_fraction_prior_spawn <- R6Class(
     read_inp_lines = function(inp_con, nline, proj_years_vector) {
       private$set_projection_years(proj_years_vector)
 
-      cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
+      cli::cli_alert_info("Reading to {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
       inp_line <- read_inp_numeric_line(inp_con)

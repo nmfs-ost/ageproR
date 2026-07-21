@@ -135,7 +135,7 @@ process_error <- R6Class(
       num_fleets = 1
     ) {
       cli::cli_alert(paste0(
-        "Reading {.strong {private$.keyword_name}}: ",
+        "Reading to {.strong {private$.keyword_name}}: ",
         "{self$parameter_title}"
       ))
 

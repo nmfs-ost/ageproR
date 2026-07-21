@@ -132,7 +132,9 @@ general_params <- R6Class(
       # Read an additional line from the file connection and split the string
       # into substrings by whitespace
       nine <- nline + 1
-      cli_alert("Line {nline} : Reading AGEPRO model GENERAL options ...")
+      cli_alert(
+        "Line {nline}: Reading to {.strong {self$keyword_name}}: AGEPRO model GENERAL options ..."
+      )
 
       inp_line <- read_inp_numeric_line(inp_con)
 

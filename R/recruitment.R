@@ -282,7 +282,7 @@ recruitment <- R6Class(
 
         cli::cli_alert(
           paste0(
-            "Reading {.strong recruit_model_num_list[[{recruit}]]}: ",
+            "Reading to {.strong recruit_model_num_list[[{recruit}]]}: ",
             "{.val {self$recruit_model_num_list[[recruit]]}} ..."
           )
         )
