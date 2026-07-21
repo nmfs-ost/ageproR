@@ -71,7 +71,7 @@ bootstrap <- R6Class(
       self$pop_scale_factor <- inp_line[2]
 
       nline <- nline + 1
-      cli_alert("Line {nline}: ")
+      cli::cli_alert("Line {nline}: Reading to {.strong {self$keyword_name}}")
       cli::cli_div(
         id = "bootstrap_fields",
         theme = list(".alert-info" = list("margin-left" = 2))
