@@ -100,10 +100,25 @@ bootstrap <- R6Class(
     #' Returns BOOTSTRAP values AGEPRO input file format (*,inp)
     #'
     get_inp_lines = function(delimiter = " ") {
-      #Warn if bootstrap file does not exists on system
+      if (is.null(self$bootstrap_file)) {
+        # Warn for NULL bootstrap_file values
+        warning(
+          "NULL bootstrap filename. Returning Blank Bootstrap file string",
+          call. = FALSE
+        )
+        # Return BOOTSTRAP input file values with empty bootstrap file string
+        return(list(
+          self$inp_keyword,
+          paste(self$num_bootstraps, self$pop_scale_factor, sep = delimiter),
+          ""
+        ))
+      }
+
       if (!test_file_exists(self$bootstrap_file)) {
+        #Warn if bootstrap file does not exists on system
         warning("Bootstrap filename does not exist on system.", call. = FALSE)
       }
+
       return(list(
         self$inp_keyword,
         paste(self$num_bootstraps, self$pop_scale_factor, sep = delimiter),
