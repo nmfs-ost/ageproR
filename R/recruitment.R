@@ -192,7 +192,9 @@ recruitment <- R6Class(
 
       nline <- nline + 1
       #TODO: Refactor recruit_model_num_list to a function
-      cli_alert("Line {nline}: Reading recruitment model number ...")
+      cli_alert(
+        "Line {nline}: List of {num_recruit_models} recruitment model{?s} ..."
+      )
 
       # Validate length Recruitment's recruit_model_num_list matches
       # Check if input model number matches the number of observed years
@@ -236,9 +238,14 @@ recruitment <- R6Class(
       }
       cli::cli_end(div_model_num)
 
-      cli::cli_alert("Reading Recruitment Probabaility ... ")
+      cli::cli_alert("Reading {.strong recruit_probability} ... ")
       # Set Input File Recruitment Probability values over default values.
       # For each year in AGEPRO Model's observation years ...
+      div_recruit_prob <-
+        cli::cli_div(
+          class = "input_field",
+          theme = list(.input_field = list("margin-left" = 2))
+        )
       for (year in private$.sequence_projection_years) {
         # Read an additional line from the file connection ...
         inp_line <- read_inp_numeric_line(inp_con)
@@ -262,6 +269,7 @@ recruitment <- R6Class(
           )
         }
       }
+      cli::cli_end(div_recruit_prob)
 
       # For each recruit model in recruit_model_collection
       for (recruit in 1:private$.number_recruit_models) {
@@ -282,7 +290,7 @@ recruitment <- R6Class(
 
         cli::cli_alert(
           paste0(
-            "Reading to {.strong recruit_model_num_list[[{recruit}]]}: ",
+            "For {.strong recruit_model_num_list[[{recruit}]]}: ",
             "{.val {self$recruit_model_num_list[[recruit]]}} ..."
           )
         )
