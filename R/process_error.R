@@ -204,23 +204,22 @@ process_error <- R6Class(
         inp_line <- read_inp_numeric_line(inp_con)
         cli::cli_alert(c(
           "Line {nline}: ",
-          "parameter_table (",
-          "{self$parameter_title}) for All Years: ",
+          "{.emph ({self$parameter_title})} ",
+          "parameter_table [\"All Years\", ]:",
           "{.val {inp_line}} ",
           "{.emph ({private$.num_ages} Age{?s})}"
         ))
 
         self$parameter_table["All Years", ] <- inp_line
-
-        #Multi-fleet or Single fleet w/ time varying
       } else {
+        #Multi-fleet or Time-Varying Single fleet
         for (i in rownames(self$parameter_table)) {
           nline <- nline + 1
           inp_line <- read_inp_numeric_line(inp_con)
           cli::cli_alert(c(
             "Line {nline}: ",
-            "parameter_table (",
-            "{self$parameter_title}) for {i}: ",
+            "{.emph ({self$parameter_title})} ",
+            "parameter_table[\"{i}\", ]: ",
             "{.val {inp_line}} ",
             "{.emph ({private$.num_ages} Age{?s})}"
           ))
@@ -243,7 +242,8 @@ process_error <- R6Class(
         inp_line <- read_inp_numeric_line(inp_con)
         cli::cli_alert(c(
           "Line {nline}: ",
-          "cv_table (Coefficent of Variation) for All Years: ",
+          "{.emph (Coefficient of Variation)} ",
+          "cv_table[\"All Years\", ]: ",
           "{.val {inp_line}} ",
           "{.emph ({private$.num_ages} Age{?s})}"
         ))
@@ -255,7 +255,8 @@ process_error <- R6Class(
           inp_line <- read_inp_numeric_line(inp_con)
           cli::cli_alert(c(
             "Line {nline}: ",
-            "cv_table (Coefficent of Variation) for {i}: ",
+            "{.emph (Coefficent of Variation)} ",
+            "cv_table[\"{i}\", ]: ",
             "{.val {inp_line}} ",
             "{.emph ({private$.num_ages} Age{?s})}"
           ))
