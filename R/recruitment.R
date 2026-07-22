@@ -238,7 +238,7 @@ recruitment <- R6Class(
       }
       cli::cli_end(div_model_num)
 
-      cli::cli_alert("Reading {.strong recruit_probability} ... ")
+      cli::cli_alert("Reading to {.strong recruit_probability} ... ")
       # Set Input File Recruitment Probability values over default values.
       # For each year in AGEPRO Model's observation years ...
       div_recruit_prob <-
@@ -251,10 +251,6 @@ recruitment <- R6Class(
         inp_line <- read_inp_numeric_line(inp_con)
 
         nline <- nline + 1
-        cli_alert(c(
-          "Line {nline}: Recruitment probabaility for year {year}: ",
-          "{.val {inp_line}}"
-        ))
 
         # Verify recruit probability value ...
         assert_numeric(inp_line, lower = 0, upper = 1)
@@ -268,6 +264,28 @@ recruitment <- R6Class(
             verbose = FALSE
           )
         }
+
+        # Output Results when recruitment probabilities at year is done
+        # Extract recruit_probability value per "Year"
+        nline_year_rec_prob <- sapply(
+          self$recruit_probability[seq(num_recruit_models)],
+          "[[",
+          as.character(year)
+        )
+
+        # Build String for Rconsole
+        output_string <- paste0(
+          "recruit_probability[[",
+          seq(num_recruit_models),
+          "]][[\"",
+          as.character(year),
+          "\"]]: ",
+          nline_year_rec_prob,
+          collapse = ",  "
+        )
+
+        # Output
+        cli::cli_alert(c("Line {nline}: {.emph (year {year})} ", output_string))
       }
       cli::cli_end(div_recruit_prob)
 
