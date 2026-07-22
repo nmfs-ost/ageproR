@@ -289,10 +289,7 @@ recruitment <- R6Class(
           )
 
         cli::cli_alert(
-          paste0(
-            "For {.strong recruit_model_num_list[[{recruit}]]}: ",
-            "{.val {self$recruit_model_num_list[[recruit]]}} ..."
-          )
+          "For {.strong recruit_data[[{recruit}]]}: ..."
         )
         #Read in inp lines to set recruitment model data values
         nline <-
