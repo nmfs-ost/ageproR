@@ -204,8 +204,7 @@ process_error <- R6Class(
         inp_line <- read_inp_numeric_line(inp_con)
         cli::cli_alert(c(
           "Line {nline}: ",
-          "{.emph ({self$parameter_title})} ",
-          "parameter_table [\"All Years\", ]:",
+          "parameter_table[\"All Years\", ]:",
           "{.val {inp_line}} ",
           "{.emph ({private$.num_ages} Age{?s})}"
         ))
@@ -218,7 +217,6 @@ process_error <- R6Class(
           inp_line <- read_inp_numeric_line(inp_con)
           cli::cli_alert(c(
             "Line {nline}: ",
-            "{.emph ({self$parameter_title})} ",
             "parameter_table[\"{i}\", ]: ",
             "{.val {inp_line}} ",
             "{.emph ({private$.num_ages} Age{?s})}"
@@ -242,7 +240,6 @@ process_error <- R6Class(
         inp_line <- read_inp_numeric_line(inp_con)
         cli::cli_alert(c(
           "Line {nline}: ",
-          "{.emph (Coefficient of Variation)} ",
           "cv_table[\"All Years\", ]: ",
           "{.val {inp_line}} ",
           "{.emph ({private$.num_ages} Age{?s})}"
@@ -255,7 +252,6 @@ process_error <- R6Class(
           inp_line <- read_inp_numeric_line(inp_con)
           cli::cli_alert(c(
             "Line {nline}: ",
-            "{.emph (Coefficent of Variation)} ",
             "cv_table[\"{i}\", ]: ",
             "{.val {inp_line}} ",
             "{.emph ({private$.num_ages} Age{?s})}"
