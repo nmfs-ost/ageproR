@@ -24,6 +24,7 @@ File Functionality on experimental JSON input file
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="default_agepro_keyword_params"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-default_agepro_keyword_params'><code>ageproR::agepro_model$default_agepro_keyword_params()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="print"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-print'><code>ageproR::agepro_model$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_bootstrap_filename"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_bootstrap_filename'><code>ageproR::agepro_model$set_bootstrap_filename()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_recruit_model"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_recruit_model'><code>ageproR::agepro_model$set_recruit_model()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="setup_projection_analyses_values"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-setup_projection_analyses_values'><code>ageproR::agepro_model$setup_projection_analyses_values()</code></a></span></li>

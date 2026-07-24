@@ -17,6 +17,21 @@ determine age-structured population over a time period. Brodziak, 2022
 test <- agepro_model$new(2019,2026,1,32,1000,4,3,0,300)
 }
 
+
+## ------------------------------------------------
+## Method `agepro_model$print`
+## ------------------------------------------------
+
+# Create agepro_inp_model "x"
+# Supress NULL Recruitment Warnings, console output
+x <- suppressWarnings(create_agepro_model(
+  enable_cat_print = FALSE,
+  show_general_params = FALSE
+))
+# Print out x's values
+x
+
+
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -92,6 +107,7 @@ mortality (\eqn{M})}
 \item \href{#method-agepro_model-default_agepro_keyword_params}{\code{agepro_model$default_agepro_keyword_params()}}
 \item \href{#method-agepro_model-set_recruit_model}{\code{agepro_model$set_recruit_model()}}
 \item \href{#method-agepro_model-set_bootstrap_filename}{\code{agepro_model$set_bootstrap_filename()}}
+\item \href{#method-agepro_model-print}{\code{agepro_model$print()}}
 \item \href{#method-agepro_model-setup_projection_analyses_values}{\code{agepro_model$setup_projection_analyses_values()}}
 \item \href{#method-agepro_model-clone}{\code{agepro_model$clone()}}
 }
@@ -229,6 +245,33 @@ Wrapper function to call bootstrap's set_bootstrap_filename
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-agepro_model-print"></a>}}
+\if{latex}{\out{\hypertarget{method-agepro_model-print}{}}}
+\subsection{Method \code{print()}}{
+Prints out values for each keyword parameter
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{agepro_model$print()}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{# Create agepro_inp_model "x"
+# Supress NULL Recruitment Warnings, console output
+x <- suppressWarnings(create_agepro_model(
+  enable_cat_print = FALSE,
+  show_general_params = FALSE
+))
+# Print out x's values
+x
+
+
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-setup_projection_analyses_values"></a>}}

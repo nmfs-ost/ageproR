@@ -329,6 +329,49 @@ agepro_model <- R6Class(
     },
 
     #' @description
+    #' Prints out values for each keyword parameter
+    #'
+    #' @examples
+    #' # Create agepro_inp_model "x"
+    #' # Supress NULL Recruitment Warnings, console output
+    #' x <- suppressWarnings(create_agepro_model(
+    #'   enable_cat_print = FALSE,
+    #'   show_general_params = FALSE
+    #' ))
+    #' # Print out x's values
+    #' x
+    #'
+    #'
+    print = function() {
+      print(c(
+        ver_inpfile_string = self$ver_inpfile_string,
+        case_id = self$case_id,
+        general = self$general,
+        bootstrap = self$bootstrap,
+        harvest = self$harvest,
+        rebuild = self$rebuild,
+        pstar = self$pstar,
+        retroadjust = self$retroadjust,
+        natmort = self$natmort,
+        biological = self$biological,
+        maturity = self$maturity,
+        stock_weight = self$stock_weight,
+        ssb_weight = self$ssb_weight,
+        mean_weight = self$mean_weight,
+        fishery = self$fishery,
+        discard = self$discard,
+        catch_weight = self$catch_weight,
+        disc_weight = self$disc_weight,
+        recruit = self$recruit,
+        bounds = self$bounds,
+        options = self$options,
+        scale = self$scale,
+        perc = self$perc,
+        refpoint = self$refpoint
+      ))
+    },
+
+    #' @description
     #' Helper Function to setup agepro model's projection analyses type. agepro
     #' models use standard projection analyses by default, and do not require
     #' additional keyword parameter setup. "pstar" and  "rebuild" projection
