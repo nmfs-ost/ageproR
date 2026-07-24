@@ -88,7 +88,7 @@ recruit_model <- R6Class(
     .length_projected_years = NULL,
 
     print_model_num_name = function() {
-      cli::cli_alert(paste0(
+      cli::cli_alert_info(paste0(
         "{.emph model_num: {private$.model_num}} ",
         "{.emph {.field ({private$.model_name})}}"
       ))
