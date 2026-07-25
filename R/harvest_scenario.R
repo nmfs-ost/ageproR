@@ -47,7 +47,6 @@ harvest_scenario <- R6Class(
     #' Formatted to print out the Harvest Scenario Table
     #'
     print = function(enable_cat_print = TRUE) {
-      cli::cli_par()
       cli::cli_alert_info("harvest_scenario_table")
       #Verbose flag check
       if (enable_cat_print) {
@@ -62,7 +61,6 @@ harvest_scenario <- R6Class(
           )
         )
       }
-      cli::cli_end()
     },
 
     #' @description

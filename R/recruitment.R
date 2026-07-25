@@ -114,7 +114,6 @@ recruitment <- R6Class(
       #verify recruit_prob list
       checkmate::assert_list(private$.recruit_probability)
 
-      cli::cli_par()
       cli::cli_alert(c(
         "{private$.number_recruit_models} recruitment model{?s}",
         " for {private$.number_projection_years} year{?s}."
@@ -127,7 +126,6 @@ recruitment <- R6Class(
         "ssb_scaling_factor: {.val {self$ssb_scaling_factor}}"
       )
       cli::cli_alert_info("max_recruit_obs: {.val {self$max_recruit_obs}}")
-      cli::cli_end()
 
       #Module to printout Recruitment Probability
       #Verbose flag check
@@ -141,14 +139,14 @@ recruitment <- R6Class(
 
       cli::cli_alert_info("recruit_data:")
       for (recruit in 1:private$.number_recruit_models) {
-        par_recruit <- cli::cli_par()
+        #par_recruit <- cli::cli_par()
         cli::cli_text("[[{recruit}]]")
 
         #Verify class inherits from "recruit_model"
         assert_r6(self$recruit_data[[recruit]], "recruit_model")
         self$recruit_data[[recruit]]$print(enable_cat_print = enable_cat_print)
 
-        cli::cli_end(par_recruit)
+        #cli::cli_end(par_recruit)
       }
     },
 

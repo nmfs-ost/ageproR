@@ -130,15 +130,12 @@ bootstrap <- R6Class(
     #' Prints out BOOTSTRAP fields
     #'
     print = function(...) {
-      cli::cli_par()
       cli_alert_info("num_bootstraps: {.val {self$num_bootstraps}}")
       cli_alert_info(paste0(
         "pop_scale_factor {.emph (BootFac)}: ",
         "{.val {self$pop_scale_factor}}"
       ))
       cli_alert_info(paste0("bootstrap_file:", "{.val {self$bootstrap_file}}"))
-
-      cli_end()
     }
   ),
   active = list(

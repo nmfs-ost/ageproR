@@ -87,7 +87,6 @@ process_error <- R6Class(
       #this parameter used a "weight-of-age"
       private$print_process_error_fields()
 
-      cli::cli_par()
       cli::cli_alert_info("parameter_table:")
       cli::cli_text("{.emph {self$parameter_title}}")
       #Verbose flag check
@@ -103,9 +102,7 @@ process_error <- R6Class(
           )
         )
       }
-      cli::cli_end()
 
-      cli::cli_par()
       cli::cli_alert_info("cv_table: ")
       cli::cli_text("{.emph Coefficient of Variation}")
       if (enable_cat_print) {
@@ -120,8 +117,6 @@ process_error <- R6Class(
           )
         )
       }
-
-      cli::cli_end()
     },
 
     #' @description
