@@ -44,7 +44,7 @@ print_parameter_table <- function(tbl, omit_rows = FALSE) {
     capture_output_as_message(cli::cat_print(head(tbl))) #first 6 rows
     cli::cli_text(
       paste0(
-        "{.emph ",
+        "{.emph # ",
         "{symbol$info} ",
         "Total of {nrow(tbl)} row{?s}; ",
         "{no(omitted_num_rows)} row{?s} omitted",
