@@ -12,7 +12,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' inp_file <- file.path(find.package("ageproR"),"Example1.INP")
+#' inp_file <- file.path(find.package("ageproR"),"example/Example1.INP")
 #'
 #' # For this example, save the Agepro Calcuation Engine Binary in
 #' # the 'agepro' subdirectory of home directory 'R_USER'
