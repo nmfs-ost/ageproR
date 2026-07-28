@@ -22,7 +22,7 @@ new instance of the agepro_inp_model.
 \dontrun{
 
 # Load path of ageproR's included Example1 Input File
-inpfile <- file.path(find.package("ageproR"),"example/Example1.INP")
+inpfile <- file.path(find.package("ageproR"),"extdata/Example1.INP")
 
 # Create agepro_inp_model and import data from inpfile
 test <- import_agepro_model(inpfile)

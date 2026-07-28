@@ -67,10 +67,10 @@ technical details.
 library("ageproR")
 
 # Load path of ageproR's included Example1 Input File
-inpfile <- file.path(find.package("ageproR"),"example/Example1.INP")
+inpfile <- file.path(find.package("ageproR"),"extdata/Example1.INP")
 
 # Load path of ageproR's included Example1 Bootstrap File
-bsnfile <- file.path(find.package("ageproR"),"example/Example1.BSN")
+bsnfile <- file.path(find.package("ageproR"),"extdata/Example1.BSN")
 
 # Create a agepro_inp_model with default values
 test <- ageproR::agepro_inp_model$new()

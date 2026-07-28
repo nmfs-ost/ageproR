@@ -20,26 +20,26 @@ test_that("New agepro_model (Year: 2019-2026, Age: 1-32, num_pop_sims: 1000, num
 })
 
 
-test_that("example/Example1.INP exists", {
-  inpfile_path <- system.file("example", "Example1.INP", package = "ageproR")
+test_that("extdata/Example1.INP exists", {
+  inpfile_path <- system.file("extdata", "Example1.INP", package = "ageproR")
   expect_true(file.exists(inpfile_path))
 })
-test_that("example/Example1.BSN exists", {
-  bsnfile_path <- system.file("example", "Example1.BSN", package = "ageproR")
+test_that("extdata/Example1.BSN exists", {
+  bsnfile_path <- system.file("extdata", "Example1.BSN", package = "ageproR")
   expect_true(file.exists(bsnfile_path))
 })
 
 
 # Opening Agepro Model with Example1.INP works
 # Note: Using original agepro_inp_model$read_inp workflow.
-test_that("Opening example/Example1.INP is imported to test agepro_inp_model", {
+test_that("Opening extdata/Example1.INP is imported to test agepro_inp_model", {
   # Create agepro_inp_model "test"
   expect_snapshot(
     test <- ageproR::agepro_inp_model$new(seed = 300),
     cnd_class = TRUE
   )
   # Create a input file and check if path works
-  inpfile_path <- system.file("example", "Example1.INP", package = "ageproR")
+  inpfile_path <- system.file("extdata", "Example1.INP", package = "ageproR")
   expect_true(file.exists(inpfile_path))
   # import AGEPRO input file data to "test"
   ## Note: The bootstrap_file output is masked to a fixed value to fix varying outputs
@@ -53,11 +53,11 @@ test_that("Opening example/Example1.INP is imported to test agepro_inp_model", {
   )
 })
 
-#Test that importing agepro_inp_model data from example/Example1.INP (with bootstrap_file)
+#Test that importing agepro_inp_model data from extdata/Example1.INP (with bootstrap_file)
 #is exported to a new to agepro_json_model class instance.
 test_that("Import agepro_inp_model (test_inp) class data to agepro_json_model (test_json) class", {
   # Create a input file and check if path works
-  inpfile_path <- system.file("example", "Example1.INP", package = "ageproR")
+  inpfile_path <- system.file("extdata", "Example1.INP", package = "ageproR")
   expect_true(file.exists(inpfile_path))
   # import_agepro_model from input file to "test_inp"
   # Note: The bootstrap_file output is masked to a fixed value to fix varying
