@@ -133,9 +133,14 @@ launch_model <- function(model, out_dir) {
   if (missing(out_dir)) {
     out_dir <- ifelse(
       .Platform$OS.type == "windows",
-      normalizePath(file.path(Sys.getenv("R_USER"), "AGEPRO"), winslash = "/"),
+      normalizePath(
+        file.path(Sys.getenv("R_USER"), "AGEPRO"),
+        winslash = "/",
+        mustWork = FALSE
+      ),
       file.path(Sys.getenv("R_USER"), "AGEPRO")
     )
+    # If system doesn't have out_dir filepath, create it.
     if (isFALSE(dir.exists(out_dir))) {
       dir.create(out_dir)
       cli::cli_alert("{out_dir} created")
@@ -143,15 +148,16 @@ launch_model <- function(model, out_dir) {
   }
 
   # Check if Model's CASE_ID is blank
-  # CASE_ID are used as a prefix to model run filenames
   blank_caseid <- checkmate::test_character(
     model$case_id$model_name,
     pattern = "^$|^[:blank:]]+$",
     null.ok = FALSE
   )
+  # Use "untitled_" inp_file prefix for blank CASE_IDs
   if (checkmate::test_character(blank_caseid)) {
     inp_file <- "untitled_"
   } else {
+    # Use CASE_ID as inp_file prefix
     regex_invalid_fschars <- '[\\/:*?"<>|-]'
     # Check if inp_file has invalid char pattterns.
     if (
@@ -190,7 +196,6 @@ launch_model <- function(model, out_dir) {
 
   # Create AGEPRO *.out file
 }
-
 
 #' Helper function to check bootstrap file locations prior AGEPRO calcuation engine launch.
 #'
