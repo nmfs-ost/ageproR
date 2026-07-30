@@ -170,8 +170,14 @@ launch_model <- function(model, out_dir) {
       )
     ) {
       # Log first instance of invalid character and throw it as error
-      invalid_file_char_regexpr <- regexpr(regex_invalid_file_char, model$case_id$model_name)
-      msg_invalid_file_char <- regmatches(model$case_id$model_name, invalid_file_char_regexpr)
+      invalid_file_char_regexpr <- regexpr(
+        regex_invalid_file_char,
+        model$case_id$model_name
+      )
+      msg_invalid_file_char <- regmatches(
+        model$case_id$model_name,
+        invalid_file_char_regexpr
+      )
 
       stop(paste0(
         "Model Case Id has an invalid character: '",
