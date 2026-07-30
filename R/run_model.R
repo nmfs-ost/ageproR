@@ -128,7 +128,7 @@ launch_model <- function(model, out_dir) {
   # Validate agepro_model
   assert_agepro_model_class(model)
 
-  # Set default AGEPRO output directory if out_dir is missing.
+  # If out_dir is missing, use <R_USER>/AGEPRO directory as default.
   # Set "AGEPRO" subdirectory of User Home directory (R_USER)
   if (missing(out_dir)) {
     out_dir <- ifelse(
@@ -147,6 +147,8 @@ launch_model <- function(model, out_dir) {
     }
   }
 
+  # inp_file prefix
+  # ===
   # Check if Model's CASE_ID is blank
   blank_caseid <- checkmate::test_character(
     model$case_id$model_name,
@@ -158,29 +160,29 @@ launch_model <- function(model, out_dir) {
     inp_file <- "untitled_"
   } else {
     # Use CASE_ID as inp_file prefix
-    regex_invalid_fschars <- '[\\/:*?"<>|-]'
-    # Check if inp_file has invalid char pattterns.
+    # TODO: Give a option to replace invalid char, or to give an error.
+    # Check CASE_ID model name for invalid characters for filenames.
+    regex_invalid_file_char <- '[[:cntrl:]\\\\/:*?\"<>|-]'
     if (
       checkmate::test_character(
         model$case_id$model_name,
-        pattern = regex_invalid_fschars
+        pattern = regex_invalid_file_char
       )
     ) {
-      # TODO: Give a option to replace invalid char, or to give an error.
-      msg_regex_invalid_fschars <- trimws(gsub(
-        "\\[*\\]*\\\\",
-        " ",
-        regex_invalid_fschars
-      ))
+      # Log first instance of invalid character and throw it as error
+      invalid_file_char_regexpr <- regexpr(regex_invalid_file_char, model$case_id$model_name)
+      msg_invalid_file_char <- regmatches(model$case_id$model_name, invalid_file_char_regexpr)
 
       stop(paste0(
         "Model Case Id has an invalid character: '",
-        msg_regex_invalid_fschars,
+        msg_invalid_file_char,
         "'"
       ))
     }
     inp_file <- inp_file
   }
+  # Check inp_file has *.inp 
+
 
   # Save agepro_model to INP file to run directory (out_dir).
 
