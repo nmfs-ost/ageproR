@@ -235,13 +235,27 @@ assert_bounds_active_binding <- function(
 #'
 #' @param x
 #' Object To Check
+#' @param class_type
+#' Type of agepro_model class type to validate. Default is `agepro_inp_model`
 #'
-check_agepro_model_class <- function(x) {
-  class_types <- c(
+check_agepro_model_class <- function(
+  x,
+  class_type = "agepro_inp_model"
+) {
+  # Validate class_type
+  valid_agepro_model_class <- c(
     "agepro_inp_model",
     "agepro_json_model",
     "agepro_model"
   )
+  if (isFALSE(checkmate::test_choice(class_type, valid_agepro_model_class))) {
+    return(paste0(
+      class_type,
+      "is not of class_type: \n",
+      valid_agepro_model_class
+    ))
+  }
+
   public_fields <- c(
     "case_id",
     "general",
@@ -267,7 +281,7 @@ check_agepro_model_class <- function(x) {
     "scale"
   )
 
-  return(checkmate::test_r6(x, classes = class_types, public = public_fields))
+  return(checkmate::test_r6(x, public = public_fields))
 }
 
 #' @rdname check_agepro_model_class
@@ -276,9 +290,10 @@ check_agepro_model_class <- function(x) {
 #'
 assert_agepro_model_class <- function(
   x,
+  class_type = c("agepro_inp_model", "agepro_json_model", "agepro_model"),
   .var.name = checkmate::vname(x),
   add = NULL
 ) {
-  res <- check_bounds_active_binding(x)
+  res <- check_agepro_model_class(x, class_type)
   checkmate::makeAssertion(x, res, .var.name, add)
 }

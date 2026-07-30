@@ -5,12 +5,19 @@
 \alias{assert_agepro_model_class}
 \title{Agepro Model R6 class object validation}
 \usage{
-check_agepro_model_class(x)
+check_agepro_model_class(x, class_type = "agepro_inp_model")
 
-assert_agepro_model_class(x, .var.name = checkmate::vname(x), add = NULL)
+assert_agepro_model_class(
+  x,
+  class_type = c("agepro_inp_model", "agepro_json_model", "agepro_model"),
+  .var.name = checkmate::vname(x),
+  add = NULL
+)
 }
 \arguments{
 \item{x}{Object To Check}
+
+\item{class_type}{Type of agepro_model class type to validate. Default is \code{agepro_inp_model}}
 
 \item{.var.name}{\code{character(1)}\cr
 Name of the checked object to print in assertions. Defaults to
