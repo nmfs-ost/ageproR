@@ -77,7 +77,7 @@ case_id <- R6Class(
       if (
         checkmate::test_character(
           case_id_fschar,
-          pattern = "^$|^[:blank:]]+$",
+          pattern = "^$|^[[:blank:]]+$",
           null.ok = FALSE
         )
       ) {
@@ -92,13 +92,13 @@ case_id <- R6Class(
           pattern = regex_invalid_file_char
         )
       ) {
-        gsub(regex_invalid_file_char, "", case_id_fschar)
+        case_id_fschar <- gsub(regex_invalid_file_char, "", case_id_fschar)
       }
 
       if (replace_blanks) {
         # Collapse multiple blank spaces to 1 character then
         # Replace as Underscore
-        gsub("[[:blank:]]{1,}", " ", case_id_fschar)
+        case_id_fschar <- gsub("[[:blank:]]{1,}", "_", case_id_fschar)
       }
 
       return(case_id_fschar)
