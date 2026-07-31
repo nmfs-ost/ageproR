@@ -92,7 +92,8 @@ to the AGEPRO input file format.description
 \if{latex}{\out{\hypertarget{method-case_id-sanitize_case_id_fschar}{}}}
 \subsection{Method \code{sanitize_case_id_fschar()}}{
 Cleans up CASE_ID's model name for any invalid
-filename characters.
+filename characters. Return 'untitled` for blank or empty
+character strings.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{case_id$sanitize_case_id_fschar(replace_blanks = TRUE)}\if{html}{\out{</div>}}
 }

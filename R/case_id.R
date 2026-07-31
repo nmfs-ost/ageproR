@@ -64,7 +64,8 @@ case_id <- R6Class(
 
     #' @description
     #' Cleans up CASE_ID's model name for any invalid
-    #' filename characters.
+    #' filename characters. Return 'untitled` for blank or empty
+    #' character strings.
     #'
     #' @param replace_blanks \cr
     #' Option to clean up blank characters and replace them
@@ -72,6 +73,16 @@ case_id <- R6Class(
     #'
     sanitize_case_id_fschar = function(replace_blanks = TRUE) {
       case_id_fschar <- self$model_name
+      # Use "untitled" for blank case_id
+      if (
+        checkmate::test_character(
+          case_id_fschar,
+          pattern = "^$|^[:blank:]]+$",
+          null.ok = FALSE
+        )
+      ) {
+        return("untitled")
+      }
 
       # Check CASE_ID model name for invalid characters for filenames.
       regex_invalid_file_char <- '[[:cntrl:]\\\\/:*?\"<>|-]'

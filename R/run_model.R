@@ -120,10 +120,11 @@ validate_calc_engine_binary <- function(
 #'
 #' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
 #' @param out_dir Output path
+#' @param append_job_dt Logical option to append the date time stamp to the input files.
 #'
-launch_model <- function(model, out_dir) {
+launch_model <- function(model, out_dir, append_job_dt = TRUE) {
   # start logging runtime
-  run_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+  job_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
 
   # Validate agepro_model
   assert_agepro_model_class(model)
@@ -147,48 +148,16 @@ launch_model <- function(model, out_dir) {
     }
   }
 
-  # inp_file prefix
-  # ===
-  # Check if Model's CASE_ID is blank
-  blank_caseid <- checkmate::test_character(
-    model$case_id$model_name,
-    pattern = "^$|^[:blank:]]+$",
-    null.ok = FALSE
+  # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
+  model_job_name <- paste0(model$case_id$sanitize_case_id_fschar(), "_")
+
+  job_dir <- ifelse(
+    append_job_dt,
+    file.path(out_dir, model_job_name, job_dt),
+    file.path(out_dir, model_job_name)
   )
-  # Use "untitled_" inp_file prefix for blank CASE_IDs
-  if (checkmate::test_character(blank_caseid)) {
-    inp_file <- "untitled_"
-  } else {
-    # Use CASE_ID as inp_file prefix
-    # TODO: Give a option to replace invalid char, or to give an error.
-    # Check CASE_ID model name for invalid characters for filenames.
-    regex_invalid_file_char <- '[[:cntrl:]\\\\/:*?\"<>|-]'
-    if (
-      checkmate::test_character(
-        model$case_id$model_name,
-        pattern = regex_invalid_file_char
-      )
-    ) {
-      # Log first instance of invalid character and throw it as error
-      invalid_file_char_regexpr <- regexpr(
-        regex_invalid_file_char,
-        model$case_id$model_name
-      )
-      msg_invalid_file_char <- regmatches(
-        model$case_id$model_name,
-        invalid_file_char_regexpr
-      )
 
-      stop(paste0(
-        "Model Case Id has an invalid character: '",
-        msg_invalid_file_char,
-        "'"
-      ))
-    }
-    inp_file <- inp_file
-  }
-  # Check inp_file has *.inp 
-
+  # Check inp_file has *.inp
 
   # Save agepro_model to INP file to run directory (out_dir).
 
