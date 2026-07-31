@@ -60,6 +60,37 @@ case_id <- R6Class(
         self$inp_keyword,
         self$model_name
       ))
+    },
+
+    #' @description
+    #' Cleans up CASE_ID's model name for any invalid
+    #' filename characters.
+    #'
+    #' @param replace_blanks \cr
+    #' Option to clean up blank characters and replace them
+    #' as a underscore symbol
+    #'
+    sanitize_case_id_fschar = function(replace_blanks = TRUE) {
+      case_id_fschar <- self$model_name
+
+      # Check CASE_ID model name for invalid characters for filenames.
+      regex_invalid_file_char <- '[[:cntrl:]\\\\/:*?\"<>|-]'
+      if (
+        checkmate::test_character(
+          case_id_fschar,
+          pattern = regex_invalid_file_char
+        )
+      ) {
+        gsub(regex_invalid_file_char, "", case_id_fschar)
+      }
+
+      if (replace_blanks) {
+        # Collapse multiple blank spaces to 1 character then
+        # Replace as Underscore
+        gsub("[[:blank:]]{1,}", " ", case_id_fschar)
+      }
+
+      return(case_id_fschar)
     }
   ),
   active = list(

@@ -24,6 +24,7 @@ Input title identifying model attributes
 \item \href{#method-case_id-print}{\code{case_id$print()}}
 \item \href{#method-case_id-read_inp_lines}{\code{case_id$read_inp_lines()}}
 \item \href{#method-case_id-get_inp_lines}{\code{case_id$get_inp_lines()}}
+\item \href{#method-case_id-sanitize_case_id_fschar}{\code{case_id$sanitize_case_id_fschar()}}
 \item \href{#method-case_id-clone}{\code{case_id$clone()}}
 }
 }
@@ -85,6 +86,26 @@ to the AGEPRO input file format.description
 \if{html}{\out{<div class="r">}}\preformatted{case_id$get_inp_lines()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-case_id-sanitize_case_id_fschar"></a>}}
+\if{latex}{\out{\hypertarget{method-case_id-sanitize_case_id_fschar}{}}}
+\subsection{Method \code{sanitize_case_id_fschar()}}{
+Cleans up CASE_ID's model name for any invalid
+filename characters.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{case_id$sanitize_case_id_fschar(replace_blanks = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{replace_blanks}}{\cr
+Option to clean up blank characters and replace them
+as a underscore symbol}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-case_id-clone"></a>}}
