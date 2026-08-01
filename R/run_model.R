@@ -148,6 +148,7 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
     }
   }
 
+  # TODO: (Limited Character Length) Custom job names.
   # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
   model_job_name <- paste0(model$case_id$sanitize_case_id_fschar(), "_")
 
@@ -193,4 +194,43 @@ model_bootstrap_check <- function(model, bsn) {
   # is valid. After validation, copy/paste input file dirname to bsn's file.
   # Assuming that the two files are on the same location, the path check
   # will be valid.
+}
+
+#' Job directory name setup
+#'
+#' Helper method that uses the agepro model's data to label the job directory
+#' names.
+#'
+#' @param model Agepro model
+#' @param type Option to name to use input model filename or the model's
+#' case_id as part of the job_dir name. Defaults to "filename"
+#'
+#' @return
+#' Returns the Character String, the contents dependent on the "type"
+#' requested. Using "case_id" returns the case id model name formatted
+#' for file directories. NULL or blank "filename" values return `untitled`,
+#' otherwise function will return the input "filename" basename without
+#' the file extension.
+#'
+set_job_name <- function(model, type = c("filename", "case_id")) {
+  type <- match.arg(type)
+
+  # For "case_id", use case_id$sanitize_case_id_fschar
+  if (type == "case_id") {
+    return(model$case_id$sanitize_case_id_fschar(), "_")
+  }
+  # TODO: Pivot agepro_model to be more agonsitic than just inp_filepath
+  # Check Model's input model filepath is NULL (typically set with created
+  # agepro models), or its a blank empty string. Return as "untitled"
+  if (
+    checkmate::check_null(model$inp_filepath) ||
+      checkmate::test_character(
+        model$inp_filepath,
+        pattern = "^$|^[[:blank:]]+$"
+      )
+  ) {
+    return("untitled")
+  }
+  # Otherwise use basename of model's input filename
+  return(gsub("(\\.[[:alnum:]]{3})", "", basename(model$inp_filepath)))
 }
