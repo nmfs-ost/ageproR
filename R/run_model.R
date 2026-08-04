@@ -217,13 +217,13 @@ set_job_name <- function(model, type = c("filename", "case_id")) {
 
   # For "case_id", use case_id$sanitize_case_id_fschar
   if (type == "case_id") {
-    return(model$case_id$sanitize_case_id_fschar(), "_")
+    return(model$case_id$sanitize_case_id_fschar())
   }
   # TODO: Pivot agepro_model to be more agonsitic than just inp_filepath
   # Check Model's input model filepath is NULL (typically set with created
   # agepro models), or its a blank empty string. Return as "untitled"
   if (
-    checkmate::check_null(model$inp_filepath) ||
+    checkmate::test_null(model$inp_filepath) ||
       checkmate::test_character(
         model$inp_filepath,
         pattern = "^$|^[[:blank:]]+$"
