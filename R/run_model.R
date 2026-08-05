@@ -122,6 +122,8 @@ validate_calc_engine_binary <- function(
 #' @param out_dir Output path
 #' @param append_job_dt Logical option to append the date time stamp to the input files.
 #'
+#' @export
+#'
 launch_model <- function(model, out_dir, append_job_dt = TRUE) {
   # start logging runtime
   job_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
@@ -150,7 +152,7 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
 
   # TODO: (Limited Character Length) Custom job names.
   # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
-  model_job_name <- paste0(model$case_id$sanitize_case_id_fschar(), "_")
+  model_job_name <- paste0(set_job_name(model, type = "filename"), "_")
 
   job_dir <- ifelse(
     append_job_dt,
