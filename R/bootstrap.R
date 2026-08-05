@@ -226,12 +226,7 @@ bootstrap <- R6Class(
       #If bootstrap file is relative to the input file path
       if (isTRUE(relative_inpfile)) {
         #Append the Input file directory path to Validate
-        private$validate_bootstrap_file(file.path(
-          inpfile_path,
-          inpline_bootstrap_path
-        ))
-        private$.bootstrap_file <- inpline_bootstrap_path
-
+        private$.bootstrap_file <- relative_inpfile
         return()
       }
 
