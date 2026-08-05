@@ -238,22 +238,12 @@ assert_bounds_active_binding <- function(
 #' @param class_type
 #' Type of agepro_model class type to validate. Default is `agepro_inp_model`
 #'
-check_agepro_model_class <- function(
-  x,
-  class_type = "agepro_inp_model"
-) {
-  # Validate class_type
-  valid_agepro_model_class <- c(
-    "agepro_inp_model",
-    "agepro_json_model",
-    "agepro_model"
-  )
-  if (isFALSE(checkmate::test_choice(class_type, valid_agepro_model_class))) {
-    return(paste0(
-      class_type,
-      "is not of class_type: \n",
-      valid_agepro_model_class
-    ))
+check_agepro_model_class <- function(x, class_type = "agepro_inp_model") {
+  # Validate agepro_model type class R6class param x
+  if (isFALSE(checkmate::test_r6(x))) {
+    return(
+      "Input parameter is not a R6class"
+    )
   }
 
   public_fields <- c(
@@ -281,7 +271,40 @@ check_agepro_model_class <- function(
     "scale"
   )
 
-  return(checkmate::test_r6(x, public = public_fields))
+  # Check if agepro_model type R6class input parameter has agepro_model fields
+  if (isFALSE(checkmate::test_r6(x, public = public_fields))) {
+    #Extract fields from input R6class
+    r6_fields <- names(x)[!sapply(names(x)), function(foo) {
+      is.function(x[[foo]])
+    }]
+    missing_fields <- public_fields[!public_fields %in% r6_fields]
+    return(paste0(
+      "Input parameter does not include ",
+      "agepro_model public fields: ",
+      missing_fields,
+      collapse = ""
+    ))
+  }
+
+  # Validate class_type (agepro_inp_model, agepro_json_model, etc.)
+  if (missing(class_type)) {
+    class_type <- c(
+      "agepro_inp_model",
+      "agepro_json_model",
+      "agepro_model"
+    )
+  }
+
+  if (isFALSE(checkmate::test_choice(class(x)[1], class_type))) {
+    return(paste0(
+      class(x)[1],
+      " is not of class_type: \n",
+      class_type,
+      collapse = ""
+    ))
+  }
+
+  return(TRUE)
 }
 
 #' @rdname check_agepro_model_class
