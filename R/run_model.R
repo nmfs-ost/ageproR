@@ -156,13 +156,9 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
 
   job_dir <- ifelse(
     append_job_dt,
-    file.path(out_dir, model_job_name, job_dt),
+    file.path(out_dir, paste0(model_job_name, job_dt)),
     file.path(out_dir, model_job_name)
   )
-
-  # Check inp_file has *.inp
-
-  # Save agepro_model to INP file to run directory (out_dir).
 
   # Assert that agepro_model bootstrap_file is not NULL.
   # Newly creatated agepro_models will have NULL bootstrap_file values
@@ -171,6 +167,8 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
 
   # Check the agepro_model's bootstrap filepath and then copy it to the
   # run directory (out_dir)
+
+  # Save agepro_model to INP file to run directory (out_dir).
 
   # run_model to AGEPRO calculation engine
 
