@@ -212,21 +212,21 @@ bootstrap <- R6Class(
         inpline_bootstrap_path <- readLines(inp_con, n = 1, warn = FALSE)
       )))
 
-      #Check that bootstrap is in the same path as in input file
-      # Get Input file path by using the file connection "description" value
+      # Check the "relative" bootstrap path exists, using the input file's
+      # file connection "description".
       inpfile_path <-
         dirname(normalizePath(summary(inp_con)$description, mustWork = TRUE))
 
-      relative_inpfile <-
-        checkmate::test_file_exists(file.path(
-          inpfile_path,
-          inpline_bootstrap_path
-        ))
-
+      # Build the relative bootstrap file path using the (normalized windows
+      # subdirectory) of the input file.
+      relative_bsnfile <- file.path(
+        inpfile_path,
+        inpline_bootstrap_path
+      )
       #If bootstrap file is relative to the input file path
-      if (isTRUE(relative_inpfile)) {
-        #Append the Input file directory path to Validate
-        private$.bootstrap_file <- relative_inpfile
+      if (checkmate::test_file_exists(relative_bsnfile)) {
+        # Append the Input file directory path to Validate
+        self$bootstrap_file <- relative_bsnfile
         return()
       }
 
