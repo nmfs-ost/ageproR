@@ -123,9 +123,10 @@ null_recruit_model <- R6Class(
     print = function(...) {
       warn_null_recruit <-
         paste0(
-          "NULL Recrumitment model found. ",
-          "Replace with a valid recruitment model before ",
-          "saving to input file"
+          "NULL Recruitment model found. \n",
+          "Please set a valid recruitment model ",
+          "via '$set_recruit_model(...)' or load a input file ",
+          "before saving to input file"
         )
       private$print_model_num_name()
 
