@@ -154,3 +154,73 @@ map_errors <- function(.xs, .fn, ...) {
   }
   out
 }
+
+#' Yes/No console Prompt
+#'
+#' Helper function to prompt a Yes/No prompt on the Rconsole
+#'
+#' @param question A character string used to prompt the user for input.
+#' @param default Logical Value if user inputs prompt without typing anying.
+#' Values can be TRUE (Yes), FALSE (No), or NULL. Default is NULL.
+#'
+#' @returns
+#' Returns a Logical Value based ong prompt, if
+#' \itemize{
+#'  \item `TRUE` User entered `y` (or `yes`)
+#'  \item `FALSE` User entered `n` (or `no`)
+#'  \item `NA` User entered `c` (or `cancel`, `q`, `quit`)
+#' }
+#'
+#'
+#'
+prompt_yes_no <- function(question, default = NULL) {
+  # Check for Non-Interactive R sesstions
+  if (isFALSE(interactive())) {
+    warning("Non-interactive session found, returning NA")
+    return(NA)
+  }
+
+  #Assert logical values , NULL is allowed
+  checkmate::assert_logical(default, null.ok = TRUE)
+
+  if (is.null(default)) {
+    pmt_option <- " [y/n/c] "
+  } else if (isTRUE(default)) {
+    pmt_option <- " [Y/n/c] "
+  } else {
+    pmt_option <- " [y/N/c] "
+  }
+
+  while (TRUE) {
+    answer <- tolower(trimws(readline(
+      prompt = paste0(trimws(question), pmt_option)
+    )))
+
+    # Default state
+    if (answer == "") {
+      if (isFALSE(checkmate::test_null(default))) {
+        return(default)
+      } else {
+        message("Please type 'y' or 'n' or 'c'")
+        next
+      }
+    }
+
+    # YES
+    if (checkmate::test_choice(answer, c("y", "yes"))) {
+      return(TRUE)
+    }
+
+    # NO
+    if (checkmate::test_choice(answer, c("n", "no"))) {
+      return(FALSE)
+    }
+
+    # CANCEL
+    if (checkmate::test_choice(answer, c("c", "cancel", "q", "quit"))) {
+      return(NA)
+    }
+
+    message("Invalid Input. Please type 'y', 'n', or 'c'")
+  }
+}
