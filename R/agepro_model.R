@@ -1295,6 +1295,7 @@ agepro_inp_model <- R6Class(
               self$perc$get_inp_lines(delimiter)
             }
           )
+          private$set_inp_filepath(inpfile)
         },
         error = function(cond) {}
       )
