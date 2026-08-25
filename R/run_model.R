@@ -176,58 +176,6 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
   # Create AGEPRO *.out file
 }
 
-#' Helper function to check bootstrap file locations prior AGEPRO calcuation engine launch.
-#'
-#' @param model AGEPRO model class for AGEPRO Input File format (`agepro_inp_model`)
-#'
-check_model_bootstrap <- function(model) {
-  # Return if bootstrap file exists
-  if (checkmate::test_file_exists(model$bootstrap$bootstrap_file)) {
-    return(TRUE)
-  }
-
-  # Assert that agepro_model bootstrap_file is not NULL.
-  # Newly creatated agepro_models will have NULL bootstrap_file values
-  if (checkmate::test_null(model$bootstrap$bootstrap_file)) {
-    stop("NULL bootstrap file found.")
-    return(FALSE)
-  }
-
-  # Otherwise, check if bootstrap file path is relative, saved on the
-  # same location as the input file: Check the model's input file location
-  # is valid. After validation, copy/paste input file dirname to bsn's file.
-  # Assuming that the two files are on the same location, the path check
-  # will be valid.
-  if (checkmate::test_file_exists(model$inp_filepath)) {
-    dir_inpfile <- dirname(model$inp_filepath)
-    rebuilt_bsn_path <- file.path(dir_inpfile, model$bootstrap$bootstrap_file)
-
-    # save to bootstrap file
-    if (checkmate::test_file_exists(rebuilt_bsn_path)) {
-      # Ask user to Replace bootstrap_file value with rebuilt_bsn_path
-      pmt_question <- paste0("Save Bootstrap File to: ", rebuilt_bsn_path)
-      pmt_answer <- prompt_yes_no(pmt_question)
-
-      if (is.na(pmt_answer) || isFALSE(pmt_answer)) {
-        cli::cli_alert("Cancelled by User")
-        return(FALSE)
-      }
-
-      tryCatch(
-        {
-          # This will also call bootstrap's validate_bootstrap_file function
-          model$bootstrap$bootstrap_file <- rebuilt_bsn_path
-        },
-        error = function(e) {
-          message("Bootstrap file validation issue: ", e)
-          return(FALSE)
-        }
-      )
-      return(TRUE)
-    }
-  }
-}
-
 #' Job directory name setup
 #'
 #' Helper method that uses the agepro model's data to label the job directory
