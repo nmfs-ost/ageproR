@@ -160,6 +160,8 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
     file.path(out_dir, model_job_name)
   )
 
+  cli::cli_alert("Job dir: {.var {job_dir}}")
+
   # Assert that agepro_model bootstrap_file is not NULL.
   # Newly creatated agepro_models will have NULL bootstrap_file values,
   # and NULL inp_filename values
