@@ -342,7 +342,7 @@ check_model_bootstrap <- function(model) {
   # Assert that agepro_model bootstrap_file is not NULL.
   # Newly creatated agepro_models will have NULL bootstrap_file values
   if (checkmate::test_null(model$bootstrap$bootstrap_file)) {
-    return("NULL bootstrap file found.")
+    return("bootstrap_file is NULL or blank.")
   }
 
   # Otherwise, check if bootstrap file path is relative, saved on the
