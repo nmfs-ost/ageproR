@@ -1295,7 +1295,6 @@ agepro_inp_model <- R6Class(
               self$perc$get_inp_lines(delimiter)
             }
           )
-          private$set_inp_filepath(inpfile)
         },
         error = function(cond) {}
       )
@@ -1305,6 +1304,9 @@ agepro_inp_model <- R6Class(
       cat(unlist(list_inp_lines), sep = "\n")
       sink()
       cli::cli_alert_info("Saved to {.file {inpfile}}")
+
+      #Save model's inp_filepath after its written to file
+      private$set_inp_filepath(inpfile)
     }
   ),
   active = list(
@@ -1333,8 +1335,8 @@ agepro_inp_model <- R6Class(
         warning(paste0(
           "Input file '",
           value,
-          "' is an invalid path or doesn't exist in ",
-          "current working directory. \n",
+          "'\n is an invalid path or doesn't exist in ",
+          "current working directory."
         ))
         return()
       }
