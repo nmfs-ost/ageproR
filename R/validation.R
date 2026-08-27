@@ -368,6 +368,8 @@ check_model_bootstrap <- function(model) {
         {
           # This will also call bootstrap's validate_bootstrap_file function
           model$bootstrap$bootstrap_file <- rebuilt_bsn_path
+          # The rebuilt_bsn_path gets saved to input file
+          model$write_inp(model$inp_filepath)
         },
         error = function(e) {
           return(paste0("Bootstrap file validation issue: ", e))
