@@ -392,5 +392,5 @@ assert_model_bootstrap <- function(
   add = NULL
 ) {
   res <- check_model_bootstrap(x)
-  checkmate::makeAssertion(res, x, .var.name, add)
+  checkmate::makeAssertion(x, res, .var.name, add)
 }
