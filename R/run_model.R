@@ -152,26 +152,35 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
 
   # TODO: (Limited Character Length) Custom job names.
   # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
-  model_job_name <- paste0(set_job_name(model, type = "filename"), "_")
+  model_job_name <- set_job_name(model, type = "filename")
 
   job_dir <- ifelse(
     append_job_dt,
-    file.path(out_dir, paste0(model_job_name, job_dt)),
+    file.path(out_dir, paste0(model_job_name, "_", job_dt)),
     file.path(out_dir, model_job_name)
   )
 
-  cli::cli_alert("Job dir: {.var {job_dir}}")
+  # Create a "job_dir" subdirectory
+  if (isFALSE(checkmate::test_directory_exists(job_dir))) {
+    dir.create(job_dir)
+  }
+  cli::cli_alert("Job dir: {.val {job_dir}}")
+  cli::cli_alert("Job name: {.val {model_job_name}}")
 
-  # Assert that agepro_model bootstrap_file is not NULL.
-  # Newly creatated agepro_models will have NULL bootstrap_file values,
-  # and NULL inp_filename values
+  # Write agepro_inp_model data to job_inpfile run directory
+  job_inpfile <- file.path(job_dir, paste0(model_job_name, ".inp"))
+  model$write_inp(job_inpfile)
 
-  # Assert agepro_model bootstrap file exists
+  # Validate model bootstrap_file (NULLs, relative bsn paths, valid paths)
+  # This may prompt the user if the validator can bulid a bootstrap_file path
+  # relative to its input file location (typically on the same directory)
+  assert_model_bootstrap(model)
 
-  # Check the agepro_model's bootstrap filepath and then copy it to the
-  # run directory (out_dir)
+  # Copy validated agepro_model's bootstrap filepath to job_dir
+  job_bsnfile <- file.path(job_dir, paste0(model_job_name, ".bsn"))
+  file.copy(model$bootstrap$bootstrap_file, job_bsnfile)
 
-  # Save agepro_model to INP file to run directory (out_dir).
+  cli::cli_alert_info("Model Bootstrap File: {.val {job_bsnfile}}")
 
   # run_model to AGEPRO calculation engine
 
