@@ -120,16 +120,26 @@ validate_calc_engine_binary <- function(
 #'
 #' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
 #' @param out_dir Output path
+#' @param exe Path of the Agepro Calcuation engine.
 #' @param append_job_dt Logical option to append the date time stamp to the input files.
 #'
 #' @export
 #'
-launch_model <- function(model, out_dir, append_job_dt = TRUE) {
+launch_model <- function(
+  model,
+  out_dir,
+  exe = "agepro.exe",
+  append_job_dt = TRUE
+) {
   # start logging runtime
   job_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
 
   # Validate agepro_model
   assert_agepro_model_class(model)
+
+  # TODO: Validate agepro calculation binary path.
+  # Will need to check where the location of AGEPRO calcuation engine binary is installed.
+  # This value allows the model to run AGEPRO calcuation engine between differnt users.
 
   # If out_dir is missing, use <R_USER>/AGEPRO directory as default.
   # Set "AGEPRO" subdirectory of User Home directory (R_USER)
@@ -183,8 +193,12 @@ launch_model <- function(model, out_dir, append_job_dt = TRUE) {
   cli::cli_alert_info("Model Bootstrap File: {.val {job_bsnfile}}")
 
   # run_model to AGEPRO calculation engine
+  run_model(exe, agepro_args = job_inpfile, out_dir = job_dir)
 
-  # Create AGEPRO *.out file
+  # Stock Synthesis Output will be printed to R conosle.
+
+  # Running AGEPRO calculation engine will create a *.out file,
+  # in addtion to auxillary output files (if enabled).
 }
 
 #' Job directory name setup
