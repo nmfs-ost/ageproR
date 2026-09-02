@@ -4,12 +4,14 @@
 \alias{launch_model}
 \title{Launches agepro_model to the calcuation engine}
 \usage{
-launch_model(model, out_dir, append_job_dt = TRUE)
+launch_model(model, out_dir, exe = "agepro.exe", append_job_dt = TRUE)
 }
 \arguments{
 \item{model}{\link[=agepro_inp_model]{"Agepro INP File Model Class Object"}}
 
 \item{out_dir}{Output path}
+
+\item{exe}{Path of the Agepro Calcuation engine.}
 
 \item{append_job_dt}{Logical option to append the date time stamp to the input files.}
 }

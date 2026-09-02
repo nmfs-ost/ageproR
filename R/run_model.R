@@ -193,7 +193,7 @@ launch_model <- function(
   cli::cli_alert_info("Model Bootstrap File: {.val {job_bsnfile}}")
 
   # run_model to AGEPRO calculation engine
-  run_model(exe, agepro_args = job_inpfile, out_dir = job_dir)
+  run_model(exe, agepro_args = job_inpfile, outdir = job_dir)
 
   # Stock Synthesis Output will be printed to R conosle.
 
