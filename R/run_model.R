@@ -85,7 +85,7 @@ write_logfile <- function(cout, fn_logfile) {
       " ",
       cout
     ),
-    cout
+    con = fn_logfile
   )
 }
 
