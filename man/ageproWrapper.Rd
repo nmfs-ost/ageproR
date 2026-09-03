@@ -23,6 +23,7 @@ ageproWrapper
 \itemize{
 \item \href{#method-ageproWrapper-new}{\code{ageproWrapper$new()}}
 \item \href{#method-ageproWrapper-run}{\code{ageproWrapper$run()}}
+\item \href{#method-ageproWrapper-run_logfile}{\code{ageproWrapper$run_logfile()}}
 \item \href{#method-ageproWrapper-clone}{\code{ageproWrapper$clone()}}
 }
 }
@@ -59,6 +60,23 @@ Runs the Binary
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{args}}{Program agruments}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ageproWrapper-run_logfile"></a>}}
+\if{latex}{\out{\hypertarget{method-ageproWrapper-run_logfile}{}}}
+\subsection{Method \code{run_logfile()}}{
+Runs the Binary with logfile
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$run_logfile(args = character())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{args}}{Program arguments}
 }
 \if{html}{\out{</div>}}
 }

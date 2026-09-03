@@ -37,7 +37,62 @@ ageproWrapper <- R6Class(
         stop("AGEPRO calcuation execuatble not found.")
       }
 
-      system2(self$agepro_path, args)
+      system2(
+        command = self$agepro_path,
+        args = args
+      )
+    },
+
+    #' @description
+    #' Runs the Binary with logfile
+    #'
+    #' @param args Program arguments
+    #'
+    run_logfile = function(args = character()) {
+      if (isFALSE(checkmate::test_file_exists(self$agepro_path))) {
+        stop("AGEPRO calcuation execuatble not found.")
+      }
+      dir_logfile <- getOption("ageproR.dir_logfile")
+      if (isFALSE(checkmate::test_directory_exists(dir_logfile))) {
+        stop("Invalid 'ageproR.dir_logfile' path.")
+      }
+
+      cout <- tryCatch(
+        {
+          system2(
+            command = self$agepro_path,
+            args = args,
+            stdout = TRUE
+          )
+        },
+        error = function(err) {
+          message(paste0(
+            "Error: \n",
+            gsub("\\.$", "", conditionMessage(err))
+          ))
+        }
+      )
+
+      #Write Logfile
+      fn_logfile <- normalizePath(
+        file.path(
+          dir_logfile,
+          paste0(format(Sys.time(), "%Y-%m-%d_%H%M"), ".txt")
+        ),
+        winslash = "\\"
+      )
+
+      writeLines(
+        c(
+          "###",
+          "console output",
+          as.character(Sys.time()),
+          "###",
+          " ",
+          cout
+        ),
+        con = fn_logfile
+      )
     }
   ),
   active = list(
