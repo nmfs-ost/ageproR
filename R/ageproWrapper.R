@@ -14,7 +14,7 @@ ageproWrapper <- R6Class(
     #' @param warn Logical parameter to validate path at initalization. If enabled,
     #' invalid reuslts returns a warning.
     initialize = function(path = NULL, warn = FALSE) {
-      agepro_path <- path
+      self$agepro_path <- path
 
       if (warn) {
         if (isFALSE(checkmate::test_file_exists(agepro_path))) {
