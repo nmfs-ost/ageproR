@@ -14,6 +14,7 @@ ageproWrapper <- R6Class(
     #' @param warn Logical parameter to validate path at initalization. If enabled,
     #' invalid reuslts returns a warning.
     initialize = function(path = NULL, warn = FALSE) {
+      # Active binding will passes "path" value through private$resolve_binary_path
       self$agepro_path <- path
 
       if (warn) {
