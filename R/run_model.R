@@ -31,6 +31,15 @@ run_model <- function(
   save_logfile = FALSE,
   fn_logfile = tempfile(format(Sys.time(), "%Y%m%d_%H%M_"), fileext = ".txt")
 ) {
+  # TODO TODO TODO TODO TODO TODO TODO TODO TODO refactor to ageproWrapper$run
+  # or ageproWrapper$run_logfile
+  #agepro_calc <- ageproWrapper$new()
+  #if (save_logfile) {
+  #  agepro_calc$run_logfile(agepro_args)
+  #}else{
+  #  agepro_calc$run(agepro_args)
+  #}
+
   # Validate exepath
   checkmate::assert_character(exepath, len = 1)
   validate_calc_engine_binary(exepath)
@@ -136,7 +145,7 @@ launch_model <- function(
 
   # Validate agepro_model
   assert_agepro_model_class(model)
-
+  browser()
   # TODO: Validate agepro calculation binary path.
   # Will need to check where the location of AGEPRO calcuation engine binary is installed.
   # This value allows the model to run AGEPRO calcuation engine between differnt users.
