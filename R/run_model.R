@@ -64,6 +64,7 @@ run_model <- function(
         "Error: \n",
         gsub("\\.$", "", conditionMessage(err))
       ))
+      return(NULL)
     }
   )
 
