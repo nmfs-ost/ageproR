@@ -63,14 +63,17 @@ ageproWrapper <- R6Class(
           system2(
             command = self$agepro_path,
             args = args,
-            stdout = TRUE
+            stdout = TRUE,
+            stderr = TRUE
           )
         },
         error = function(err) {
-          message(paste0(
+          msg_err <- paste0(
             "Error: \n",
             gsub("\\.$", "", conditionMessage(err))
-          ))
+          )
+          message(msg_err)
+          return(msg_err)
         }
       )
 
