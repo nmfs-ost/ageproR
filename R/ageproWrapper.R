@@ -38,10 +38,13 @@ ageproWrapper <- R6Class(
         stop("AGEPRO calcuation execuatble not found.")
       }
 
-      system2(
+      cout <- system2(
         command = self$agepro_path,
         args = args
       )
+
+      #Return AGEPRO output object as an R object
+      return(cout)
     },
 
     #' @description
@@ -97,6 +100,9 @@ ageproWrapper <- R6Class(
         ),
         con = fn_logfile
       )
+
+      #Return AGEPRO output object as an R object
+      return(cout)
     }
   ),
   active = list(
