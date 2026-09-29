@@ -2,19 +2,23 @@
 % Please edit documentation in R/ageproWrapper.R
 \name{ageproWrapper}
 \alias{ageproWrapper}
-\title{ageproWrapper}
+\title{R6Class Wrapper for Running AGEPRO Calcuation Engine binary}
 \description{
-ageproWrapper
+R6Class Wrapper for Running AGEPRO Calcuation Engine binary
 
-ageproWrapper
+R6Class Wrapper for Running AGEPRO Calcuation Engine binary
 }
 \details{
-ageproWrapper
+A R6class wrapper that handles exeution of the AGEPRO calcuation binary.
+This includes varaibles to handle binary path and output logfile, and
+a function wrapper to run the binary.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{agepro_path}}{AGEPRO Calculation Engine path}
+
+\item{\code{logdir}}{File path reserved for logfiles for AGEPRO Calcuation Engine runs.}
 }
 \if{html}{\out{</div>}}
 }
@@ -69,14 +73,25 @@ Runs the Binary
 \if{latex}{\out{\hypertarget{method-ageproWrapper-run_logfile}{}}}
 \subsection{Method \code{run_logfile()}}{
 Runs the Binary with logfile
+
+This function uses the private function resolve_logdir
+to return the logfile directory. This function will return
+the custom output directory if it exists. Otherwise it will
+check if user session (.Rprofile) has an existing path. If
+\code{ageproR.run_logdir} does't work it, will fallback to the "AGEPRO"
+subirectory of home directory.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$run_logfile(args = character())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$run_logfile(args = character(), out_dir = "")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{args}}{Program arguments}
+
+\item{\code{out_dir}}{Output directory for the logfile. The default
+blank character string will return the AGEPRO subdirectory
+of the home directory via resolve_logdir}
 }
 \if{html}{\out{</div>}}
 }
