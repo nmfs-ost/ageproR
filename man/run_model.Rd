@@ -8,8 +8,7 @@ run_model(
   exepath = "agepro.exe",
   agepro_args = "",
   outdir = getwd(),
-  save_logfile = FALSE,
-  fn_logfile = tempfile(format(Sys.time(), "\%Y\%m\%d_\%H\%M_"), fileext = ".txt")
+  save_logfile = FALSE
 )
 }
 \arguments{
@@ -20,8 +19,6 @@ run_model(
 \item{outdir}{Output path}
 
 \item{save_logfile}{Option to save AGEPRO Calcuation Engine ouput to logfile}
-
-\item{fn_logfile}{Logfile Filename}
 }
 \description{
 Wrapper function to call the Binary

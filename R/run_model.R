@@ -6,7 +6,6 @@
 #' @param agepro_args Typically used for AGEPRO Input Files.
 #' @param outdir Output path
 #' @param save_logfile Option to save AGEPRO Calcuation Engine ouput to logfile
-#' @param fn_logfile Logfile Filename
 #'
 #' @export
 #' @examples
@@ -28,48 +27,14 @@ run_model <- function(
   exepath = "agepro.exe",
   agepro_args = "",
   outdir = getwd(),
-  save_logfile = FALSE,
-  fn_logfile = tempfile(format(Sys.time(), "%Y%m%d_%H%M_"), fileext = ".txt")
+  save_logfile = FALSE
 ) {
-  # TODO TODO TODO TODO TODO TODO TODO TODO TODO refactor to ageproWrapper$run
-  # or ageproWrapper$run_logfile
-  #agepro_calc <- ageproWrapper$new()
-  #if (save_logfile) {
-  #  agepro_calc$run_logfile(agepro_args)
-  #}else{
-  #  agepro_calc$run(agepro_args)
-  #}
+  agepro_calc <- ageproWrapper$new()
 
-  # Validate exepath
-  checkmate::assert_character(exepath, len = 1)
-  validate_calc_engine_binary(exepath)
-
-  # Valadate outdir
-  if (isFALSE(checkmate::test_directory_exists(outdir))) {
-    stop("Invalid AGEPRO Output Directory")
-  }
-
-  cout <- tryCatch(
-    {
-      # System Call to AGEPRO Calcuation Engine Binary
-      system2(
-        command = exepath,
-        args = agepro_args,
-        stdout = ifelse(save_logfile, TRUE, ""),
-        stderr = ""
-      )
-    },
-    error = function(err) {
-      message(paste0(
-        "Error: \n",
-        gsub("\\.$", "", conditionMessage(err))
-      ))
-      return(NULL)
-    }
-  )
-
-  if (isTRUE(save_logfile)) {
-    write_logfile(cout, file.path(outdir, fn_logfile))
+  cout <- if (save_logfile) {
+    agepro_calc$run_logfile(agepro_args, outdir)
+  } else {
+    agepro_calc$run(agepro_args)
   }
 
   return(cout)
