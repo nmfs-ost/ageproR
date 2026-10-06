@@ -24,123 +24,130 @@ The max_bounds class (or BOUNDS) is recognized as a keyword
 parameter used in the AGEPRO input file format, but it is optional.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{max_weight}}{The maximum value of fish weight, noting that there is lognormal
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{max_weight}}{The maximum value of fish weight, noting that there is lognormal
 sampling variation for weight at age values}
 
-\item{\code{max_natural_mortality}}{The maximum natural mortality rate, noting that there is lognormal
+    \item{\code{max_natural_mortality}}{The maximum natural mortality rate, noting that there is lognormal
 sampling variation for natural mortality at age values}
 
-\item{\code{json_list_object}}{Returns JSON list object of containing BOUNDS values}
+    \item{\code{json_list_object}}{Returns JSON list object of containing BOUNDS values}
 
-\item{\code{enable_max_bounds}}{Logical field that flags if fields can be edited. To set
+    \item{\code{enable_max_bounds}}{Logical field that flags if fields can be edited. To set
 the value use \code{set_enable_max_bounds} or field}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-max_bounds-new}{\code{max_bounds$new()}}
-\item \href{#method-max_bounds-print}{\code{max_bounds$print()}}
-\item \href{#method-max_bounds-read_inp_lines}{\code{max_bounds$read_inp_lines()}}
-\item \href{#method-max_bounds-get_inp_lines}{\code{max_bounds$get_inp_lines()}}
-\item \href{#method-max_bounds-clone}{\code{max_bounds$clone()}}
-}
+  \itemize{
+    \item \href{#method-max_bounds-initialize}{\code{max_bounds$new()}}
+    \item \href{#method-max_bounds-print}{\code{max_bounds$print()}}
+    \item \href{#method-max_bounds-read_inp_lines}{\code{max_bounds$read_inp_lines()}}
+    \item \href{#method-max_bounds-get_inp_lines}{\code{max_bounds$get_inp_lines()}}
+    \item \href{#method-max_bounds-clone}{\code{max_bounds$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-max_bounds-new"></a>}}
-\if{latex}{\out{\hypertarget{method-max_bounds-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{max_bounds$new(max_weight = 10, max_nat_mort = 1, bounds_flag = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-max_bounds-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-max_bounds-initialize}{}}}
+\subsection{\code{max_bounds$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{max_bounds$new(max_weight = 10, max_nat_mort = 1, bounds_flag = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{max_weight}}{Maximum bound weight (MT). Default is 10.0}
+      \item{\code{max_nat_mort}}{Maximum bound of natural mortality. Default is 1.0.}
+      \item{\code{bounds_flag}}{R6class containing option flags to allow max bounds to be used}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{max_weight}}{Maximum bound weight (MT). Default is 10.0}
-
-\item{\code{max_nat_mort}}{Maximum bound of natural mortality. Default is 1.0.}
-
-\item{\code{bounds_flag}}{R6class containing option flags to allow max bounds to be used}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-max_bounds-print"></a>}}
 \if{latex}{\out{\hypertarget{method-max_bounds-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out max_bounds values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{max_bounds$print()}\if{html}{\out{</div>}}
+\subsection{\code{max_bounds$print()}}{
+  Formatted to print out max_bounds values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{max_bounds$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-max_bounds-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-max_bounds-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter BOUNDS from the
+\subsection{\code{max_bounds$read_inp_lines()}}{
+  Reads in the values from the keyword parameter BOUNDS from the
 AGEPRO Input file
 
 Note: enable_max_bounds must be set to TRUE.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{max_bounds$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{max_bounds$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-max_bounds-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-max_bounds-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns values from the class to the BOUNDS AGEPRO keyword parameter
+\subsection{\code{max_bounds$get_inp_lines()}}{
+  Returns values from the class to the BOUNDS AGEPRO keyword parameter
 formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{max_bounds$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{max_bounds$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-max_bounds-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-max_bounds-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{max_bounds$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{max_bounds$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{max_bounds$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

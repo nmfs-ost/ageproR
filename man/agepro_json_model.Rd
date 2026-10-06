@@ -7,135 +7,143 @@
 File Functionality on experimental JSON input file
 }
 \section{Super class}{
-\code{\link[ageproR:agepro_model]{ageproR::agepro_model}} -> \code{agepro_json_model}
+\code{\link[ageproR:agepro_model]{agepro_model}} -> \code{agepro_json_model}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-agepro_json_model-new}{\code{agepro_json_model$new()}}
-\item \href{#method-agepro_json_model-get_json}{\code{agepro_json_model$get_json()}}
-\item \href{#method-agepro_json_model-write_json}{\code{agepro_json_model$write_json()}}
-\item \href{#method-agepro_json_model-read_json}{\code{agepro_json_model$read_json()}}
-\item \href{#method-agepro_json_model-import_agepro_inp_model}{\code{agepro_json_model$import_agepro_inp_model()}}
-\item \href{#method-agepro_json_model-clone}{\code{agepro_json_model$clone()}}
+  \itemize{
+    \item \href{#method-agepro_json_model-initialize}{\code{agepro_json_model$new()}}
+    \item \href{#method-agepro_json_model-get_json}{\code{agepro_json_model$get_json()}}
+    \item \href{#method-agepro_json_model-write_json}{\code{agepro_json_model$write_json()}}
+    \item \href{#method-agepro_json_model-read_json}{\code{agepro_json_model$read_json()}}
+    \item \href{#method-agepro_json_model-import_agepro_inp_model}{\code{agepro_json_model$import_agepro_inp_model()}}
+    \item \href{#method-agepro_json_model-clone}{\code{agepro_json_model$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="default_agepro_keyword_params"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-default_agepro_keyword_params'><code>ageproR::agepro_model$default_agepro_keyword_params()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="print"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-print'><code>ageproR::agepro_model$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_bootstrap_filename"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_bootstrap_filename'><code>ageproR::agepro_model$set_bootstrap_filename()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_recruit_model"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_recruit_model'><code>ageproR::agepro_model$set_recruit_model()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="setup_projection_analyses_values"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-setup_projection_analyses_values'><code>ageproR::agepro_model$setup_projection_analyses_values()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="default_agepro_keyword_params"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-default_agepro_keyword_params'><code>agepro_model$default_agepro_keyword_params()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="print"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-print'><code>agepro_model$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_bootstrap_filename"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_bootstrap_filename'><code>agepro_model$set_bootstrap_filename()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_recruit_model"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_recruit_model'><code>agepro_model$set_recruit_model()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="setup_projection_analyses_values"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-setup_projection_analyses_values'><code>agepro_model$setup_projection_analyses_values()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-agepro_json_model-new"></a>}}
-\if{latex}{\out{\hypertarget{method-agepro_json_model-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the instances of the AGEPRO Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_json_model$new(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-agepro_json_model-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-agepro_json_model-initialize}{}}}
+\subsection{\code{agepro_json_model$new()}}{
+  Initializes the instances of the AGEPRO Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_json_model$new(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{Parameters to initialize the parent
+\code{\link{agepro_model}} class}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{Parameters to initialize the parent
-\code{\link[=agepro_model]{agepro_model}} class}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_json_model-get_json"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_json_model-get_json}{}}}
-\subsection{Method \code{get_json()}}{
-Return a json formatted object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_json_model$get_json()}\if{html}{\out{</div>}}
-}
-
-\subsection{Details}{
-See \link[jsonlite:fromJSON]{jsonlite::toJSON} for more details.\code{NA} values in a list or
+\subsection{\code{agepro_json_model$get_json()}}{
+  Return a json formatted object.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_json_model$get_json()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Details}{
+    See \link[jsonlite:toJSON]{jsonlite::toJSON} for more details.\code{NA} values in a list or
 a multi-length vector will converted to JSON style NULL value, but
 wrapped in a JSON array (\verb{[null, null]}). Using the defaults in
 \link[jsonlite:fromJSON]{jsonlite::fromJSON}, the JSON null array can be is converted back to
 \code{NA}. Single \code{NA} values will be reconverted to \code{NULL}.
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_json_model-write_json"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_json_model-write_json}{}}}
-\subsection{Method \code{write_json()}}{
-Write JSON file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_json_model$write_json(file, show_dir = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_json_model$write_json()}}{
+  Write JSON file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_json_model$write_json(file, show_dir = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{file}}{input file path}
+      \item{\code{show_dir}}{Option to show directory after JSON file is written.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file}}{input file path}
-
-\item{\code{show_dir}}{Option to show directory after JSON file is written.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_json_model-read_json"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_json_model-read_json}{}}}
-\subsection{Method \code{read_json()}}{
-Reads AGEPRO json experimental input file format.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_json_model$read_json(file)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_json_model$read_json()}}{
+  Reads AGEPRO json experimental input file format.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_json_model$read_json(file)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{file}}{input file path}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{file}}{input file path}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_json_model-import_agepro_inp_model"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_json_model-import_agepro_inp_model}{}}}
-\subsection{Method \code{import_agepro_inp_model()}}{
-Imports AGEPRO model data formatted for AGEPRO input files
+\subsection{\code{agepro_json_model$import_agepro_inp_model()}}{
+  Imports AGEPRO model data formatted for AGEPRO input files
 (\code{agepro_inp_model}).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_json_model$import_agepro_inp_model(inp_model)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_json_model$import_agepro_inp_model(inp_model)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_model}}{AGEPRO model with AGEPRO Input File (*.INP) functions}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_model}}{AGEPRO model with AGEPRO Input File (*.INP) functions}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_json_model-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_json_model-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_json_model$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_json_model$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_json_model$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

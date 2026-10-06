@@ -23,147 +23,150 @@ The retrospective_adjustments class (\code{RETROADJUST}) is recognized as a keyw
 parameter used in the AGEPRO input file format, but it is optional.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{retro_adjust}}{This is the vector of age-specific numbers at age multipliers for an
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{retro_adjust}}{This is the vector of age-specific numbers at age multipliers for an
 initial population size at age vector if retrospective bias adjustment
 is applied.}
 
-\item{\code{enable_retrospective_adjustments}}{Logical field that flags if fields can be edited. This class will not
+    \item{\code{enable_retrospective_adjustments}}{Logical field that flags if fields can be edited. This class will not
 accept new values to its fields or allow it to be exported to input file
 until this option flag is TRUE.}
 
-\item{\code{json_list_object}}{Returns JSON list object of containing SCALE values}
+    \item{\code{json_list_object}}{Returns JSON list object of containing SCALE values}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-retrospective_adjustments-new}{\code{retrospective_adjustments$new()}}
-\item \href{#method-retrospective_adjustments-print}{\code{retrospective_adjustments$print()}}
-\item \href{#method-retrospective_adjustments-read_inp_lines}{\code{retrospective_adjustments$read_inp_lines()}}
-\item \href{#method-retrospective_adjustments-get_inp_lines}{\code{retrospective_adjustments$get_inp_lines()}}
-\item \href{#method-retrospective_adjustments-clone}{\code{retrospective_adjustments$clone()}}
-}
+  \itemize{
+    \item \href{#method-retrospective_adjustments-initialize}{\code{retrospective_adjustments$new()}}
+    \item \href{#method-retrospective_adjustments-print}{\code{retrospective_adjustments$print()}}
+    \item \href{#method-retrospective_adjustments-read_inp_lines}{\code{retrospective_adjustments$read_inp_lines()}}
+    \item \href{#method-retrospective_adjustments-get_inp_lines}{\code{retrospective_adjustments$get_inp_lines()}}
+    \item \href{#method-retrospective_adjustments-clone}{\code{retrospective_adjustments$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-retrospective_adjustments-new"></a>}}
-\if{latex}{\out{\hypertarget{method-retrospective_adjustments-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{retrospective_adjustments$new(
+\if{html}{\out{<a id="method-retrospective_adjustments-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-retrospective_adjustments-initialize}{}}}
+\subsection{\code{retrospective_adjustments$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{retrospective_adjustments$new(
   retro_adjust,
   enable_cat_print = TRUE,
   retro_flag = NULL
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{retro_adjust}}{Vector for retrospective bias adjustment}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{retro_adjust}}{Vector for retrospective bias adjustment}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
-
-\item{\code{retro_flag}}{R6class containing option flags to allow retrospective adjustments
+      \item{\code{retro_flag}}{R6class containing option flags to allow retrospective adjustments
 to be used}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-retrospective_adjustments-print"></a>}}
 \if{latex}{\out{\hypertarget{method-retrospective_adjustments-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out retrospective_adjustments values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{retrospective_adjustments$print(enable_cat_print = TRUE, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+\subsection{\code{retrospective_adjustments$print()}}{
+  Formatted to print out retrospective_adjustments values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{retrospective_adjustments$print(enable_cat_print = TRUE, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-retrospective_adjustments-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-retrospective_adjustments-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter RETROADJUST from the
+\subsection{\code{retrospective_adjustments$read_inp_lines()}}{
+  Reads in the values from the keyword parameter RETROADJUST from the
 AGEPRO Input file
 
 Note: enable_retrospective_adjustments must be set to TRUE.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{retrospective_adjustments$read_inp_lines(inp_con, nline, num_ages)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{retrospective_adjustments$read_inp_lines(inp_con, nline, num_ages)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
-
-\item{\code{num_ages}}{Model's number of ages derived from general_params
+      \item{\code{num_ages}}{Model's number of ages derived from general_params
 num_ages active binding.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-retrospective_adjustments-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-retrospective_adjustments-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns values from the class to the RETROADJUST AGEPRO keyword parameter
+\subsection{\code{retrospective_adjustments$get_inp_lines()}}{
+  Returns values from the class to the RETROADJUST AGEPRO keyword parameter
 formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{retrospective_adjustments$get_inp_lines(delimiter = "  ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{retrospective_adjustments$get_inp_lines(delimiter = "  ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-retrospective_adjustments-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-retrospective_adjustments-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{retrospective_adjustments$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{retrospective_adjustments$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{retrospective_adjustments$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

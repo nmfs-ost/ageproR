@@ -6,6 +6,8 @@
 #'
 #' @export
 #'
+#' @importFrom R6 R6Class
+#'
 ageproWrapper <- R6Class(
   "ageproWrapper",
   public = list(

@@ -16,7 +16,7 @@ launch_model(model, out_dir, exe = "agepro.exe", append_job_dt = TRUE)
 \item{append_job_dt}{Logical option to append the date time stamp to the input files.}
 }
 \description{
-This function will takes the \link[=agepro_inp_model]{agepro_inp_model} class,
+This function will takes the \link{agepro_inp_model} class,
 saves it as an AGEPRO input file, launches the AGEPRO calcuation engine with it.
 }
 \details{

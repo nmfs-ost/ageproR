@@ -7,122 +7,133 @@
 Input title identifying model attributes
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{model_name}}{String that describes the projection model run}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{model_name}}{String that describes the projection model run}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-case_id-new}{\code{case_id$new()}}
-\item \href{#method-case_id-print}{\code{case_id$print()}}
-\item \href{#method-case_id-read_inp_lines}{\code{case_id$read_inp_lines()}}
-\item \href{#method-case_id-get_inp_lines}{\code{case_id$get_inp_lines()}}
-\item \href{#method-case_id-sanitize_case_id_fschar}{\code{case_id$sanitize_case_id_fschar()}}
-\item \href{#method-case_id-clone}{\code{case_id$clone()}}
-}
+  \itemize{
+    \item \href{#method-case_id-initialize}{\code{case_id$new()}}
+    \item \href{#method-case_id-print}{\code{case_id$print()}}
+    \item \href{#method-case_id-read_inp_lines}{\code{case_id$read_inp_lines()}}
+    \item \href{#method-case_id-get_inp_lines}{\code{case_id$get_inp_lines()}}
+    \item \href{#method-case_id-sanitize_case_id_fschar}{\code{case_id$sanitize_case_id_fschar()}}
+    \item \href{#method-case_id-clone}{\code{case_id$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-case_id-new"></a>}}
-\if{latex}{\out{\hypertarget{method-case_id-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize Class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{case_id$new(model_name = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-case_id-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-case_id-initialize}{}}}
+\subsection{\code{case_id$new()}}{
+  Initialize Class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{case_id$new(model_name = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{model_name}}{Character string that describes the projection model}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{model_name}}{Character string that describes the projection model}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-case_id-print"></a>}}
 \if{latex}{\out{\hypertarget{method-case_id-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out Model case id
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{case_id$print()}\if{html}{\out{</div>}}
+\subsection{\code{case_id$print()}}{
+  Prints out Model case id
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{case_id$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-case_id-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-case_id-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Read AGEPRO Case ID from input data file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{case_id$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{case_id$read_inp_lines()}}{
+  Read AGEPRO Case ID from input data file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{case_id$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-case_id-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-case_id-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns the values for the CASEID keyword parameter formatted
+\subsection{\code{case_id$get_inp_lines()}}{
+  Returns the values for the CASEID keyword parameter formatted
 to the AGEPRO input file format.description
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{case_id$get_inp_lines()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{case_id$get_inp_lines()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-case_id-sanitize_case_id_fschar"></a>}}
 \if{latex}{\out{\hypertarget{method-case_id-sanitize_case_id_fschar}{}}}
-\subsection{Method \code{sanitize_case_id_fschar()}}{
-Cleans up CASE_ID's model name for any invalid
+\subsection{\code{case_id$sanitize_case_id_fschar()}}{
+  Cleans up CASE_ID's model name for any invalid
 filename characters. Return 'untitled` for blank or empty
 character strings.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{case_id$sanitize_case_id_fschar(replace_blanks = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{replace_blanks}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{case_id$sanitize_case_id_fschar(replace_blanks = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{replace_blanks}}{\cr
 Option to clean up blank characters and replace them
 as a underscore symbol}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-case_id-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-case_id-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{case_id$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{case_id$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{case_id$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

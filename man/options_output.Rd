@@ -8,60 +8,61 @@ Class Structure that includes user-defined options to enable auxiliary or
 options to export AGEPRO output
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{auxfile_output_flag}}{\link[base:logical]{Logical} flag to output stock summary information}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{auxfile_output_flag}}{\link[base:logical]{Logical} flag to output stock summary information}
 
-\item{\code{process_error_datafiles}}{\link[base:logical]{Logical} flag to output population and fishery processes
+    \item{\code{process_error_datafiles}}{\link[base:logical]{Logical} flag to output population and fishery processes
 simulated with lognormal process error (process_error parameters) to
 auxiliary output files}
 
-\item{\code{export_df}}{\link[base:logical]{Logical} flag to output AGEPRO calculation engine
+    \item{\code{export_df}}{\link[base:logical]{Logical} flag to output AGEPRO calculation engine
 projection results to R \link[base:data.frame]{data.frame}. Default is
 \code{1} (or TRUE) at initialization.}
 
-\item{\code{valid_aux_output_flags}}{Returns a list of valid numerical flags to enable _Stock of Age _
+    \item{\code{valid_aux_output_flags}}{Returns a list of valid numerical flags to enable _Stock of Age _
 \emph{Distribution Summary and Auxiliary Files}.}
 
-\item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
+    \item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
 \verb{AGEPRO VERSION 4.0} format for setting auxiliary files.}
 
-\item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
+    \item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-options_output-new}{\code{options_output$new()}}
-\item \href{#method-options_output-print}{\code{options_output$print()}}
-\item \href{#method-options_output-read_inp_lines}{\code{options_output$read_inp_lines()}}
-\item \href{#method-options_output-get_inp_lines}{\code{options_output$get_inp_lines()}}
-\item \href{#method-options_output-clone}{\code{options_output$clone()}}
-}
+  \itemize{
+    \item \href{#method-options_output-initialize}{\code{options_output$new()}}
+    \item \href{#method-options_output-print}{\code{options_output$print()}}
+    \item \href{#method-options_output-read_inp_lines}{\code{options_output$read_inp_lines()}}
+    \item \href{#method-options_output-get_inp_lines}{\code{options_output$get_inp_lines()}}
+    \item \href{#method-options_output-clone}{\code{options_output$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-options_output-new"></a>}}
-\if{latex}{\out{\hypertarget{method-options_output-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_output$new(
+\if{html}{\out{<a id="method-options_output-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-options_output-initialize}{}}}
+\subsection{\code{options_output$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_output$new(
   auxiliary_flag = 0,
   process_error_datafiles = FALSE,
   export_df = TRUE,
   enable_agepro40_format = FALSE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{auxiliary_flag}}{\link[base:numeric]{Numeric} flag to enable Stock Distribution Summary file
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{auxiliary_flag}}{\link[base:numeric]{Numeric} flag to enable Stock Distribution Summary file
 and auxiliary data. The following options allow the user to select which
 output from the AGEPRO calculation engine is returned:
 \describe{
@@ -78,83 +79,88 @@ any auxiliary files.}
 EXCEPT the Stock Numbers of Age Auxiliary File
 }
 }}
-
-\item{\code{process_error_datafiles}}{\link[base:logical]{Logical} flag to enable output of population and fishery
+      \item{\code{process_error_datafiles}}{\link[base:logical]{Logical} flag to enable output of population and fishery
 process error results as auxiliary files}
-
-\item{\code{export_df}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
-
-\item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
+      \item{\code{export_df}}{\link[base:logical]{Logical} flag to enable AGEPRO output to data.frame}
+      \item{\code{enable_agepro40_format}}{\link[base:logical]{Logical} flag to indicate model is using the
 \verb{AGEPRO VERSION 4.0} format for setting auxiliary files.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-options_output-print"></a>}}
 \if{latex}{\out{\hypertarget{method-options_output-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out output_option values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_output$print()}\if{html}{\out{</div>}}
+\subsection{\code{options_output$print()}}{
+  Formatted to print out output_option values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_output$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-options_output-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-options_output-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter OPTIONS from the
+\subsection{\code{options_output$read_inp_lines()}}{
+  Reads in the values from the keyword parameter OPTIONS from the
 AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_output$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_output$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-options_output-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-options_output-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns values from the options_output (OPTIONS)
+\subsection{\code{options_output$get_inp_lines()}}{
+  Returns values from the options_output (OPTIONS)
 AGEPRO keyword parameter formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_output$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_output$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-options_output-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-options_output-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_output$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{options_output$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_output$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

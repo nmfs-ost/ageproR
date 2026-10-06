@@ -7,139 +7,144 @@
 Recruitment Model Description
 }
 \section{Super classes}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{\link[ageproR:parametric_curve]{ageproR::parametric_curve}} -> \code{parametric_autocorrelated_error}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{\link[ageproR:parametric_curve]{parametric_curve}} -> \code{parametric_autocorrelated_error}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{phi}}{Sets the Autocorrelated parametric Curve Parameter, phi. Returns the
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{phi}}{Sets the Autocorrelated parametric Curve Parameter, phi. Returns the
 current value if no argument was passed.}
 
-\item{\code{log_residual}}{Sets the Autocorrelated parametric Curve Parameter, log_residual.
+    \item{\code{log_residual}}{Sets the Autocorrelated parametric Curve Parameter, log_residual.
 Returns the current value if no argument was passed.}
 
-\item{\code{json_recruit_data}}{Returns JSON-ready Recruit Model Data}
-}
-\if{html}{\out{</div>}}
+    \item{\code{json_recruit_data}}{Returns JSON-ready Recruit Model Data}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-parametric_autocorrelated_error-new}{\code{parametric_autocorrelated_error$new()}}
-\item \href{#method-parametric_autocorrelated_error-print}{\code{parametric_autocorrelated_error$print()}}
-\item \href{#method-parametric_autocorrelated_error-inp_lines_recruit_data}{\code{parametric_autocorrelated_error$inp_lines_recruit_data()}}
-\item \href{#method-parametric_autocorrelated_error-read_inp_lines}{\code{parametric_autocorrelated_error$read_inp_lines()}}
-\item \href{#method-parametric_autocorrelated_error-clone}{\code{parametric_autocorrelated_error$clone()}}
-}
+  \itemize{
+    \item \href{#method-parametric_autocorrelated_error-initialize}{\code{parametric_autocorrelated_error$new()}}
+    \item \href{#method-parametric_autocorrelated_error-print}{\code{parametric_autocorrelated_error$print()}}
+    \item \href{#method-parametric_autocorrelated_error-inp_lines_recruit_data}{\code{parametric_autocorrelated_error$inp_lines_recruit_data()}}
+    \item \href{#method-parametric_autocorrelated_error-read_inp_lines}{\code{parametric_autocorrelated_error$read_inp_lines()}}
+    \item \href{#method-parametric_autocorrelated_error-clone}{\code{parametric_autocorrelated_error$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-parametric_autocorrelated_error-new"></a>}}
-\if{latex}{\out{\hypertarget{method-parametric_autocorrelated_error-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_autocorrelated_error$new(
+\if{html}{\out{<a id="method-parametric_autocorrelated_error-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-parametric_autocorrelated_error-initialize}{}}}
+\subsection{\code{parametric_autocorrelated_error$new()}}{
+  Initializes the Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_autocorrelated_error$new(
   alpha = 0,
   beta = 0,
   variance = 0,
   phi = 0,
   log_residual = 0
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{alpha}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{alpha}}{\cr
 Stock Recruitment Parameter, alpha}
-
-\item{\code{beta}}{\cr
+      \item{\code{beta}}{\cr
 Stock Recruitment Parameter, beta}
-
-\item{\code{variance}}{\cr
+      \item{\code{variance}}{\cr
 variance}
-
-\item{\code{phi}}{\cr
+      \item{\code{phi}}{\cr
 Autocorrelation parameters}
-
-\item{\code{log_residual}}{\cr
+      \item{\code{log_residual}}{\cr
 Log-Scale Residual for the stock recruitment fit in the time prior to
 the projection}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_autocorrelated_error-print"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_autocorrelated_error-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out Parametric Data
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_autocorrelated_error$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{parametric_autocorrelated_error$print()}}{
+  Prints out Parametric Data
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_autocorrelated_error$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_autocorrelated_error-inp_lines_recruit_data"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_autocorrelated_error-inp_lines_recruit_data}{}}}
-\subsection{Method \code{inp_lines_recruit_data()}}{
-Exports RECRUIT submodel data for autocorrleated parametric curve
+\subsection{\code{parametric_autocorrelated_error$inp_lines_recruit_data()}}{
+  Exports RECRUIT submodel data for autocorrleated parametric curve
 recruitment as formatted AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_autocorrelated_error$inp_lines_recruit_data(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_autocorrelated_error$inp_lines_recruit_data(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_autocorrelated_error-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_autocorrelated_error-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads Autocorrelated Parametric Curve model data from AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_autocorrelated_error$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{parametric_autocorrelated_error$read_inp_lines()}}{
+  Reads Autocorrelated Parametric Curve model data from AGEPRO Input file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_autocorrelated_error$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_autocorrelated_error-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_autocorrelated_error-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_autocorrelated_error$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{parametric_autocorrelated_error$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_autocorrelated_error$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

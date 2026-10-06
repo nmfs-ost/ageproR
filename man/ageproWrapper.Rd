@@ -4,75 +4,73 @@
 \alias{ageproWrapper}
 \title{R6Class Wrapper for Running AGEPRO Calcuation Engine binary}
 \description{
-R6Class Wrapper for Running AGEPRO Calcuation Engine binary
-
-R6Class Wrapper for Running AGEPRO Calcuation Engine binary
-}
-\details{
 A R6class wrapper that handles exeution of the AGEPRO calcuation binary.
 This includes varaibles to handle binary path and output logfile, and
 a function wrapper to run the binary.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{agepro_path}}{AGEPRO Calculation Engine path}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{agepro_path}}{AGEPRO Calculation Engine path}
 
-\item{\code{logdir}}{File path reserved for logfiles for AGEPRO Calcuation Engine runs.}
-}
-\if{html}{\out{</div>}}
+    \item{\code{logdir}}{File path reserved for logfiles for AGEPRO Calcuation Engine runs.}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ageproWrapper-new}{\code{ageproWrapper$new()}}
-\item \href{#method-ageproWrapper-run}{\code{ageproWrapper$run()}}
-\item \href{#method-ageproWrapper-run_logfile}{\code{ageproWrapper$run_logfile()}}
-\item \href{#method-ageproWrapper-clone}{\code{ageproWrapper$clone()}}
-}
+  \itemize{
+    \item \href{#method-ageproWrapper-initialize}{\code{ageproWrapper$new()}}
+    \item \href{#method-ageproWrapper-run}{\code{ageproWrapper$run()}}
+    \item \href{#method-ageproWrapper-run_logfile}{\code{ageproWrapper$run_logfile()}}
+    \item \href{#method-ageproWrapper-clone}{\code{ageproWrapper$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ageproWrapper-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ageproWrapper-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the binary Wrapper
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$new(path = NULL, warn = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{path}}{Explicit path to directory}
-
-\item{\code{warn}}{Logical parameter to validate path at initalization. If enabled,
+\if{html}{\out{<a id="method-ageproWrapper-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ageproWrapper-initialize}{}}}
+\subsection{\code{ageproWrapper$new()}}{
+  Initializes the binary Wrapper
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ageproWrapper$new(path = NULL, warn = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{path}}{Explicit path to directory}
+      \item{\code{warn}}{Logical parameter to validate path at initalization. If enabled,
 invalid reuslts returns a warning.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ageproWrapper-run"></a>}}
 \if{latex}{\out{\hypertarget{method-ageproWrapper-run}{}}}
-\subsection{Method \code{run()}}{
-Runs the Binary
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$run(args = character())}\if{html}{\out{</div>}}
+\subsection{\code{ageproWrapper$run()}}{
+  Runs the Binary
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ageproWrapper$run(args = character())}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{args}}{Program agruments}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{args}}{Program agruments}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ageproWrapper-run_logfile"></a>}}
 \if{latex}{\out{\hypertarget{method-ageproWrapper-run_logfile}{}}}
-\subsection{Method \code{run_logfile()}}{
-Runs the Binary with logfile
+\subsection{\code{ageproWrapper$run_logfile()}}{
+  Runs the Binary with logfile
 
 This function uses the private function resolve_logdir
 to return the logfile directory. This function will return
@@ -80,37 +78,40 @@ the custom output directory if it exists. Otherwise it will
 check if user session (.Rprofile) has an existing path. If
 \code{ageproR.run_logdir} does't work it, will fallback to the "AGEPRO"
 subirectory of home directory.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$run_logfile(args = character(), out_dir = "")}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{args}}{Program arguments}
-
-\item{\code{out_dir}}{Output directory for the logfile. The default
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ageproWrapper$run_logfile(args = character(), out_dir = "")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{args}}{Program arguments}
+      \item{\code{out_dir}}{Output directory for the logfile. The default
 blank character string will return the AGEPRO subdirectory
 of the home directory via resolve_logdir}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ageproWrapper-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ageproWrapper-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ageproWrapper$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ageproWrapper$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ageproWrapper$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

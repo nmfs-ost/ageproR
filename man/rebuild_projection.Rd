@@ -14,153 +14,158 @@ any existing rebuild and pstar projection objects.
 }
 \keyword{projection_analyses}
 \section{Super class}{
-\code{\link[ageproR:projection_analyses]{ageproR::projection_analyses}} -> \code{rebuild_projection}
+\code{\link[ageproR:projection_analyses]{projection_analyses}} -> \code{rebuild_projection}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{json_list_object}}{Returns JSON list object of rebuilder Projection values}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{json_list_object}}{Returns JSON list object of rebuilder Projection values}
 
-\item{\code{target_biomass_value}}{Rebuilding projection's target biomass value in units of thousands
+    \item{\code{target_biomass_value}}{Rebuilding projection's target biomass value in units of thousands
 of metric tons (MT)}
 
-\item{\code{target_biomass_type}}{Index for the type of population biomass as the target:
+    \item{\code{target_biomass_type}}{Index for the type of population biomass as the target:
 \describe{
 \item{0}{Spawning Stock Biomass}
 \item{1}{January 1st Stock Biomass}
 \item{2}{Mid-Year (Mean) Biomass}
 }}
 
-\item{\code{target_percent}}{The percent frequency of achieving the target value by the target
+    \item{\code{target_percent}}{The percent frequency of achieving the target value by the target
 year. The percent frequency is a value between 0 (a zero
 chance of achieving target) and 100 (indicating a 100 percent chance
 of achieving target).}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-rebuild_projection-new}{\code{rebuild_projection$new()}}
-\item \href{#method-rebuild_projection-read_inp_lines}{\code{rebuild_projection$read_inp_lines()}}
-\item \href{#method-rebuild_projection-get_inp_lines}{\code{rebuild_projection$get_inp_lines()}}
-\item \href{#method-rebuild_projection-print}{\code{rebuild_projection$print()}}
-\item \href{#method-rebuild_projection-clone}{\code{rebuild_projection$clone()}}
-}
+  \itemize{
+    \item \href{#method-rebuild_projection-initialize}{\code{rebuild_projection$new()}}
+    \item \href{#method-rebuild_projection-read_inp_lines}{\code{rebuild_projection$read_inp_lines()}}
+    \item \href{#method-rebuild_projection-get_inp_lines}{\code{rebuild_projection$get_inp_lines()}}
+    \item \href{#method-rebuild_projection-print}{\code{rebuild_projection$print()}}
+    \item \href{#method-rebuild_projection-clone}{\code{rebuild_projection$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-rebuild_projection-new"></a>}}
-\if{latex}{\out{\hypertarget{method-rebuild_projection-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{rebuild_projection$new(
+\if{html}{\out{<a id="method-rebuild_projection-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-rebuild_projection-initialize}{}}}
+\subsection{\code{rebuild_projection$new()}}{
+  Initializes class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{rebuild_projection$new(
   proj_years,
   target_biomass = 0,
   target_type = 0,
   target_percent = 0,
   ...
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{May be a single numeric value: the number of years in the
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{May be a single numeric value: the number of years in the
 time projection; a vector of sequential values: Sequence of years in from
 first to last year of the time projection; or an instance of
 \link[=projection_years]{Projection years}}
-
-\item{\code{target_biomass}}{Target biomass value in units of thousands
+      \item{\code{target_biomass}}{Target biomass value in units of thousands
 of metric tons (MT). Default set to 0.}
-
-\item{\code{target_type}}{Target population biomass:
+      \item{\code{target_type}}{Target population biomass:
 \describe{
 \item{0}{Spawning Stock Biomass. Set as Default}
 \item{1}{January 1st Stock Biomass}
 \item{2}{Mid-Year (Mean) Biomass}
 }}
-
-\item{\code{target_percent}}{The percent frequency that \code{target_year} reaches
+      \item{\code{target_percent}}{The percent frequency that \code{target_year} reaches
 \code{target_biomass} from 0 to 100. Default set to 0.}
+      \item{\code{...}}{Other parameters to pass to
+\code{\link{projection_analyses}}}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{Other parameters to pass to
-\code{\link[=projection_analyses]{projection_analyses}}}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-rebuild_projection-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-rebuild_projection-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter REBUILD from the
+\subsection{\code{rebuild_projection$read_inp_lines()}}{
+  Reads in the values from the keyword parameter REBUILD from the
 AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{rebuild_projection$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{rebuild_projection$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-rebuild_projection-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-rebuild_projection-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns rebuild projection Values formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{rebuild_projection$get_inp_lines(delimiter)}\if{html}{\out{</div>}}
+\subsection{\code{rebuild_projection$get_inp_lines()}}{
+  Returns rebuild projection Values formatted as AGEPRO input file lines.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{rebuild_projection$get_inp_lines(delimiter)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-rebuild_projection-print"></a>}}
 \if{latex}{\out{\hypertarget{method-rebuild_projection-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out the rebuild projections fields to console
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{rebuild_projection$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{rebuild_projection$print()}}{
+  Prints out the rebuild projections fields to console
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{rebuild_projection$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-rebuild_projection-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-rebuild_projection-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{rebuild_projection$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{rebuild_projection$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{rebuild_projection$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

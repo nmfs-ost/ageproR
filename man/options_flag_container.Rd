@@ -30,84 +30,90 @@ is FALSE: set value \code{report_percentile},
 Then it will be TRUE
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{enable_percentile_summary}}{Enables output summary report of specific Percentile}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{enable_percentile_summary}}{Enables output summary report of specific Percentile}
 
-\item{\code{enable_reference_points}}{Enables biological reference points threshold report}
+    \item{\code{enable_reference_points}}{Enables biological reference points threshold report}
 
-\item{\code{enable_scaling_factors}}{Enables Scaling Factors}
+    \item{\code{enable_scaling_factors}}{Enables Scaling Factors}
 
-\item{\code{enable_max_bounds}}{Sets maximum bounds of Weight(MT) and natural mortality}
+    \item{\code{enable_max_bounds}}{Sets maximum bounds of Weight(MT) and natural mortality}
 
-\item{\code{enable_retrospective_adjustments}}{Allows use of Retrospective Adjustment Factors by Age}
-}
-\if{html}{\out{</div>}}
+    \item{\code{enable_retrospective_adjustments}}{Allows use of Retrospective Adjustment Factors by Age}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-options_flag_container-clone}{\code{options_flag_container$clone()}}
-}
+  \itemize{
+    \item \href{#method-options_flag_container-clone}{\code{options_flag_container$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-options_flag_container-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-options_flag_container-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_flag_container$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{options_flag_container$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_flag_container$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{op}}{Class container that encapsulates logical flags to enable AGEPRO
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{op}}{Class container that encapsulates logical flags to enable AGEPRO
 user-defined options}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-options_flags-new}{\code{options_flags$new()}}
-\item \href{#method-options_flags-clone}{\code{options_flags$clone()}}
-}
+  \itemize{
+    \item \href{#method-options_flags-initialize}{\code{options_flags$new()}}
+    \item \href{#method-options_flags-clone}{\code{options_flags$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-options_flags-new"></a>}}
-\if{latex}{\out{\hypertarget{method-options_flags-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_flags$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-options_flags-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-options_flags-initialize}{}}}
+\subsection{\code{options_flags$new()}}{
+  Initialize
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_flags$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-options_flags-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-options_flags-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{options_flags$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{options_flags$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{options_flags$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

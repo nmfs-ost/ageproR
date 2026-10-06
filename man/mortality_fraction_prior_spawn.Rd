@@ -8,159 +8,162 @@ Class Structure that includes proportion seasonal timing for fishing mortality &
 prior to spawning season
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{time_varying}}{\link[base:logical]{Logical} flag to list fishing and natural mortality per
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{time_varying}}{\link[base:logical]{Logical} flag to list fishing and natural mortality per
 observation year if TRUE or representative of the}
 
-\item{\code{proportion_total_mortality_matrix}}{Proportion of total mortality occurring prior to spawning}
+    \item{\code{proportion_total_mortality_matrix}}{Proportion of total mortality occurring prior to spawning}
 
-\item{\code{natural_mortality_prior_spawn}}{Returns the proportions of Natural mortality (TM) that occurs from
+    \item{\code{natural_mortality_prior_spawn}}{Returns the proportions of Natural mortality (TM) that occurs from
 January 1st to Spawning Season.}
 
-\item{\code{fishing_mortality_prior_spawn}}{Returns within-year fractions of fishing mortality (TF) that occurs from
+    \item{\code{fishing_mortality_prior_spawn}}{Returns within-year fractions of fishing mortality (TF) that occurs from
 January 1st to Spawning Season.}
 
-\item{\code{json_list_object}}{Returns JSON list object of values from the
+    \item{\code{json_list_object}}{Returns JSON list object of values from the
 mortality_fraction_prior_spawn class}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
 
-\item{\code{projection_years}}{Returns the projection_years used in the mortaliy_fraction object}
-}
-\if{html}{\out{</div>}}
+    \item{\code{projection_years}}{Returns the projection_years used in the mortaliy_fraction object}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-mortality_fraction_prior_spawn-new}{\code{mortality_fraction_prior_spawn$new()}}
-\item \href{#method-mortality_fraction_prior_spawn-print}{\code{mortality_fraction_prior_spawn$print()}}
-\item \href{#method-mortality_fraction_prior_spawn-read_inp_lines}{\code{mortality_fraction_prior_spawn$read_inp_lines()}}
-\item \href{#method-mortality_fraction_prior_spawn-get_inp_lines}{\code{mortality_fraction_prior_spawn$get_inp_lines()}}
-\item \href{#method-mortality_fraction_prior_spawn-clone}{\code{mortality_fraction_prior_spawn$clone()}}
-}
+  \itemize{
+    \item \href{#method-mortality_fraction_prior_spawn-initialize}{\code{mortality_fraction_prior_spawn$new()}}
+    \item \href{#method-mortality_fraction_prior_spawn-print}{\code{mortality_fraction_prior_spawn$print()}}
+    \item \href{#method-mortality_fraction_prior_spawn-read_inp_lines}{\code{mortality_fraction_prior_spawn$read_inp_lines()}}
+    \item \href{#method-mortality_fraction_prior_spawn-get_inp_lines}{\code{mortality_fraction_prior_spawn$get_inp_lines()}}
+    \item \href{#method-mortality_fraction_prior_spawn-clone}{\code{mortality_fraction_prior_spawn$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-mortality_fraction_prior_spawn-new"></a>}}
-\if{latex}{\out{\hypertarget{method-mortality_fraction_prior_spawn-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{mortality_fraction_prior_spawn$new(
+\if{html}{\out{<a id="method-mortality_fraction_prior_spawn-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-mortality_fraction_prior_spawn-initialize}{}}}
+\subsection{\code{mortality_fraction_prior_spawn$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{mortality_fraction_prior_spawn$new(
   proj_years_vector,
   time_varying = FALSE,
   default_proportion = 0.5,
   enable_cat_print = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years_vector}}{Input can be Sequence of years in from first to last year of
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years_vector}}{Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
-
-\item{\code{time_varying}}{Logical flag that enables the stochastic parameter
+      \item{\code{time_varying}}{Logical flag that enables the stochastic parameter
 to use as a time-varying array if TRUE (or 1). Otherwise, FALSE the
 vector will cover "all years" of the projection. Default is FALSE}
-
-\item{\code{default_proportion}}{Proportion default values. Time varying will adjust the values by
+      \item{\code{default_proportion}}{Proportion default values. Time varying will adjust the values by
 number of projection years.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-mortality_fraction_prior_spawn-print"></a>}}
 \if{latex}{\out{\hypertarget{method-mortality_fraction_prior_spawn-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out the values of the Fraction Mortality Parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{mortality_fraction_prior_spawn$print(enable_cat_print = TRUE)}\if{html}{\out{</div>}}
+\subsection{\code{mortality_fraction_prior_spawn$print()}}{
+  Formatted to print out the values of the Fraction Mortality Parameter
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{mortality_fraction_prior_spawn$print(enable_cat_print = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
+messages to be seen on console.}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
+messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
-messages to be seen on console.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
-messages to be seen on console.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-mortality_fraction_prior_spawn-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-mortality_fraction_prior_spawn-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter BIOLOGICAL from the
+\subsection{\code{mortality_fraction_prior_spawn$read_inp_lines()}}{
+  Reads in the values from the keyword parameter BIOLOGICAL from the
 AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{mortality_fraction_prior_spawn$read_inp_lines(
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{mortality_fraction_prior_spawn$read_inp_lines(
   inp_con,
   nline,
   proj_years_vector
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
-
-\item{\code{proj_years_vector}}{Input can be Sequence of years in from first to last year of
+      \item{\code{proj_years_vector}}{Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-mortality_fraction_prior_spawn-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-mortality_fraction_prior_spawn-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns values from the mortality_fraction_prior_spawn (BIOLOGICAL)
+\subsection{\code{mortality_fraction_prior_spawn$get_inp_lines()}}{
+  Returns values from the mortality_fraction_prior_spawn (BIOLOGICAL)
 AGEPRO keyword parameter formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{mortality_fraction_prior_spawn$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{mortality_fraction_prior_spawn$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-mortality_fraction_prior_spawn-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-mortality_fraction_prior_spawn-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{mortality_fraction_prior_spawn$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{mortality_fraction_prior_spawn$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{mortality_fraction_prior_spawn$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

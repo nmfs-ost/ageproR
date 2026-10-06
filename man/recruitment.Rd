@@ -10,56 +10,57 @@ projections. Please refer to the AGEPRO reference Manual for more detail on
 these models.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{recruit_scaling_factor}}{The multiplier to convert recruitment submodel's recruitment units to
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{recruit_scaling_factor}}{The multiplier to convert recruitment submodel's recruitment units to
 absolute numbers of fish}
 
-\item{\code{ssb_scaling_factor}}{The multiplier to convert recruitment submodel's SSB to absolute
+    \item{\code{ssb_scaling_factor}}{The multiplier to convert recruitment submodel's SSB to absolute
 spawning weight of fish in kilograms (kg)}
 
-\item{\code{max_recruit_obs}}{Recruitment submodel's maximum number of observations}
+    \item{\code{max_recruit_obs}}{Recruitment submodel's maximum number of observations}
 
-\item{\code{recruit_model_num_list}}{Returns a list of recruitment model numbers representing the agepro model's
+    \item{\code{recruit_model_num_list}}{Returns a list of recruitment model numbers representing the agepro model's
 recruitment model instance. This "read-only" field is informative of the current
 instance of the model recrutment model order. Use recruitment R6class field
 \code{recruit_data} to access recruitment model data.}
 
-\item{\code{number_recruit_models}}{Returns number of recruitment models. This "read-only" field is set when the
+    \item{\code{number_recruit_models}}{Returns number of recruitment models. This "read-only" field is set when the
 recruitment model is initialized.}
 
-\item{\code{recruit_probability}}{The Recruitment Probabilities.}
+    \item{\code{recruit_probability}}{The Recruitment Probabilities.}
 
-\item{\code{recruit_data}}{List containing data for each recruitment model in the recruitment
+    \item{\code{recruit_data}}{List containing data for each recruitment model in the recruitment
 model collection list. Use this field to access a specific recruitment models field.}
 
-\item{\code{json_list_object}}{List of RECRUIT keyword fields values, exportable to JSON.}
+    \item{\code{json_list_object}}{List of RECRUIT keyword fields values, exportable to JSON.}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
 
-\item{\code{valid_recruit_models}}{Returns vector of valid Recruitment Model Numbers}
-}
-\if{html}{\out{</div>}}
+    \item{\code{valid_recruit_models}}{Returns vector of valid Recruitment Model Numbers}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-recruitment-new}{\code{recruitment$new()}}
-\item \href{#method-recruitment-print}{\code{recruitment$print()}}
-\item \href{#method-recruitment-read_inp_lines}{\code{recruitment$read_inp_lines()}}
-\item \href{#method-recruitment-get_inp_lines}{\code{recruitment$get_inp_lines()}}
-\item \href{#method-recruitment-clone}{\code{recruitment$clone()}}
-}
+  \itemize{
+    \item \href{#method-recruitment-initialize}{\code{recruitment$new()}}
+    \item \href{#method-recruitment-print}{\code{recruitment$print()}}
+    \item \href{#method-recruitment-read_inp_lines}{\code{recruitment$read_inp_lines()}}
+    \item \href{#method-recruitment-get_inp_lines}{\code{recruitment$get_inp_lines()}}
+    \item \href{#method-recruitment-clone}{\code{recruitment$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-recruitment-new"></a>}}
-\if{latex}{\out{\hypertarget{method-recruitment-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the Recruitment Class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{recruitment$new(
+\if{html}{\out{<a id="method-recruitment-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-recruitment-initialize}{}}}
+\subsection{\code{recruitment$new()}}{
+  Initializes the Recruitment Class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{recruitment$new(
   model_num,
   seq_years,
   num_recruit_models = 1,
@@ -67,117 +68,116 @@ Initializes the Recruitment Class
   ssb_scaling_factor = 1,
   max_recruit_obs = 10000,
   enable_cat_print = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{model_num}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{model_num}}{\cr
 AGEPRO Recruitment Model Number}
-
-\item{\code{seq_years}}{\cr
+      \item{\code{seq_years}}{\cr
 Array representing the Projection Time Horizon}
-
-\item{\code{num_recruit_models}}{Number of Recruitment Models in AGEPRO model. Default is 1.}
-
-\item{\code{recruit_scaling_factor}}{Recruit model's multiplier to convert units to absolute numbers of fish.}
-
-\item{\code{ssb_scaling_factor}}{Recruit model's multiplier to convert SSB to absolute
+      \item{\code{num_recruit_models}}{Number of Recruitment Models in AGEPRO model. Default is 1.}
+      \item{\code{recruit_scaling_factor}}{Recruit model's multiplier to convert units to absolute numbers of fish.}
+      \item{\code{ssb_scaling_factor}}{Recruit model's multiplier to convert SSB to absolute
 spawning weight of fish in kilograms (kg)}
-
-\item{\code{max_recruit_obs}}{Max limit of recruitment observations. Default is 10000.}
-
-\item{\code{enable_cat_print}}{Flag to print out \code{cat} based cli messages printed on console. Default
+      \item{\code{max_recruit_obs}}{Max limit of recruitment observations. Default is 10000.}
+      \item{\code{enable_cat_print}}{Flag to print out \code{cat} based cli messages printed on console. Default
 is TRUE.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-recruitment-print"></a>}}
 \if{latex}{\out{\hypertarget{method-recruitment-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out Recruitment
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{recruitment$print(enable_cat_print = TRUE, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{enable_cat_print}}{Flag to allow \code{cat} based cli messages printed on
+\subsection{\code{recruitment$print()}}{
+  Prints out Recruitment
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{recruitment$print(enable_cat_print = TRUE, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{enable_cat_print}}{Flag to allow \code{cat} based cli messages printed on
 console. Default is TRUE}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-recruitment-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-recruitment-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in Recruitment AGEPRO parameters from AGEPRO INP Input File
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{recruitment$read_inp_lines(
+\subsection{\code{recruitment$read_inp_lines()}}{
+  Reads in Recruitment AGEPRO parameters from AGEPRO INP Input File
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{recruitment$read_inp_lines(
   inp_con,
   nline,
   seq_years = 1,
   num_recruit_models = 1
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
-
-\item{\code{seq_years}}{\cr
+      \item{\code{seq_years}}{\cr
 Array representing the Projection Time Horizon}
+      \item{\code{num_recruit_models}}{Number of Recruitment Models. Default is 1}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{num_recruit_models}}{Number of Recruitment Models. Default is 1}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-recruitment-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-recruitment-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns the values for the RECRUIT keyword parameter formatted
+\subsection{\code{recruitment$get_inp_lines()}}{
+  Returns the values for the RECRUIT keyword parameter formatted
 to the AGEPRO input file format.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{recruitment$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{recruitment$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-recruitment-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-recruitment-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{recruitment$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{recruitment$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{recruitment$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
