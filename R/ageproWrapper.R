@@ -18,7 +18,7 @@ ageproWrapper <- R6Class(
     #' @param warn Logical parameter to validate path at initalization. If enabled,
     #' invalid reuslts returns a warning.
     initialize = function(path = NULL, warn = FALSE) {
-      # Active binding will passes "path" value through private$resolve_binary_path
+      # Active binding will passes "path" value through private$get_binary_path
       self$agepro_path <- path
 
       if (warn) {
@@ -54,7 +54,7 @@ ageproWrapper <- R6Class(
     #' @description
     #' Runs the Binary with logfile
     #'
-    #' This function uses the private function resolve_logdir
+    #' This function uses the private function get_logdir
     #' to return the logfile directory. This function will return
     #' the custom output directory if it exists. Otherwise it will
     #' check if user session (.Rprofile) has an existing path. If
@@ -64,14 +64,14 @@ ageproWrapper <- R6Class(
     #' @param args Program arguments
     #' @param out_dir Output directory for the logfile. The default
     #' blank character string will return the AGEPRO subdirectory
-    #' of the home directory via resolve_logdir
+    #' of the home directory via get_logdir
     #'
     run_logfile = function(args = character(), out_dir = "") {
       if (isFALSE(checkmate::test_file_exists(self$agepro_path))) {
         stop("AGEPRO calcuation execuatble not found.")
       }
       # Resolve logfile dir
-      dir_logfile <- private$resolve_logdir(out_dir)
+      dir_logfile <- private$get_logdir(out_dir)
 
       cout <- tryCatch(
         {
@@ -137,7 +137,7 @@ ageproWrapper <- R6Class(
       if (missing(value)) {
         return(private$.agepro_path)
       } else {
-        private$.agepro_path <- private$resolve_binary_path(value)
+        private$.agepro_path <- private$get_binary_path(value)
       }
     },
 
@@ -151,11 +151,11 @@ ageproWrapper <- R6Class(
     .agepro_path = NULL,
     .logdir = NULL,
 
-    # "Multi-tiered" helper method to valadate and retrieve AGEPRO binary path. From
+    # "Multi-tiered" helper method to retrieve AGEPRO binary path. From
     # Input custom path, user's ageproR Rsesions option (ageproR.agepro_path),
     # R envronmental values (AGEPRO_PATH) [TODO: Establish a AGEPRO_PATH envriomental value],
     # default path (~/AGEPRO/AGEPRO.exe for windows)
-    resolve_binary_path = function(path) {
+    get_binary_path = function(path) {
       # Check "path" exists when class initialized
       if (checkmate::test_file_exists(path)) {
         return(normalizePath(path, mustWork = NA))
@@ -181,10 +181,10 @@ ageproWrapper <- R6Class(
       return(normalizePath(default_path, mustWork = NA))
     },
 
-    # Helper method to check and retrieve the logfile output directory:
+    # Helper method to retrieve the logfile output directory:
     # From input custom path, user's ageproR setting from .Rprofile
     # (ageproR.model_logdir), or default path ('~/AGEPRO')
-    resolve_logdir = function(logdir) {
+    get_logdir = function(logdir) {
       #Input logfile directory path: Check if custom paths exist on system.
       if (checkmate::test_file_exists(logdir)) {
         private$.logdir <- normalizePath(logdir, mustWork = NA)
