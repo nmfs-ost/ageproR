@@ -115,6 +115,19 @@ ageproWrapper <- R6Class(
 
       #Return AGEPRO output object as an R object
       return(cout)
+    },
+
+    #' Validate file path for AGEPRO Calcuation Engine Binary
+    #'
+    #' @param exepath AGEPRO Calcuuation Path Binary
+    #'
+    validate_binary = function(
+      exepath = file.path(getwd(), "agepro.exe")
+    ) {
+      #Validate exepath: The path
+      if (isFALSE(checkmate::test_file_exists(exepath, extension = "exe"))) {
+        stop("AGEPRO Calcuation Engine Binary was not found")
+      }
     }
   ),
   active = list(

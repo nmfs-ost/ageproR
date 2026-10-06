@@ -64,20 +64,6 @@ write_logfile <- function(cout, fn_logfile) {
   )
 }
 
-
-#' Validates file path for AGEPRO Calcuation Engine Binary
-#'
-#' @param exepath AGEPRO Calcuuation Path Binary
-#'
-validate_calc_engine_binary <- function(
-  exepath = file.path(getwd(), "agepro.exe")
-) {
-  #Validate exepath: The path
-  if (isFALSE(checkmate::test_file_exists(exepath, extension = "exe"))) {
-    stop("AGEPRO Calcuation Engine Binary was not found")
-  }
-}
-
 #' Launches agepro_model to the calcuation engine
 #'
 #' This function will takes the [agepro_inp_model][ageproR::agepro_inp_model] class,

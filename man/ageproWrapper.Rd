@@ -23,6 +23,7 @@ a function wrapper to run the binary.
     \item \href{#method-ageproWrapper-initialize}{\code{ageproWrapper$new()}}
     \item \href{#method-ageproWrapper-run}{\code{ageproWrapper$run()}}
     \item \href{#method-ageproWrapper-run_logfile}{\code{ageproWrapper$run_logfile()}}
+    \item \href{#method-ageproWrapper-validate_binary}{\code{ageproWrapper$validate_binary()}}
     \item \href{#method-ageproWrapper-clone}{\code{ageproWrapper$clone()}}
   }
 }
@@ -89,7 +90,27 @@ subirectory of home directory.
       \item{\code{args}}{Program arguments}
       \item{\code{out_dir}}{Output directory for the logfile. The default
 blank character string will return the AGEPRO subdirectory
-of the home directory via resolve_logdir}
+of the home directory via resolve_logdir
+
+Validate file path for AGEPRO Calcuation Engine Binary}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ageproWrapper-validate_binary"></a>}}
+\if{latex}{\out{\hypertarget{method-ageproWrapper-validate_binary}{}}}
+\subsection{\code{ageproWrapper$validate_binary()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ageproWrapper$validate_binary(exepath = file.path(getwd(), "agepro.exe"))}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{exepath}}{AGEPRO Calcuuation Path Binary}
     }
     \if{html}{\out{</div>}}
   }
