@@ -128,19 +128,18 @@ ageproWrapper <- R6Class(
 
     #' @field logdir
     #' File path reserved for logfiles for AGEPRO Calcuation Engine runs.
-    logdir = function(value) {
-      if (missing(value)) {
-        return(private$.logdir)
-      } else {
-        private$.logdir <- private$resolve_logdir(value)
-      }
+    logdir = function() {
+      return(private$.logdir)
     }
   ),
   private = list(
     .agepro_path = NULL,
     .logdir = NULL,
 
-    # "Multi-tiered" helper method to get AGEPRO binary path
+    # "Multi-tiered" helper method to valadate and retrieve AGEPRO binary path. From
+    # Input custom path, user's ageproR Rsesions option (ageproR.agepro_path),
+    # R envronmental values (AGEPRO_PATH) [TODO: Establish a AGEPRO_PATH envriomental value],
+    # default path (~/AGEPRO/AGEPRO.exe for windows)
     resolve_binary_path = function(path) {
       # Check "path" exists when class initialized
       if (checkmate::test_file_exists(path)) {
@@ -167,20 +166,26 @@ ageproWrapper <- R6Class(
       return(normalizePath(default_path, mustWork = NA))
     },
 
+    # Helper method to check and retrieve the logfile output directory:
+    # From input custom path, user's ageproR setting from .Rprofile
+    # (ageproR.model_logdir), or default path ('~/AGEPRO')
     resolve_logdir = function(logdir) {
       #Input logfile directory path: Check if custom paths exist on system.
       if (checkmate::test_file_exists(logdir)) {
-        return(normalizePath(logdir, mustWork = NA))
+        private$.logdir <- normalizePath(logdir, mustWork = NA)
+        return()
       }
       # User Session Options (.Rprofile)
-      rprofile_logdir <- getOption("ageproR.run_logdir")
+      rprofile_logdir <- getOption("ageproR.model_logdir")
       if (checkmate::test_directory_exists(rprofile_logdir)) {
-        return(normalizePath(rprofile_logdir, mustWork = NA))
+        private$.logdir <- normalizePath(rprofile_logdir, mustWork = NA)
+        return()
       }
 
       # Fallback to Default Directory
       default_logdir <- file.path("~", "AGEPRO")
-      return(normalizePath(default_logdir, mustWork = NA))
+      private$.logdir <- normalizePath(default_logdir, mustWork = NA)
+      return()
     }
   )
 )
