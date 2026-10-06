@@ -14,14 +14,15 @@ run_model(
 \arguments{
 \item{exepath}{Path of the Agepro Calcuation engine}
 
-\item{agepro_args}{Typically used for AGEPRO Input Files.}
+\item{agepro_args}{Program arugument flags. Typically used for AGEPRO Input Files,
+however this field is intended to have program argument flags.}
 
 \item{outdir}{Output path}
 
 \item{save_logfile}{Option to save AGEPRO Calcuation Engine ouput to logfile}
 }
 \description{
-Wrapper function to call the Binary
+Wrapper function to call the Binary.
 }
 \examples{
 \dontrun{

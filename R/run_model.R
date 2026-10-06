@@ -1,9 +1,10 @@
 #' Run the AGEPRO Cacluation Engine Binary with a AGEPRO Input File
 #'
-#' Wrapper function to call the Binary
+#' Wrapper function to call the Binary.
 #'
 #' @param exepath Path of the Agepro Calcuation engine
-#' @param agepro_args Typically used for AGEPRO Input Files.
+#' @param agepro_args Program arugument flags. Typically used for AGEPRO Input Files,
+#' however this field is intended to have program argument flags.
 #' @param outdir Output path
 #' @param save_logfile Option to save AGEPRO Calcuation Engine ouput to logfile
 #'
@@ -29,7 +30,7 @@ run_model <- function(
   outdir = getwd(),
   save_logfile = FALSE
 ) {
-  agepro_calc <- ageproWrapper$new()
+  agepro_calc <- ageproWrapper$new(path = exepath)
 
   cout <- if (save_logfile) {
     agepro_calc$run_logfile(agepro_args, outdir)
@@ -156,7 +157,7 @@ launch_model <- function(
   # run_model to AGEPRO calculation engine
   run_model(exe, agepro_args = job_inpfile, outdir = job_dir)
 
-  # Stock Synthesis Output will be printed to R conosle.
+  # Output will be printed to R conosle.
 
   # Running AGEPRO calculation engine will create a *.out file,
   # in addtion to auxillary output files (if enabled).

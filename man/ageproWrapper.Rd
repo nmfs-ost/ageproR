@@ -73,7 +73,7 @@ invalid reuslts returns a warning.}
 \subsection{\code{ageproWrapper$run_logfile()}}{
   Runs the Binary with logfile
 
-This function uses the private function resolve_logdir
+This function uses the private function get_logdir
 to return the logfile directory. This function will return
 the custom output directory if it exists. Otherwise it will
 check if user session (.Rprofile) has an existing path. If
@@ -90,7 +90,7 @@ subirectory of home directory.
       \item{\code{args}}{Program arguments}
       \item{\code{out_dir}}{Output directory for the logfile. The default
 blank character string will return the AGEPRO subdirectory
-of the home directory via resolve_logdir
+of the home directory via get_logdir
 
 Validate file path for AGEPRO Calcuation Engine Binary}
     }
