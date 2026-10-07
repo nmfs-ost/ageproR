@@ -30,13 +30,24 @@ run_model <- function(
   outdir = getwd(),
   save_logfile = FALSE
 ) {
-  agepro_calc <- ageproWrapper$new(path = exepath)
+  tryCatch(
+    {
+      agepro_calc <- ageproWrapper$new(path = exepath)
 
-  cout <- if (save_logfile) {
-    agepro_calc$run_logfile(agepro_args, outdir)
-  } else {
-    agepro_calc$run(agepro_args)
-  }
+      cout <- if (save_logfile) {
+        agepro_calc$run_logfile(agepro_args, outdir)
+      } else {
+        agepro_calc$run(agepro_args)
+      }
+    },
+    error = function(err) {
+      message(paste0(
+        conditionMessage(err),
+        "Exiting model launch to AGEPRO. "
+      ))
+      return(invisible())
+    }
+  )
 
   return(cout)
 }
