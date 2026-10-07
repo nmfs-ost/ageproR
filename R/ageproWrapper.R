@@ -186,7 +186,7 @@ ageproWrapper <- R6Class(
     # (ageproR.model_logdir), or default path ('~/AGEPRO')
     get_logdir = function(logdir) {
       #Input logfile directory path: Check if custom paths exist on system.
-      if (checkmate::test_file_exists(logdir)) {
+      if (checkmate::test_directory_exists(logdir)) {
         private$.logdir <- normalizePath(logdir, mustWork = NA)
         return()
       }
@@ -199,6 +199,13 @@ ageproWrapper <- R6Class(
 
       # Fallback to Default Directory
       default_logdir <- file.path("~", "AGEPRO")
+      # Create default_logdir subdirectory at HOME if it doesn't exist
+      if (isFALSE(checkmate::test_directory_exists(default_logdir))) {
+        cli::cli_alert_info(
+          "Creating default_logdir directory at {.val {default_logdir}}"
+        )
+        dir.create(default_logdir)
+      }
       private$.logdir <- normalizePath(default_logdir, mustWork = NA)
       return()
     }
