@@ -42,10 +42,9 @@ run_model <- function(
     },
     error = function(err) {
       message(paste0(
-        conditionMessage(err),
-        "Exiting model launch to AGEPRO. "
+        "Error occured with launching model to AGEPRO: \n",
+        conditionMessage(err)
       ))
-      return(invisible())
     }
   )
 
