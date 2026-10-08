@@ -165,12 +165,16 @@ launch_model <- function(
   cli::cli_alert_info("Model Bootstrap File: {.val {job_bsnfile}}")
 
   # run_model to AGEPRO calculation engine
-  run_model(exe, agepro_args = job_inpfile, outdir = job_dir)
-
-  # Output will be printed to R conosle.
+  # AGEPRO console output is printed to R conosle
+  # TODO: If save_logfile is TRUE, AGEPRO console output will be stored in a
+  # text logfile.
+  cout <- run_model(exe, agepro_args = job_inpfile, outdir = job_dir)
 
   # Running AGEPRO calculation engine will create a *.out file,
   # in addtion to auxillary output files (if enabled).
+
+  # If the input file's "import to R" flag is enabled, a *.rdat file
+  # is saved to the job_dir
 }
 
 #' Job directory name setup
