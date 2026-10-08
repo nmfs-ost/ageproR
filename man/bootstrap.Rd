@@ -11,132 +11,143 @@ of bootstrap iterations containing the population of the first year in
 the projection
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{num_bootstraps}}{Number of bootstraps replicates of initial popualion size}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{num_bootstraps}}{Number of bootstraps replicates of initial popualion size}
 
-\item{\code{pop_scale_factor}}{Population Scale Factor, or BootFac, that represents the multiplicative
+    \item{\code{pop_scale_factor}}{Population Scale Factor, or BootFac, that represents the multiplicative
 factor to convert the relative bootstrap population numbers at age to
 absolute numbers at age.}
 
-\item{\code{bootstrap_file}}{Bootstrap file path.}
+    \item{\code{bootstrap_file}}{Bootstrap file path.}
 
-\item{\code{json_list_object}}{JSON list object for BOOTSTRAP keyword parameter}
+    \item{\code{json_list_object}}{JSON list object for BOOTSTRAP keyword parameter}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-bootstrap-new}{\code{bootstrap$new()}}
-\item \href{#method-bootstrap-set_bootstrap_filename}{\code{bootstrap$set_bootstrap_filename()}}
-\item \href{#method-bootstrap-read_inp_lines}{\code{bootstrap$read_inp_lines()}}
-\item \href{#method-bootstrap-get_inp_lines}{\code{bootstrap$get_inp_lines()}}
-\item \href{#method-bootstrap-print}{\code{bootstrap$print()}}
-\item \href{#method-bootstrap-clone}{\code{bootstrap$clone()}}
-}
+  \itemize{
+    \item \href{#method-bootstrap-initialize}{\code{bootstrap$new()}}
+    \item \href{#method-bootstrap-set_bootstrap_filename}{\code{bootstrap$set_bootstrap_filename()}}
+    \item \href{#method-bootstrap-read_inp_lines}{\code{bootstrap$read_inp_lines()}}
+    \item \href{#method-bootstrap-get_inp_lines}{\code{bootstrap$get_inp_lines()}}
+    \item \href{#method-bootstrap-print}{\code{bootstrap$print()}}
+    \item \href{#method-bootstrap-clone}{\code{bootstrap$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-bootstrap-new"></a>}}
-\if{latex}{\out{\hypertarget{method-bootstrap-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the Bootstrap Class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bootstrap$new()}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-bootstrap-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-bootstrap-initialize}{}}}
+\subsection{\code{bootstrap$new()}}{
+  Initializes the Bootstrap Class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{bootstrap$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-bootstrap-set_bootstrap_filename"></a>}}
 \if{latex}{\out{\hypertarget{method-bootstrap-set_bootstrap_filename}{}}}
-\subsection{Method \code{set_bootstrap_filename()}}{
-Uses file dialog interface to retrieve Bootstrap file name
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bootstrap$set_bootstrap_filename(bsn_path)}\if{html}{\out{</div>}}
+\subsection{\code{bootstrap$set_bootstrap_filename()}}{
+  Uses file dialog interface to retrieve Bootstrap file name
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{bootstrap$set_bootstrap_filename(bsn_path)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{bsn_path}}{Bootstrap Filename (*.bsn) path}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{bsn_path}}{Bootstrap Filename (*.bsn) path}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-bootstrap-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-bootstrap-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in BOOTSTRAP numbers and options from AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bootstrap$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{bootstrap$read_inp_lines()}}{
+  Reads in BOOTSTRAP numbers and options from AGEPRO Input file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{bootstrap$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-bootstrap-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-bootstrap-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns BOOTSTRAP values AGEPRO input file format (*,inp)
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bootstrap$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+\subsection{\code{bootstrap$get_inp_lines()}}{
+  Returns BOOTSTRAP values AGEPRO input file format (*,inp)
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{bootstrap$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-bootstrap-print"></a>}}
 \if{latex}{\out{\hypertarget{method-bootstrap-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out BOOTSTRAP fields
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bootstrap$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{bootstrap$print()}}{
+  Prints out BOOTSTRAP fields
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{bootstrap$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-bootstrap-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-bootstrap-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bootstrap$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{bootstrap$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{bootstrap$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

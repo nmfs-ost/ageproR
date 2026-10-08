@@ -19,7 +19,7 @@ test <- agepro_model$new(2019,2026,1,32,1000,4,3,0,300)
 
 
 ## ------------------------------------------------
-## Method `agepro_model$print`
+## Method `agepro_model$print()`
 ## ------------------------------------------------
 
 # Create agepro_inp_model "x"
@@ -34,91 +34,92 @@ x
 
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{ver_inpfile_string}}{Version string on AGEPRO input files (*.inp) for version compatibility
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{ver_inpfile_string}}{Version string on AGEPRO input files (*.inp) for version compatibility
 with Jon Brodiak's AGEPRO calculation engine.}
 
-\item{\code{ver_json_format}}{JSON Input File Format version.}
+    \item{\code{ver_json_format}}{JSON Input File Format version.}
 
-\item{\code{ver_rpackage}}{Returns ageproR r package version.}
+    \item{\code{ver_rpackage}}{Returns ageproR r package version.}
 
-\item{\code{projection_analyses_type}}{Type of projection analyses: standard, rebuilding, pstar.}
+    \item{\code{projection_analyses_type}}{Type of projection analyses: standard, rebuilding, pstar.}
 
-\item{\code{case_id}}{Title identifying AGEPRO model attributes}
+    \item{\code{case_id}}{Title identifying AGEPRO model attributes}
 
-\item{\code{general}}{General Options}
+    \item{\code{general}}{General Options}
 
-\item{\code{bootstrap}}{Bootstrapping}
+    \item{\code{bootstrap}}{Bootstrapping}
 
-\item{\code{natmort}}{Natural Mortality}
+    \item{\code{natmort}}{Natural Mortality}
 
-\item{\code{maturity}}{Maturity Fraction}
+    \item{\code{maturity}}{Maturity Fraction}
 
-\item{\code{fishery}}{\cr
+    \item{\code{fishery}}{\cr
 Fishery Selectivity}
 
-\item{\code{discard}}{\cr
+    \item{\code{discard}}{\cr
 Discard Fraction}
 
-\item{\code{stock_weight}}{Stock weight on January 1st at age}
+    \item{\code{stock_weight}}{Stock weight on January 1st at age}
 
-\item{\code{ssb_weight}}{Spawning Stock Weight of Age}
+    \item{\code{ssb_weight}}{Spawning Stock Weight of Age}
 
-\item{\code{mean_weight}}{Midyear mean population weight at age}
+    \item{\code{mean_weight}}{Midyear mean population weight at age}
 
-\item{\code{catch_weight}}{Landed catch weight at age by fleet}
+    \item{\code{catch_weight}}{Landed catch weight at age by fleet}
 
-\item{\code{disc_weight}}{Discard weight of age by fleet}
+    \item{\code{disc_weight}}{Discard weight of age by fleet}
 
-\item{\code{harvest}}{Harvest intensity (of fishing mortality or landings quota) by fleet}
+    \item{\code{harvest}}{Harvest intensity (of fishing mortality or landings quota) by fleet}
 
-\item{\code{recruit}}{AGEPRO Recruitment Model information}
+    \item{\code{recruit}}{AGEPRO Recruitment Model information}
 
-\item{\code{perc}}{User-selected percentile summary of the key results in the output file.}
+    \item{\code{perc}}{User-selected percentile summary of the key results in the output file.}
 
-\item{\code{bounds}}{Bounds on simulated fish weights and natural mortality rates}
+    \item{\code{bounds}}{Bounds on simulated fish weights and natural mortality rates}
 
-\item{\code{refpoint}}{Reference points for optional AGEPRO output threshold report.}
+    \item{\code{refpoint}}{Reference points for optional AGEPRO output threshold report.}
 
-\item{\code{scale}}{Scaling factors for biomass, recruitment, and stock size}
+    \item{\code{scale}}{Scaling factors for biomass, recruitment, and stock size}
 
-\item{\code{retroadjust}}{Retrospective bias Adjustment}
+    \item{\code{retroadjust}}{Retrospective bias Adjustment}
 
-\item{\code{pstar}}{Calculating Total Allowable Catch \eqn{TAC} to produce \eqn{P*}, the
+    \item{\code{pstar}}{Calculating Total Allowable Catch \eqn{TAC} to produce \eqn{P*}, the
 probability of overfishing in the target year.}
 
-\item{\code{rebuild}}{calculation of the constant total Fishing Mortality \eqn{F}
+    \item{\code{rebuild}}{calculation of the constant total Fishing Mortality \eqn{F}
 calculated across all fleets with the rebuild spawning biomass.}
 
-\item{\code{biological}}{Seasonal spawning timing for fishing mortality (\eqn{F}) and natural
+    \item{\code{biological}}{Seasonal spawning timing for fishing mortality (\eqn{F}) and natural
 mortality (\eqn{M})}
 
-\item{\code{options}}{Options for AGEPRO projection output}
+    \item{\code{options}}{Options for AGEPRO projection output}
 
-\item{\code{supported_inpfile_versions}}{Supported AGEPRO Input File formats}
-}
-\if{html}{\out{</div>}}
+    \item{\code{supported_inpfile_versions}}{Supported AGEPRO Input File formats}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-agepro_model-new}{\code{agepro_model$new()}}
-\item \href{#method-agepro_model-default_agepro_keyword_params}{\code{agepro_model$default_agepro_keyword_params()}}
-\item \href{#method-agepro_model-set_recruit_model}{\code{agepro_model$set_recruit_model()}}
-\item \href{#method-agepro_model-set_bootstrap_filename}{\code{agepro_model$set_bootstrap_filename()}}
-\item \href{#method-agepro_model-print}{\code{agepro_model$print()}}
-\item \href{#method-agepro_model-setup_projection_analyses_values}{\code{agepro_model$setup_projection_analyses_values()}}
-\item \href{#method-agepro_model-clone}{\code{agepro_model$clone()}}
-}
+  \itemize{
+    \item \href{#method-agepro_model-initialize}{\code{agepro_model$new()}}
+    \item \href{#method-agepro_model-default_agepro_keyword_params}{\code{agepro_model$default_agepro_keyword_params()}}
+    \item \href{#method-agepro_model-set_recruit_model}{\code{agepro_model$set_recruit_model()}}
+    \item \href{#method-agepro_model-set_bootstrap_filename}{\code{agepro_model$set_bootstrap_filename()}}
+    \item \href{#method-agepro_model-print}{\code{agepro_model$print()}}
+    \item \href{#method-agepro_model-setup_projection_analyses_values}{\code{agepro_model$setup_projection_analyses_values()}}
+    \item \href{#method-agepro_model-clone}{\code{agepro_model$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-agepro_model-new"></a>}}
-\if{latex}{\out{\hypertarget{method-agepro_model-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the instance of the AGEPRO Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$new(
+\if{html}{\out{<a id="method-agepro_model-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-agepro_model-initialize}{}}}
+\subsection{\code{agepro_model$new()}}{
+  Initializes the instance of the AGEPRO Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$new(
   yr_start,
   yr_end,
   age_begin,
@@ -131,81 +132,70 @@ Initializes the instance of the AGEPRO Model
   show_general_params = TRUE,
   enable_cat_print = TRUE,
   ...
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{yr_start}}{First Year of Projection}
-
-\item{\code{yr_end}}{Last Year of Projection}
-
-\item{\code{age_begin}}{Age begin}
-
-\item{\code{age_end}}{Age end}
-
-\item{\code{num_pop_sims}}{Number of population simulations}
-
-\item{\code{num_fleets}}{Number of fleets}
-
-\item{\code{num_rec_models}}{Number of Recruit Modules}
-
-\item{\code{discards_present}}{Are Discards present? FALSE by default}
-
-\item{\code{seed}}{Random Number seed. By Default, generates a pesdorandom number.}
-
-\item{\code{show_general_params}}{Logical flag to show AGEPRO model's general parameters on R console.
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{yr_start}}{First Year of Projection}
+      \item{\code{yr_end}}{Last Year of Projection}
+      \item{\code{age_begin}}{Age begin}
+      \item{\code{age_end}}{Age end}
+      \item{\code{num_pop_sims}}{Number of population simulations}
+      \item{\code{num_fleets}}{Number of fleets}
+      \item{\code{num_rec_models}}{Number of Recruit Modules}
+      \item{\code{discards_present}}{Are Discards present? FALSE by default}
+      \item{\code{seed}}{Random Number seed. By Default, generates a pesdorandom number.}
+      \item{\code{show_general_params}}{Logical flag to show AGEPRO model's general parameters on R console.
 TRUE, by default.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli}
-\code{\link[cli:cat_line]{cat_print}} messages to be seen on console. This is
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli}
+\code{\link[cli:cat_print]{cat_print}} messages to be seen on console. This is
 also used to print verbose information about the the initialized object.
 By default, this is set to TRUE.}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-default_agepro_keyword_params"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_model-default_agepro_keyword_params}{}}}
-\subsection{Method \code{default_agepro_keyword_params()}}{
-This will create default values for each primary AGEPRO keyword
+\subsection{\code{agepro_model$default_agepro_keyword_params()}}{
+  This will create default values for each primary AGEPRO keyword
 parameter based on the values passed by the \code{general_params} class.
 Optional keyowrd parameters, such as as discard fraction or discard
 weight may be created, if enabled.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$default_agepro_keyword_params(
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$default_agepro_keyword_params(
   x,
   projection_analyses_type = "standard",
   enable_cat_print = TRUE,
   ...
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{\link[=general_params]{General Params} class object.}
-
-\item{\code{projection_analyses_type}}{Type of projection analyses type.
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{\link[=general_params]{General Params} class object.}
+      \item{\code{projection_analyses_type}}{Type of projection analyses type.
 Default is \code{"standard"}.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-set_recruit_model"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_model-set_recruit_model}{}}}
-\subsection{Method \code{set_recruit_model()}}{
-Setup recruitment with a recruitment model collection list with default
+\subsection{\code{agepro_model$set_recruit_model()}}{
+  Setup recruitment with a recruitment model collection list with default
 data using current AGEPRO model's number of recruits and sequence of
 projection years.
 
@@ -214,50 +204,54 @@ Recruitment Model numbers as vector to the \code{model_num} parameter. If
 the vector length of \code{model_num} doesn't match current AGEPRO
 \link[=general_params]{general parameter's} \code{num_rec_models}
 value, it will throw an error.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$set_recruit_model(..., enable_cat_print = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$set_recruit_model(..., enable_cat_print = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-set_bootstrap_filename"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_model-set_bootstrap_filename}{}}}
-\subsection{Method \code{set_bootstrap_filename()}}{
-Wrapper function to call bootstrap's set_bootstrap_filename
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$set_bootstrap_filename(bsnfile)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_model$set_bootstrap_filename()}}{
+  Wrapper function to call bootstrap's set_bootstrap_filename
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$set_bootstrap_filename(bsnfile)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{bsnfile}}{bootstrap filename}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{bsnfile}}{bootstrap filename}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-print"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_model-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out values for each keyword parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$print()}\if{html}{\out{</div>}}
-}
-
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{# Create agepro_inp_model "x"
+\subsection{\code{agepro_model$print()}}{
+  Prints out values for each keyword parameter
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$print()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Examples}{
+    \if{html}{\out{<div class="r example copy">}}
+    \preformatted{# Create agepro_inp_model "x"
 # Supress NULL Recruitment Warnings, console output
 x <- suppressWarnings(create_agepro_model(
   enable_cat_print = FALSE,
@@ -265,19 +259,16 @@ x <- suppressWarnings(create_agepro_model(
 ))
 # Print out x's values
 x
-
-
 }
-\if{html}{\out{</div>}}
-
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-setup_projection_analyses_values"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_model-setup_projection_analyses_values}{}}}
-\subsection{Method \code{setup_projection_analyses_values()}}{
-Helper Function to setup agepro model's projection analyses type. agepro
+\subsection{\code{agepro_model$setup_projection_analyses_values()}}{
+  Helper Function to setup agepro model's projection analyses type. agepro
 models use standard projection analyses by default, and do not require
 additional keyword parameter setup. "pstar" and  "rebuild" projection
 analyses types require their own keyword parameter classes to setup.
@@ -285,36 +276,39 @@ However, they are not created during model initialization.
 
 AGEPRO models must can not have both pstar and rebuilder projection
 analyses,
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$setup_projection_analyses_values(type, enable_cat_print = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{type}}{projection_analyses_type}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$setup_projection_analyses_values(type, enable_cat_print = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{type}}{projection_analyses_type}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_model-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_model-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_model$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_model$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_model$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

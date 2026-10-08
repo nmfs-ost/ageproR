@@ -10,60 +10,61 @@ quantity of recruitment models used, and fishery processes that affect
 projections.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{yr_start}}{First Year in Projection}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{yr_start}}{First Year in Projection}
 
-\item{\code{yr_end}}{Last Year in Projection}
+    \item{\code{yr_end}}{Last Year in Projection}
 
-\item{\code{age_begin}}{First Age Class}
+    \item{\code{age_begin}}{First Age Class}
 
-\item{\code{age_end}}{Last Age Class}
+    \item{\code{age_end}}{Last Age Class}
 
-\item{\code{num_pop_sims}}{Number of Population Simulations}
+    \item{\code{num_pop_sims}}{Number of Population Simulations}
 
-\item{\code{num_fleets}}{Number of Fleets}
+    \item{\code{num_fleets}}{Number of Fleets}
 
-\item{\code{num_rec_models}}{Number of Recruitment Models}
+    \item{\code{num_rec_models}}{Number of Recruitment Models}
 
-\item{\code{discards_present}}{Are discards present?}
+    \item{\code{discards_present}}{Are discards present?}
 
-\item{\code{seed}}{Pseudo Random Number seed}
+    \item{\code{seed}}{Pseudo Random Number seed}
 
-\item{\code{num_years}}{Determines the number of years in projection by the
+    \item{\code{num_years}}{Determines the number of years in projection by the
 (absolute) difference of the last and first year of projection.}
 
-\item{\code{num_ages}}{Determines number of ages by the (absolute) difference
+    \item{\code{num_ages}}{Determines number of ages by the (absolute) difference
 of the first and last age class.}
 
-\item{\code{seq_years}}{Returns a sequence of years from First year of
+    \item{\code{seq_years}}{Returns a sequence of years from First year of
 projection}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
 
-\item{\code{json_list_object}}{List of GENERAL keyword fields values, exportable to JSON.}
-}
-\if{html}{\out{</div>}}
+    \item{\code{json_list_object}}{List of GENERAL keyword fields values, exportable to JSON.}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-general_params-new}{\code{general_params$new()}}
-\item \href{#method-general_params-print}{\code{general_params$print()}}
-\item \href{#method-general_params-read_inp_lines}{\code{general_params$read_inp_lines()}}
-\item \href{#method-general_params-get_inp_lines}{\code{general_params$get_inp_lines()}}
-\item \href{#method-general_params-clone}{\code{general_params$clone()}}
-}
+  \itemize{
+    \item \href{#method-general_params-initialize}{\code{general_params$new()}}
+    \item \href{#method-general_params-print}{\code{general_params$print()}}
+    \item \href{#method-general_params-read_inp_lines}{\code{general_params$read_inp_lines()}}
+    \item \href{#method-general_params-get_inp_lines}{\code{general_params$get_inp_lines()}}
+    \item \href{#method-general_params-clone}{\code{general_params$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-general_params-new"></a>}}
-\if{latex}{\out{\hypertarget{method-general_params-new}{}}}
-\subsection{Method \code{new()}}{
-Starts an instances of the AGEPRO Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{general_params$new(
+\if{html}{\out{<a id="method-general_params-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-general_params-initialize}{}}}
+\subsection{\code{general_params$new()}}{
+  Starts an instances of the AGEPRO Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{general_params$new(
   yr_start = 0,
   yr_end = 2,
   age_begin = 1,
@@ -74,107 +75,106 @@ Starts an instances of the AGEPRO Model
   discards_present = FALSE,
   seed = sample.int(1e+08, 1),
   enable_cat_print = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{yr_start}}{First Year of Projection}
-
-\item{\code{yr_end}}{Last Year of Projection}
-
-\item{\code{age_begin}}{age begin}
-
-\item{\code{age_end}}{age end}
-
-\item{\code{num_pop_sims}}{Number of population sims}
-
-\item{\code{num_fleets}}{Number of fleets}
-
-\item{\code{num_rec_models}}{Number of Recruit Modeles}
-
-\item{\code{discards_present}}{discards_present}
-
-\item{\code{seed}}{Random Number seed}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's messages on console.
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{yr_start}}{First Year of Projection}
+      \item{\code{yr_end}}{Last Year of Projection}
+      \item{\code{age_begin}}{age begin}
+      \item{\code{age_end}}{age end}
+      \item{\code{num_pop_sims}}{Number of population sims}
+      \item{\code{num_fleets}}{Number of fleets}
+      \item{\code{num_rec_models}}{Number of Recruit Modeles}
+      \item{\code{discards_present}}{discards_present}
+      \item{\code{seed}}{Random Number seed}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's messages on console.
 By Default, set to TRUE.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-general_params-print"></a>}}
 \if{latex}{\out{\hypertarget{method-general_params-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out General Parameters
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{general_params$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{general_params$print()}}{
+  Prints out General Parameters
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{general_params$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-general_params-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-general_params-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads General AGEPRO parameters from AGEPRO INP Input File
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{general_params$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{general_params$read_inp_lines()}}{
+  Reads General AGEPRO parameters from AGEPRO INP Input File
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{general_params$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-general_params-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-general_params-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns the values for the GENERAL keyword parameter formatted
+\subsection{\code{general_params$get_inp_lines()}}{
+  Returns the values for the GENERAL keyword parameter formatted
 to the AGEPRO input file format.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{general_params$get_inp_lines(delimiter = "  ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{general_params$get_inp_lines(delimiter = "  ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-general_params-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-general_params-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{general_params$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{general_params$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{general_params$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -9,243 +9,246 @@ errors that generate time-varying dynamics of population and fishery
 process.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{input_option}}{Option to indicate this parameter will be read:
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{input_option}}{Option to indicate this parameter will be read:
 \itemize{
 \item \code{0} By default, done interactively via interface.
 \item \code{1} Imported via location of an existing data file.
 }}
 
-\item{\code{time_varying}}{\link[base:logical]{Logical} flag to list parameter process data by
+    \item{\code{time_varying}}{\link[base:logical]{Logical} flag to list parameter process data by
 observation year}
 
-\item{\code{parameter_table}}{This is the logic for the fish population or
+    \item{\code{parameter_table}}{This is the logic for the fish population or
 fishery's processes by age (and by fleet if fleets are a
 factor).}
 
-\item{\code{cv_table}}{Matrix containing the vector of the lognormal process
+    \item{\code{cv_table}}{Matrix containing the vector of the lognormal process
 error of the average population or fishery process parameter's at age
 (and by fleet if fleets are a factor).}
 
-\item{\code{parameter_title}}{Name of the population or fishery process}
+    \item{\code{parameter_title}}{Name of the population or fishery process}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter name}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter name}
 
-\item{\code{json_list_object}}{Returns JSON list object with Process Error Parameter values}
-}
-\if{html}{\out{</div>}}
+    \item{\code{json_list_object}}{Returns JSON list object with Process Error Parameter values}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-process_error-new}{\code{process_error$new()}}
-\item \href{#method-process_error-create_parameter_table}{\code{process_error$create_parameter_table()}}
-\item \href{#method-process_error-print}{\code{process_error$print()}}
-\item \href{#method-process_error-read_inp_lines}{\code{process_error$read_inp_lines()}}
-\item \href{#method-process_error-read_inp_lines_parameter_tables}{\code{process_error$read_inp_lines_parameter_tables()}}
-\item \href{#method-process_error-read_inp_lines_cv_table}{\code{process_error$read_inp_lines_cv_table()}}
-\item \href{#method-process_error-get_inp_lines}{\code{process_error$get_inp_lines()}}
-\item \href{#method-process_error-clone}{\code{process_error$clone()}}
-}
+  \itemize{
+    \item \href{#method-process_error-initialize}{\code{process_error$new()}}
+    \item \href{#method-process_error-create_parameter_table}{\code{process_error$create_parameter_table()}}
+    \item \href{#method-process_error-print}{\code{process_error$print()}}
+    \item \href{#method-process_error-read_inp_lines}{\code{process_error$read_inp_lines()}}
+    \item \href{#method-process_error-read_inp_lines_parameter_tables}{\code{process_error$read_inp_lines_parameter_tables()}}
+    \item \href{#method-process_error-read_inp_lines_cv_table}{\code{process_error$read_inp_lines_cv_table()}}
+    \item \href{#method-process_error-get_inp_lines}{\code{process_error$get_inp_lines()}}
+    \item \href{#method-process_error-clone}{\code{process_error$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-process_error-new"></a>}}
-\if{latex}{\out{\hypertarget{method-process_error-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$new(
+\if{html}{\out{<a id="method-process_error-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-process_error-initialize}{}}}
+\subsection{\code{process_error$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$new(
   proj_years,
   num_ages,
   num_fleets = 1,
   input_option = 0,
   time_varying = TRUE,
   ...
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{\link[=projection_years]{Projection years}:
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{\link[=projection_years]{Projection years}:
 Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
-
-\item{\code{num_ages}}{Number of Age classes}
-
-\item{\code{num_fleets}}{Number of Fleets. Default is 1}
-
-\item{\code{input_option}}{Option to indicate this parameter will be:
+      \item{\code{num_ages}}{Number of Age classes}
+      \item{\code{num_fleets}}{Number of Fleets. Default is 1}
+      \item{\code{input_option}}{Option to indicate this parameter will be:
 \itemize{
 \item \code{0} By default, done interactively via interface.
 \item \code{1} Imported via location of an existing data file.
 }}
-
-\item{\code{time_varying}}{Logical flag that enables the stochastic parameter
+      \item{\code{time_varying}}{Logical flag that enables the stochastic parameter
 to use as a time-varying array if TRUE (or 1). Otherwise, FALSE the
 vector will cover "all years" of the projection. Default is TRUE.}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-create_parameter_table"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-create_parameter_table}{}}}
-\subsection{Method \code{create_parameter_table()}}{
-Creates an Population or Fishery process Parameter table
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$create_parameter_table(fleet_yr_rows, ages_cols)}\if{html}{\out{</div>}}
+\subsection{\code{process_error$create_parameter_table()}}{
+  Creates an Population or Fishery process Parameter table
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$create_parameter_table(fleet_yr_rows, ages_cols)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{fleet_yr_rows}}{(Fleet-)Year Row}
+      \item{\code{ages_cols}}{Age Columns}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{fleet_yr_rows}}{(Fleet-)Year Row}
-
-\item{\code{ages_cols}}{Age Columns}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-print"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out the values of the Process Error Parameter
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$print(enable_cat_print = TRUE, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+\subsection{\code{process_error$print()}}{
+  Formatted to print out the values of the Process Error Parameter
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$print(enable_cat_print = TRUE, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in Process Error keyword parameter's values from AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$read_inp_lines(
+\subsection{\code{process_error$read_inp_lines()}}{
+  Reads in Process Error keyword parameter's values from AGEPRO Input file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$read_inp_lines(
   inp_con,
   nline,
   proj_years,
   num_ages,
   num_fleets = 1
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
-
-\item{\code{proj_years}}{\link[=projection_years]{Projection years}:
+      \item{\code{proj_years}}{\link[=projection_years]{Projection years}:
 Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
+      \item{\code{num_ages}}{Number of Age classes}
+      \item{\code{num_fleets}}{Number of Fleets. Default is 1}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{num_ages}}{Number of Age classes}
-
-\item{\code{num_fleets}}{Number of Fleets. Default is 1}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-read_inp_lines_parameter_tables"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-read_inp_lines_parameter_tables}{}}}
-\subsection{Method \code{read_inp_lines_parameter_tables()}}{
-Helper function to set population or fishery process parameter
+\subsection{\code{process_error$read_inp_lines_parameter_tables()}}{
+  Helper function to set population or fishery process parameter
 tables from AGEPRO input files. Reads in an additional line (or lines)
 from the file connection to assign to the \code{parameter_table}
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$read_inp_lines_parameter_tables(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$read_inp_lines_parameter_tables(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-read_inp_lines_cv_table"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-read_inp_lines_cv_table}{}}}
-\subsection{Method \code{read_inp_lines_cv_table()}}{
-Internal helper function to set cv tables from
+\subsection{\code{process_error$read_inp_lines_cv_table()}}{
+  Internal helper function to set cv tables from
 AGEPRO input files. Reads in an additional line (or lines) from the
 file connection to assign to the \code{cv_table}
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$read_inp_lines_cv_table(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$read_inp_lines_cv_table(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns the values for the Process Error parameter formatted
+\subsection{\code{process_error$get_inp_lines()}}{
+  Returns the values for the Process Error parameter formatted
 to the AGEPRO input file format.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$get_inp_lines(delimiter = "  ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$get_inp_lines(delimiter = "  ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-process_error-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-process_error-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{process_error$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{process_error$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{process_error$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -8,162 +8,168 @@ Class Structure containing the Harvest values and Harvest Specifications
 }
 \keyword{projection_analyses}
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{harvest_specifications}}{Contains values the Harvest Specification per projection year
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{harvest_specifications}}{Contains values the Harvest Specification per projection year
 \describe{
 \item{"0"}{F-MULT}
 \item{"1"}{LANDINGS}
 \item{"2"}{REMOVALS}
 }}
 
-\item{\code{harvest_value}}{Contains the harvest Amount per projection year. Can be fleet specific
+    \item{\code{harvest_value}}{Contains the harvest Amount per projection year. Can be fleet specific
 if more than 2 fleets are specified.}
 
-\item{\code{harvest_scenario_table}}{Combines the Harvest specification and (fleet) harvest amount per
+    \item{\code{harvest_scenario_table}}{Combines the Harvest specification and (fleet) harvest amount per
 projection year.}
 
-\item{\code{json_list_object}}{Returns JSON list object with Harvest Specification and Harvest Values}
+    \item{\code{json_list_object}}{Returns JSON list object with Harvest Specification and Harvest Values}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-harvest_scenario-new}{\code{harvest_scenario$new()}}
-\item \href{#method-harvest_scenario-print}{\code{harvest_scenario$print()}}
-\item \href{#method-harvest_scenario-setup_harvest_scenario_variables}{\code{harvest_scenario$setup_harvest_scenario_variables()}}
-\item \href{#method-harvest_scenario-read_inp_lines}{\code{harvest_scenario$read_inp_lines()}}
-\item \href{#method-harvest_scenario-get_inp_lines}{\code{harvest_scenario$get_inp_lines()}}
-\item \href{#method-harvest_scenario-clone}{\code{harvest_scenario$clone()}}
-}
+  \itemize{
+    \item \href{#method-harvest_scenario-initialize}{\code{harvest_scenario$new()}}
+    \item \href{#method-harvest_scenario-print}{\code{harvest_scenario$print()}}
+    \item \href{#method-harvest_scenario-setup_harvest_scenario_variables}{\code{harvest_scenario$setup_harvest_scenario_variables()}}
+    \item \href{#method-harvest_scenario-read_inp_lines}{\code{harvest_scenario$read_inp_lines()}}
+    \item \href{#method-harvest_scenario-get_inp_lines}{\code{harvest_scenario$get_inp_lines()}}
+    \item \href{#method-harvest_scenario-clone}{\code{harvest_scenario$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-harvest_scenario-new"></a>}}
-\if{latex}{\out{\hypertarget{method-harvest_scenario-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes Class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{harvest_scenario$new(projection_years, num_fleets = 1, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{projection_years}}{\link[=projection_years]{Projection years}:
+\if{html}{\out{<a id="method-harvest_scenario-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-harvest_scenario-initialize}{}}}
+\subsection{\code{harvest_scenario$new()}}{
+  Initializes Class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{harvest_scenario$new(projection_years, num_fleets = 1, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{projection_years}}{\link[=projection_years]{Projection years}:
 Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
+      \item{\code{num_fleets}}{Number of Fleets. Default is 1}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{num_fleets}}{Number of Fleets. Default is 1}
-
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-harvest_scenario-print"></a>}}
 \if{latex}{\out{\hypertarget{method-harvest_scenario-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out the Harvest Scenario Table
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{harvest_scenario$print(enable_cat_print = TRUE)}\if{html}{\out{</div>}}
+\subsection{\code{harvest_scenario$print()}}{
+  Formatted to print out the Harvest Scenario Table
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{harvest_scenario$print(enable_cat_print = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
+messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
-messages to be seen on console.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-harvest_scenario-setup_harvest_scenario_variables"></a>}}
 \if{latex}{\out{\hypertarget{method-harvest_scenario-setup_harvest_scenario_variables}{}}}
-\subsection{Method \code{setup_harvest_scenario_variables()}}{
-Helper function to setup harvest_scenario's variables
+\subsection{\code{harvest_scenario$setup_harvest_scenario_variables()}}{
+  Helper function to setup harvest_scenario's variables
 harvest_specifications, harvest_value, harvest_scenario_table
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{harvest_scenario$setup_harvest_scenario_variables(proj_years, num_fleets = 1)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{harvest_scenario$setup_harvest_scenario_variables(proj_years, num_fleets = 1)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{\link[=projection_years]{Projection years} object}
+      \item{\code{num_fleets}}{Number of Fleets. Defaults to 1}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{\link[=projection_years]{Projection years} object}
-
-\item{\code{num_fleets}}{Number of Fleets. Defaults to 1}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-harvest_scenario-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-harvest_scenario-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in Harvest Scenario keyword parameter's values from the
+\subsection{\code{harvest_scenario$read_inp_lines()}}{
+  Reads in Harvest Scenario keyword parameter's values from the
 AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{harvest_scenario$read_inp_lines(inp_con, nline, proj_years, num_fleets = 1)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{harvest_scenario$read_inp_lines(inp_con, nline, proj_years, num_fleets = 1)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
-
-\item{\code{proj_years}}{\link[=projection_years]{Projection years}:
+      \item{\code{proj_years}}{\link[=projection_years]{Projection years}:
 Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
+      \item{\code{num_fleets}}{Number of Fleets. Default is 1}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{num_fleets}}{Number of Fleets. Default is 1}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-harvest_scenario-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-harvest_scenario-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns Harvest Specification and Harvest Values from the Harvest
+\subsection{\code{harvest_scenario$get_inp_lines()}}{
+  Returns Harvest Specification and Harvest Values from the Harvest
 Scenario parameter formatted to the AGEPRO input file format.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{harvest_scenario$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{harvest_scenario$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-harvest_scenario-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-harvest_scenario-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{harvest_scenario$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{harvest_scenario$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{harvest_scenario$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

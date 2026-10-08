@@ -4,55 +4,48 @@
 \alias{agepro_inp_model}
 \title{AGEPRO Input File Model}
 \description{
-AGEPRO Input File Model
-
-AGEPRO Input File Model
-}
-\details{
 File Functionality is based on AGEPRO-CoreLib implementation
 }
 \section{Super class}{
-\code{\link[ageproR:agepro_model]{ageproR::agepro_model}} -> \code{agepro_inp_model}
+\code{\link[ageproR:agepro_model]{agepro_model}} -> \code{agepro_inp_model}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{nline}}{nlines}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{nline}}{nlines}
 
-\item{\code{inp_filepath}}{Filepath of AGEPRO input file}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_filepath}}{Filepath of AGEPRO input file}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-agepro_inp_model-new}{\code{agepro_inp_model$new()}}
-\item \href{#method-agepro_inp_model-read_inp}{\code{agepro_inp_model$read_inp()}}
-\item \href{#method-agepro_inp_model-read_inpfile_values}{\code{agepro_inp_model$read_inpfile_values()}}
-\item \href{#method-agepro_inp_model-match_keyword}{\code{agepro_inp_model$match_keyword()}}
-\item \href{#method-agepro_inp_model-not_implemented}{\code{agepro_inp_model$not_implemented()}}
-\item \href{#method-agepro_inp_model-write_inp}{\code{agepro_inp_model$write_inp()}}
-\item \href{#method-agepro_inp_model-clone}{\code{agepro_inp_model$clone()}}
+  \itemize{
+    \item \href{#method-agepro_inp_model-initialize}{\code{agepro_inp_model$new()}}
+    \item \href{#method-agepro_inp_model-read_inp}{\code{agepro_inp_model$read_inp()}}
+    \item \href{#method-agepro_inp_model-read_inpfile_values}{\code{agepro_inp_model$read_inpfile_values()}}
+    \item \href{#method-agepro_inp_model-match_keyword}{\code{agepro_inp_model$match_keyword()}}
+    \item \href{#method-agepro_inp_model-not_implemented}{\code{agepro_inp_model$not_implemented()}}
+    \item \href{#method-agepro_inp_model-write_inp}{\code{agepro_inp_model$write_inp()}}
+    \item \href{#method-agepro_inp_model-clone}{\code{agepro_inp_model$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="default_agepro_keyword_params"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-default_agepro_keyword_params'><code>ageproR::agepro_model$default_agepro_keyword_params()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="print"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-print'><code>ageproR::agepro_model$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_bootstrap_filename"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_bootstrap_filename'><code>ageproR::agepro_model$set_bootstrap_filename()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_recruit_model"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_recruit_model'><code>ageproR::agepro_model$set_recruit_model()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="setup_projection_analyses_values"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-setup_projection_analyses_values'><code>ageproR::agepro_model$setup_projection_analyses_values()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="default_agepro_keyword_params"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-default_agepro_keyword_params'><code>agepro_model$default_agepro_keyword_params()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="print"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-print'><code>agepro_model$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_bootstrap_filename"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_bootstrap_filename'><code>agepro_model$set_bootstrap_filename()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="set_recruit_model"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-set_recruit_model'><code>agepro_model$set_recruit_model()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="agepro_model" data-id="setup_projection_analyses_values"><a href='../../ageproR/html/agepro_model.html#method-agepro_model-setup_projection_analyses_values'><code>agepro_model$setup_projection_analyses_values()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-agepro_inp_model-new"></a>}}
-\if{latex}{\out{\hypertarget{method-agepro_inp_model-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes an instance of the AGEPRO model with AGEPRO input file
+\if{html}{\out{<a id="method-agepro_inp_model-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-agepro_inp_model-initialize}{}}}
+\subsection{\code{agepro_inp_model$new()}}{
+  Initializes an instance of the AGEPRO model with AGEPRO input file
 format functions. A default model can be initialized without setting
-\link[=general_params]{general_params} parameter values. The default
+\link{general_params} parameter values. The default
 values for the default model is:
 
 \itemize{
@@ -64,8 +57,9 @@ values for the default model is:
 \item Discards Present (\code{discards_present}): \code{FALSE} (or 0)
 \item Pseudo-Randomly generated \code{seed}
 }
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$new(
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$new(
   yr_start = 0,
   yr_end = 2,
   age_begin = 1,
@@ -78,158 +72,154 @@ values for the default model is:
   enable_cat_print = TRUE,
   show_general_params = TRUE,
   ...
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{yr_start}}{First Year of Projection}
-
-\item{\code{yr_end}}{Last Year of Projection}
-
-\item{\code{age_begin}}{Age begin}
-
-\item{\code{age_end}}{Age end}
-
-\item{\code{num_pop_sims}}{Number of population simulations}
-
-\item{\code{num_fleets}}{Number of fleets}
-
-\item{\code{num_rec_models}}{Number of Recruit Modules}
-
-\item{\code{discards_present}}{Are Discards present? FALSE by default}
-
-\item{\code{seed}}{Random Number seed. By Default, generates a pesdorandom number.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{yr_start}}{First Year of Projection}
+      \item{\code{yr_end}}{Last Year of Projection}
+      \item{\code{age_begin}}{Age begin}
+      \item{\code{age_end}}{Age end}
+      \item{\code{num_pop_sims}}{Number of population simulations}
+      \item{\code{num_fleets}}{Number of fleets}
+      \item{\code{num_rec_models}}{Number of Recruit Modules}
+      \item{\code{discards_present}}{Are Discards present? FALSE by default}
+      \item{\code{seed}}{Random Number seed. By Default, generates a pesdorandom number.}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console. In this instance, this is set to TRUE}
-
-\item{\code{show_general_params}}{Logical flag to show AGEPRO model's general parameters on R console.
+      \item{\code{show_general_params}}{Logical flag to show AGEPRO model's general parameters on R console.
 TRUE, by default.}
+      \item{\code{...}}{further arguments passed to or from other methods}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
+}
 
-\item{\code{...}}{further arguments passed to or from other methods}
-
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_inp_model-read_inp"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_inp_model-read_inp}{}}}
-\subsection{Method \code{read_inp()}}{
-Read AGEPRO INP Input Files
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$read_inp(inpfile, ...)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_inp_model$read_inp()}}{
+  Read AGEPRO INP Input Files
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$read_inp(inpfile, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inpfile}}{input file name}
+      \item{\code{...}}{further arguments passed to or from other methods}
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inpfile}}{input file name}
-
-\item{\code{...}}{further arguments passed to or from other methods}
-
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_inp_model-read_inpfile_values"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_inp_model-read_inpfile_values}{}}}
-\subsection{Method \code{read_inpfile_values()}}{
-Read Input file Values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$read_inpfile_values(inp_con)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_inp_model$read_inpfile_values()}}{
+  Read Input file Values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$read_inpfile_values(inp_con)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_inp_model-match_keyword"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_inp_model-match_keyword}{}}}
-\subsection{Method \code{match_keyword()}}{
-Match Keyword
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$match_keyword(inp_line, inp_con)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_inp_model$match_keyword()}}{
+  Match Keyword
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$match_keyword(inp_line, inp_con)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_line}}{Line read from the AGEPRO Input File}
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_line}}{Line read from the AGEPRO Input File}
-
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_inp_model-not_implemented"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_inp_model-not_implemented}{}}}
-\subsection{Method \code{not_implemented()}}{
-Throws a Not Implemented exception message. Placeholder function.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$not_implemented(keyword = "")}\if{html}{\out{</div>}}
+\subsection{\code{agepro_inp_model$not_implemented()}}{
+  Throws a Not Implemented exception message. Placeholder function.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$not_implemented(keyword = "")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{keyword}}{keyword}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{keyword}}{keyword}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_inp_model-write_inp"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_inp_model-write_inp}{}}}
-\subsection{Method \code{write_inp()}}{
-Writes AGEPRO keyword parameter data as a AGEPRO input file (*.inp)
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$write_inp(
+\subsection{\code{agepro_inp_model$write_inp()}}{
+  Writes AGEPRO keyword parameter data as a AGEPRO input file (*.inp)
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$write_inp(
   inpfile,
   delimiter = "  ",
   overwrite_as_currentver = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inpfile}}{input file path}
-
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-
-\item{\code{overwrite_as_currentver}}{As default, overwrites version value to
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inpfile}}{input file path}
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+      \item{\code{overwrite_as_currentver}}{As default, overwrites version value to
 to the current version of the AGEPRO input file format.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-agepro_inp_model-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-agepro_inp_model-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{agepro_inp_model$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{agepro_inp_model$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{agepro_inp_model$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

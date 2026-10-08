@@ -1,12 +1,12 @@
 #' Run the AGEPRO Cacluation Engine Binary with a AGEPRO Input File
 #'
-#' Wrapper function to call the Binary
+#' Wrapper function to call the Binary.
 #'
 #' @param exepath Path of the Agepro Calcuation engine
-#' @param agepro_args Typically used for AGEPRO Input Files.
+#' @param agepro_args Program arugument flags. Typically used for AGEPRO Input Files,
+#' however this field is intended to have program argument flags.
 #' @param outdir Output path
 #' @param save_logfile Option to save AGEPRO Calcuation Engine ouput to logfile
-#' @param fn_logfile Logfile Filename
 #'
 #' @export
 #' @examples
@@ -28,39 +28,25 @@ run_model <- function(
   exepath = "agepro.exe",
   agepro_args = "",
   outdir = getwd(),
-  save_logfile = FALSE,
-  fn_logfile = tempfile(format(Sys.time(), "%Y%m%d_%H%M_"), fileext = ".txt")
+  save_logfile = FALSE
 ) {
-  # Validate exepath
-  checkmate::assert_character(exepath, len = 1)
-  validate_calc_engine_binary(exepath)
-
-  # Valadate outdir
-  if (isFALSE(checkmate::test_directory_exists(outdir))) {
-    stop("Invalid AGEPRO Output Directory")
-  }
-
-  cout <- tryCatch(
+  tryCatch(
     {
-      # System Call to AGEPRO Calcuation Engine Binary
-      system2(
-        command = exepath,
-        args = agepro_args,
-        stdout = ifelse(save_logfile, TRUE, ""),
-        stderr = ""
-      )
+      agepro_calc <- ageproWrapper$new(path = exepath)
+
+      cout <- if (save_logfile) {
+        agepro_calc$run_logfile(agepro_args, outdir)
+      } else {
+        agepro_calc$run(agepro_args)
+      }
     },
     error = function(err) {
       message(paste0(
-        "Error: \n",
-        gsub("\\.$", "", conditionMessage(err))
+        "Error occured with launching model to AGEPRO: \n",
+        conditionMessage(err)
       ))
     }
   )
-
-  if (isTRUE(save_logfile)) {
-    write_logfile(cout, file.path(outdir, fn_logfile))
-  }
 
   return(cout)
 }
@@ -85,22 +71,8 @@ write_logfile <- function(cout, fn_logfile) {
       " ",
       cout
     ),
-    cout
+    con = fn_logfile
   )
-}
-
-
-#' Validates file path for AGEPRO Calcuation Engine Binary
-#'
-#' @param exepath AGEPRO Calcuuation Path Binary
-#'
-validate_calc_engine_binary <- function(
-  exepath = file.path(getwd(), "agepro.exe")
-) {
-  #Validate exepath: The path
-  if (isFALSE(checkmate::test_file_exists(exepath, extension = "exe"))) {
-    stop("AGEPRO Calcuation Engine Binary was not found")
-  }
 }
 
 #' Launches agepro_model to the calcuation engine
@@ -136,7 +108,7 @@ launch_model <- function(
 
   # Validate agepro_model
   assert_agepro_model_class(model)
-
+  browser()
   # TODO: Validate agepro calculation binary path.
   # Will need to check where the location of AGEPRO calcuation engine binary is installed.
   # This value allows the model to run AGEPRO calcuation engine between differnt users.
@@ -193,12 +165,16 @@ launch_model <- function(
   cli::cli_alert_info("Model Bootstrap File: {.val {job_bsnfile}}")
 
   # run_model to AGEPRO calculation engine
-  run_model(exe, agepro_args = job_inpfile, out_dir = job_dir)
-
-  # Stock Synthesis Output will be printed to R conosle.
+  # AGEPRO console output is printed to R conosle
+  # TODO: If save_logfile is TRUE, AGEPRO console output will be stored in a
+  # text logfile.
+  cout <- run_model(exe, agepro_args = job_inpfile, outdir = job_dir)
 
   # Running AGEPRO calculation engine will create a *.out file,
   # in addtion to auxillary output files (if enabled).
+
+  # If the input file's "import to R" flag is enabled, a *.rdat file
+  # is saved to the job_dir
 }
 
 #' Job directory name setup
