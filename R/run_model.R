@@ -84,7 +84,7 @@ write_logfile <- function(cout, fn_logfile) {
 #' directory. Function will also store AGEPRO calcuation engine logfile if requested.
 #'
 #' @details
-#' This is simlar to how AGEPRO_GUI launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
+#' This is simlar to how [AGEPRO-GUI](https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI) launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
 #' in the AGEPRO Input File is relative to the directory that input file is saved; The bootstrap filepath value does not have
 #' to have directory paths if the Input file and bootstrap file is saved in the same directory.
 #'
