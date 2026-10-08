@@ -1,5 +1,5 @@
 ---
-output: github_document
+fromat: gfm
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -37,8 +37,8 @@ AGEPRO (Age Structured Projection Model) calculation engine.
 - Fixed Recruitment Model 
 - Empirical Cumulative Distribution Factor for w/ Linear Decline to Zero
 - Markov Matrix Recruitment Model
-- Run AGEPRO models with the AGEPRO calculation engine within R.
-- Exported AGEPRO output R data objects.
+~~ - Run AGEPRO models with the AGEPRO calculation engine within R. ~~
+~~ - Exported AGEPRO output R data objects. ~~
 
 Importing Stock Synthesis report data as AGEPRO input data is being developed as a separate R-package: ss3agepro
 
@@ -48,7 +48,9 @@ You can install the development version of ageproR from
 [NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
 with:
 
-```{r ageproR-install, eval = FALSE}
+```{r ageproR-install}
+#| eval: false
+
 # via `pak`
 install.packages("pak")
 pak::pkg_install("nmfs-ost/ageproR")
@@ -64,9 +66,11 @@ remotes::install_github("nmfs-ost/ageproR")
 `AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves 
 to the `AGEPRO VERSION 4.25` Input File Format.
 
+**Note: Models sent to the AGEPRO calualtion engine MUST be in the `AGEPRO VERSION 4.25` fornat**
+
 Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
 
-```{r example-run, child="inst/example/doc-model-workflow.Rmd"}
+```{r example-run, child="inst/extdata/doc-model-workflow.Rmd"}
 ```
 
 ## Citation
