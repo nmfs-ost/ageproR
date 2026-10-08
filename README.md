@@ -28,9 +28,9 @@ in future updates.
 - Predictor Recruitment Models
 - Fixed Recruitment Model
 - Empirical Cumulative Distribution Factor for w/ Linear Decline to Zero
-- Markov Matrix Recruitment Model \~~ - Run AGEPRO models with the
-  AGEPRO calculation engine within R. \~~ \~~ - Exported AGEPRO output R
-  data objects. \~~
+- Markov Matrix Recruitment Model
+- ~~Run AGEPRO models with the AGEPRO calculation engine within R.~~
+- ~~Exported AGEPRO output R data objects.~~
 
 Importing Stock Synthesis report data as AGEPRO input data is being
 developed as a separate R-package: ss3agepro
