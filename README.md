@@ -32,8 +32,8 @@ in future updates.
 - ~~Run AGEPRO models with the AGEPRO calculation engine within R.~~
 - ~~Exported AGEPRO output R data objects.~~
 
-Importing Stock Synthesis report data as AGEPRO input data is being
-developed as a separate R-package: ss3agepro
+Importing Stock Synthesis Report Data will handled as a separate
+R-package project: ss3agepro
 
 ## Installation
 
