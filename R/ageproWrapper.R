@@ -42,6 +42,7 @@ ageproWrapper <- R6Class(
         stop("AGEPRO calcuation execuatble not found.")
       }
 
+      cli::cli_alert_info("Running: {.code {self$agepro_path} {args}}")
       cout <- system2(
         command = self$agepro_path,
         args = args
