@@ -154,8 +154,7 @@ ageproWrapper <- R6Class(
 
     # "Multi-tiered" helper method to retrieve AGEPRO binary path. From
     # Input custom path, user's ageproR Rsesions option (ageproR.agepro_path),
-    # R envronmental values (AGEPRO_PATH) [TODO: Establish a AGEPRO_PATH envriomental value],
-    # default path (~/AGEPRO/AGEPRO.exe for windows)
+    # and default path (~/AGEPRO/AGEPRO.exe for windows)
     get_binary_path = function(path) {
       # Check "path" exists when class initialized
       if (checkmate::test_file_exists(path)) {
@@ -165,11 +164,6 @@ ageproWrapper <- R6Class(
       option_path <- getOption("ageproR.agepro_path")
       if (checkmate::test_file_exists(option_path)) {
         return(normalizePath(option_path, mustWork = NA))
-      }
-      # Check Enivromental Variables (.Renviron)
-      env_path <- Sys.getenv("AGEPRO_PATH")
-      if (checkmate::test_file_exists(env_path)) {
-        return(normalizePath(env_path, mustWork = NA))
       }
 
       # Check Default Install Directory
