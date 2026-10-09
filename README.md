@@ -111,6 +111,13 @@ test$set_recruit_model(c(5,5,6))
 
 ## Reading or importing from AGEPRO input file (\*.inp)
 
+> \[!NOTE\]
+>
+> Input Files with the `AGEPRO VERSION 4.0` format can be loaded to
+> ageproR currently, but will be deprecated. In future updates. By
+> default, AGPRO input files will be saved in the `AGEPRO VERSION 4.25`
+> format.
+
 Loading AGEPRO Input Files with multiple recuitment models will
 automatically set the **number of recruits** and overwrite the existing
 model’s recruitment data; For instance, reading a AGEPRO input file with
@@ -133,13 +140,6 @@ test <- ageproR::import_agepro_model(inpfile)
 ```
 
 ### Setting Bootstrap Filepath when importing AGEPRO input data files
-
-> \[!NOTE\]
->
-> Input Files with the `AGEPRO VERSION 4.0` format can be loaded to
-> ageproR currently, but will be deprecated. In future updates. By
-> default, AGPRO input files will be saved in the `AGEPRO VERSION 4.25`
-> format.
 
 ``` r
 # Load path of ageproR's included Example1 Bootstrap File
