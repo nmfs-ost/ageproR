@@ -136,10 +136,12 @@ test <- ageproR::import_agepro_model(inpfile)
 
 ### Setting Bootstrap Filepath when importing AGEPRO input data files
 
-> \[!NOTE\] Input Files with the `AGEPRO VERSION 4.0` format can be
-> loaded to ageproR currently, but will be deprecated. In future
-> updates. By default, AGPRO input files will be saved in the
-> `AGEPRO VERSION 4.25` format.
+> \[!NOTE\]
+>
+> Input Files with the `AGEPRO VERSION 4.0` format can be loaded to
+> ageproR currently, but will be deprecated. In future updates. By
+> default, AGPRO input files will be saved in the `AGEPRO VERSION 4.25`
+> format.
 
 ``` r
 # Load path of ageproR's included Example1 Bootstrap File
