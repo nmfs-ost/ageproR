@@ -111,13 +111,11 @@ test$set_recruit_model(c(5,5,6))
 
 ## Reading or importing from AGEPRO input file (\*.inp)
 
-> \[!NOTE\]
->
-> Loading AGEPRO Input Files with multiple recuitment models will
-> automatically set the **number of recruits** and overwrite the
-> existing model’s recruitment data; For instance, reading a AGEPRO
-> input file with multiple recruits will overwrite newly created model’s
-> default data single NULL Recruitment.
+Loading AGEPRO Input Files with multiple recuitment models will
+automatically set the **number of recruits** and overwrite the existing
+model’s recruitment data; For instance, reading a AGEPRO input file with
+multiple recruits will overwrite newly created model’s default data
+single NULL Recruitment.
 
 ``` r
 # Load path of ageproR's included Example1 Input File
