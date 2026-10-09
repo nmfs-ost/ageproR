@@ -23,7 +23,7 @@ test$set_recruit_model(c(14))
 test$bootstrap$bootstrap_file
 
 # Load path of ageproR's included Example1 Bootstrap File
-bsnfile <- system.file("inst/extdata/Example1.BSN", package = "ageproR")
+bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
 
 # Set Path of Bootstrap File 
 # Note: Leaving parameter blank may request a file dialog window.
@@ -57,7 +57,7 @@ test$set_recruit_model(c(5,5,6))
 
 ```{r read-inp, eval = FALSE}
 # Load path of ageproR's included Example1 Input File
-inpfile <- system.file("inst/extdata/Example1.INP", package = "ageproR")
+inpfile <- system.file("extdata/Example1.INP", package = "ageproR")
 
 # Creates a new instance of agepro_inp_model class, wieh to default values,
 # and imports model data from the agepro input data file from 'inpfile'
