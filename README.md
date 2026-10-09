@@ -63,9 +63,9 @@ Please refer to the [*AGEPRO Reference
 Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
 technical details.
 
-## Agepro Model Workflow Examples
+# Agepro Model Workflow Examples
 
-### Setting up a new `agepro_inp_model`
+## Setting up a new `agepro_inp_model`
 
 ``` r
 library("ageproR")
@@ -95,7 +95,7 @@ bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
 test$set_bootstrap_filename(bsnfile)
 ```
 
-### Setting up a new `agepro_inp_model` w/ multiple recruitment models
+## Setting up a new `agepro_inp_model` w/ multiple recruitment models
 
 ``` r
 # New instance of agepro_inp_model refreses class to default values.
@@ -109,7 +109,7 @@ test$set_recruit_model(c(5,5,6))
 # NOTE: A valid rerun of set_recruit_model will OVERWRITE the previous [RECRUIT] values.
 ```
 
-### Reading or importing from AGEPRO input file (\*.inp)
+## Reading or importing from AGEPRO input file (\*.inp)
 
 > \[!NOTE\]
 >
@@ -132,16 +132,30 @@ test <- ageproR::import_agepro_model(inpfile)
 # and is a combination of these calls:
 # test <- ageproR::agepro_inp_model$new()
 # test$read_inp(inpfile) 
-
-# Note: Input Files with the `AGEPRO VERSION 4.0` format can be loaded to ageproR currently, 
-# but will be deprecated. In future updates. By default, AGPRO input files will be saved in the 
-# `AGEPRO VERSION 4.25` format. 
-# Function `read_inp` will also detect non-existant bootstrap paths. If there are no warnings, 
-# check the agepro model's bootstrap filepath equals the intended "bsnpath". If not: 
-# test2$set_bootstrap_filename(bsnfile)
 ```
 
-### Saving to AGEPRO Input File.
+### Setting Bootstrap Filepath when importing AGEPRO input data files
+
+> \[!NOTE\] Input Files with the `AGEPRO VERSION 4.0` format can be
+> loaded to ageproR currently, but will be deprecated. In future
+> updates. By default, AGPRO input files will be saved in the
+> `AGEPRO VERSION 4.25` format.
+
+``` r
+# Load path of ageproR's included Example1 Bootstrap File
+bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
+
+# Reading agepro input files via `import_agepro_model` or `read_inp` will give a 
+# WARNING for non-existant bootstrap paths.  
+
+# Double check if the model's bootstrap filepath equals the intended "bsnpath"
+test$bootstrap$bootstrap_file
+
+# If not, set the path:
+# testt$set_bootstrap_filename(bsnfile)
+```
+
+## Saving to AGEPRO Input File.
 
 ``` r
 # Using the "test2" model .... 
