@@ -6,9 +6,8 @@
 By Default, creating a new instance of `agepro_inp_model` with default values will include a 
 single **NULL Recritment Model**, a placeholder recruitment model. This will trigger a WARNING 
 message to set and replace this Model with a vaild recruitment model before saving to file. 
-_The AGEPRO calcuation engine does not recognize models with **NULL Recruitment Model** of `0`, and  
+_The AGEPRO calcuation engine does not recognize models with **NULL Recruitment Model** of `0`, and 
 will not run this model_.
-
 
 ```{r set-model, eval = FALSE}
 library("ageproR")

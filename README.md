@@ -72,8 +72,7 @@ values will include a single **NULL Recritment Model**, a placeholder
 recruitment model. This will trigger a WARNING message to set and
 replace this Model with a vaild recruitment model before saving to file.
 *The AGEPRO calcuation engine does not recognize models with **NULL
-Recruitment Model** of `0`, and  
-will not run this model*.
+Recruitment Model** of `0`, and will not run this model*.
 
 ``` r
 library("ageproR")
