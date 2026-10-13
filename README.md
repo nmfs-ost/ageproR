@@ -67,15 +67,19 @@ technical details.
 
 ## Setting up a new `agepro_inp_model`
 
+By Default, creating a new instance of `agepro_inp_model` with default
+values will include a single **NULL Recritment Model**, a placeholder
+recruitment model. This will trigger a WARNING message to set and
+replace this Model with a vaild recruitment model before saving to file.
+*The AGEPRO calcuation engine does not recognize models with **NULL
+Recruitment Model** of `0`, and  
+will not run this model*.
+
 ``` r
 library("ageproR")
 
 # Create a agepro_inp_model with default values
 test <- ageproR::create_agepro_model()
-# By Default, creating a new instance of agepro_inp_model with default values will include a 
-# single "NULL Recritment Model", a placeholder recruitment model. It will print a WARNING 
-# to replace this Model with a vaild recruitment model before saving to file. AGEPRO  
-# Calcuation Engine will not recognize NULL Recruitment models.
 
 # The function create_agepro_model is designed to ease users to create agepro model classes 
 # wtihout the nuances of R6class initializtion. This is the equivalent to:
@@ -165,6 +169,8 @@ outfile <- tempfile("example1_", fileext = ".inp")
 # Note: Leaving parameter blank may request a file dialog window.  
 test2$write_inp(outfile)
 ```
+
+## TODO: Model Output
 
 ## Citation
 
