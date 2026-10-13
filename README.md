@@ -117,9 +117,7 @@ test$set_recruit_model(c(5,5,6))
 > \[!NOTE\]
 >
 > Input Files with the `AGEPRO VERSION 4.0` format can be loaded to
-> ageproR currently, but will be deprecated. In future updates. By
-> default, AGPRO input files will be saved in the `AGEPRO VERSION 4.25`
-> format.
+> ageproR currently, but will be deprecated.
 
 Loading AGEPRO Input Files with multiple recuitment models will
 automatically set the **number of recruits** and overwrite the existing
@@ -159,6 +157,11 @@ test$bootstrap$bootstrap_file
 ```
 
 ## Saving to AGEPRO Input File.
+
+> \[!NOTE\]
+>
+> By default, AGEPRO input files is saved in the current
+> `AGEPRO VERSION 4.25` format.
 
 ``` r
 # Using the "test2" model .... 
