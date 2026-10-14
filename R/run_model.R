@@ -39,8 +39,10 @@ run_model <- function(
       } else {
         agepro_calc$run(agepro_args)
       }
+      cli::cli_alert_success("Completed AGEPRO model run.")
     },
     error = function(err) {
+      cli::cli_alert_danger("AGEPRO process stopped.")
       message(paste0(
         "Error occured with launching model to AGEPRO: \n",
         conditionMessage(err)
@@ -84,7 +86,7 @@ launch_model <- function(
 
   # Validate agepro_model
   assert_agepro_model_class(model)
-  browser()
+
   # TODO: Validate agepro calculation binary path.
   # Will need to check where the location of AGEPRO calcuation engine binary is installed.
   # This value allows the model to run AGEPRO calcuation engine between differnt users.
@@ -151,6 +153,7 @@ launch_model <- function(
 
   # If the input file's "import to R" flag is enabled, a *.rdat file
   # is saved to the job_dir
+  return(cout)
 }
 
 #' Job directory name setup
