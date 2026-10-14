@@ -7,6 +7,7 @@
 #' @param header_color Text Color, R color, or HTML hexidecimal color.
 #'
 #' @keywords internal
+#' @noRd
 #'
 div_keyword_header <- function(keyword, header_color = "cyan") {
   d <- cli_div(

@@ -121,6 +121,7 @@ file_dialog <- function(
 #' to show the file dialog window over the IDE.
 #'
 #' @keywords internal
+#' @noRd
 #'
 #' @param filetype filename extension
 #' @template elipses
@@ -138,6 +139,7 @@ open_file_dialog <- function(filetype, ...) {
 #' to show the file dialog window over the IDE.
 #'
 #' @keywords internal
+#' @noRd
 #'
 #' @importFrom checkmate assert_character
 #'
@@ -187,6 +189,7 @@ get_r_frontend <- function() {
 #' @template inp_con
 #'
 #' @keywords internal
+#' @noRd
 #'
 read_inp_numeric_line <- function(inp_con) {
   if (!isOpen(inp_con)) {
@@ -226,6 +229,7 @@ read_inp_numeric_line <- function(inp_con) {
 #' @param filetype filename extension.
 #'
 #' @keywords internal
+#' @noRd
 #'
 validate_filetype <- function(filetype) {
   if (missing(filetype)) {
@@ -252,6 +256,7 @@ validate_filetype <- function(filetype) {
 #' @param ext Two item vector describing the filename description and filename extension respecively. By default it is assigned to `c("All Files", "*")`
 #'
 #' @keywords internal
+#' @noRd
 #' @returns A Character vector representing the filepath of the chosen path from the file dialog.
 #'
 run_tcltk_dialog <- function(
