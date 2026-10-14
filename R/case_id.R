@@ -124,7 +124,7 @@ case_id <- R6Class(
     #' @field inp_keyword
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
-      paste0("[", toupper(private$.keyword_name), "]")
+      paste0("[", toupper(gsub("_", "", .keyword_name)), "]")
     }
   ),
   private = list(
