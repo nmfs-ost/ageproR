@@ -10,7 +10,7 @@
 #' @noRd
 #'
 div_keyword_header <- function(keyword, header_color = "cyan") {
-  d <- cli_div(
+  d <- cli::cli_div(
     theme = list(
       rule = list(
         color = header_color,
@@ -18,8 +18,8 @@ div_keyword_header <- function(keyword, header_color = "cyan") {
       )
     )
   )
-  cli_rule(keyword)
-  cli_end(d)
+  cli::cli_rule(keyword)
+  cli::cli_end(d)
 }
 
 
