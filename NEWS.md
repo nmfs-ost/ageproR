@@ -1,4 +1,4 @@
-# ageproR 0.9.1 2026-06-01
+# ageproR 0.9.1 (2026-06-01)
 
 - Fixes write_inp error when detecting options_flags (#109)
   - **write_inp**: Removes unused options_flag references remainining (due to undocumented agepro_flag depencency changes in ageproR 0.8.0) with "options with option flags" classes.
@@ -6,7 +6,7 @@
 - Added CITATION to README
 - README: Updated Input File Format to `AGEPRO VERSION 4.25`
 
-# ageproR 0.9.0 2026-02-03
+# ageproR 0.9.0 (2026-02-03)
 
 - Default current version AGEPRO input file format is set to `AGEPRO VERSION 4.25`. 
   - Added `agepro40_inpfile_string` for `AGEPRO VERSION 4.0` compatibility.
@@ -56,7 +56,7 @@
 - Update roxygen to 7.3.3
 
 
-# ageproR 0.8.0 2025-07-23
+# ageproR 0.8.0 (2025-07-23)
 
 - Recruitment 
   - Added `empirical_ssb` for **Empirical Recruit Per Spawning Mass Distribution** (Recruitment model 2) (#76)
@@ -117,7 +117,7 @@
 - README update (#88)
 
 
-# ageproR 0.7.3 2025-04-03
+# ageproR 0.7.3 (2025-04-03)
 
 - `agepro_inp_model` can be initialized with general agepro model parameters. This change will be consistent with `agepro_model` and `agepro_json_model`. (#64)
   - The default method to generate **agepro_inp_model** remains the same.
@@ -128,7 +128,7 @@
 - Updated README
 - removed redundant `general_params` parameter checks during agepro_model initialization
 
-# ageproR 0.7.2 2024-10-07
+# ageproR 0.7.2 (2024-10-07)
 
 - Use version string (line 1) from AGEPRO Input File to correctly check input file version format against the "current version" input file string (`currentver_inpfile_string`)
 - Validation checks for Invalid recruitment model data from NULL or Deprecated Recruitment model 9, when importing and exporting to AGEPRO Input File and JSON Input file (#54)
@@ -138,7 +138,7 @@
   - Function now checks input 'type' parameter value before assigning to projection_analyses_type
 - Error message clarifications
 
-# ageproR 0.7.1 2024-09-23
+# ageproR 0.7.1 (2024-09-23)
 
 - Revert to `AGEPRO VERSION 4.0` as `currentver_inpfile_string` . Input files will be written to `AGEPRO VERSION 4.0`
   - Supported_inpfile_versions are: `currentver_inpfile_string`, `AGEPRO VERSION 4.0` , `AGEPRO VERSION 4.25`
@@ -148,7 +148,7 @@
   - Includes warning if (Supported) AGEPRO Input File Version is not the "current version"
 - Updated Roxygen
 
-# ageproR 0.7.0 2024-09-04
+# ageproR 0.7.0 (2024-09-04)
 
 - Added AGEPRO **optput_options** (**OPTIONS**) 
   - Added optional options keyword parameters:
@@ -179,11 +179,11 @@
   - Added cli prompts when **import_agepro_inp_model** is used
   - Added alternative package install method `pak::pkg_install` example to README.
 
-# ageproR 0.6.2 2024-03-20
+# ageproR 0.6.2 (2024-03-20)
 
 - Revise R6 class method order to: public, active, private for maintainability  
 
-# ageproR 0.6.1 2024-03-18
+# ageproR 0.6.1 (2024-03-18)
 
 - Rename inplines -> inp_lines for consistency (#37)
 - Rename general, bootstrap, process_error, and recruitment json_list active binding functions to `json_list_object`
@@ -193,7 +193,7 @@
 - Resolved `tibble::as_tibble` column name deprecation (#44)
 - Updated Roxygen Dependency to 7.3.1
 
-# ageproR 0.6.0 2024-03-11
+# ageproR 0.6.0 (2024-03-11)
 
 - Added `mortality_fraction_prior_spawn`
   - Data can be imported/exported to AGEPRO Input File/Experimental JSON Input File
@@ -207,7 +207,7 @@
   - Added custom checkmate assertion wrapper to check `set_recruit_model` argument is empty or has multiple arguments.
 - Update DESCRIPTION
 
-# ageproR 0.5.1 2024-01-31
+# ageproR 0.5.1 (2024-01-31)
 
 * recruitment 
   - Fixed an issue (#39) where a difference of number of recruitment models using the agepro_model function `set_recruit_model` only changed the Recruit Data collection object structure but did not change recruitment probability nor the `num_rec_models` general_param field.
@@ -234,7 +234,7 @@
   - Replaced deprecated doctype package in with  **\_PACKAGE\_** roxygen package documentation (`ageproR.R -> ageproR-package.R`)
 
 
-# ageproR 0.5.0 2024-01-10
+# ageproR 0.5.0 (2024-01-10)
 
 * Added `harvest_scenario`
 * Added `projection_analyses`
@@ -276,7 +276,7 @@
 - Function documentation changes
  
  
-# ageproR 0.4.1 2023-10-25
+# ageproR 0.4.1 (2023-10-25)
 
 * Code refactoring of `general_params`, `case_id`, and `recruitment`
   * general_params
@@ -305,7 +305,7 @@ R6class
 * Minor code documentation fixes
   
 
-# ageproR 0.4.0 2023-10-04
+# ageproR 0.4.0 (2023-10-04)
 
 * Added AGEPRO Keyword parameters for process error for population and 
 fishery processes. (#32)
@@ -359,18 +359,18 @@ negatives.
 * Removed unused `output.R` and `read_input.R`
   - This removes the **rprojroot** and **usethis** dependencies.
 
-# ageproR 0.3.2  2023-08-09
+# ageproR 0.3.2  (2023-08-09)
 
 * Fixed `ver_legacy_string` typo that affected the creation of the
 `agepro_model` class.
 
-# ageproR 0.3.1  2023-08-03
+# ageproR 0.3.1  (2023-08-03)
 
 * Tweaks to R Console cli when loading AGEPRO input file.
   - Improved AGEPRO Input File version validation check.
   - Tweaked Invalid Bootstrap Filename Warning message. 
 
-# ageproR 0.3.0  2023-07-31
+# ageproR 0.3.0  (2023-07-31)
 
 Renamed package as ageproR to reflect the package as a supplement to Jon 
 Brodziak's original AGEPRO program.
@@ -395,7 +395,7 @@ recruit model data, BOOTSTRAP) to AGEPRO input file (*.inp)
 * Fixed GENERAL parameter order (#22)
 * Added LICENSE
 
-# ageproj 0.2.0  2023-06-21
+# ageproj 0.2.0  (2023-06-21)
 
 * Added BOOTSTRAP.
   * Added `bootstrap$set_bootstrap_filename` to set bootstrap file from file 
