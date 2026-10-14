@@ -85,7 +85,8 @@ run_model <- function(
 #' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
 #' @param out_dir Output path
 #' @param exe Path of the Agepro Calcuation engine.
-#' @param append_job_dt Logical option to append the date time stamp to the input files.
+#' @param append_job_dt [Logical][base::logical] option to append the date time stamp to the input files.
+#' @param save_logfile [Logical][base::logical] option to log AGEPRO Calcuation Engine ouput to a logfile. FALSE by Default.
 #'
 #' @export
 #'
@@ -93,11 +94,9 @@ launch_model <- function(
   model,
   out_dir,
   exe = "agepro.exe",
-  append_job_dt = TRUE
+  append_job_dt = TRUE,
+  save_logfile = FALSE
 ) {
-  # start logging runtime
-  job_dt <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
-
   # Validate agepro_model
   assert_agepro_model_class(model)
 
@@ -160,14 +159,18 @@ launch_model <- function(
   # AGEPRO console output is printed to R conosle
   # TODO: If save_logfile is TRUE, AGEPRO console output will be stored in a
   # text logfile.
-  cout <- run_model(exe, agepro_args = job_inpfile, outdir = job_dir)
+  cout <- run_model(
+    exe,
+    agepro_args = job_inpfile,
+    outdir = job_dir,
+    save_logfile
+  )
 
   # Running AGEPRO calculation engine will create a *.out file,
   # in addtion to auxillary output files (if enabled).
 
   # If the input file's "import to R" flag is enabled, a *.rdat file
   # is saved to the job_dir
-  return(cout)
 }
 
 #' Job directory name setup
