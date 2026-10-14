@@ -129,7 +129,10 @@ launch_model <- function(
 
   job_dir <- ifelse(
     append_job_dt,
-    file.path(out_dir, paste0(model_job_name, "_", job_dt)),
+    file.path(
+      out_dir,
+      paste0(model_job_name, "_", format(Sys.time(), "%Y-%m-%d_%H-%M-%S"))
+    ),
     file.path(out_dir, model_job_name)
   )
 
