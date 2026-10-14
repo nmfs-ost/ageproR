@@ -1,12 +1,26 @@
 #' Run the AGEPRO Cacluation Engine Binary with a AGEPRO Input File
 #'
-#' Wrapper function to call the Binary.
+#' Wrapper function to call the AGEPRO calcualtion Engine in the Rconsole. If the
+#' parameter `save_logflle` is enabled, AGEPRO console output is printed to a logfile
+#' instead.
+#'
+#' @details
+#'
+#' The user must have of the AGEPRO calcuation engine installed on their system. There are
+#' three ways ageproR can obtain the path of this binary: the custom supplied path via
+#' `exepath`, user-session variable through ".Rprofile" `ageproR.agepro_path`, or as a
+#' "default" fallback: in the "AGEPRO" subdirectory of home.
+#'
+#' Running a model through the AGEPRO calculation engine will creates a *.out file.
+#' Auxillary output files will depend on the "auxillaryFlagOption" setting on the the
+#' agepro input file. For more details on this, see the [Model Outputs](https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html)
+#' section of the _AGEPRO Reference Manual_.
 #'
 #' @param exepath Path of the Agepro Calcuation engine
 #' @param agepro_args Program arugument flags. Typically used for AGEPRO Input Files,
 #' however this field is intended to have program argument flags.
 #' @param outdir Output path
-#' @param save_logfile Option to save AGEPRO Calcuation Engine ouput to logfile
+#' @param save_logfile [Logical][base::logical] option to log AGEPRO Calcuation Engine ouput to a logfile. FALSE by Default.
 #'
 #' @export
 #' @examples
