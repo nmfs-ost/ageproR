@@ -93,6 +93,8 @@ create_blank_parameter_table <- function(
 #'
 #' @param x Filepath string
 #'
+#' @noRd
+#'
 invalid_path_message <- function(x) {
   paste0(
     "'",
@@ -110,6 +112,7 @@ invalid_path_message <- function(x) {
 #'
 #' @param x Vector output object
 #'
+#' @noRd
 #' @importFrom utils capture.output
 #'
 capture_output_as_message <- function(x) {
@@ -125,6 +128,7 @@ capture_output_as_message <- function(x) {
 #' rlang topic "Dealing with errors thrown from the mapped function".
 #' For AgeproR, this is used primarily to capture the error assertion calls.
 #'
+#' @noRd
 #' @template elipses
 #'
 #' @param .xs List r Atomic Vector
@@ -164,6 +168,7 @@ map_errors <- function(.xs, .fn, ...) {
 #' @param default Logical Value if user inputs prompt without typing anying.
 #' Values can be TRUE (Yes), FALSE (No), or NULL. Default is NULL.
 #'
+#' @noRd
 #' @returns
 #' Returns a Logical Value based ong prompt, if
 #' \itemize{
@@ -171,7 +176,6 @@ map_errors <- function(.xs, .fn, ...) {
 #'  \item `FALSE` User entered `n` (or `no`)
 #'  \item `NA` User entered `c` (or `cancel`, `q`, `quit`)
 #' }
-#'
 #'
 #'
 prompt_yes_no <- function(question, default = NULL) {
