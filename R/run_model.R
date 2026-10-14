@@ -51,30 +51,6 @@ run_model <- function(
   return(cout)
 }
 
-
-#' Log AGEPRO Ouput to File
-#'
-#' Saves AGEPRO Output to Logfile
-#'
-#' @param cout Output connection from console
-#' @param fn_logfile Filename path to save output
-#'
-write_logfile <- function(cout, fn_logfile) {
-  #TODO: Verify type of cout
-
-  writeLines(
-    c(
-      "###",
-      "console output",
-      as.character(Sys.time()),
-      "###",
-      " ",
-      cout
-    ),
-    con = fn_logfile
-  )
-}
-
 #' Launches agepro_model to the calcuation engine
 #'
 #' This function will takes the [agepro_inp_model][ageproR::agepro_inp_model] class,
