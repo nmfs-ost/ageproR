@@ -158,12 +158,12 @@ ageproWrapper <- R6Class(
     get_binary_path = function(path) {
       # Check "path" exists when class initialized
       if (checkmate::test_file_exists(path)) {
-        return(normalizePath(path, mustWork = NA))
+        return(normalizePath(path, mustWork = NA, winslash = "/"))
       }
       # Check User Session Options (.Rprofile)
       option_path <- getOption("ageproR.agepro_path")
       if (checkmate::test_file_exists(option_path)) {
-        return(normalizePath(option_path, mustWork = NA))
+        return(normalizePath(option_path, mustWork = NA, winslash = "/"))
       }
 
       # Check Default Install Directory
@@ -173,7 +173,7 @@ ageproWrapper <- R6Class(
         default_path <- paste0(default_path, ".exe")
       }
 
-      return(normalizePath(default_path, mustWork = NA))
+      return(normalizePath(default_path, mustWork = NA, winslash = "/"))
     },
 
     # Helper method to retrieve the logfile output directory:
@@ -182,13 +182,17 @@ ageproWrapper <- R6Class(
     get_logdir = function(logdir) {
       #Input logfile directory path: Check if custom paths exist on system.
       if (checkmate::test_directory_exists(logdir)) {
-        private$.logdir <- normalizePath(logdir, mustWork = NA)
+        private$.logdir <- normalizePath(logdir, mustWork = NA, winslash = "/")
         return()
       }
       # User Session Options (.Rprofile)
       rprofile_logdir <- getOption("ageproR.model_logdir")
       if (checkmate::test_directory_exists(rprofile_logdir)) {
-        private$.logdir <- normalizePath(rprofile_logdir, mustWork = NA)
+        private$.logdir <- normalizePath(
+          rprofile_logdir,
+          mustWork = NA,
+          winslash = "/"
+        )
         return()
       }
 
@@ -201,7 +205,11 @@ ageproWrapper <- R6Class(
         )
         dir.create(default_logdir)
       }
-      private$.logdir <- normalizePath(default_logdir, mustWork = NA)
+      private$.logdir <- normalizePath(
+        default_logdir,
+        mustWork = NA,
+        winslash = "/"
+      )
       return()
     }
   )
