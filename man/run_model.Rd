@@ -27,16 +27,20 @@ parameter \code{save_logflle} is enabled, AGEPRO console output is printed to a 
 instead.
 }
 \details{
-The user must have of the AGEPRO calcuation engine installed on their system. There are
-three ways ageproR can obtain the path of this binary: the custom supplied path via
+\href{https://github.com/noaa-pifsc/AGEPRO}{AGEPRO calcuation engine} must be installed on the system.
+
+There are three ways ageproR can obtain the path of this binary: the custom supplied path via
 \code{exepath}, user-session variable through ".Rprofile" \code{ageproR.agepro_path}, or as a
 "default" fallback: in the "AGEPRO" subdirectory of home.
-
-Running a model through the AGEPRO calculation engine will creates a *.out file.
-Auxillary output files will depend on the "auxillaryFlagOption" setting on the the
-agepro input file. For more details on this, see the \href{https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html}{Model Outputs}
-section of the \emph{AGEPRO Reference Manual}.
 }
+\section{AGEPRO Auxiliary Output Files}{
+
+AGEPRO can export to R data object (\verb{*.rdat}) and auxiliary output files, as an additiion
+to the AGEPRO output (\verb{*.out}) file. For more details about Auxiliary output files, see the section
+\href{https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html}{Model Outputs}
+on the \emph{AGEPRO Reference Manual}.
+}
+
 \examples{
 \dontrun{
 

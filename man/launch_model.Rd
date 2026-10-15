@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_model.R
 \name{launch_model}
 \alias{launch_model}
-\title{Launches agepro_model to the calcuation engine}
+\title{Launch an agepro_inp_model to AGEPRO}
 \usage{
 launch_model(
   model,
@@ -17,23 +17,33 @@ launch_model(
 
 \item{out_dir}{Output path}
 
-\item{exe}{Path of the Agepro Calcuation engine.}
+\item{exe}{Path of the Agepro calcuation engine.}
 
 \item{append_job_dt}{\link[base:logical]{Logical} option to append the date time stamp to the input files.}
 
-\item{save_logfile}{\link[base:logical]{Logical} option to log AGEPRO Calcuation Engine ouput to a logfile. FALSE by Default.}
+\item{save_logfile}{\link[base:logical]{Logical} option to log AGEPRO calcuation engine ouput to a logfile. FALSE by Default.}
 }
 \description{
-This function will takes the \link{agepro_inp_model} class,
-saves it as an AGEPRO input file, launches the AGEPRO calcuation engine with it.
+This function takes the \link{agepro_inp_model} class,
+creates a "job directory", where it saves the class data as an AGEPRO input file,
+imports a copy the bootstrap file, and launches the AGEPRO calcuation engine with it.
 }
 \details{
 After the calcuation engine is done, AGEPRO output file will be saved to the output
 directory. Function will also store AGEPRO calcuation engine logfile if requested.
 
-This is simlar to how \href{https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI}{AGEPRO-GUI} launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
+This is simlar to how \href{https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI}{AGEPRO-GUI}
+launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
 in the AGEPRO Input File is relative to the directory that input file is saved; The bootstrap filepath value does not have
 to have directory paths if the Input file and bootstrap file is saved in the same directory.
 
 The "default directory" of the outdir will be saved at the "AGEPRO" subdirectory of the \code{R_USER} directory.
 }
+\section{AGEPRO Auxiliary Output Files}{
+
+AGEPRO can export to R data object (\verb{*.rdat}) and auxiliary output files, as an additiion
+to the AGEPRO output (\verb{*.out}) file. For more details about Auxiliary output files, see the section
+\href{https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html}{Model Outputs}
+on the \emph{AGEPRO Reference Manual}.
+}
+

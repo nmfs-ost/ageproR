@@ -6,15 +6,17 @@
 #'
 #' @details
 #'
-#' The user must have of the AGEPRO calcuation engine installed on their system. There are
-#' three ways ageproR can obtain the path of this binary: the custom supplied path via
+#' [AGEPRO calcuation engine](https://github.com/noaa-pifsc/AGEPRO) must be installed on the system.
+#'
+#' There are three ways ageproR can obtain the path of this binary: the custom supplied path via
 #' `exepath`, user-session variable through ".Rprofile" `ageproR.agepro_path`, or as a
 #' "default" fallback: in the "AGEPRO" subdirectory of home.
 #'
-#' Running a model through the AGEPRO calculation engine will creates a *.out file.
-#' Auxillary output files will depend on the "auxillaryFlagOption" setting on the the
-#' agepro input file. For more details on this, see the [Model Outputs](https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html)
-#' section of the _AGEPRO Reference Manual_.
+#' @section AGEPRO Auxiliary Output Files:
+#' AGEPRO can export to R data object (`*.rdat`) and auxiliary output files, as an additiion
+#' to the AGEPRO output (`*.out`) file. For more details about Auxiliary output files, see the section
+#' [Model Outputs](https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html)
+#' on the _AGEPRO Reference Manual_.
 #'
 #' @param exepath Path of the Agepro Calcuation engine
 #' @param agepro_args Program arugument flags. Typically used for AGEPRO Input Files,
@@ -67,26 +69,30 @@ run_model <- function(
   return(cout)
 }
 
-#' Launches agepro_model to the calcuation engine
+#' Launch an agepro_inp_model to AGEPRO
 #'
-#' This function will takes the [agepro_inp_model][ageproR::agepro_inp_model] class,
-#' saves it as an AGEPRO input file, launches the AGEPRO calcuation engine with it.
+#' This function takes the [agepro_inp_model][ageproR::agepro_inp_model] class,
+#' creates a "job directory", where it saves the class data as an AGEPRO input file,
+#' imports a copy the bootstrap file, and launches the AGEPRO calcuation engine with it.
 #'
 #' After the calcuation engine is done, AGEPRO output file will be saved to the output
 #' directory. Function will also store AGEPRO calcuation engine logfile if requested.
 #'
 #' @details
-#' This is simlar to how [AGEPRO-GUI](https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI) launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
+#' This is simlar to how [AGEPRO-GUI](https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI)
+#' launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
 #' in the AGEPRO Input File is relative to the directory that input file is saved; The bootstrap filepath value does not have
 #' to have directory paths if the Input file and bootstrap file is saved in the same directory.
 #'
 #' The "default directory" of the outdir will be saved at the "AGEPRO" subdirectory of the `R_USER` directory.
 #'
+#' @inheritSection run_model AGEPRO Auxiliary Output Files
+#'
 #' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
 #' @param out_dir Output path
-#' @param exe Path of the Agepro Calcuation engine.
+#' @param exe Path of the Agepro calcuation engine.
 #' @param append_job_dt [Logical][base::logical] option to append the date time stamp to the input files.
-#' @param save_logfile [Logical][base::logical] option to log AGEPRO Calcuation Engine ouput to a logfile. FALSE by Default.
+#' @param save_logfile [Logical][base::logical] option to log AGEPRO calcuation engine ouput to a logfile. FALSE by Default.
 #'
 #' @export
 #'
@@ -169,8 +175,9 @@ launch_model <- function(
     save_logfile
   )
 
-  # Running AGEPRO calculation engine will create a *.out file,
-  # in addtion to auxillary output files (if enabled).
+  # AGEPRO will create a set of output files, depending on what options
+  # in [OPTIONS] in the agepro input file are set.
+  # Verify that *.out file is saved in the job_dir
 
   # If the input file's "import to R" flag is enabled, a *.rdat file
   # is saved to the job_dir
