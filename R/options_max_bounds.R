@@ -52,8 +52,8 @@ max_bounds <- R6Class(
       # or invalid enable_max_bounds
       private$validate_bounds_flag(bounds_flag)
 
-      #If all max_bounds parameters are non-default values set the flag
-      #set_enable_max_bounds to FALSE.
+      #If all max_bounds parameters are default values, assume the flag
+      #set_enable_max_bounds is FALSE.
       default_max_weight <- formals(self$initialize)[["max_weight"]]
       default_max_nat_mort <- formals(self$initialize)[["max_nat_mort"]]
       if (
