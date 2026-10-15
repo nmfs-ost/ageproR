@@ -178,6 +178,14 @@ launch_model <- function(
   # AGEPRO will create a set of output files, depending on what options
   # in [OPTIONS] in the agepro input file are set.
   # Verify that *.out file is saved in the job_dir
+  if (
+    checkmate::test_file_exists(file.path(
+      job_dir,
+      paste0(model_job_name, ".out")
+    ))
+  ) {
+    cli::cli_alert_info("Model output files were saved at {.val {job_dir}}")
+  }
 
   # If the input file's "import to R" flag is enabled, a *.rdat file
   # is saved to the job_dir
