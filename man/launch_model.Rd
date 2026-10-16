@@ -47,3 +47,20 @@ to the AGEPRO output (\verb{*.out}) file. For more details about Auxiliary outpu
 on the \emph{AGEPRO Reference Manual}.
 }
 
+\examples{
+\dontrun{
+# Create new agepro_inp_class and import data from Example1 dataset
+test_model <- ageproR::import_agepro_model(system.file("extdata/Example1.INP", package = "ageproR"))
+
+# For this example, the AGEPRO Calcuation Engine Binary in
+# the 'agepro' subdirectory of home directory 'R_USER'
+exepath <- path.expand("~/agepro/AGEPRO.EXE")
+if(.Platform$OS.type == "windows") {
+  exepath <- normalizePath(exepath, winslash="/")
+}
+
+# Launch model to AGEPRO
+ageproR::launch_model(test_model, exe = exepath)
+}
+
+}
