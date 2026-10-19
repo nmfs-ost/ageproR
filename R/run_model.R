@@ -9,7 +9,7 @@
 #' [AGEPRO calcuation engine](https://github.com/noaa-pifsc/AGEPRO) must be installed on the system.
 #'
 #' There are three ways ageproR can obtain the path of this binary: the custom supplied path via
-#' `exepath`, user-session variable through ".Rprofile" `ageproR.agepro_path`, or as a
+#' `exepath`, user's system environmental variable `AGEPRO_PATH` through ".Renviron", or as a
 #' "default" fallback: in the "AGEPRO" subdirectory of home.
 #'
 #' @section AGEPRO Auxiliary Output Files:

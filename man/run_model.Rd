@@ -30,7 +30,7 @@ instead.
 \href{https://github.com/noaa-pifsc/AGEPRO}{AGEPRO calcuation engine} must be installed on the system.
 
 There are three ways ageproR can obtain the path of this binary: the custom supplied path via
-\code{exepath}, user-session variable through ".Rprofile" \code{ageproR.agepro_path}, or as a
+\code{exepath}, user's system environmental variable \code{AGEPRO_PATH} through ".Renviron", or as a
 "default" fallback: in the "AGEPRO" subdirectory of home.
 }
 \section{AGEPRO Auxiliary Output Files}{

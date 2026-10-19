@@ -74,10 +74,10 @@ invalid reuslts returns a warning.}
   Runs the Binary with logfile
 
 This function uses the private function get_logdir
-to return the logfile directory. This function will return
-the custom output directory if it exists. Otherwise it will
-check if user session (.Rprofile) has an existing path. If
-\code{ageproR.run_logdir} does't work it, will fallback to the "AGEPRO"
+to return the logfile directory. This function returns
+the custom output directory, if it exists. Otherwise it will
+check the \code{AGEPRO_PATH} value of \code{.Renivron} if the path exists.
+If that value is invalid, it will fallback to the "AGEPRO"
 subirectory of home directory.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}

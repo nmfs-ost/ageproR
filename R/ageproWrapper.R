@@ -56,10 +56,10 @@ ageproWrapper <- R6Class(
     #' Runs the Binary with logfile
     #'
     #' This function uses the private function get_logdir
-    #' to return the logfile directory. This function will return
-    #' the custom output directory if it exists. Otherwise it will
-    #' check if user session (.Rprofile) has an existing path. If
-    #' `ageproR.run_logdir` does't work it, will fallback to the "AGEPRO"
+    #' to return the logfile directory. This function returns
+    #' the custom output directory, if it exists. Otherwise it will
+    #' check the `AGEPRO_PATH` value of `.Renivron` if the path exists.
+    #' If that value is invalid, it will fallback to the "AGEPRO"
     #' subirectory of home directory.
     #'
     #' @param args Program arguments
@@ -153,17 +153,17 @@ ageproWrapper <- R6Class(
     .logdir = NULL,
 
     # "Multi-tiered" helper method to retrieve AGEPRO binary path. From
-    # Input custom path, user's ageproR Rsesions option (ageproR.agepro_path),
-    # and default path (~/AGEPRO/AGEPRO.exe for windows)
+    # Input custom path, user's System R Envriomental Variables .Renviron
+    # (AGEPRO_PATH), and default path (~/AGEPRO/AGEPRO.exe for windows)
     get_binary_path = function(path) {
       # Check "path" exists when class initialized
       if (checkmate::test_file_exists(path)) {
         return(normalizePath(path, mustWork = NA, winslash = "/"))
       }
-      # Check User Session Options (.Rprofile)
-      option_path <- getOption("ageproR.agepro_path")
-      if (checkmate::test_file_exists(option_path)) {
-        return(normalizePath(option_path, mustWork = NA, winslash = "/"))
+      # Check User System Environmental Variable (.Renviron)
+      env_path <- Sys.getenv("AGEPRO_PATH")
+      if (checkmate::test_file_exists(env_path)) {
+        return(normalizePath(env_path, mustWork = NA, winslash = "/"))
       }
 
       # Check Default Install Directory
@@ -177,19 +177,19 @@ ageproWrapper <- R6Class(
     },
 
     # Helper method to retrieve the logfile output directory:
-    # From input custom path, user's ageproR setting from .Rprofile
-    # (ageproR.model_logdir), or default path ('~/AGEPRO')
+    # From input custom path, user's system envromental variable setting
+    # (LOG_OUTDIR), or default path ('~/AGEPRO')
     get_logdir = function(logdir) {
       #Input logfile directory path: Check if custom paths exist on system.
       if (checkmate::test_directory_exists(logdir)) {
         private$.logdir <- normalizePath(logdir, mustWork = NA, winslash = "/")
         return()
       }
-      # User Session Options (.Rprofile)
-      rprofile_logdir <- getOption("ageproR.model_logdir")
-      if (checkmate::test_directory_exists(rprofile_logdir)) {
+      # User System Envrionmental Variable (.Renviron)
+      env_logdir <- Sys.getenv("LOG_OUTDIR")
+      if (checkmate::test_directory_exists(env_logdir)) {
         private$.logdir <- normalizePath(
-          rprofile_logdir,
+          env_logdir,
           mustWork = NA,
           winslash = "/"
         )
