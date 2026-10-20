@@ -13,7 +13,7 @@ NULL
 
   if (agepro_exepath == "") {
     packageStartupMessage(
-      "Note: User Renviron variable 'AGEPRO_PATH' is not set."
+      "Note: User Renviron variable AGEPRO_PATH is not set."
     )
     return()
   }
@@ -22,7 +22,7 @@ NULL
   # Check if AGEPRO_PATH exists
   if (isFALSE(file.exists(agepro_exepath))) {
     packageStartupMessage(sprintf(
-      "Warning: Path in 'AGEPRO_PATH' does not exist (%s)",
+      "Warning: Value of AGEPRO_PATH does not exist (%s)",
       agepro_exepath
     ))
     return()
@@ -30,12 +30,12 @@ NULL
   # Check if its a *.exe
   if (isFALSE(grepl("\\.exe$", agepro_exepath, ignore.case = TRUE))) {
     packageStartupMessage(sprintf(
-      "Warning: 'AGEPRO_PATH' is not a *.exe binary path (%s)",
+      "Warning: Value of AGEPRO_PATH is not an *.exe binary path (%s)",
       agepro_exepath
     ))
     return()
   }
 
   # If all checks pass, print AGEPRO_PATH.
-  packageStartupMessage("'AGEPRO_PATH' found at: ", agepro_exepath)
+  packageStartupMessage("AGEPRO_PATH found at: ", agepro_exepath)
 }
