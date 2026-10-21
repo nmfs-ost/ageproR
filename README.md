@@ -124,6 +124,9 @@ replace this Model with a vaild recruitment model before saving to file.
 Recruitment Model** of `0`, and will not run this model*.
 
 ``` r
+# If AGEPRO_PATH is setup, it will print the path of the AGEPRO Calcualtion Engine binary
+# right after ageproR package is loaded.
+# See readme section 'Configuring ageproR with the AGEPRO calcuation engine' for details
 library("ageproR")
 
 # Create a agepro_inp_model with default values

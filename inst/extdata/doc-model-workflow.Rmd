@@ -10,6 +10,9 @@ _The AGEPRO calcuation engine does not recognize models with **NULL Recruitment 
 will not run this model_.
 
 ```{r set-model, eval = FALSE}
+# If AGEPRO_PATH is setup, it will print the path of the AGEPRO Calcualtion Engine binary
+# right after ageproR package is loaded.
+# See readme section 'Configuring ageproR with the AGEPRO calcuation engine' for details
 library("ageproR")
 
 # Create a agepro_inp_model with default values
