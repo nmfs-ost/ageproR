@@ -44,8 +44,7 @@ Importing Stock Synthesis Report Data will handled as a separate R-package proje
 
 ## Installation
 
-You can install the development version of ageproR from 
-[NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
+You can install ageproR from the [NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
 with:
 
 ```{r ageproR-install}
@@ -58,6 +57,46 @@ pak::pkg_install("nmfs-ost/ageproR")
 # alternative method
 install.packages("remotes")
 remotes::install_github("nmfs-ost/ageproR")
+```
+
+## Configuring ageproR with the AGEPRO calcuation engine
+
+ageproR requires the command line based [AGEPRO Calculation Engine](https://github.com/noaa-pifsc/AGEPRO) to
+run model projections. Download the [AGEPRO calculation engine binary](https://github.com/noaa-pifsc/AGEPRO/releases) at the NOAA-PIFSC github repository. 
+
+Store the AGEPRO calcuation engine binary to a folder location, this will be the directory path used to connect ageproR with AGEPRO with each model launch. For convenience, you can set an user-level R envrionmental variable.
+
+### Open `.Renviron` file
+
+The following command will allow you to set the AGEPRO path to your user-level .Renviron file. This command opens 
+`~/.Renviron` file in your editor.
+
+```{r use-renvrion}
+#| eval: false
+
+usethis::edit_r_environ()
+```
+
+### Set the `AGEPRO_PATH` value and save `.Renviron`
+
+> [!WARNING]
+> 
+> **Windows Paths**
+> You must use forward slashes (`/`) or double backslashes (`\\`), not the standard single Windows backslashes (`\`).
+
+In `.Renviron`, add the line `AGEPRO_PATH`, with your directory. Save the changes. 
+
+```
+AGEPRO_PATH="C://path//to//folder//AGEPRO.EXE"
+```
+
+### Restart R and Verify 
+
+**You must restart the R session** for the changes to make effect. Once R is restarted and load `ageproR`. If set correctly you will see an conformation message:
+
+```
+library(ageproR)
+#>'AGEPRO_PATH' found at: "C://path//to//folder//AGEPRO.EXE"
 ```
 
 ## AGEPRO input file format
