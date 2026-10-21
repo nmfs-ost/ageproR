@@ -98,9 +98,14 @@ confirmation message:
 
 **ageproR** is compatible with the AGEPRO input file formats
 `AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
-saves to the `AGEPRO VERSION 4.25` Input File Format.
+saves AGEPRO input files in the `AGEPRO VERSION 4.25` format.
 
-**Note: Models sent to the AGEPRO calualtion engine MUST be in the
+Loading an input file with the `AGEPRO VERSION 4.0` format to
+**ageproR** will maintain its version format until it is saved (or
+launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25`
+format.
+
+**Models sent to the AGEPRO calualtion engine MUST be in the
 `AGEPRO VERSION 4.25` fornat**
 
 Please refer to the [*AGEPRO Reference
@@ -158,11 +163,6 @@ test$set_recruit_model(c(5,5,6))
 
 ## Reading or importing from AGEPRO input file (\*.inp)
 
-> \[!NOTE\]
->
-> Input Files with the `AGEPRO VERSION 4.0` format can be loaded to
-> ageproR currently, but will be deprecated.
-
 Loading AGEPRO Input Files with multiple recuitment models will
 automatically set the **number of recruits** and overwrite the existing
 model’s recruitment data; For instance, reading a AGEPRO input file with
@@ -202,10 +202,8 @@ test$bootstrap$bootstrap_file
 
 ## Saving to AGEPRO Input File.
 
-> \[!NOTE\]
->
-> By default, AGEPRO input files is saved in the current
-> `AGEPRO VERSION 4.25` format.
+By default, AGEPRO input files is saved in the `AGEPRO VERSION 4.25`
+format.
 
 ``` r
 # Using the "test2" model .... 

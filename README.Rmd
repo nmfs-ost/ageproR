@@ -101,10 +101,13 @@ library(ageproR)
 ## AGEPRO input file format
 
 **ageproR** is compatible with the AGEPRO input file formats 
-`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves 
-to the `AGEPRO VERSION 4.25` Input File Format.
+`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves AGEPRO 
+input files in the `AGEPRO VERSION 4.25` format.
 
-**Note: Models sent to the AGEPRO calualtion engine MUST be in the `AGEPRO VERSION 4.25` fornat**
+Loading an input file with the `AGEPRO VERSION 4.0` format to **ageproR** will maintain its version format
+until it is saved (or launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25` format.
+
+**Models sent to the AGEPRO calualtion engine MUST be in the `AGEPRO VERSION 4.25` fornat**
 
 Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
 
