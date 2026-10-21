@@ -77,7 +77,7 @@ usethis::edit_r_environ()
 
 > \[!WARNING\]
 >
-> **Windows Paths** You must use forward slashes (`/`) or double
+> **Windows Paths:** You must use forward slashes (`/`) or double
 > backslashes (`\\`), not the standard single Windows backslashes (`\`).
 
 In `.Renviron`, add the line `AGEPRO_PATH`, with your directory. Save
@@ -88,8 +88,8 @@ the changes.
 ### Restart R and Verify
 
 **You must restart the R session** for the changes to make effect. Once
-R is restarted and load `ageproR`. If set correctly you will see an
-conformation message:
+R is restarted, load `ageproR`. If set correctly, you will see an
+confirmation message:
 
     library(ageproR)
     #>'AGEPRO_PATH' found at: "C://path//to//folder//AGEPRO.EXE"
