@@ -104,14 +104,14 @@ test2$write_inp(outfile)
 
 ## Launch model
 
-Ensure that the model's "Export to R" option is enabled ('1') before launching to the 
-AGEPRO calcuation engine. When this flag is saved in the AGEPRO input file, it will 
-allow AGEPRO to export output data as a Rdata file (`*.rdat`)
+Ensure that the model's "Export to R" option is enabled (`1`) before launching to the 
+AGEPRO calcuation engine. When this enabled flag is saved in the AGEPRO input file, it 
+allows AGEPRO to export output data as a Rdata file (`*.rdat`). 
 
-By default, `launch_model` creates a "job directory" in the `~/AGEPRO` folder, and the
-job directory name comes from the model's **Case Id** name (untitled if null/blank) and 
-a timestamp. The Job Directory will contain: AGEPRO Input Data file, Bootstrap
-file, and AGEPRO output files. 
+By defalt, `launch_model` creates a "job directory" in the `~/AGEPRO` folder. 
+The "job directory" name, by default, derived from the model's **Case Id** name (untitled 
+if null/blank) and a timestamp. The Job Directory contains: `agepro_inp_model` data saved as
+a AGEPRO Input Data file, Bootstrap file, and AGEPRO output files. 
 
 ```{r launch-model, eval = FALSE}
 # Using `test`from 'setting a new agepro_inp_model'
