@@ -108,7 +108,7 @@ Ensure that the model's "Export to R" option is enabled (`1`) before launching t
 AGEPRO calcuation engine. When this enabled flag is saved in the AGEPRO input file, it 
 allows AGEPRO to export output data as a Rdata file (`*.rdat`). 
 
-By defalt, `launch_model` creates a "job directory" in the `~/AGEPRO` folder. 
+By default, `launch_model` creates a "job directory" in the `~/AGEPRO` folder. 
 The "job directory" name, by default, derived from the model's **Case Id** name (untitled 
 if null/blank) and a timestamp. The Job Directory contains: `agepro_inp_model` data saved as
 a AGEPRO Input Data file, Bootstrap file, and AGEPRO output files. 
