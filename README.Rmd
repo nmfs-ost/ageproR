@@ -81,7 +81,7 @@ Store the AGEPRO calcuation engine binary to a folder location, this will be the
 
 ### Open `.Renviron` file
 
-The following command will allow you to set the AGEPRO path to your user-level .Renviron file. This command opens 
+The following command will allow you to set the AGEPRO path to your user-level .Renviron file. This command opens the
 `~/.Renviron` file in your editor.
 
 ```{r use-renvrion}
@@ -96,7 +96,7 @@ usethis::edit_r_environ()
 > 
 > **Windows Paths:** You must use forward slashes (`/`) or double backslashes (`\\`), not the standard single Windows backslashes (`\`).
 
-In `.Renviron`, add the line `AGEPRO_PATH`, with your directory. Save the changes. 
+In `.Renviron`, add the line `AGEPRO_PATH` to _your directory where the AGEPRO calcuation binary is saved_. Save the changes. 
 
 ```
 AGEPRO_PATH="C://path//to//folder//AGEPRO.EXE"
