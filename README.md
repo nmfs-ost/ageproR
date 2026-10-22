@@ -8,22 +8,20 @@
 
 <!-- badges: end -->
 
-ageproR is a developing R-package designed to handle input data to and
-from AGEPRO (Age Structured Projection Model) calculation engine.
+**ageproR** is a R-package designed to handle input data to and from
+AGEPRO (Age Structured Projection Model) calculation engine.
 
-> \[!IMPORTANT\]
->
-> **If you using AGEPRO for production, please use:**
->
-> - [AGEPRO-GUI, includes binary for AGEPRO calculation
->   engine](https://github.com/nmfs-ost/AGEPRO-GUI)
-> - [AGEPRO Command Line based Calculation Engine source code
->   repo](https://github.com/noaa-pifsc/AGEPRO)
+**ageproR** supercedes
+[AGEPRO-GUI](https://github.com/nmfs-ost/AGEPRO-GUI), but requires the
+binary from the [AGEPRO Command Line based Calculation Engine source
+code repo](https://github.com/noaa-pifsc/AGEPRO). See section
+[Configuring ageproR with the AGEPRO calcuation
+engine](#configuring-agepror-with-the-agepro-calcuation-engine) for
+details.
 
 ## Note
 
-**ageproR** is still in development. These features will be implemented
-in future updates.
+These features will be implemented in future **ageproR** updates.
 
 - Predictor Recruitment Models
 - Fixed Recruitment Model
@@ -31,9 +29,6 @@ in future updates.
 - Markov Matrix Recruitment Model
 - ~~Run AGEPRO models with the AGEPRO calculation engine within R.~~
 - ~~Exported AGEPRO output R data objects.~~
-
-Importing Stock Synthesis Report Data will handled as a separate
-R-package project: ss3agepro
 
 ## AGEPRO input file format
 
