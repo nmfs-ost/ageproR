@@ -35,6 +35,24 @@ in future updates.
 Importing Stock Synthesis Report Data will handled as a separate
 R-package project: ss3agepro
 
+## AGEPRO input file format
+
+**ageproR** is compatible with the AGEPRO input file formats
+`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
+saves AGEPRO input files in the `AGEPRO VERSION 4.25` format.
+
+Loading an input file with the `AGEPRO VERSION 4.0` format to
+**ageproR** will maintain its version format until it is saved (or
+launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25`
+format.
+
+**Models sent to the AGEPRO calualtion engine MUST be in the
+`AGEPRO VERSION 4.25` fornat**
+
+Please refer to the [*AGEPRO Reference
+Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
+technical details.
+
 ## Installation
 
 You can install ageproR from the [NOAA Fisheries OST
@@ -93,24 +111,6 @@ confirmation message:
 
     library(ageproR)
     #>'AGEPRO_PATH' found at: "C://path//to//folder//AGEPRO.EXE"
-
-## AGEPRO input file format
-
-**ageproR** is compatible with the AGEPRO input file formats
-`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
-saves AGEPRO input files in the `AGEPRO VERSION 4.25` format.
-
-Loading an input file with the `AGEPRO VERSION 4.0` format to
-**ageproR** will maintain its version format until it is saved (or
-launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25`
-format.
-
-**Models sent to the AGEPRO calualtion engine MUST be in the
-`AGEPRO VERSION 4.25` fornat**
-
-Please refer to the [*AGEPRO Reference
-Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
-technical details.
 
 # Agepro Model Workflow Examples
 
@@ -224,7 +224,7 @@ launching to the AGEPRO calcuation engine. When this enabled flag is
 saved in the AGEPRO input file, it allows AGEPRO to export output data
 as a Rdata file (`*.rdat`).
 
-By defalt, `launch_model` creates a “job directory” in the `~/AGEPRO`
+By default, `launch_model` creates a “job directory” in the `~/AGEPRO`
 folder. The “job directory” name, by default, derived from the model’s
 **Case Id** name (untitled if null/blank) and a timestamp. The Job
 Directory contains: `agepro_inp_model` data saved as a AGEPRO Input Data

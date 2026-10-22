@@ -42,6 +42,19 @@ AGEPRO (Age Structured Projection Model) calculation engine.
 
 Importing Stock Synthesis Report Data will handled as a separate R-package project: ss3agepro
 
+## AGEPRO input file format
+
+**ageproR** is compatible with the AGEPRO input file formats 
+`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves AGEPRO 
+input files in the `AGEPRO VERSION 4.25` format.
+
+Loading an input file with the `AGEPRO VERSION 4.0` format to **ageproR** will maintain its version format
+until it is saved (or launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25` format.
+
+**Models sent to the AGEPRO calualtion engine MUST be in the `AGEPRO VERSION 4.25` fornat**
+
+Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
+
 ## Installation
 
 You can install ageproR from the [NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
@@ -97,19 +110,6 @@ AGEPRO_PATH="C://path//to//folder//AGEPRO.EXE"
 library(ageproR)
 #>'AGEPRO_PATH' found at: "C://path//to//folder//AGEPRO.EXE"
 ```
-
-## AGEPRO input file format
-
-**ageproR** is compatible with the AGEPRO input file formats 
-`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves AGEPRO 
-input files in the `AGEPRO VERSION 4.25` format.
-
-Loading an input file with the `AGEPRO VERSION 4.0` format to **ageproR** will maintain its version format
-until it is saved (or launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25` format.
-
-**Models sent to the AGEPRO calualtion engine MUST be in the `AGEPRO VERSION 4.25` fornat**
-
-Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
 
 ```{r example-run, child="inst/extdata/doc-model-workflow.Rmd"}
 ```
