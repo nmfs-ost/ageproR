@@ -64,13 +64,14 @@ inpfile <- system.file("extdata/Example1.INP", package = "ageproR")
 # Creates a new instance of agepro_inp_model class, wieh to default values,
 # and imports model data from the agepro input data file from 'inpfile'
 # Leaving the first parameter ('file') with a blank value will call for a file dialog window.
-test <- ageproR::import_agepro_model(inpfile)
+test2 <- ageproR::import_agepro_model(inpfile)
 
 # The function import_agepro_model is designed to ease users from the nuances of R6class initializtion, 
 # and is a combination of these calls:
 # test <- ageproR::agepro_inp_model$new()
 # test$read_inp(inpfile) 
 ```
+
 ### Setting Bootstrap Filepath when importing AGEPRO input data files 
 
 ```{r inp-bootstrap-setup, eval = FALSE}
@@ -81,10 +82,10 @@ bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
 # WARNING for non-existant bootstrap paths.  
 
 # Double check if the model's bootstrap filepath equals the intended "bsnpath"
-test$bootstrap$bootstrap_file
+test2$bootstrap$bootstrap_file
 
 # If not, set the path:
-# testt$set_bootstrap_filename(bsnfile)
+# test2$set_bootstrap_filename(bsnfile)
 ```
 
 ## Saving to AGEPRO Input File.
@@ -101,4 +102,23 @@ test2$write_inp(outfile)
 ```
 
 
-## TODO: Model Output 
+## Launch model
+
+Ensure that the model's "Export to R" option is enabled ('1') before launching to the 
+AGEPRO calcuation engine. When this flag is saved in the AGEPRO input file, it will 
+allow AGEPRO to export output data as a Rdata file (`*.rdat`)
+
+By default, `launch_model` creates a "job directory" in the `~/AGEPRO` folder, and the
+job directory name comes from the model's **Case Id** name (untitled if null/blank) and 
+a timestamp. The Job Directory will contain: AGEPRO Input Data file, Bootstrap
+file, and AGEPRO output files. 
+
+```{r launch-model, eval = FALSE}
+# Using `test`from 'setting a new agepro_inp_model'
+test$options$export_df # Check "Export to R" option is enabled: should be 1
+launch_model(test)
+
+# Using `test2` from 'Reading or importing from AGEPRO input file (*.inp)'
+test2$options$export_df # Check "Export to R" option is enabled:  should be 1
+launch_model(test2)
+```
