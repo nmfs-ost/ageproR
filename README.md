@@ -13,10 +13,10 @@ AGEPRO (Age Structured Projection Model) calculation engine.
 
 **ageproR** supercedes
 [AGEPRO-GUI](https://github.com/nmfs-ost/AGEPRO-GUI), but requires the
-binary from the [AGEPRO Command Line based Calculation Engine source
+binary from the Command Line based [AGEPRO Calculation Engine source
 code repo](https://github.com/noaa-pifsc/AGEPRO). See section
-[Configuring ageproR with the AGEPRO calcuation
-engine](#configuring-agepror-with-the-agepro-calcuation-engine) for
+*[Configuring ageproR with the AGEPRO calcuation
+engine](#configuring-agepror-with-the-agepro-calcuation-engine)* for
 details.
 
 ## Note
