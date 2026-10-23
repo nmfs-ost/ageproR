@@ -52,11 +52,6 @@ test$set_recruit_model(c(5,5,6))
 
 ## Reading or importing from AGEPRO input file (*.inp)
 
-Loading AGEPRO Input Files with multiple recuitment models will automatically set the
-**number of recruits** and overwrite the existing model's recruitment data; For instance,
-reading a AGEPRO input file with multiple recruits will overwrite newly created model's
-default data single NULL Recruitment.   
-
 ```{r read-inp, eval = FALSE}
 # Load path of ageproR's included Example1 Input File
 inpfile <- system.file("extdata/Example1.INP", package = "ageproR")
@@ -66,20 +61,24 @@ inpfile <- system.file("extdata/Example1.INP", package = "ageproR")
 # Leaving the first parameter ('file') with a blank value will call for a file dialog window.
 test2 <- ageproR::import_agepro_model(inpfile)
 
-# The function import_agepro_model is designed to ease users from the nuances of R6class initializtion, 
-# and is a combination of these calls:
-# test <- ageproR::agepro_inp_model$new()
-# test$read_inp(inpfile) 
+# The function import_agepro_model is similar to create_agepro_model, but a way to import data from
+# agepro input files without the nuances of agepro class R6class initializtion. 
+# This is functional combination of:
+# test2 <- ageproR::agepro_inp_model$new()
+# test2$read_inp(inpfile) 
 ```
 
+Importing data from AGEPRO Input Files, especially with multiple recuitment models, readjusts the models number of recruits.
+
 ### Setting Bootstrap Filepath when importing AGEPRO input data files 
+
+When importing agepro input data via `import_agepro_model` or `read_inp`, **ageproR** will give a WARNING 
+if the bootstrap file path non existant on the system. **ageproR** will to check if the bootstrap's 
+filepath is relative to the input file location.
 
 ```{r inp-bootstrap-setup, eval = FALSE}
 # Load path of ageproR's included Example1 Bootstrap File
 bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
-
-# Reading agepro input files via `import_agepro_model` or `read_inp` will give a 
-# WARNING for non-existant bootstrap paths.  
 
 # Double check if the model's bootstrap filepath equals the intended "bsnpath"
 test2$bootstrap$bootstrap_file
