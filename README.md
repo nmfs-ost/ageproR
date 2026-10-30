@@ -219,11 +219,20 @@ launching to the AGEPRO calcuation engine. When this enabled flag is
 saved in the AGEPRO input file, it allows AGEPRO to export output data
 as a Rdata file (`*.rdat`).
 
-By default, `launch_model` creates a “job directory” in the `~/AGEPRO`
-folder. The “job directory” name, by default, derived from the model’s
-**Case Id** name (untitled if null/blank) and a timestamp. The Job
-Directory contains: `agepro_inp_model` data saved as a AGEPRO Input Data
-file, Bootstrap file, and AGEPRO output files.
+By default, `launch_model` creates a **Model Job** for each
+**agepro_model** run to the AGEPRO Caluclation Engine. Each Model Job
+will have a **Model Job Name**, by default, is derived from the imported
+AGEPRO input file (otherwise it is *untitled*), an underscore, and a
+timestamp string formatted in `YYYY-MM-DD_hh-mm-ss`. The **Model Job
+Name** is used to create a **Model job directory**, by default, in the
+`~/AGEPRO` folder. In the
+
+Files in the **Model Job Directory** will named to the **Model Job
+Name** with the appropriate file extensions:
+
+- `agepro_inp_model` data saved as a AGEPRO Input Data file
+- Copy of Models Bootstrap file
+- Output Files from the AGEPRO Calcuation Engine.
 
 ``` r
 # Using `test`from 'setting a new agepro_inp_model'
