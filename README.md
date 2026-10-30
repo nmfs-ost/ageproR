@@ -42,7 +42,7 @@ launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25`
 format.
 
 **Models sent to the AGEPRO calualtion engine MUST be in the
-`AGEPRO VERSION 4.25` fornat**
+`AGEPRO VERSION 4.25` format**
 
 Please refer to the [*AGEPRO Reference
 Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
