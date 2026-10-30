@@ -225,7 +225,7 @@ will have a **Model Job Name**, by default, is derived from the imported
 AGEPRO input file (otherwise it is *untitled*), an underscore, and a
 timestamp string formatted in `YYYY-MM-DD_hh-mm-ss`. The **Model Job
 Name** is used to create a **Model job directory**, by default, in the
-`~/AGEPRO` folder. In the
+`~/AGEPRO` folder.
 
 Files in the **Model Job Directory** will named to the **Model Job
 Name** with the appropriate file extensions:
