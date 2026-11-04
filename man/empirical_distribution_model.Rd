@@ -5,67 +5,66 @@
 \title{Empirical Recruitment Distribution (Model #3)}
 \description{
 Empirical Recruitment Distribution (Model #3)
-
-Empirical Recruitment Distribution (Model #3)
 }
 \section{Super classes}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{\link[ageproR:empirical_recruit]{ageproR::empirical_recruit}} -> \code{empirical_distribution_model}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{\link[ageproR:empirical_recruit]{empirical_recruit}} -> \code{empirical_distribution_model}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-empirical_distribution_model-new}{\code{empirical_distribution_model$new()}}
-\item \href{#method-empirical_distribution_model-clone}{\code{empirical_distribution_model$clone()}}
+  \itemize{
+    \item \href{#method-empirical_distribution_model-initialize}{\code{empirical_distribution_model$new()}}
+    \item \href{#method-empirical_distribution_model-clone}{\code{empirical_distribution_model$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-inp_lines_recruit_data'><code>ageproR::empirical_recruit$inp_lines_recruit_data()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="new_obs_table"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-new_obs_table'><code>ageproR::empirical_recruit$new_obs_table()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="print"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-print'><code>ageproR::empirical_recruit$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="print_json"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-print_json'><code>ageproR::empirical_recruit$print_json()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="read_inp_lines"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-read_inp_lines'><code>ageproR::empirical_recruit$read_inp_lines()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="set_obs_table_from_df"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-set_obs_table_from_df'><code>ageproR::empirical_recruit$set_obs_table_from_df()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-inp_lines_recruit_data'><code>empirical_recruit$inp_lines_recruit_data()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="new_obs_table"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-new_obs_table'><code>empirical_recruit$new_obs_table()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="print"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-print'><code>empirical_recruit$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="print_json"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-print_json'><code>empirical_recruit$print_json()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="read_inp_lines"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-read_inp_lines'><code>empirical_recruit$read_inp_lines()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="set_obs_table_from_df"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-set_obs_table_from_df'><code>empirical_recruit$set_obs_table_from_df()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-empirical_distribution_model-new"></a>}}
-\if{latex}{\out{\hypertarget{method-empirical_distribution_model-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the Empirical Recruitment Distribution Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_distribution_model$new(num_observations, obs_table = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{num_observations}}{\cr
+\if{html}{\out{<a id="method-empirical_distribution_model-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-empirical_distribution_model-initialize}{}}}
+\subsection{\code{empirical_distribution_model$new()}}{
+  Initialize the Empirical Recruitment Distribution Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_distribution_model$new(num_observations, obs_table = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{num_observations}}{\cr
 Number of Empirical Observation Records}
-
-\item{\code{obs_table}}{Data Frame containing empirical recruitment
+      \item{\code{obs_table}}{Data Frame containing empirical recruitment
 observation table. If NULL, set to default values.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_distribution_model-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_distribution_model-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_distribution_model$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{empirical_distribution_model$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_distribution_model$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -31,15 +31,17 @@ Imports:
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Collate: 
     'ageproR-package.R'
+    'ageproWrapper.R'
     'agepro_model.R'
     'bootstrap.R'
     'case_id.R'
+    'create_agepro_model.R'
     'file.R'
     'general_params.R'
     'harvest_scenario.R'
+    'import_agepro_model.R'
     'mortality_fraction.R'
     'options_flags.R'
     'options_max_bounds.R'
@@ -53,6 +55,7 @@ Collate:
     'projection_years.R'
     'recruit_model.R'
     'recruitment.R'
+    'run_model.R'
     'utils.R'
     'validation.R'
 Suggests: 
@@ -62,3 +65,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/Needs/website: quarto
+Config/roxygen2/version: 8.1.0

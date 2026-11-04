@@ -5,131 +5,129 @@
 \title{Shepherd Curve with Autocorrelated Lognormal Error (Model #12)}
 \description{
 Shepherd Curve with Autocorrelated Lognormal Error (Model #12)
-
-Shepherd Curve with Autocorrelated Lognormal Error (Model #12)
 }
 \section{Super classes}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{\link[ageproR:parametric_curve]{ageproR::parametric_curve}} -> \code{\link[ageproR:parametric_autocorrelated_error]{ageproR::parametric_autocorrelated_error}} -> \code{shepherd_curve_autocorrelated_error}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{\link[ageproR:parametric_curve]{parametric_curve}} -> \code{\link[ageproR:parametric_autocorrelated_error]{parametric_autocorrelated_error}} -> \code{shepherd_curve_autocorrelated_error}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{kpar}}{Sets the Autocorrelated parametric Curve Parameter, phi. Returns the
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{kpar}}{Sets the Autocorrelated parametric Curve Parameter, phi. Returns the
 current value if no argument was passed.}
 
-\item{\code{json_recruit_data}}{Returns JSON-ready Recruit Model Data}
-}
-\if{html}{\out{</div>}}
+    \item{\code{json_recruit_data}}{Returns JSON-ready Recruit Model Data}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-shepherd_curve_autocorrelated_error-new}{\code{shepherd_curve_autocorrelated_error$new()}}
-\item \href{#method-shepherd_curve_autocorrelated_error-print}{\code{shepherd_curve_autocorrelated_error$print()}}
-\item \href{#method-shepherd_curve_autocorrelated_error-read_inp_lines}{\code{shepherd_curve_autocorrelated_error$read_inp_lines()}}
-\item \href{#method-shepherd_curve_autocorrelated_error-clone}{\code{shepherd_curve_autocorrelated_error$clone()}}
+  \itemize{
+    \item \href{#method-shepherd_curve_autocorrelated_error-initialize}{\code{shepherd_curve_autocorrelated_error$new()}}
+    \item \href{#method-shepherd_curve_autocorrelated_error-print}{\code{shepherd_curve_autocorrelated_error$print()}}
+    \item \href{#method-shepherd_curve_autocorrelated_error-read_inp_lines}{\code{shepherd_curve_autocorrelated_error$read_inp_lines()}}
+    \item \href{#method-shepherd_curve_autocorrelated_error-clone}{\code{shepherd_curve_autocorrelated_error$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-inp_lines_recruit_data'><code>ageproR::parametric_autocorrelated_error$inp_lines_recruit_data()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-inp_lines_recruit_data'><code>parametric_autocorrelated_error$inp_lines_recruit_data()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-shepherd_curve_autocorrelated_error-new"></a>}}
-\if{latex}{\out{\hypertarget{method-shepherd_curve_autocorrelated_error-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the Shepherd Autocorrelated Curve Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{shepherd_curve_autocorrelated_error$new(
+\if{html}{\out{<a id="method-shepherd_curve_autocorrelated_error-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-shepherd_curve_autocorrelated_error-initialize}{}}}
+\subsection{\code{shepherd_curve_autocorrelated_error$new()}}{
+  Initializes the Shepherd Autocorrelated Curve Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{shepherd_curve_autocorrelated_error$new(
   alpha = 0,
   beta = 0,
   kpar = 0,
   variance = 0,
   phi = 0,
   log_residual = 0
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{alpha}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{alpha}}{\cr
 Stock Recruitment Parameter, alpha}
-
-\item{\code{beta}}{\cr
+      \item{\code{beta}}{\cr
 Stock Recruitment Parameter, beta}
-
-\item{\code{kpar}}{kpar}
-
-\item{\code{variance}}{\cr
+      \item{\code{kpar}}{kpar}
+      \item{\code{variance}}{\cr
 variance}
-
-\item{\code{phi}}{\cr
+      \item{\code{phi}}{\cr
 Autocorrelation parameters}
-
-\item{\code{log_residual}}{\cr
+      \item{\code{log_residual}}{\cr
 Log-Scale Residual for the stock recruitment fit in the time prior to
 the projection}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-shepherd_curve_autocorrelated_error-print"></a>}}
 \if{latex}{\out{\hypertarget{method-shepherd_curve_autocorrelated_error-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out Parametric Autocorrelated Curve Data
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{shepherd_curve_autocorrelated_error$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{shepherd_curve_autocorrelated_error$print()}}{
+  Prints out Parametric Autocorrelated Curve Data
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{shepherd_curve_autocorrelated_error$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-shepherd_curve_autocorrelated_error-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-shepherd_curve_autocorrelated_error-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads Parametric Autocorreled Curve model data from AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{shepherd_curve_autocorrelated_error$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{shepherd_curve_autocorrelated_error$read_inp_lines()}}{
+  Reads Parametric Autocorreled Curve model data from AGEPRO Input file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{shepherd_curve_autocorrelated_error$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-shepherd_curve_autocorrelated_error-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-shepherd_curve_autocorrelated_error-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{shepherd_curve_autocorrelated_error$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{shepherd_curve_autocorrelated_error$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{shepherd_curve_autocorrelated_error$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

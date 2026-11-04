@@ -1,0 +1,246 @@
+#' Run the AGEPRO Cacluation Engine Binary with a AGEPRO Input File
+#'
+#' Wrapper function to call the AGEPRO calcualtion Engine in the Rconsole. If the
+#' parameter `save_logflle` is enabled, AGEPRO console output is printed to a logfile
+#' instead.
+#'
+#' @details
+#'
+#' [AGEPRO calcuation engine](https://github.com/noaa-pifsc/AGEPRO) must be installed on the system.
+#'
+#' There are three ways ageproR can obtain the path of this binary: the custom supplied path via
+#' `exepath`, user's system environmental variable `AGEPRO_PATH` through ".Renviron", or as a
+#' "default" fallback: in the "AGEPRO" subdirectory of home.
+#'
+#' @section AGEPRO Auxiliary Output Files:
+#' AGEPRO can export to R data object (`*.rdat`) and auxiliary output files, as an additiion
+#' to the AGEPRO output (`*.out`) file. For more details about Auxiliary output files, see the section
+#' [Model Outputs](https://nmfs-ost.github.io/agepro-ref-manual/11-2_model-outputs.html)
+#' on the _AGEPRO Reference Manual_.
+#'
+#' @param exepath Path of the Agepro Calcuation engine
+#' @param agepro_args Program arugument flags. Typically used for AGEPRO Input Files,
+#' however this field is intended to have program argument flags.
+#' @param outdir Output path
+#' @param save_logfile [Logical][base::logical] option to log AGEPRO Calcuation Engine ouput to a logfile. FALSE by Default.
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#'
+#' inp_file <- system.file("extdata/Example1.INP", package = "ageproR")
+#'
+#' # For this example, save the Agepro Calcuation Engine Binary in
+#' # the 'agepro' subdirectory of home directory 'R_USER'
+#' exepath <- path.expand("~/agepro/AGEPRO.EXE")
+#' if(.Platform$OS.type == "windows") {
+#'   exepath <- normalizePath(exepath, winslash="/")
+#' }
+#'
+#' ageproR::run_model(exepath, inp_file, tempdir())
+#' }
+#'
+run_model <- function(
+  exepath = "agepro.exe",
+  agepro_args = "",
+  outdir = getwd(),
+  save_logfile = FALSE
+) {
+  tryCatch(
+    {
+      agepro_calc <- ageproWrapper$new(path = exepath)
+
+      cout <- if (save_logfile) {
+        agepro_calc$run_logfile(agepro_args, outdir)
+      } else {
+        agepro_calc$run(agepro_args)
+      }
+      cli::cli_alert_success("Completed AGEPRO model run.")
+    },
+    error = function(err) {
+      cli::cli_alert_danger("AGEPRO process stopped.")
+      message(paste0(
+        "Error occured with launching model to AGEPRO: \n",
+        conditionMessage(err)
+      ))
+    }
+  )
+
+  return(cout)
+}
+
+#' Launch an agepro_inp_model to AGEPRO
+#'
+#' This function takes the [agepro_inp_model][ageproR::agepro_inp_model] class,
+#' creates a "job directory", where it saves the class data as an AGEPRO input file,
+#' imports a copy the bootstrap file, and launches the AGEPRO calcuation engine with it.
+#'
+#' After the calcuation engine is done, AGEPRO output file will be saved to the output
+#' directory. Function will also store AGEPRO calcuation engine logfile if requested.
+#'
+#' @details
+#' This is simlar to how [AGEPRO-GUI](https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI)
+#' launches agepro_model to the AGEPRO calcuation engine. The bootstrap file path written
+#' in the AGEPRO Input File is relative to the directory that input file is saved; The bootstrap filepath value does not have
+#' to have directory paths if the Input file and bootstrap file is saved in the same directory.
+#'
+#' The "default directory" of the outdir will be saved at the "AGEPRO" subdirectory of the `R_USER` directory.
+#'
+#' @inheritSection run_model AGEPRO Auxiliary Output Files
+#'
+#' @param model ["Agepro INP File Model Class Object"][ageproR::agepro_inp_model]
+#' @param out_dir Output path
+#' @param exe Path of the Agepro calcuation engine.
+#' @param append_job_dt [Logical][base::logical] option to append the date time stamp to the input files.
+#' @param save_logfile [Logical][base::logical] option to log AGEPRO calcuation engine ouput to a logfile. FALSE by Default.
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#' # Create new agepro_inp_class and import data from Example1 dataset
+#' test_model <- ageproR::import_agepro_model(system.file("extdata/Example1.INP", package = "ageproR"))
+#'
+#' # For this example, the AGEPRO Calcuation Engine Binary in
+#' # the 'agepro' subdirectory of home directory 'R_USER'
+#' exepath <- path.expand("~/agepro/AGEPRO.EXE")
+#' if(.Platform$OS.type == "windows") {
+#'   exepath <- normalizePath(exepath, winslash="/")
+#' }
+#'
+#' # Launch model to AGEPRO
+#' ageproR::launch_model(test_model, exe = exepath)
+#' }
+#'
+launch_model <- function(
+  model,
+  out_dir,
+  exe = "agepro.exe",
+  append_job_dt = TRUE,
+  save_logfile = FALSE
+) {
+  # Validate agepro_model
+  assert_agepro_model_class(model)
+
+  # TODO: Validate agepro calculation binary path.
+  # Will need to check where the location of AGEPRO calcuation engine binary is installed.
+  # This value allows the model to run AGEPRO calcuation engine between differnt users.
+
+  # If out_dir is missing, use <R_USER>/AGEPRO directory as default.
+  # Set "AGEPRO" subdirectory of User Home directory (R_USER)
+  if (missing(out_dir)) {
+    out_dir <- ifelse(
+      .Platform$OS.type == "windows",
+      normalizePath(
+        file.path(Sys.getenv("R_USER"), "AGEPRO"),
+        winslash = "/",
+        mustWork = FALSE
+      ),
+      file.path(Sys.getenv("R_USER"), "AGEPRO")
+    )
+    # If system doesn't have out_dir filepath, create it.
+    if (isFALSE(dir.exists(out_dir))) {
+      dir.create(out_dir)
+      cli::cli_alert("{out_dir} created")
+    }
+  }
+
+  # TODO: (Limited Character Length) Custom job names.
+  # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
+  model_job_name <- set_job_name(model, type = "filename")
+
+  job_dir <- ifelse(
+    append_job_dt,
+    file.path(
+      out_dir,
+      paste0(model_job_name, "_", format(Sys.time(), "%Y-%m-%d_%H-%M-%S"))
+    ),
+    file.path(out_dir, model_job_name)
+  )
+
+  # Create a "job_dir" subdirectory
+  if (isFALSE(checkmate::test_directory_exists(job_dir))) {
+    dir.create(job_dir)
+  }
+  cli::cli_alert("Job dir: {.val {job_dir}}")
+  cli::cli_alert("Job name: {.val {model_job_name}}")
+
+  # Write agepro_inp_model data to job_inpfile run directory
+  job_inpfile <- file.path(job_dir, paste0(model_job_name, ".inp"))
+  model$write_inp(job_inpfile)
+
+  # Validate model bootstrap_file (NULLs, relative bsn paths, valid paths)
+  # This may prompt the user if the validator can bulid a bootstrap_file path
+  # relative to its input file location (typically on the same directory)
+  assert_model_bootstrap(model)
+
+  # Copy validated agepro_model's bootstrap filepath to job_dir
+  job_bsnfile <- file.path(job_dir, paste0(model_job_name, ".bsn"))
+  file.copy(model$bootstrap$bootstrap_file, job_bsnfile)
+
+  cli::cli_alert_info("Model Bootstrap File: {.val {job_bsnfile}}")
+
+  # run_model to AGEPRO calculation engine
+  # AGEPRO console output is printed to R conosle
+  # TODO: If save_logfile is TRUE, AGEPRO console output will be stored in a
+  # text logfile.
+  cout <- run_model(
+    exe,
+    agepro_args = job_inpfile,
+    outdir = job_dir,
+    save_logfile
+  )
+
+  # AGEPRO will create a set of output files, depending on what options
+  # in [OPTIONS] in the agepro input file are set.
+  # Verify that *.out file is saved in the job_dir
+  if (
+    checkmate::test_file_exists(file.path(
+      job_dir,
+      paste0(model_job_name, ".out")
+    ))
+  ) {
+    cli::cli_alert_info("Model output files were saved at {.val {job_dir}}")
+  }
+
+  # If the input file's "import to R" flag is enabled, a *.rdat file
+  # is saved to the job_dir
+}
+
+#' Job directory name setup
+#'
+#' Helper method that uses the agepro model's data to label the job directory
+#' names.
+#'
+#' @param model Agepro model
+#' @param type Option to name to use input model filename or the model's
+#' case_id as part of the job_dir name. Defaults to "filename"
+#'
+#' @return
+#' Returns the Character String, the contents dependent on the "type"
+#' requested. Using "case_id" returns the case id model name formatted
+#' for file directories. NULL or blank "filename" values return `untitled`,
+#' otherwise function will return the input "filename" basename without
+#' the file extension.
+#'
+set_job_name <- function(model, type = c("filename", "case_id")) {
+  type <- match.arg(type)
+
+  # For "case_id", use case_id$sanitize_case_id_fschar
+  if (type == "case_id") {
+    return(model$case_id$sanitize_case_id_fschar())
+  }
+  # TODO: Pivot agepro_model to be more agonsitic than just inp_filepath
+  # Check Model's input model filepath is NULL (typically set with created
+  # agepro models), or its a blank empty string. Return as "untitled"
+  if (
+    checkmate::test_null(model$inp_filepath) ||
+      checkmate::test_character(
+        model$inp_filepath,
+        pattern = "^$|^[[:blank:]]+$"
+      )
+  ) {
+    return("untitled")
+  }
+  # Otherwise use basename of model's input filename
+  return(gsub("(\\.[[:alnum:]]{3})", "", basename(model$inp_filepath)))
+}

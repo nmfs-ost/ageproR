@@ -1,4 +1,5 @@
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ageproR
@@ -7,37 +8,50 @@
 
 <!-- badges: end -->
 
-ageproR is a developing R-package designed to handle input data to and
-from AGEPRO (Age Structured Projection Model) calculation engine.
+**ageproR** is a R-package designed to handle input data to and from
+AGEPRO (Age Structured Projection Model) calculation engine.
 
-> \[!IMPORTANT\]
->
-> **If you using AGEPRO for production, please use:**
->
-> - [AGEPRO-GUI, includes binary for AGEPRO calculation
->   engine](https://github.com/nmfs-ost/AGEPRO-GUI)
-> - [AGEPRO Command Line based Calculation Engine source code
->   repo](https://github.com/noaa-pifsc/AGEPRO)
+**ageproR** supercedes
+[AGEPRO-GUI](https://github.com/nmfs-ost/AGEPRO-GUI), but requires the
+binary from the Command Line based [AGEPRO Calculation Engine source
+code repo](https://github.com/noaa-pifsc/AGEPRO). See section
+*[Configuring ageproR with the AGEPRO calcuation
+engine](#configuring-agepror-with-the-agepro-calcuation-engine)* for
+details.
 
 ## Note
 
-**ageproR** is still in development. These features will be implemented
-in future updates.
+These features will be implemented in future **ageproR** updates.
 
 - Predictor Recruitment Models
 - Fixed Recruitment Model
 - Empirical Cumulative Distribution Factor for w/ Linear Decline to Zero
 - Markov Matrix Recruitment Model
-- Run AGEPRO models with the AGEPRO calculation engine within R.
-- Exported AGEPRO output R data objects.
+- ~~Run AGEPRO models with the AGEPRO calculation engine within R.~~
+- ~~Exported AGEPRO output R data objects.~~
 
-Importing Stock Synthesis report data as AGEPRO input data is being
-developed as a separate R-package: ss3agepro
+## AGEPRO input file format
+
+**ageproR** is compatible with the AGEPRO input file formats
+`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
+saves AGEPRO input files in the `AGEPRO VERSION 4.25` format.
+
+Loading an input file with the `AGEPRO VERSION 4.0` format to
+**ageproR** will maintain its version format until it is saved (or
+launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25`
+format.
+
+**Models sent to the AGEPRO calualtion engine MUST be in the
+`AGEPRO VERSION 4.25` format**
+
+Please refer to the [*AGEPRO Reference
+Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
+technical details.
 
 ## Installation
 
-You can install the development version of ageproR from [NOAA Fisheries
-OST Repository](https://github.com/nmfs-ost/ageproR) with:
+You can install ageproR from the [NOAA Fisheries OST
+Repository](https://github.com/nmfs-ost/ageproR) with:
 
 ``` r
 # via `pak`
@@ -49,35 +63,73 @@ install.packages("remotes")
 remotes::install_github("nmfs-ost/ageproR")
 ```
 
-## AGEPRO input file format
+## Configuring ageproR with the AGEPRO calcuation engine
 
-**ageproR** is compatible with the AGEPRO input file formats
-`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR**
-saves to the `AGEPRO VERSION 4.25` Input File Format.
+ageproR requires the command line based [AGEPRO Calculation
+Engine](https://github.com/noaa-pifsc/AGEPRO) to run model projections.
+Download the [AGEPRO calculation engine
+binary](https://github.com/noaa-pifsc/AGEPRO/releases) at the NOAA-PIFSC
+github repository.
 
-Please refer to the [*AGEPRO Reference
-Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more
-technical details.
+Store the AGEPRO calcuation engine binary to a folder location, this
+will be the directory path used to connect ageproR with AGEPRO with each
+model launch. For convenience, you can set an user-level R envrionmental
+variable.
 
-## Agepro Model Workflow Examples
+### Open `.Renviron` file
 
-### Setting up a new `agepro_inp_model`
+The following command will allow you to set the AGEPRO path to your
+user-level .Renviron file. This command opens the `~/.Renviron` file in
+your editor.
 
 ``` r
+usethis::edit_r_environ()
+```
+
+### Set the `AGEPRO_PATH` value and save `.Renviron`
+
+> \[!WARNING\]
+>
+> **Windows Paths:** You must use forward slashes (`/`) or double
+> backslashes (`\\`), not the standard single Windows backslashes (`\`).
+
+In `.Renviron`, add the line `AGEPRO_PATH` to *your directory where the
+AGEPRO calcuation binary is saved*. Save the changes.
+
+    AGEPRO_PATH="C://path//to//folder//AGEPRO.EXE"
+
+### Restart R and Verify
+
+**You must restart the R session** for the changes to make effect. Once
+R is restarted, load `ageproR`. If set correctly, you will see an
+confirmation message:
+
+    library(ageproR)
+    #>'AGEPRO_PATH' found at: "C://path//to//folder//AGEPRO.EXE"
+
+# Agepro Model Workflow Examples
+
+## Setting up a new `agepro_inp_model`
+
+By Default, creating a new instance of `agepro_inp_model` with default
+values will include a single **NULL Recritment Model**, a placeholder
+recruitment model. This will trigger a WARNING message to set and
+replace this Model with a vaild recruitment model before saving to file.
+*The AGEPRO calcuation engine does not recognize models with **NULL
+Recruitment Model** of `0`, and will not run this model*.
+
+``` r
+# If AGEPRO_PATH is setup, it will print the path of the AGEPRO Calcualtion Engine binary
+# right after ageproR package is loaded.
+# See readme section 'Configuring ageproR with the AGEPRO calcuation engine' for details
 library("ageproR")
 
-# Load path of ageproR's included Example_UKU Input File
-inpfile <- file.path(find.package("ageproR"),"example/Example_UKU.INP")
-
-# Load path of ageproR's included Example_UKU Bootstrap File
-bsnfile <- file.path(find.package("ageproR"),"example/Example_UKU.BSN")
-
 # Create a agepro_inp_model with default values
-test <- ageproR::agepro_inp_model$new()
-# By Default, creating a new instance of agepro_inp_model with default values will include a 
-# single "NULL Recritment Model", a placeholder recruitment model. It will print a WARNING 
-# to replace this Model with a vaild recruitment model before saving to file. AGEPRO  
-# Calcuation Engine will not recognize NULL Recruitment models.
+test <- ageproR::create_agepro_model()
+
+# The function create_agepro_model is designed to ease users to create agepro model classes 
+# wtihout the nuances of R6class initializtion. This is the equivalent to:
+# test <- ageproR::agepro_inp_model$new()
 
 # Set model with Recruit Model 14: "Empirical Cumulative Distribution Function of Recruitment". 
 test$set_recruit_model(c(14))
@@ -85,17 +137,20 @@ test$set_recruit_model(c(14))
 # New agepro_models instances return NULL
 test$bootstrap$bootstrap_file
 
+# Load path of ageproR's included Example1 Bootstrap File
+bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
+
 # Set Path of Bootstrap File 
 # Note: Leaving parameter blank may request a file dialog window.
 test$set_bootstrap_filename(bsnfile)
 ```
 
-### Setting up a new `agepro_inp_model` w/ multiple recruitment models
+## Setting up a new `agepro_inp_model` w/ multiple recruitment models
 
 ``` r
 # New instance of agepro_inp_model refreses class to default values.
 # Specify the "number of recuitment models" (num_rec_models) at initializtion
-test <- ageproR::agepro_inp_model$new(num_rec_models=3)
+test <- ageproR::create_agepro_model(num_rec_models=3)
 
 # Multiple recruitments depend on agepro_model's "number of recruitment models". 
 # For example, to set a 3 recruit agepro_inp_model w/ two Beverton-Holt models and a single
@@ -104,33 +159,49 @@ test$set_recruit_model(c(5,5,6))
 # NOTE: A valid rerun of set_recruit_model will OVERWRITE the previous [RECRUIT] values.
 ```
 
-### Reading or importing from AGEPRO input file (\*.inp)
-
-> \[!NOTE\]
->
-> Loading AGEPRO Input Files with multiple recuitment models will
-> automatically set the **number of recruits** and overwrite the
-> existing model’s recruitment data; For instance, reading a AGEPRO
-> input file with multiple recruits will overwrite newly created model’s
-> default data single NULL Recruitment.
+## Reading or importing from AGEPRO input file (\*.inp)
 
 ``` r
-# New instance of agepro_inp_model refreses class to default values.
-test2 <- ageproR::agepro_inp_model$new()
+# Load path of ageproR's included Example1 Input File
+inpfile <- system.file("extdata/Example1.INP", package = "ageproR")
 
-# Importing AGEPRO input file. 
-# Leaving parameter blank may request a file dialog window.
-test2$read_inp(inpfile) 
+# Creates a new instance of agepro_inp_model class, wieh to default values,
+# and imports model data from the agepro input data file from 'inpfile'
+# Leaving the first parameter ('file') with a blank value will call for a file dialog window.
+test2 <- ageproR::import_agepro_model(inpfile)
 
-# Note: Input Files with the `AGEPRO VERSION 4.0` format can be loaded to ageproR currently, 
-# but will be deprecated. In future updates. By default, AGPRO input files will be saved in the 
-# `AGEPRO VERSION 4.25` format. 
-# Function `read_inp` will also detect non-existant bootstrap paths. If there are no warnings, 
-# check the agepro model's bootstrap filepath equals the intended "bsnpath". If not: 
+# The function import_agepro_model is similar to create_agepro_model, but a way to import data from
+# agepro input files without the nuances of agepro class R6class initializtion. 
+# This is functional combination of:
+# test2 <- ageproR::agepro_inp_model$new()
+# test2$read_inp(inpfile) 
+```
+
+Importing data from AGEPRO Input Files, especially with multiple
+recuitment models, readjusts the models number of recruits.
+
+### Setting Bootstrap Filepath when importing AGEPRO input data files
+
+When importing agepro input data via `import_agepro_model` or
+`read_inp`, **ageproR** will give a WARNING if the bootstrap file path
+non existant on the system. **ageproR** will to check if the bootstrap’s
+filepath is relative to the input file location.
+
+``` r
+# Load path of ageproR's included Example1 Bootstrap File
+bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
+
+# Double check if the model's bootstrap filepath equals the intended "bsnpath"
+test2$bootstrap$bootstrap_file
+
+# If not, set the path:
 # test2$set_bootstrap_filename(bsnfile)
 ```
 
-### Saving to AGEPRO Input File.
+## Saving to AGEPRO Input File.
+
+By default, AGEPRO input files is saved in the `AGEPRO VERSION 4.25`
+format.
 
 ``` r
 # Using the "test2" model .... 
@@ -141,9 +212,41 @@ outfile <- tempfile("example1_", fileext = ".inp")
 test2$write_inp(outfile)
 ```
 
+## Launch model
+
+Ensure that the model’s “Export to R” option is enabled (`1`) before
+launching to the AGEPRO calcuation engine. When this enabled flag is
+saved in the AGEPRO input file, it allows AGEPRO to export output data
+as a Rdata file (`*.rdat`).
+
+By default, `launch_model` creates a **Model Job** for each
+**agepro_model** run to the AGEPRO Caluclation Engine. Each Model Job
+will have a **Model Job Name**, by default, is derived from the imported
+AGEPRO input file (otherwise it is *untitled*), an underscore, and a
+timestamp string formatted in `YYYY-MM-DD_hh-mm-ss`. The **Model Job
+Name** is used to create a **Model job directory**, by default, in the
+`~/AGEPRO` folder.
+
+Files in the **Model Job Directory** will named to the **Model Job
+Name** with the appropriate file extensions:
+
+- `agepro_inp_model` data saved as a AGEPRO Input Data file
+- Copy of Models Bootstrap file
+- Output Files from the AGEPRO Calcuation Engine.
+
+``` r
+# Using `test`from 'setting a new agepro_inp_model'
+test$options$export_df # Check "Export to R" option is enabled: should be 1
+launch_model(test)
+
+# Using `test2` from 'Reading or importing from AGEPRO input file (*.inp)'
+test2$options$export_df # Check "Export to R" option is enabled:  should be 1
+launch_model(test2)
+```
+
 ## Citation
 
-Please cite this AGEPRO project as:
+Please cite AGEPRO as:
 
     Brodziak, Jon and Rago, Paul J. and Conser, Ramon. (1998). A General Approach for Making Short-Term 
     Stochastic Projections from an Age-Structured Fisheries Assessment Model. Fishery Stock Assessment 

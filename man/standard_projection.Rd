@@ -8,50 +8,54 @@ Class Structure containing Standard Projection Analyses
 }
 \keyword{projection_analyses}
 \section{Super class}{
-\code{\link[ageproR:projection_analyses]{ageproR::projection_analyses}} -> \code{standard_projection}
+\code{\link[ageproR:projection_analyses]{projection_analyses}} -> \code{standard_projection}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-standard_projection-new}{\code{standard_projection$new()}}
-\item \href{#method-standard_projection-clone}{\code{standard_projection$clone()}}
-}
+  \itemize{
+    \item \href{#method-standard_projection-initialize}{\code{standard_projection$new()}}
+    \item \href{#method-standard_projection-clone}{\code{standard_projection$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-standard_projection-new"></a>}}
-\if{latex}{\out{\hypertarget{method-standard_projection-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{standard_projection$new(proj_years)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{May be a single numeric value: the number of years in the
+\if{html}{\out{<a id="method-standard_projection-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-standard_projection-initialize}{}}}
+\subsection{\code{standard_projection$new()}}{
+  Initializes class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{standard_projection$new(proj_years)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{May be a single numeric value: the number of years in the
 time projection; a vector of sequential values: Sequence of years in from
 first to last year of the time projection; or an instance of
 \link[=projection_years]{Projection years}}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-standard_projection-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-standard_projection-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{standard_projection$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{standard_projection$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{standard_projection$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

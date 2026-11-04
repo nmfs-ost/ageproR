@@ -1,4 +1,3 @@
-
 #' @title
 #' AGEPRO projection output options.
 #'
@@ -18,7 +17,6 @@
 options_output <- R6Class(
   "options_output",
   public = list(
-
     #' @description
     #' Initializes the class
     #'
@@ -52,11 +50,12 @@ options_output <- R6Class(
     #' [Logical][base::logical] flag to indicate model is using the
     #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
     #'
-    initialize = function(auxiliary_flag = 0,
-                          process_error_datafiles = FALSE,
-                          export_df = TRUE,
-                          enable_agepro40_format = FALSE) {
-
+    initialize = function(
+      auxiliary_flag = 0,
+      process_error_datafiles = FALSE,
+      export_df = TRUE,
+      enable_agepro40_format = FALSE
+    ) {
       div_keyword_header(private$.keyword_name)
       cli_alert("Setting AGEPRO projection output options ...")
 
@@ -64,8 +63,6 @@ options_output <- R6Class(
       self$auxfile_output_flag <- auxiliary_flag
       self$process_error_datafiles <- process_error_datafiles
       self$export_df <- export_df
-
-
     },
 
     #' @description
@@ -76,19 +73,23 @@ options_output <- R6Class(
         paste0(
           "auxfile_output_flag: ",
           "{.val {private$.auxfile_output_flag}} ",
-          "{.emph ({private$aux_flag_string(private$.auxfile_output_flag)})}"))
+          "{.emph ({private$aux_flag_string(private$.auxfile_output_flag)})}"
+        )
+      )
       cli::cli_alert_info(
         paste0(
           "process_error_datafiles: ",
           "{.val {private$.process_error_datafiles}} ",
-          "{.emph ({as.logical(private$.process_error_datafiles)})}"))
+          "{.emph ({as.logical(private$.process_error_datafiles)})}"
+        )
+      )
       cli::cli_alert_info(
         paste0(
           "export_df {.emph (export output as data.frame)}: ",
           "{.val {private$.export_df}} ",
-          "{.emph ({as.logical(private$.export_df)})}"))
-
-
+          "{.emph ({as.logical(private$.export_df)})}"
+        )
+      )
     },
 
     #' @description
@@ -96,8 +97,7 @@ options_output <- R6Class(
     #' AGEPRO Input file
     #'
     read_inp_lines = function(inp_con, nline) {
-
-      cli::cli_alert("Reading {.strong {private$.keyword_name}}")
+      cli::cli_alert("Reading to {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
       inp_line <- read_inp_numeric_line(inp_con)
@@ -106,11 +106,15 @@ options_output <- R6Class(
       suppressMessages(self$process_error_datafiles <- inp_line[2])
       suppressMessages(self$export_df <- inp_line[3])
 
-      cli::cli_alert(paste0("Line {nline} : ",
-                            "Reading AGEPRO projection output options ..."))
+      cli::cli_alert(paste0(
+        "Line {nline} : ",
+        "Reading AGEPRO projection output options ..."
+      ))
 
-      cli::cli_div(id = "options_fields",
-                   theme = list(".alert-info" = list("margin-left" = 2)))
+      cli::cli_div(
+        id = "options_fields",
+        theme = list(".alert-info" = list("margin-left" = 2))
+      )
       self$print()
       cli::cli_end("options_fields")
 
@@ -123,44 +127,50 @@ options_output <- R6Class(
     #'
     #' @template delimiter
     #'
-    get_inp_lines = function(delimiter = " "){
+    get_inp_lines = function(delimiter = " ") {
       return(list(
         self$inp_keyword,
-        paste(self$auxfile_output_flag,
-              self$process_error_datafiles,
-              self$export_df,
-              sep = delimiter)
+        paste(
+          self$auxfile_output_flag,
+          self$process_error_datafiles,
+          self$export_df,
+          sep = delimiter
+        )
       ))
     }
-
   ),
   active = list(
-
     #' @field auxfile_output_flag
     #' [Logical][base::logical] flag to output stock summary information
     auxfile_output_flag = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.auxfile_output_flag)
-      }else{
-
+      } else {
         # Calling Handler to wrap field name w/ validate_logical_parameter
         # message
         withCallingHandlers(
-          message = function (cnd) {
+          message = function(cnd) {
             cli::cli_alert_info(
-              paste0("output_summary_report: ",
-                     "{sub('\u2192 ', '', conditionMessage(cnd))}"))
+              paste0(
+                "output_summary_report: ",
+                "{sub('\u2192 ', '', conditionMessage(cnd))}"
+              )
+            )
 
             rlang::cnd_muffle(cnd)
           },
 
           ## TODO: Replace validate_logical_parameter
-          if(self$enable_agepro40_format){
-            private$.auxfile_output_flag <- private$validate_logical_parameter(value)
-          }else{
-            private$.auxfile_output_flag <- checkmate::assert_choice(value, self$valid_aux_output_flags)
+          if (self$enable_agepro40_format) {
+            private$.auxfile_output_flag <- private$validate_logical_parameter(
+              value
+            )
+          } else {
+            private$.auxfile_output_flag <- checkmate::assert_choice(
+              value,
+              self$valid_aux_output_flags
+            )
           }
-
         )
       }
     },
@@ -170,18 +180,20 @@ options_output <- R6Class(
     #' simulated with lognormal process error (process_error parameters) to
     #' auxiliary output files
     process_error_datafiles = function(value) {
-      if(missing(value)) {
+      if (missing(value)) {
         return(private$.process_error_datafiles)
-      }else {
-
+      } else {
         # Calling Handler to wrap field name w/ validate_logical_parameter
         # message
         withCallingHandlers(
           message = function(cnd) {
             cli::cli_alert_info(
-              paste0("process_error_datafiles ",
-                     "{.emph (Auxillary output files)}: ",
-                     "{sub('\u2192 ', '', conditionMessage(cnd))}"))
+              paste0(
+                "process_error_datafiles ",
+                "{.emph (Auxillary output files)}: ",
+                "{sub('\u2192 ', '', conditionMessage(cnd))}"
+              )
+            )
 
             rlang::cnd_muffle(cnd)
           },
@@ -198,31 +210,32 @@ options_output <- R6Class(
     #' `1` (or TRUE) at initialization.
     #'
     export_df = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.export_df)
-      }else{
-
+      } else {
         # Calling Handler to wrap field name w/ validate_logical_parameter
         # message
         withCallingHandlers(
           message = function(cnd) {
             cli::cli_alert_info(
-              paste0("export_df ",
-                     "{.emph (AGEPRO output as data.frame)}: ",
-                     "{sub('\u2192 ', '', conditionMessage(cnd))}"))
+              paste0(
+                "export_df ",
+                "{.emph (AGEPRO output as data.frame)}: ",
+                "{sub('\u2192 ', '', conditionMessage(cnd))}"
+              )
+            )
             rlang::cnd_muffle(cnd)
           },
 
           private$.export_df <- private$validate_logical_parameter(value)
         )
-
       }
     },
 
     #' @field valid_aux_output_flags
     #' Returns a list of valid numerical flags to enable _Stock of Age _
     #' _Distribution Summary and Auxiliary Files_.
-    valid_aux_output_flags = function () {
+    valid_aux_output_flags = function() {
       return(private$.valid_aux_output_flags)
     },
 
@@ -230,15 +243,13 @@ options_output <- R6Class(
     #' [Logical][base::logical] flag to indicate model is using the
     #' `AGEPRO VERSION 4.0` format for setting auxiliary files.
     enable_agepro40_format = function(value) {
-      if(missing(value)){
+      if (missing(value)) {
         return(private$.enable_agepro40_format)
-      }
-      else{
+      } else {
         checkmate::assert_logical(value)
         private$.enable_agepro40_format <- value
       }
     },
-
 
     #' @field json_list_object
     #' Returns JSON list object of containing options_output values
@@ -259,34 +270,32 @@ options_output <- R6Class(
     #' @field inp_keyword
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
-      paste0("[",toupper(private$.keyword_name),"]")
+      paste0("[", toupper(private$.keyword_name), "]")
     }
-
   ),
   private = list(
-
     .keyword_name = "options",
 
     .auxfile_output_flag = NULL,
     .process_error_datafiles = NULL,
     .export_df = NULL,
-    .valid_aux_output_flags = c(0,1,2,3,4),
+    .valid_aux_output_flags = c(0, 1, 2, 3, 4),
     .enable_agepro40_format = FALSE,
 
     aux_flag_string = function(value) {
-
       #Validation
       checkmate::assert_choice(value, choices = private$.valid_aux_output_flags)
 
-      list_aux_flag <- list("No Stock of Age Distribution Summary, Output Auxiliary Files EXCEPT Stock Numbers of Age",
-                            "Output Stock of Age Distribution Summary and All Auxiliary Files",
-                            "No Stock Of Age Distribution Summary and Auxiliary Files",
-                            "Output Stock Distribution Summary, but NO Auxiliary Files",
-                            "Output Stock Distribution Summary and Auxiliary Files EXCEPT Auxiliary Stock File")
+      list_aux_flag <- list(
+        "No Stock of Age Distribution Summary, Output Auxiliary Files EXCEPT Stock Numbers of Age",
+        "Output Stock of Age Distribution Summary and All Auxiliary Files",
+        "No Stock Of Age Distribution Summary and Auxiliary Files",
+        "Output Stock Distribution Summary, but NO Auxiliary Files",
+        "Output Stock Distribution Summary and Auxiliary Files EXCEPT Auxiliary Stock File"
+      )
 
       #Add 1 to value to match up with list_aux_flag indexing
-      return(list_aux_flag[[value+1]])
-
+      return(list_aux_flag[[value + 1]])
     },
 
     # Validate parameters formatted as logical values
@@ -297,25 +306,21 @@ options_output <- R6Class(
     # as logical values.
     #
     validate_logical_parameter = function(x) {
-
       #Convert logical values as numeric
-      if(checkmate::test_logical(x)){
+      if (checkmate::test_logical(x)) {
         logical_x <- x
         x <- as.numeric(x)
-        cli::cli_alert(c("{.val {x}}"," ({.val {logical_x}})"))
-      }else{
+        cli::cli_alert(c("{.val {x}}", " ({.val {logical_x}})"))
+      } else {
         cli::cli_alert("{.val {x}}")
       }
 
       validation_error <- checkmate::makeAssertCollection()
       checkmate::assert_numeric(x, add = validation_error)
-      checkmate::assert_choice(x, choices = c(0, 1),
-                               add = validation_error)
+      checkmate::assert_choice(x, choices = c(0, 1), add = validation_error)
       checkmate::reportAssertions(validation_error)
 
       return(x)
-
     }
   )
-
 )

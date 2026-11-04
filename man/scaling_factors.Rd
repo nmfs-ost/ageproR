@@ -22,131 +22,137 @@ The scaling_factors class (or SCALE) is recognized as a keyword
 parameter used in the AGEPRO input file format, but it is optional.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{biomass_scale}}{Output units of biomass expressed in thousand metric tons}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{biomass_scale}}{Output units of biomass expressed in thousand metric tons}
 
-\item{\code{recruitment_scale}}{Output units of recruitment numbers}
+    \item{\code{recruitment_scale}}{Output units of recruitment numbers}
 
-\item{\code{stock_size_scale}}{Output Units of stock size numbers}
+    \item{\code{stock_size_scale}}{Output Units of stock size numbers}
 
-\item{\code{enable_scaling_factors}}{Logical field that flags if fields can be edited. This class will not
+    \item{\code{enable_scaling_factors}}{Logical field that flags if fields can be edited. This class will not
 accept new values to its fields or allow it to be exported to input file
 until this option flag is TRUE.}
 
-\item{\code{json_list_object}}{Returns JSON list object of containing SCALE values}
+    \item{\code{json_list_object}}{Returns JSON list object of containing SCALE values}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-scaling_factors-new}{\code{scaling_factors$new()}}
-\item \href{#method-scaling_factors-print}{\code{scaling_factors$print()}}
-\item \href{#method-scaling_factors-read_inp_lines}{\code{scaling_factors$read_inp_lines()}}
-\item \href{#method-scaling_factors-get_inp_lines}{\code{scaling_factors$get_inp_lines()}}
-\item \href{#method-scaling_factors-clone}{\code{scaling_factors$clone()}}
-}
+  \itemize{
+    \item \href{#method-scaling_factors-initialize}{\code{scaling_factors$new()}}
+    \item \href{#method-scaling_factors-print}{\code{scaling_factors$print()}}
+    \item \href{#method-scaling_factors-read_inp_lines}{\code{scaling_factors$read_inp_lines()}}
+    \item \href{#method-scaling_factors-get_inp_lines}{\code{scaling_factors$get_inp_lines()}}
+    \item \href{#method-scaling_factors-clone}{\code{scaling_factors$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-scaling_factors-new"></a>}}
-\if{latex}{\out{\hypertarget{method-scaling_factors-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{scaling_factors$new(
+\if{html}{\out{<a id="method-scaling_factors-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-scaling_factors-initialize}{}}}
+\subsection{\code{scaling_factors$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{scaling_factors$new(
   scale_bio = 0,
   scale_recruit = 0,
   scale_stock_size = 0,
   scale_flag = NULL
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{scale_bio}}{Output units of biomass express in thousand metric units}
+      \item{\code{scale_recruit}}{Output Units of Recruitment Numbers}
+      \item{\code{scale_stock_size}}{Output Units of Stock Size Numbers}
+      \item{\code{scale_flag}}{R6class containing option flags to allow scaling factors to be used}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{scale_bio}}{Output units of biomass express in thousand metric units}
-
-\item{\code{scale_recruit}}{Output Units of Recruitment Numbers}
-
-\item{\code{scale_stock_size}}{Output Units of Stock Size Numbers}
-
-\item{\code{scale_flag}}{R6class containing option flags to allow scaling factors to be used}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scaling_factors-print"></a>}}
 \if{latex}{\out{\hypertarget{method-scaling_factors-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out scaling_factors values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{scaling_factors$print()}\if{html}{\out{</div>}}
+\subsection{\code{scaling_factors$print()}}{
+  Formatted to print out scaling_factors values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{scaling_factors$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scaling_factors-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-scaling_factors-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter SCALE from the
+\subsection{\code{scaling_factors$read_inp_lines()}}{
+  Reads in the values from the keyword parameter SCALE from the
 AGEPRO Input file
 
 Note: enable_scaling_factors must be set to TRUE.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{scaling_factors$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{scaling_factors$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scaling_factors-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-scaling_factors-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns values from the class to the SCALE AGEPRO keyword parameter
+\subsection{\code{scaling_factors$get_inp_lines()}}{
+  Returns values from the class to the SCALE AGEPRO keyword parameter
 formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{scaling_factors$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{scaling_factors$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-scaling_factors-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-scaling_factors-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{scaling_factors$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{scaling_factors$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{scaling_factors$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

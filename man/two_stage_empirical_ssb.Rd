@@ -5,75 +5,74 @@
 \title{Two-Stage Empirical Recruits Per Spawning Biomass Distribution (Model #4)}
 \description{
 Two-Stage Empirical Recruits Per Spawning Biomass Distribution (Model #4)
-
-Two-Stage Empirical Recruits Per Spawning Biomass Distribution (Model #4)
 }
 \section{Super classes}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{\link[ageproR:empirical_recruit]{ageproR::empirical_recruit}} -> \code{\link[ageproR:two_stage_empirical_recruit]{ageproR::two_stage_empirical_recruit}} -> \code{two_stage_empirical_ssb}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{\link[ageproR:empirical_recruit]{empirical_recruit}} -> \code{\link[ageproR:two_stage_empirical_recruit]{two_stage_empirical_recruit}} -> \code{two_stage_empirical_ssb}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{json_recruit_data}}{gets JSON-ready Recruit Model Data}
-}
-\if{html}{\out{</div>}}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{json_recruit_data}}{gets JSON-ready Recruit Model Data}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-two_stage_empirical_ssb-new}{\code{two_stage_empirical_ssb$new()}}
-\item \href{#method-two_stage_empirical_ssb-clone}{\code{two_stage_empirical_ssb$clone()}}
+  \itemize{
+    \item \href{#method-two_stage_empirical_ssb-initialize}{\code{two_stage_empirical_ssb$new()}}
+    \item \href{#method-two_stage_empirical_ssb-clone}{\code{two_stage_empirical_ssb$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="new_obs_table"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-new_obs_table'><code>ageproR::empirical_recruit$new_obs_table()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="print_json"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-print_json'><code>ageproR::empirical_recruit$print_json()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="set_obs_table_from_df"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-set_obs_table_from_df'><code>ageproR::empirical_recruit$set_obs_table_from_df()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-inp_lines_recruit_data'><code>ageproR::two_stage_empirical_recruit$inp_lines_recruit_data()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="new_recruitment_matrix"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-new_recruitment_matrix'><code>ageproR::two_stage_empirical_recruit$new_recruitment_matrix()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="print"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-print'><code>ageproR::two_stage_empirical_recruit$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="read_inp_lines"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-read_inp_lines'><code>ageproR::two_stage_empirical_recruit$read_inp_lines()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="new_obs_table"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-new_obs_table'><code>empirical_recruit$new_obs_table()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="print_json"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-print_json'><code>empirical_recruit$print_json()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="empirical_recruit" data-id="set_obs_table_from_df"><a href='../../ageproR/html/empirical_recruit.html#method-empirical_recruit-set_obs_table_from_df'><code>empirical_recruit$set_obs_table_from_df()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-inp_lines_recruit_data'><code>two_stage_empirical_recruit$inp_lines_recruit_data()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="new_recruitment_matrix"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-new_recruitment_matrix'><code>two_stage_empirical_recruit$new_recruitment_matrix()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="print"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-print'><code>two_stage_empirical_recruit$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="two_stage_empirical_recruit" data-id="read_inp_lines"><a href='../../ageproR/html/two_stage_empirical_recruit.html#method-two_stage_empirical_recruit-read_inp_lines'><code>two_stage_empirical_recruit$read_inp_lines()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-two_stage_empirical_ssb-new"></a>}}
-\if{latex}{\out{\hypertarget{method-two_stage_empirical_ssb-new}{}}}
-\subsection{Method \code{new()}}{
-Initialize the Empirical CDF Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{two_stage_empirical_ssb$new(low_recruits = 2, high_recruits = 2)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{low_recruits}}{\cr
+\if{html}{\out{<a id="method-two_stage_empirical_ssb-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-two_stage_empirical_ssb-initialize}{}}}
+\subsection{\code{two_stage_empirical_ssb$new()}}{
+  Initialize the Empirical CDF Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{two_stage_empirical_ssb$new(low_recruits = 2, high_recruits = 2)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{low_recruits}}{\cr
 The number of low recruits per spawning stock biomass data points.}
-
-\item{\code{high_recruits}}{\cr
+      \item{\code{high_recruits}}{\cr
 The number of high recruits per spawning stock biomass data points.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-two_stage_empirical_ssb-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-two_stage_empirical_ssb-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{two_stage_empirical_ssb$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{two_stage_empirical_ssb$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{two_stage_empirical_ssb$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

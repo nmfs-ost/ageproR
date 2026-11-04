@@ -8,82 +8,80 @@ Generalized Class Structure for Natural Mortality rate of age
 AGEPRO Keyword parameter.
 }
 \section{Super class}{
-\code{\link[ageproR:process_error]{ageproR::process_error}} -> \code{natural_mortality}
+\code{\link[ageproR:process_error]{process_error}} -> \code{natural_mortality}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-natural_mortality-new}{\code{natural_mortality$new()}}
-\item \href{#method-natural_mortality-clone}{\code{natural_mortality$clone()}}
+  \itemize{
+    \item \href{#method-natural_mortality-initialize}{\code{natural_mortality$new()}}
+    \item \href{#method-natural_mortality-clone}{\code{natural_mortality$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="create_parameter_table"><a href='../../ageproR/html/process_error.html#method-process_error-create_parameter_table'><code>ageproR::process_error$create_parameter_table()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="get_inp_lines"><a href='../../ageproR/html/process_error.html#method-process_error-get_inp_lines'><code>ageproR::process_error$get_inp_lines()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="print"><a href='../../ageproR/html/process_error.html#method-process_error-print'><code>ageproR::process_error$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="read_inp_lines"><a href='../../ageproR/html/process_error.html#method-process_error-read_inp_lines'><code>ageproR::process_error$read_inp_lines()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="read_inp_lines_cv_table"><a href='../../ageproR/html/process_error.html#method-process_error-read_inp_lines_cv_table'><code>ageproR::process_error$read_inp_lines_cv_table()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="read_inp_lines_parameter_tables"><a href='../../ageproR/html/process_error.html#method-process_error-read_inp_lines_parameter_tables'><code>ageproR::process_error$read_inp_lines_parameter_tables()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="create_parameter_table"><a href='../../ageproR/html/process_error.html#method-process_error-create_parameter_table'><code>process_error$create_parameter_table()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="get_inp_lines"><a href='../../ageproR/html/process_error.html#method-process_error-get_inp_lines'><code>process_error$get_inp_lines()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="print"><a href='../../ageproR/html/process_error.html#method-process_error-print'><code>process_error$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="read_inp_lines"><a href='../../ageproR/html/process_error.html#method-process_error-read_inp_lines'><code>process_error$read_inp_lines()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="read_inp_lines_cv_table"><a href='../../ageproR/html/process_error.html#method-process_error-read_inp_lines_cv_table'><code>process_error$read_inp_lines_cv_table()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="process_error" data-id="read_inp_lines_parameter_tables"><a href='../../ageproR/html/process_error.html#method-process_error-read_inp_lines_parameter_tables'><code>process_error$read_inp_lines_parameter_tables()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-natural_mortality-new"></a>}}
-\if{latex}{\out{\hypertarget{method-natural_mortality-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{natural_mortality$new(
+\if{html}{\out{<a id="method-natural_mortality-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-natural_mortality-initialize}{}}}
+\subsection{\code{natural_mortality$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{natural_mortality$new(
   proj_years,
   num_ages,
   input_option = 0,
   time_varying = TRUE,
   enable_cat_print = TRUE
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{\link[=projection_years]{Projection years}:
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{\link[=projection_years]{Projection years}:
 Input can be Sequence of years in from first to last year of
 projection or the number of years in the time projection.}
-
-\item{\code{num_ages}}{Number of Age classes}
-
-\item{\code{input_option}}{Option to indicate this parameter will be:
+      \item{\code{num_ages}}{Number of Age classes}
+      \item{\code{input_option}}{Option to indicate this parameter will be:
 \itemize{
 \item \code{0} By default, done interactively via interface.
 \item \code{1} Imported via location of an existing data file.
 }}
-
-\item{\code{time_varying}}{Logical flag that enables the stochastic parameter
+      \item{\code{time_varying}}{Logical flag that enables the stochastic parameter
 to use as a time-varying array if TRUE (or 1). Otherwise, FALSE the
 vector will cover "all years" of the projection. Default is TRUE.}
-
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
 messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-natural_mortality-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-natural_mortality-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{natural_mortality$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{natural_mortality$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{natural_mortality$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

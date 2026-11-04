@@ -5,67 +5,65 @@
 \title{Beverton-Holt w/ Lognormal Error (Model #5)}
 \description{
 Beverton-Holt w/ Lognormal Error (Model #5)
-
-Beverton-Holt w/ Lognormal Error (Model #5)
 }
 \section{Super classes}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{\link[ageproR:parametric_curve]{ageproR::parametric_curve}} -> \code{beverton_holt_curve_model}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{\link[ageproR:parametric_curve]{parametric_curve}} -> \code{beverton_holt_curve_model}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-beverton_holt_curve_model-new}{\code{beverton_holt_curve_model$new()}}
-\item \href{#method-beverton_holt_curve_model-clone}{\code{beverton_holt_curve_model$clone()}}
+  \itemize{
+    \item \href{#method-beverton_holt_curve_model-initialize}{\code{beverton_holt_curve_model$new()}}
+    \item \href{#method-beverton_holt_curve_model-clone}{\code{beverton_holt_curve_model$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_curve" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/parametric_curve.html#method-parametric_curve-inp_lines_recruit_data'><code>ageproR::parametric_curve$inp_lines_recruit_data()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_curve" data-id="print"><a href='../../ageproR/html/parametric_curve.html#method-parametric_curve-print'><code>ageproR::parametric_curve$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_curve" data-id="read_inp_lines"><a href='../../ageproR/html/parametric_curve.html#method-parametric_curve-read_inp_lines'><code>ageproR::parametric_curve$read_inp_lines()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_curve" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/parametric_curve.html#method-parametric_curve-inp_lines_recruit_data'><code>parametric_curve$inp_lines_recruit_data()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_curve" data-id="print"><a href='../../ageproR/html/parametric_curve.html#method-parametric_curve-print'><code>parametric_curve$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_curve" data-id="read_inp_lines"><a href='../../ageproR/html/parametric_curve.html#method-parametric_curve-read_inp_lines'><code>parametric_curve$read_inp_lines()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-beverton_holt_curve_model-new"></a>}}
-\if{latex}{\out{\hypertarget{method-beverton_holt_curve_model-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the Beverton Holt Curve Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{beverton_holt_curve_model$new(alpha = 0, beta = 0, variance = 0)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{alpha}}{\cr
+\if{html}{\out{<a id="method-beverton_holt_curve_model-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-beverton_holt_curve_model-initialize}{}}}
+\subsection{\code{beverton_holt_curve_model$new()}}{
+  Initializes the Beverton Holt Curve Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{beverton_holt_curve_model$new(alpha = 0, beta = 0, variance = 0)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{alpha}}{\cr
 Stock Recruitment Parameter, alpha}
-
-\item{\code{beta}}{\cr
+      \item{\code{beta}}{\cr
 Stock Recruitment Parameter, beta}
-
-\item{\code{variance}}{\cr
+      \item{\code{variance}}{\cr
 variance}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-beverton_holt_curve_model-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-beverton_holt_curve_model-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{beverton_holt_curve_model$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{beverton_holt_curve_model$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{beverton_holt_curve_model$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

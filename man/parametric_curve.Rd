@@ -7,133 +7,140 @@
 Recruitment Model Description
 }
 \section{Super class}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{parametric_curve}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{parametric_curve}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{json_recruit_data}}{Returns JSON-ready Recruit Model Data'}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{json_recruit_data}}{Returns JSON-ready Recruit Model Data'}
 
-\item{\code{alpha}}{Sets the Parametric Curve Parameter, alpha. Returns the
+    \item{\code{alpha}}{Sets the Parametric Curve Parameter, alpha. Returns the
 current value if no argument was passed}
 
-\item{\code{beta}}{Sets the Parametric Curve Parameter, beta. Returns the
+    \item{\code{beta}}{Sets the Parametric Curve Parameter, beta. Returns the
 current value if no argument was passed}
 
-\item{\code{variance}}{Sets the Parametric Curve Parameter, variance. Returns the
+    \item{\code{variance}}{Sets the Parametric Curve Parameter, variance. Returns the
 current value if no argument was passed.}
 
-\item{\code{model_group}}{Model group Number}
+    \item{\code{model_group}}{Model group Number}
 
-\item{\code{super_}}{Binds the super class to parametric_curve child classes}
-}
-\if{html}{\out{</div>}}
+    \item{\code{super_}}{Binds the super class to parametric_curve child classes}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-parametric_curve-new}{\code{parametric_curve$new()}}
-\item \href{#method-parametric_curve-inp_lines_recruit_data}{\code{parametric_curve$inp_lines_recruit_data()}}
-\item \href{#method-parametric_curve-print}{\code{parametric_curve$print()}}
-\item \href{#method-parametric_curve-read_inp_lines}{\code{parametric_curve$read_inp_lines()}}
-\item \href{#method-parametric_curve-clone}{\code{parametric_curve$clone()}}
-}
+  \itemize{
+    \item \href{#method-parametric_curve-initialize}{\code{parametric_curve$new()}}
+    \item \href{#method-parametric_curve-inp_lines_recruit_data}{\code{parametric_curve$inp_lines_recruit_data()}}
+    \item \href{#method-parametric_curve-print}{\code{parametric_curve$print()}}
+    \item \href{#method-parametric_curve-read_inp_lines}{\code{parametric_curve$read_inp_lines()}}
+    \item \href{#method-parametric_curve-clone}{\code{parametric_curve$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-parametric_curve-new"></a>}}
-\if{latex}{\out{\hypertarget{method-parametric_curve-new}{}}}
-\subsection{Method \code{new()}}{
-Instantiate Parametric Recruitment Curve Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_curve$new(alpha = 0, beta = 0, variance = 0)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{alpha}}{\cr
+\if{html}{\out{<a id="method-parametric_curve-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-parametric_curve-initialize}{}}}
+\subsection{\code{parametric_curve$new()}}{
+  Instantiate Parametric Recruitment Curve Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_curve$new(alpha = 0, beta = 0, variance = 0)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{alpha}}{\cr
 Stock Recruitment Parameter, alpha}
-
-\item{\code{beta}}{\cr
+      \item{\code{beta}}{\cr
 Stock Recruitment Parameter, beta}
-
-\item{\code{variance}}{\cr
+      \item{\code{variance}}{\cr
 variance}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_curve-inp_lines_recruit_data"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_curve-inp_lines_recruit_data}{}}}
-\subsection{Method \code{inp_lines_recruit_data()}}{
-Exports RECRUIT submodel data for parametric curve recruitment
+\subsection{\code{parametric_curve$inp_lines_recruit_data()}}{
+  Exports RECRUIT submodel data for parametric curve recruitment
 to AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_curve$inp_lines_recruit_data(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_curve$inp_lines_recruit_data(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_curve-print"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_curve-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out Parametric Data
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_curve$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{parametric_curve$print()}}{
+  Prints out Parametric Data
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_curve$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_curve-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_curve-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads Parametric Curve model data from AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_curve$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{parametric_curve$read_inp_lines()}}{
+  Reads Parametric Curve model data from AGEPRO Input file
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_curve$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-parametric_curve-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-parametric_curve-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{parametric_curve$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{parametric_curve$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{parametric_curve$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

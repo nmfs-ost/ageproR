@@ -15,149 +15,157 @@ any existing rebuild and pstar projection objects.
 }
 \keyword{projection_analyses}
 \section{Super class}{
-\code{\link[ageproR:projection_analyses]{ageproR::projection_analyses}} -> \code{pstar_projection}
+\code{\link[ageproR:projection_analyses]{projection_analyses}} -> \code{pstar_projection}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{num_pstar_levels}}{Number of pstar values to be evaluated}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{num_pstar_levels}}{Number of pstar values to be evaluated}
 
-\item{\code{pstar_levels_table}}{The vector of probabilities of overfishing or PStar values to be used}
+    \item{\code{pstar_levels_table}}{The vector of probabilities of overfishing or PStar values to be used}
 
-\item{\code{pstar_overfishing_f}}{Fishing mortality rate that defines the overfishing level}
+    \item{\code{pstar_overfishing_f}}{Fishing mortality rate that defines the overfishing level}
 
-\item{\code{json_list_object}}{Returns JSON list object of PStar Projection values}
-}
-\if{html}{\out{</div>}}
+    \item{\code{json_list_object}}{Returns JSON list object of PStar Projection values}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-pstar_projection-new}{\code{pstar_projection$new()}}
-\item \href{#method-pstar_projection-create_blank_pstar_levels_table}{\code{pstar_projection$create_blank_pstar_levels_table()}}
-\item \href{#method-pstar_projection-read_inp_lines}{\code{pstar_projection$read_inp_lines()}}
-\item \href{#method-pstar_projection-get_inp_lines}{\code{pstar_projection$get_inp_lines()}}
-\item \href{#method-pstar_projection-print}{\code{pstar_projection$print()}}
-\item \href{#method-pstar_projection-clone}{\code{pstar_projection$clone()}}
-}
+  \itemize{
+    \item \href{#method-pstar_projection-initialize}{\code{pstar_projection$new()}}
+    \item \href{#method-pstar_projection-create_blank_pstar_levels_table}{\code{pstar_projection$create_blank_pstar_levels_table()}}
+    \item \href{#method-pstar_projection-read_inp_lines}{\code{pstar_projection$read_inp_lines()}}
+    \item \href{#method-pstar_projection-get_inp_lines}{\code{pstar_projection$get_inp_lines()}}
+    \item \href{#method-pstar_projection-print}{\code{pstar_projection$print()}}
+    \item \href{#method-pstar_projection-clone}{\code{pstar_projection$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pstar_projection-new"></a>}}
-\if{latex}{\out{\hypertarget{method-pstar_projection-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pstar_projection$new(proj_years, num_pstar_levels = 1, pstar_f = 0, ...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{May be a single numeric value: the number of years in the
+\if{html}{\out{<a id="method-pstar_projection-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-pstar_projection-initialize}{}}}
+\subsection{\code{pstar_projection$new()}}{
+  Initializes class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pstar_projection$new(proj_years, num_pstar_levels = 1, pstar_f = 0, ...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{May be a single numeric value: the number of years in the
 time projection; a vector of sequential values: Sequence of years in from
 first to last year of the time projection; or an instance of
 \link[=projection_years]{Projection years}}
-
-\item{\code{num_pstar_levels}}{Number of Pstar levels. Default is \code{1}}
-
-\item{\code{pstar_f}}{Fishing mortality rate \eqn{f}. Default is \code{0.0}}
-
-\item{\code{...}}{Other parameters to pass to
-\code{\link[=projection_analyses]{projection_analyses}}}
+      \item{\code{num_pstar_levels}}{Number of Pstar levels. Default is \code{1}}
+      \item{\code{pstar_f}}{Fishing mortality rate \eqn{f}. Default is \code{0.0}}
+      \item{\code{...}}{Other parameters to pass to
+\code{\link{projection_analyses}}}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pstar_projection-create_blank_pstar_levels_table"></a>}}
 \if{latex}{\out{\hypertarget{method-pstar_projection-create_blank_pstar_levels_table}{}}}
-\subsection{Method \code{create_blank_pstar_levels_table()}}{
-Creates a blank table-like matrix of probabilities of overfishing,
+\subsection{\code{pstar_projection$create_blank_pstar_levels_table()}}{
+  Creates a blank table-like matrix of probabilities of overfishing,
 or PStar values, to be used.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pstar_projection$create_blank_pstar_levels_table(num_pstar_levels = 1)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pstar_projection$create_blank_pstar_levels_table(num_pstar_levels = 1)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{num_pstar_levels}}{Number of pstar values}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{num_pstar_levels}}{Number of pstar values}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pstar_projection-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-pstar_projection-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter PSTAR from the
+\subsection{\code{pstar_projection$read_inp_lines()}}{
+  Reads in the values from the keyword parameter PSTAR from the
 AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pstar_projection$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pstar_projection$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pstar_projection-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-pstar_projection-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns PStar projection Values formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pstar_projection$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+\subsection{\code{pstar_projection$get_inp_lines()}}{
+  Returns PStar projection Values formatted as AGEPRO input file lines.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pstar_projection$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pstar_projection-print"></a>}}
 \if{latex}{\out{\hypertarget{method-pstar_projection-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out PStar values on Rconsole
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pstar_projection$print(enable_cat_print = TRUE)}\if{html}{\out{</div>}}
+\subsection{\code{pstar_projection$print()}}{
+  Formatted to print out PStar values on Rconsole
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pstar_projection$print(enable_cat_print = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_print]{cat_print}}
+messages to be seen on console.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{enable_cat_print}}{Logical flag to show target function's \strong{cli} \code{\link[cli:cat_line]{cat_print}}
-messages to be seen on console.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pstar_projection-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-pstar_projection-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{pstar_projection$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{pstar_projection$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{pstar_projection$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

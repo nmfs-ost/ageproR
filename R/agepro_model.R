@@ -52,8 +52,8 @@ agepro_model <- R6Class(
       ...
     ) {
       #Current Input File Version
-      private$.ver_inpfile_string = private$.currentver_inpfile_string
-      private$.ver_json_format = 2
+      private$.ver_inpfile_string <- private$.currentver_inpfile_string
+      private$.ver_json_format <- 2
       private$setup_ver_rpackage()
 
       #Set GENERAL
@@ -326,6 +326,49 @@ agepro_model <- R6Class(
     #' @param bsnfile bootstrap filename
     set_bootstrap_filename = function(bsnfile) {
       self$bootstrap$set_bootstrap_filename(bsnfile)
+    },
+
+    #' @description
+    #' Prints out values for each keyword parameter
+    #'
+    #' @examples
+    #' # Create agepro_inp_model "x"
+    #' # Supress NULL Recruitment Warnings, console output
+    #' x <- suppressWarnings(create_agepro_model(
+    #'   enable_cat_print = FALSE,
+    #'   show_general_params = FALSE
+    #' ))
+    #' # Print out x's values
+    #' x
+    #'
+    #'
+    print = function() {
+      print(c(
+        ver_inpfile_string = self$ver_inpfile_string,
+        case_id = self$case_id,
+        general = self$general,
+        bootstrap = self$bootstrap,
+        harvest = self$harvest,
+        rebuild = self$rebuild,
+        pstar = self$pstar,
+        retroadjust = self$retroadjust,
+        natmort = self$natmort,
+        biological = self$biological,
+        maturity = self$maturity,
+        stock_weight = self$stock_weight,
+        ssb_weight = self$ssb_weight,
+        mean_weight = self$mean_weight,
+        fishery = self$fishery,
+        discard = self$discard,
+        catch_weight = self$catch_weight,
+        disc_weight = self$disc_weight,
+        recruit = self$recruit,
+        bounds = self$bounds,
+        options = self$options,
+        scale = self$scale,
+        perc = self$perc,
+        refpoint = self$refpoint
+      ))
     },
 
     #' @description
@@ -878,8 +921,10 @@ agepro_model <- R6Class(
     .discards_present = NULL,
     .projection_analyses_type = NULL,
 
+    .input_filepath = NULL,
+
     setup_ver_rpackage = function() {
-      private$.ver_rpackage = utils::packageVersion("ageproR")
+      private$.ver_rpackage <- utils::packageVersion("ageproR")
     }
   )
 )
@@ -975,9 +1020,10 @@ agepro_inp_model <- R6Class(
     #' Read AGEPRO INP Input Files
     #'
     #' @param inpfile input file name
-    read_inp = function(inpfile) {
-      if (missing(inpfile)) {
-        inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"))
+    #' @template elipses
+    read_inp = function(inpfile, ...) {
+      if (missing(inpfile) && interactive()) {
+        inpfile <- open_file_dialog(c("AGEPRO input File", ".inp"), ...)
         #Exit Function if user cancels out of file dialog
         if (!test_file_exists(inpfile, access = "r", extension = "inp")) {
           return(invisible(NULL))
@@ -1028,7 +1074,7 @@ agepro_inp_model <- R6Class(
       # Assume line 1 is version string
       self$nline <- 1
 
-      div_line1_alert = function() {
+      div_line1_alert <- function() {
         cli::cli_div(
           class = "tmp",
           theme = list(
@@ -1195,7 +1241,7 @@ agepro_inp_model <- R6Class(
       delimiter = "  ",
       overwrite_as_currentver = TRUE
     ) {
-      if (missing(inpfile)) {
+      if (missing(inpfile) && interactive()) {
         inpfile <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values
@@ -1258,6 +1304,9 @@ agepro_inp_model <- R6Class(
       cat(unlist(list_inp_lines), sep = "\n")
       sink()
       cli::cli_alert_info("Saved to {.file {inpfile}}")
+
+      #Save model's inp_filepath after its written to file
+      private$set_inp_filepath(inpfile)
     }
   ),
   active = list(
@@ -1275,24 +1324,23 @@ agepro_inp_model <- R6Class(
       if (isFALSE(missing(val))) {
         stop("active binding is read only", call. = FALSE)
       }
-      private$.inp_filepath
+      private$.input_filepath
     }
   ),
   private = list(
     .nline = NULL,
-    .inp_filepath = NULL,
 
     set_inp_filepath = function(value) {
       if (isFALSE(checkmate::test_file_exists(value))) {
         warning(paste0(
           "Input file '",
           value,
-          "' is an invalid path or doesn't exist in ",
-          "current working directory. \n",
+          "'\n is an invalid path or doesn't exist in ",
+          "current working directory."
         ))
         return()
       }
-      private$.inp_filepath <- value
+      private$.input_filepath <- value
     },
 
     read_case_id = function(con, nline) {
@@ -1309,7 +1357,7 @@ agepro_inp_model <- R6Class(
       # Set Recruitment's observation year sequence array using GENERAL's
       # year names from the projection time period
       cli::cli_alert(paste0(
-        "Reading {.strong recruit}: ",
+        "Reading to {.strong recruit}: ",
         "Recruitment for time period from ",
         "{.val {self$general$yr_start}}",
         " to ",
@@ -1560,8 +1608,10 @@ agepro_inp_model <- R6Class(
           paste0(
             inp_line,
             msg_wasfound,
-            " but does not match current version of the AGEPRO",
-            " Input File format: ",
+            " but this format is not compatable with AGEPRO (calcuation engine)",
+            " version 4.25 and above.\n",
+            " By default, AGEPRO input files will be saved under this version",
+            " format: ",
             private$.currentver_inpfile_string
           ),
           call. = FALSE
@@ -1737,7 +1787,7 @@ agepro_json_model <- R6Class(
     #' @param show_dir Option to show directory after JSON file is written.
     #'
     write_json = function(file, show_dir = FALSE) {
-      if (missing(file)) {
+      if (missing(file) && interactive()) {
         file <- save_file_dialog()
         # Exit Function if user cancels out of file dialog
         # User cancelled dialogs return NULL values

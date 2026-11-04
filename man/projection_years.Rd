@@ -4,75 +4,76 @@
 \alias{projection_years}
 \title{Projection Years}
 \description{
-Projection Years
-
-Projection Years
-}
-\details{
 Handle the ambiguous use of "projection years" that can interpreted as
 a single int representing the count of projection years or a vector of
 sequential values representing a vector of "years" from first to last
 year of the AGEPRO model's time projection.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{count}}{The count of projection_years}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{count}}{The count of projection_years}
 
-\item{\code{sequence}}{Vector of years of time projection}
-}
-\if{html}{\out{</div>}}
+    \item{\code{sequence}}{Vector of years of time projection}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-projection_years-new}{\code{projection_years$new()}}
-\item \href{#method-projection_years-print}{\code{projection_years$print()}}
-\item \href{#method-projection_years-clone}{\code{projection_years$clone()}}
-}
+  \itemize{
+    \item \href{#method-projection_years-initialize}{\code{projection_years$new()}}
+    \item \href{#method-projection_years-print}{\code{projection_years$print()}}
+    \item \href{#method-projection_years-clone}{\code{projection_years$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-projection_years-new"></a>}}
-\if{latex}{\out{\hypertarget{method-projection_years-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{projection_years$new(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-projection_years-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-projection_years-initialize}{}}}
+\subsection{\code{projection_years$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{projection_years$new(x)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{Projected year value or vector}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{x}}{Projected year value or vector}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-projection_years-print"></a>}}
 \if{latex}{\out{\hypertarget{method-projection_years-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out projection_years fields
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{projection_years$print()}\if{html}{\out{</div>}}
+\subsection{\code{projection_years$print()}}{
+  Prints out projection_years fields
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{projection_years$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-projection_years-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-projection_years-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{projection_years$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{projection_years$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{projection_years$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

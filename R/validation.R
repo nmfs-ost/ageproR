@@ -1,5 +1,3 @@
-
-
 #' Recruitment Model Number Parameter validation
 #'
 #' @description
@@ -17,33 +15,33 @@
 #' @param x object to check
 #'
 check_model_num_vector_format <- function(x) {
-
   # Catch "Empty" argument
-  if(isTRUE(all.equal(length(x), 0))){
+  if (isTRUE(all.equal(length(x), 0))) {
     return(paste0("No recruitment model numbers passed"))
   }
 
   # Catch Multiple parameters and return validation message
-  if(!isTRUE(all.equal(length(x),1))){
-    return(paste0("Multiple parameters detected, ",
-                  "please pass multiple recruitment models as a single vector"))
+  if (!isTRUE(all.equal(length(x), 1))) {
+    return(paste0(
+      "Multiple parameters detected, ",
+      "please pass multiple recruitment models as a single vector"
+    ))
   }
 
   return(TRUE)
-
 }
 
 
 #' @rdname check_model_num_vector_format
 #'
 #' @template assert
-assert_model_num_vector_format <- function(x,
-                                      .var.name = checkmate::vname(x),
-                                      add = NULL) {
-
-  res = check_model_num_vector_format(x)
+assert_model_num_vector_format <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_model_num_vector_format(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
 
 
@@ -59,29 +57,34 @@ assert_model_num_vector_format <- function(x,
 #' @param num_recruit_models
 #' Number of recruitment models AGEPRO model at initialization
 #'
-check_model_num_vector_count <- function(x, num_recruit_models){
-
+check_model_num_vector_count <- function(x, num_recruit_models) {
   #Throw Error if vector length doesn't match num_recruit_models
-  if(!isTRUE(all.equal(length(x), num_recruit_models))){
-    return(paste0("Recruitment Model vector (model_num) object count ",
-                "does not match number of recruits. ",
-                "(count: ", length(x), ", number of recruits: ",
-                num_recruit_models, ")"))
+  if (!isTRUE(all.equal(length(x), num_recruit_models))) {
+    return(paste0(
+      "Recruitment Model vector (model_num) object count ",
+      "does not match number of recruits. ",
+      "(count: ",
+      length(x),
+      ", number of recruits: ",
+      num_recruit_models,
+      ")"
+    ))
   }
 
   return(TRUE)
-
 }
 
 #' @rdname check_model_num_vector_count
 #'
 #' @template assert
 #'
-assert_model_num_vector_count <- function(x, num_recruit_models,
-                                          .var.name = checkmate::vname(x),
-                                          add = NULL) {
-
-  res = check_model_num_vector_count(x, num_recruit_models)
+assert_model_num_vector_count <- function(
+  x,
+  num_recruit_models,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_model_num_vector_count(x, num_recruit_models)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -96,12 +99,14 @@ assert_model_num_vector_count <- function(x, num_recruit_models,
 #' Object to check
 #'
 check_proj_years_sequence <- function(x) {
-  if(isFALSE(all(diff(x) %in% 1))) {
-    paste0("Invalid projection_years Sequence: ",
-           "Sequence does not increment by 1 or ",
-           "not a valid interaction (no colon) of two numeric ",
-           "elements.")
-  }else {
+  if (isFALSE(all(diff(x) %in% 1))) {
+    paste0(
+      "Invalid projection_years Sequence: ",
+      "Sequence does not increment by 1 or ",
+      "not a valid interaction (no colon) of two numeric ",
+      "elements."
+    )
+  } else {
     TRUE
   }
 }
@@ -110,9 +115,12 @@ check_proj_years_sequence <- function(x) {
 #'
 #' @template assert
 #'
-assert_proj_years_sequence <- function(x, .var.name = checkmate::vname(x),
-                                   add = NULL) {
-  res = check_proj_years_sequence(x)
+assert_proj_years_sequence <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_proj_years_sequence(x)
   checkmate::makeAssertion(x, res, .var.name, add)
 }
 
@@ -128,8 +136,7 @@ assert_proj_years_sequence <- function(x, .var.name = checkmate::vname(x),
 #' Object to Check
 #'
 check_perc_active_binding <- function(x) {
-
-  if(checkmate::test_numeric(x, len = 1)) {
+  if (checkmate::test_numeric(x, len = 1)) {
     return(paste0(
       "Input value found as a numeric, not a percentile_summary class. ",
       "Did you mean to set report_percentile field?"
@@ -138,8 +145,7 @@ check_perc_active_binding <- function(x) {
 
   perc_fields <- c("report_percentile")
 
-  return(checkmate::check_r6(x, public = perc_fields) )
-
+  return(checkmate::check_r6(x, public = perc_fields))
 }
 
 
@@ -147,11 +153,13 @@ check_perc_active_binding <- function(x) {
 #'
 #' @template assert
 #'
-assert_perc_active_binding <- function(x, .var.name = checkmate::vname(x),
-                                       add = NULL) {
-  res = check_perc_active_binding(x)
+assert_perc_active_binding <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_perc_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
 
 
@@ -166,16 +174,14 @@ assert_perc_active_binding <- function(x, .var.name = checkmate::vname(x),
 #' Object to Check
 #'
 check_case_id_active_binding <- function(x) {
-
-  if(checkmate::test_string(x)) {
+  if (checkmate::test_string(x)) {
     return(paste0(
       "Input value found as a string, not a case_id class. ",
       "Did you mean to set model_name field?"
     ))
   }
 
-  return(checkmate::check_r6(x, public = "model_name") )
-
+  return(checkmate::check_r6(x, public = "model_name"))
 }
 
 
@@ -183,13 +189,14 @@ check_case_id_active_binding <- function(x) {
 #'
 #' @template assert
 #'
-assert_case_id_active_binding <- function(x, .var.name = checkmate::vname(x),
-                                       add = NULL) {
-  res = check_case_id_active_binding(x)
+assert_case_id_active_binding <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_case_id_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
-
 
 
 #' Validation for BOUNDS active binding in agepro_model
@@ -202,121 +209,188 @@ assert_case_id_active_binding <- function(x, .var.name = checkmate::vname(x),
 #' Object to Check
 #'
 check_bounds_active_binding <- function(x) {
-
-  bounds_fields <- c("max_weight",
-                     "max_natural_mortality")
-  return(checkmate::check_r6(x, public = bounds_fields) )
+  bounds_fields <- c("max_weight", "max_natural_mortality")
+  return(checkmate::check_r6(x, public = bounds_fields))
 }
 
 #' @rdname check_bounds_active_binding
 #'
 #' @template assert
 #'
-assert_bounds_active_binding <- function(x, .var.name = checkmate::vname(x),
-                                       add = NULL) {
-  res = check_bounds_active_binding(x)
+assert_bounds_active_binding <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_bounds_active_binding(x)
   checkmate::makeAssertion(x, res, .var.name, add)
-
 }
 
 
-
-#' @title
-#' Custom mapping function for error handing
+#' Agepro Model R6 class object validation
 #'
-#' @description
-#' Custom mapping function used for error handling. This is based on the
-#' rlang topic errors guide.
+#' Wrapper of checkmate::checkR6 function, to check the input object is a
+#' "agepro_model" type R6class that includes the public fields as defined
+#' in agepro_model.
 #'
-#' @template elipses
+#' @param x
+#' Object To Check
+#' @param class_type
+#' Type of agepro_model class type to validate. Default is `agepro_inp_model`
 #'
-#' @param .xs List r Atomic Vector
-#' @param .fn Function
-#'
-#' @export
-#'
-validate_map = function(.xs, .fn, ...) {
-
-  # Capture the defused code supplied as `.fn`
-  fn_code <- substitute(.fn)
-
-  out <- rlang::new_list(length(.xs))
-
-  for(i in seq_along(.xs)){
-    rlang::try_fetch(
-      out[[i]] <- .fn(.xs[[i]], ...),
-      error = function(cnd) {
-        # Inspect the 'call' field to detect `.fn` calls
-        if(rlang::is_call(cnd$call, ".fn")) {
-          # Replace ".fn" by the defused code
-          # and Keep existing Arguemnts
-          cnd$call[[1]] <- fn_code
-        }
-        rlang::abort(
-          sprintf("Problem while mapping around element %d ", i),
-          parent = cnd
-        )
-      }
+check_agepro_model_class <- function(x, class_type = "agepro_inp_model") {
+  # Validate agepro_model type class R6class param x
+  if (isFALSE(checkmate::test_r6(x))) {
+    return(
+      "Input parameter is not a R6class"
     )
   }
-  out
+
+  public_fields <- c(
+    "case_id",
+    "general",
+    "bootstrap",
+    "natmort",
+    "maturity",
+    "biological",
+    "fishery",
+    "discard",
+    "stock_weight",
+    "ssb_weight",
+    "mean_weight",
+    "catch_weight",
+    "disc_weight",
+    "recruit",
+    "harvest",
+    "pstar",
+    "options",
+    "refpoint",
+    "bounds",
+    "retroadjust",
+    "refpoint",
+    "scale"
+  )
+
+  # Check if agepro_model type R6class input parameter has agepro_model fields
+  if (isFALSE(checkmate::test_r6(x, public = public_fields))) {
+    #Extract fields from input R6class
+    r6_fields <- names(x)[!sapply(names(x)), function(foo) {
+      is.function(x[[foo]])
+    }]
+    missing_fields <- public_fields[!public_fields %in% r6_fields]
+    return(paste0(
+      "Input parameter does not include ",
+      "agepro_model public fields: ",
+      missing_fields,
+      collapse = ""
+    ))
+  }
+
+  # Validate class_type (agepro_inp_model, agepro_json_model, etc.)
+  if (missing(class_type)) {
+    class_type <- c(
+      "agepro_inp_model",
+      "agepro_json_model",
+      "agepro_model"
+    )
+  }
+
+  if (isFALSE(checkmate::test_choice(class(x)[1], class_type))) {
+    return(paste0(
+      class(x)[1],
+      " is not of class_type: \n",
+      class_type,
+      collapse = ""
+    ))
+  }
+
+  return(TRUE)
 }
 
-#' @title
-#' Validates the usage of the 'projection years' parameter.
+#' @rdname check_agepro_model_class
+#'
+#' @template assert
+#'
+assert_agepro_model_class <- function(
+  x,
+  class_type = c("agepro_inp_model", "agepro_json_model", "agepro_model"),
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_agepro_model_class(x, class_type)
+  checkmate::makeAssertion(x, res, .var.name, add)
+}
+
+#' AGEPRO Model Bootstrap file path valdation
 #'
 #' @description
-#' If `proj_years` parameter is a
-#' [projection_years class][ageproR::projection_years], then it will return
-#' that value. Otherwise, it will create a new `projection_years` class based
-#' on the param value passed.
-#'
-#' @param proj_years Projection year parameter. May be a numeric vector or a
-#' [`projection_years`][ageproR::projection_years]
-#'
-validate_proj_years_parameter <- function (proj_years) {
-
-  #Validate parameters
-  if (checkmate::test_r6(proj_years, public = c("count","sequence") )) {
-    proj_years_class <- proj_years
-  } else {
-    proj_years_class <- ageproR::projection_years$new(proj_years)
-  }
-
-  return(proj_years_class)
-}
-
-
-
-#' Checks the validity of filetype key-value pair.
-#'
-#' Checks the filetype as a 2 length vector without missing values. If filetype
-#' as not passed in the parameter, it will return the default `All files (*.*)`
-#' string vector.
+#' Helper function to check bootstrap file locations. This is typically used to
+#' check the bootstrap file path prior AGEPRO calcuation engine launch.
 #'
 #' @details
-#' The filetype key-value pair is defined as _fileTypeName_ _extension_. This
-#' is used to [specifying flie
-#' patterns](https://www.tcl.tk/man/tcl8.0/TkCmd/getOpenFile.html#M11) for
-#' Tcl/TK file modules.
+#' For portabilty and AGEPRO model reproducabilty, bootstrap file path strings
+#' may be relative to the location as the input file.
 #'
-#' @param filetype filename extension.
+#' @param model AGEPRO model class for AGEPRO Input File format (`agepro_inp_model`)
 #'
-#' @keywords internal
-#'
-validate_filetype <- function(filetype) {
-
-  if (missing(filetype)) {
-    #Default "All Files (*)" file type
-    filetype <- c("All Files", "*")
+check_model_bootstrap <- function(model) {
+  # Return if bootstrap file exists
+  if (checkmate::test_file_exists(model$bootstrap$bootstrap_file)) {
+    return(TRUE)
   }
 
-  #Validate filetype string
-  checkmate::assert_vector(filetype, all.missing = FALSE, len = 2,
-                           null.ok = FALSE)
-  return(filetype)
+  # Assert that agepro_model bootstrap_file is not NULL.
+  # Newly creatated agepro_models will have NULL bootstrap_file values
+  if (checkmate::test_null(model$bootstrap$bootstrap_file)) {
+    return("bootstrap_file is NULL or blank.")
+  }
 
+  # Otherwise, check if bootstrap file path is relative, saved on the
+  # same location as the input file: Check the model's input file location
+  # is valid. After validation, copy/paste input file dirname to bsn's file.
+  # Assuming that the two files are on the same location, the path check
+  # will be valid.
+  if (checkmate::test_file_exists(model$inp_filepath)) {
+    dir_inpfile <- dirname(model$inp_filepath)
+    rebuilt_bsn_path <- file.path(dir_inpfile, model$bootstrap$bootstrap_file)
+
+    # save to bootstrap file
+    if (checkmate::test_file_exists(rebuilt_bsn_path)) {
+      # Ask user to Replace bootstrap_file value with rebuilt_bsn_path
+      pmt_question <- paste0("Save Bootstrap File to: ", rebuilt_bsn_path)
+      pmt_answer <- prompt_yes_no(pmt_question)
+
+      if (is.na(pmt_answer) || isFALSE(pmt_answer)) {
+        return("Cancelled by User")
+      }
+
+      tryCatch(
+        {
+          # This will also call bootstrap's validate_bootstrap_file function
+          model$bootstrap$bootstrap_file <- rebuilt_bsn_path
+          # The rebuilt_bsn_path gets saved to input file
+          model$write_inp(model$inp_filepath)
+        },
+        error = function(e) {
+          return(paste0("Bootstrap file validation issue: ", e))
+        }
+      )
+      return(TRUE)
+    }
+  }
 }
 
-
-
+#' @rdname check_model_bootstrap
+#'
+#' @param x
+#' object to check
+#' @template assert
+#'
+assert_model_bootstrap <- function(
+  x,
+  .var.name = checkmate::vname(x),
+  add = NULL
+) {
+  res <- check_model_bootstrap(x)
+  checkmate::makeAssertion(x, res, .var.name, add)
+}

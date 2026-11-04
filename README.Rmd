@@ -1,5 +1,5 @@
 ---
-output: github_document
+fromat: gfm
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -18,37 +18,46 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-ageproR is a developing R-package designed to handle input data to and from 
+**ageproR** is a R-package designed to handle input data to and from 
 AGEPRO (Age Structured Projection Model) calculation engine. 
 
-> [!IMPORTANT]
->
-> **If you using AGEPRO for production, please use:**
->
-> - [AGEPRO-GUI, includes binary for AGEPRO calculation engine](https://github.com/nmfs-ost/AGEPRO-GUI)
-> - [AGEPRO Command Line based Calculation Engine source code repo](https://github.com/noaa-pifsc/AGEPRO) 
-> 
+**ageproR** supercedes [AGEPRO-GUI](https://github.com/nmfs-ost/AGEPRO-GUI), but requires the 
+binary from the Command Line based [AGEPRO Calculation Engine source code repo](https://github.com/noaa-pifsc/AGEPRO).
+See section _[Configuring ageproR with the AGEPRO calcuation engine](#configuring-agepror-with-the-agepro-calcuation-engine)_
+for details.
 
 ## Note
 
-**ageproR** is still in development. These features will be implemented in future updates. 
+These features will be implemented in future **ageproR** updates. 
 
 - Predictor Recruitment Models 
 - Fixed Recruitment Model 
 - Empirical Cumulative Distribution Factor for w/ Linear Decline to Zero
 - Markov Matrix Recruitment Model
-- Run AGEPRO models with the AGEPRO calculation engine within R.
-- Exported AGEPRO output R data objects.
+- ~~Run AGEPRO models with the AGEPRO calculation engine within R.~~
+- ~~Exported AGEPRO output R data objects.~~
 
-Importing Stock Synthesis report data as AGEPRO input data is being developed as a separate R-package: ss3agepro
+## AGEPRO input file format
+
+**ageproR** is compatible with the AGEPRO input file formats 
+`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves AGEPRO 
+input files in the `AGEPRO VERSION 4.25` format.
+
+Loading an input file with the `AGEPRO VERSION 4.0` format to **ageproR** will maintain its version format
+until it is saved (or launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25` format.
+
+**Models sent to the AGEPRO calualtion engine MUST be in the `AGEPRO VERSION 4.25` format**
+
+Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
 
 ## Installation
 
-You can install the development version of ageproR from 
-[NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
+You can install ageproR from the [NOAA Fisheries OST Repository](https://github.com/nmfs-ost/ageproR) 
 with:
 
-```{r ageproR-install, eval = FALSE}
+```{r ageproR-install}
+#| eval: false
+
 # via `pak`
 install.packages("pak")
 pak::pkg_install("nmfs-ost/ageproR")
@@ -58,20 +67,51 @@ install.packages("remotes")
 remotes::install_github("nmfs-ost/ageproR")
 ```
 
-## AGEPRO input file format
+## Configuring ageproR with the AGEPRO calcuation engine
 
-**ageproR** is compatible with the AGEPRO input file formats 
-`AGEPRO VERSION 4.0` & `AGEPRO VERSION 4.25`. By default, **ageproR** saves 
-to the `AGEPRO VERSION 4.25` Input File Format.
+ageproR requires the command line based [AGEPRO Calculation Engine](https://github.com/noaa-pifsc/AGEPRO) to
+run model projections. Download the [AGEPRO calculation engine binary](https://github.com/noaa-pifsc/AGEPRO/releases) at the NOAA-PIFSC github repository. 
 
-Please refer to the [*AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/) for more technical details.
+Store the AGEPRO calcuation engine binary to a folder location, this will be the directory path used to connect ageproR with AGEPRO with each model launch. For convenience, you can set an user-level R envrionmental variable.
 
-```{r example-run, child="inst/example/doc-model-workflow.Rmd"}
+### Open `.Renviron` file
+
+The following command will allow you to set the AGEPRO path to your user-level .Renviron file. This command opens the
+`~/.Renviron` file in your editor.
+
+```{r use-renvrion}
+#| eval: false
+
+usethis::edit_r_environ()
+```
+
+### Set the `AGEPRO_PATH` value and save `.Renviron`
+
+> [!WARNING]
+> 
+> **Windows Paths:** You must use forward slashes (`/`) or double backslashes (`\\`), not the standard single Windows backslashes (`\`).
+
+In `.Renviron`, add the line `AGEPRO_PATH` to _your directory where the AGEPRO calcuation binary is saved_. Save the changes. 
+
+```
+AGEPRO_PATH="C://path//to//folder//AGEPRO.EXE"
+```
+
+### Restart R and Verify 
+
+**You must restart the R session** for the changes to make effect. Once R is restarted, load `ageproR`. If set correctly, you will see an confirmation message:
+
+```
+library(ageproR)
+#>'AGEPRO_PATH' found at: "C://path//to//folder//AGEPRO.EXE"
+```
+
+```{r example-run, child="inst/extdata/doc-model-workflow.Rmd"}
 ```
 
 ## Citation
 
-Please cite this AGEPRO project as: 
+Please cite AGEPRO as: 
 
 ```
 Brodziak, Jon and Rago, Paul J. and Conser, Ramon. (1998). A General Approach for Making Short-Term 

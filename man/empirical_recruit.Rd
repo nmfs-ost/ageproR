@@ -7,171 +7,184 @@
 Recruitment Model Description
 }
 \section{Super class}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{empirical_recruit}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{empirical_recruit}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{with_ssb}}{with ssb}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{with_ssb}}{with ssb}
 
-\item{\code{low_bound}}{Lowest significant number bound}
+    \item{\code{low_bound}}{Lowest significant number bound}
 
-\item{\code{json_recruit_data}}{gets JSON-ready Recruit Model Data}
+    \item{\code{json_recruit_data}}{gets JSON-ready Recruit Model Data}
 
-\item{\code{observed_points}}{Gets/Sets the number of observations used of the model projection}
+    \item{\code{observed_points}}{Gets/Sets the number of observations used of the model projection}
 
-\item{\code{observations}}{Recruitment Inupt Array (data)}
+    \item{\code{observations}}{Recruitment Inupt Array (data)}
 
-\item{\code{super_}}{Binds the super class with the empirical_recruit child classes}
-}
-\if{html}{\out{</div>}}
+    \item{\code{super_}}{Binds the super class with the empirical_recruit child classes}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-empirical_recruit-new}{\code{empirical_recruit$new()}}
-\item \href{#method-empirical_recruit-new_obs_table}{\code{empirical_recruit$new_obs_table()}}
-\item \href{#method-empirical_recruit-set_obs_table_from_df}{\code{empirical_recruit$set_obs_table_from_df()}}
-\item \href{#method-empirical_recruit-print}{\code{empirical_recruit$print()}}
-\item \href{#method-empirical_recruit-print_json}{\code{empirical_recruit$print_json()}}
-\item \href{#method-empirical_recruit-read_inp_lines}{\code{empirical_recruit$read_inp_lines()}}
-\item \href{#method-empirical_recruit-inp_lines_recruit_data}{\code{empirical_recruit$inp_lines_recruit_data()}}
-\item \href{#method-empirical_recruit-clone}{\code{empirical_recruit$clone()}}
-}
+  \itemize{
+    \item \href{#method-empirical_recruit-initialize}{\code{empirical_recruit$new()}}
+    \item \href{#method-empirical_recruit-new_obs_table}{\code{empirical_recruit$new_obs_table()}}
+    \item \href{#method-empirical_recruit-set_obs_table_from_df}{\code{empirical_recruit$set_obs_table_from_df()}}
+    \item \href{#method-empirical_recruit-print}{\code{empirical_recruit$print()}}
+    \item \href{#method-empirical_recruit-print_json}{\code{empirical_recruit$print_json()}}
+    \item \href{#method-empirical_recruit-read_inp_lines}{\code{empirical_recruit$read_inp_lines()}}
+    \item \href{#method-empirical_recruit-inp_lines_recruit_data}{\code{empirical_recruit$inp_lines_recruit_data()}}
+    \item \href{#method-empirical_recruit-clone}{\code{empirical_recruit$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-empirical_recruit-new"></a>}}
-\if{latex}{\out{\hypertarget{method-empirical_recruit-new}{}}}
-\subsection{Method \code{new()}}{
-Creates an Empirical Recruit instance
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$new(num_observations = 1, with_ssb = FALSE, obs_table = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{num_observations}}{\cr
+\if{html}{\out{<a id="method-empirical_recruit-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-empirical_recruit-initialize}{}}}
+\subsection{\code{empirical_recruit$new()}}{
+  Creates an Empirical Recruit instance
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$new(num_observations = 1, with_ssb = FALSE, obs_table = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{num_observations}}{\cr
 Number of Empirical Observation Records}
-
-\item{\code{with_ssb}}{Empirical Recruitment includes Spawning
+      \item{\code{with_ssb}}{Empirical Recruitment includes Spawning
 Stock Biomass (SSB)}
-
-\item{\code{obs_table}}{Data Frame containing empirical recruitment
+      \item{\code{obs_table}}{Data Frame containing empirical recruitment
 observation table. If NULL, set to default values.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-new_obs_table"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-new_obs_table}{}}}
-\subsection{Method \code{new_obs_table()}}{
-Create Obs table
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$new_obs_table()}\if{html}{\out{</div>}}
+\subsection{\code{empirical_recruit$new_obs_table()}}{
+  Create Obs table
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$new_obs_table()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-set_obs_table_from_df"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-set_obs_table_from_df}{}}}
-\subsection{Method \code{set_obs_table_from_df()}}{
-Input data frame to set empirical recruitment observation data table.
+\subsection{\code{empirical_recruit$set_obs_table_from_df()}}{
+  Input data frame to set empirical recruitment observation data table.
 Typically used at initialization.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$set_obs_table_from_df(df)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$set_obs_table_from_df(df)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{df}}{Input data frame}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{df}}{Input data frame}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-print"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-print}{}}}
-\subsection{Method \code{print()}}{
-Prints out Recruitment Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$print(...)}\if{html}{\out{</div>}}
+\subsection{\code{empirical_recruit$print()}}{
+  Prints out Recruitment Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$print(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{further arguments passed to or from other methods}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{further arguments passed to or from other methods}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-print_json"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-print_json}{}}}
-\subsection{Method \code{print_json()}}{
-Returns Recruit data as JSON
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$print_json()}\if{html}{\out{</div>}}
+\subsection{\code{empirical_recruit$print_json()}}{
+  Returns Recruit data as JSON
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$print_json()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Read inp lines
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+\subsection{\code{empirical_recruit$read_inp_lines()}}{
+  Read inp lines
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-inp_lines_recruit_data"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-inp_lines_recruit_data}{}}}
-\subsection{Method \code{inp_lines_recruit_data()}}{
-Exports RECRUIT submodel data for empirical recruitment types
+\subsection{\code{empirical_recruit$inp_lines_recruit_data()}}{
+  Exports RECRUIT submodel data for empirical recruitment types
 to AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$inp_lines_recruit_data(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$inp_lines_recruit_data(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-empirical_recruit-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-empirical_recruit-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{empirical_recruit$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{empirical_recruit$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{empirical_recruit$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -9,62 +9,65 @@ Rebuilding, and PStar projection analyses based AGEPRO Keyword parameters.
 }
 \keyword{projection_analyses}
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{target_year}}{User-Selected target year for rebuilder and pstar projection analyses}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{target_year}}{User-Selected target year for rebuilder and pstar projection analyses}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-projection_analyses-new}{\code{projection_analyses$new()}}
-\item \href{#method-projection_analyses-clone}{\code{projection_analyses$clone()}}
-}
+  \itemize{
+    \item \href{#method-projection_analyses-initialize}{\code{projection_analyses$new()}}
+    \item \href{#method-projection_analyses-clone}{\code{projection_analyses$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-projection_analyses-new"></a>}}
-\if{latex}{\out{\hypertarget{method-projection_analyses-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{projection_analyses$new(proj_years, target_year = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{proj_years}}{May be a single numeric value: the number of years in
+\if{html}{\out{<a id="method-projection_analyses-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-projection_analyses-initialize}{}}}
+\subsection{\code{projection_analyses$new()}}{
+  Initializes class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{projection_analyses$new(proj_years, target_year = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{proj_years}}{May be a single numeric value: the number of years in
 the time projection; a vector of sequential values: Sequence of years
 in from first to last year of the time projection; or an instance of
 \link[=projection_years]{Projection years}:}
-
-\item{\code{target_year}}{Harvest Scenario Target Year for Pstar or
+      \item{\code{target_year}}{Harvest Scenario Target Year for Pstar or
 Rebuild projections. The NULL default triggers the default to be
 assigned to the last projection year from \code{proj_years}}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-projection_analyses-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-projection_analyses-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{projection_analyses$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{projection_analyses$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{projection_analyses$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

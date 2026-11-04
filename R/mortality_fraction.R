@@ -80,7 +80,7 @@ mortality_fraction_prior_spawn <- R6Class(
     read_inp_lines = function(inp_con, nline, proj_years_vector) {
       private$set_projection_years(proj_years_vector)
 
-      cli::cli_alert_info("Reading {.strong {private$.keyword_name}}")
+      cli::cli_alert_info("Reading to {.strong {private$.keyword_name}}")
 
       nline <- nline + 1
       inp_line <- read_inp_numeric_line(inp_con)
@@ -199,7 +199,7 @@ mortality_fraction_prior_spawn <- R6Class(
         add = validation_error
       )
       value |>
-        ageproR::validate_map(
+        map_errors(
           \(value) {
             checkmate::assert_numeric(
               value,
@@ -234,15 +234,17 @@ mortality_fraction_prior_spawn <- R6Class(
       if (isFALSE(missing(value))) {
         stop(
           paste0(
-            "Active binding is read only. \n",
-            "Please use proportion_total_mortality_matrix \n",
-            "to set proportions for natural and fishing mortality ",
-            "prior to spawn."
+            "Can not set natural_mortality_prior_spawn directly. \n",
+            "Set natural_mortality_prior_spawn row values to the \n",
+            "proportion_total_mortality_matrix."
           ),
           call. = FALSE
         )
       }
-      return(private$.natural_mortality_prior_spawn)
+      #return(private$.natural_mortality_prior_spawn)
+      return(private$.proportion_total_mortality_matrix[
+        "natural_mortality_prior_spawn",
+      ])
     },
 
     #' @field fishing_mortality_prior_spawn
@@ -253,15 +255,17 @@ mortality_fraction_prior_spawn <- R6Class(
       if (isFALSE(missing(value))) {
         stop(
           paste0(
-            "Active binding is read only. \n",
-            "Please use proportion_total_mortality_matrix ",
-            "to set proportions for natural and fishing mortality ",
-            "prior to spawn."
+            "Can not set fishing_mortality_prior_spawn directly. \n",
+            "Set fishing_mortality_prior_spawn row values to the \n",
+            "proportion_total_mortality_matrix."
           ),
           call. = FALSE
         )
       }
-      return(private$.fishing_mortality_prior_spawn)
+      #return(private$.fishing_mortality_prior_spawn)
+      return(private$.proportion_total_mortality_matrix[
+        "fishing_mortality_prior_spawn",
+      ])
     },
 
     #' @field json_list_object
@@ -289,6 +293,12 @@ mortality_fraction_prior_spawn <- R6Class(
     #' Returns AGEPRO input-file formatted Parameter
     inp_keyword = function() {
       paste0("[", toupper(private$.keyword_name), "]")
+    },
+
+    #' @field projection_years
+    #' Returns the projection_years used in the mortaliy_fraction object
+    projection_years = function() {
+      return(private$.projection_years)
     }
   ),
   private = list(
@@ -322,7 +332,7 @@ mortality_fraction_prior_spawn <- R6Class(
     },
 
     # Handle proj_years that may be a single int or sequential numeric vector
-    oset_projection_years = function(value) {
+    set_projection_years = function(value) {
       # Handle instances where value is passed as projection_years class
       if (checkmate::test_r6(value, public = c("count", "sequence"))) {
         private$.projection_years <- value$clone(deep = TRUE)
@@ -345,12 +355,17 @@ mortality_fraction_prior_spawn <- R6Class(
       checkmate::assert_numeric(value, lower = 0, upper = 1)
 
       if (time_varying) {
+        # Add prefix "y" to column names for projection years
+        colnames_projection_years <- paste0(
+          "y",
+          private$.projection_years$sequence
+        )
         return(
           matrix(
             value,
             nrow = 1,
             ncol = private$.projection_years$count,
-            dimnames = list(row_names, private$.projection_years$sequence)
+            dimnames = list(row_names, colnames_projection_years)
           )
         )
       } else {

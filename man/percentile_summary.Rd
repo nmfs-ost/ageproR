@@ -22,119 +22,127 @@ The percentile_summary class (or \code{PERC}) is an optional keyword
 parameter used in the AGEPRO input file format.
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{report_percentile}}{User-defined percentile for reporting the percentile of the projected
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{report_percentile}}{User-defined percentile for reporting the percentile of the projected
 distribution of the following quantities of interest by year:
 spawning stock biomass, stock biomass on January 1st, mean biomass,
 combined catch biomass, landings, fishing mortality, and stock
 numbers at age}
 
-\item{\code{enable_percentile_summary}}{Read-only logical field that flags if fields can be edited. To set
+    \item{\code{enable_percentile_summary}}{Read-only logical field that flags if fields can be edited. To set
 the value use \code{set_enable_percentile_summary} or field}
 
-\item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
+    \item{\code{json_list_object}}{Returns JSON list object of containing options_output values}
 
-\item{\code{keyword_name}}{AGEPRO keyword parameter name}
+    \item{\code{keyword_name}}{AGEPRO keyword parameter name}
 
-\item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
-}
-\if{html}{\out{</div>}}
+    \item{\code{inp_keyword}}{Returns AGEPRO input-file formatted Parameter}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-percentile_summary-new}{\code{percentile_summary$new()}}
-\item \href{#method-percentile_summary-print}{\code{percentile_summary$print()}}
-\item \href{#method-percentile_summary-read_inp_lines}{\code{percentile_summary$read_inp_lines()}}
-\item \href{#method-percentile_summary-get_inp_lines}{\code{percentile_summary$get_inp_lines()}}
-\item \href{#method-percentile_summary-clone}{\code{percentile_summary$clone()}}
-}
+  \itemize{
+    \item \href{#method-percentile_summary-initialize}{\code{percentile_summary$new()}}
+    \item \href{#method-percentile_summary-print}{\code{percentile_summary$print()}}
+    \item \href{#method-percentile_summary-read_inp_lines}{\code{percentile_summary$read_inp_lines()}}
+    \item \href{#method-percentile_summary-get_inp_lines}{\code{percentile_summary$get_inp_lines()}}
+    \item \href{#method-percentile_summary-clone}{\code{percentile_summary$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-percentile_summary-new"></a>}}
-\if{latex}{\out{\hypertarget{method-percentile_summary-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the class
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{percentile_summary$new(perc = 0, perc_flag = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-percentile_summary-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-percentile_summary-initialize}{}}}
+\subsection{\code{percentile_summary$new()}}{
+  Initializes the class
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{percentile_summary$new(perc = 0, perc_flag = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{perc}}{User-defined percentile of projected distributions}
+      \item{\code{perc_flag}}{R6class containing option flags to allow percentile summary to be used}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{perc}}{User-defined percentile of projected distributions}
-
-\item{\code{perc_flag}}{R6class containing option flags to allow percentile summary to be used}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-percentile_summary-print"></a>}}
 \if{latex}{\out{\hypertarget{method-percentile_summary-print}{}}}
-\subsection{Method \code{print()}}{
-Formatted to print out output_option values
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{percentile_summary$print()}\if{html}{\out{</div>}}
+\subsection{\code{percentile_summary$print()}}{
+  Formatted to print out output_option values
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{percentile_summary$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-percentile_summary-read_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-percentile_summary-read_inp_lines}{}}}
-\subsection{Method \code{read_inp_lines()}}{
-Reads in the values from the keyword parameter PERC from the
+\subsection{\code{percentile_summary$read_inp_lines()}}{
+  Reads in the values from the keyword parameter PERC from the
 AGEPRO Input file
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{percentile_summary$read_inp_lines(inp_con, nline)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
-
-\item{\code{nline}}{\cr
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{percentile_summary$read_inp_lines(inp_con, nline)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{inp_con}}{Open file connection to AGEPRO Input File.}
+      \item{\code{nline}}{\cr
 Location of the current line number being read when the file connection to
 the AGEPRO input file is open.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-percentile_summary-get_inp_lines"></a>}}
 \if{latex}{\out{\hypertarget{method-percentile_summary-get_inp_lines}{}}}
-\subsection{Method \code{get_inp_lines()}}{
-Returns values from the class to the PERC AGEPRO keyword parameter
+\subsection{\code{percentile_summary$get_inp_lines()}}{
+  Returns values from the class to the PERC AGEPRO keyword parameter
 formatted as AGEPRO input file lines.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{percentile_summary$get_inp_lines(delimiter = " ")}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{percentile_summary$get_inp_lines(delimiter = " ")}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{delimiter}}{Character string delimiter separating values of AGEPRO input file line.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-percentile_summary-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-percentile_summary-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{percentile_summary$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{percentile_summary$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{percentile_summary$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

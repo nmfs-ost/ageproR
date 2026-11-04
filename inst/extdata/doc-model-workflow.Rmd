@@ -1,0 +1,131 @@
+
+# Agepro Model Workflow Examples
+
+## Setting up a new `agepro_inp_model`
+
+By Default, creating a new instance of `agepro_inp_model` with default values will include a 
+single **NULL Recritment Model**, a placeholder recruitment model. This will trigger a WARNING 
+message to set and replace this Model with a vaild recruitment model before saving to file. 
+_The AGEPRO calcuation engine does not recognize models with **NULL Recruitment Model** of `0`, and 
+will not run this model_.
+
+```{r set-model, eval = FALSE}
+# If AGEPRO_PATH is setup, it will print the path of the AGEPRO Calcualtion Engine binary
+# right after ageproR package is loaded.
+# See readme section 'Configuring ageproR with the AGEPRO calcuation engine' for details
+library("ageproR")
+
+# Create a agepro_inp_model with default values
+test <- ageproR::create_agepro_model()
+
+# The function create_agepro_model is designed to ease users to create agepro model classes 
+# wtihout the nuances of R6class initializtion. This is the equivalent to:
+# test <- ageproR::agepro_inp_model$new()
+
+# Set model with Recruit Model 14: "Empirical Cumulative Distribution Function of Recruitment". 
+test$set_recruit_model(c(14))
+
+# New agepro_models instances return NULL
+test$bootstrap$bootstrap_file
+
+# Load path of ageproR's included Example1 Bootstrap File
+bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
+
+# Set Path of Bootstrap File 
+# Note: Leaving parameter blank may request a file dialog window.
+test$set_bootstrap_filename(bsnfile)
+```
+
+## Setting up a new `agepro_inp_model` w/ multiple recruitment models
+
+```{r set-multi-recruit, eval = FALSE}
+# New instance of agepro_inp_model refreses class to default values.
+# Specify the "number of recuitment models" (num_rec_models) at initializtion
+test <- ageproR::create_agepro_model(num_rec_models=3)
+
+# Multiple recruitments depend on agepro_model's "number of recruitment models". 
+# For example, to set a 3 recruit agepro_inp_model w/ two Beverton-Holt models and a single
+# Ricker model:
+test$set_recruit_model(c(5,5,6)) 
+# NOTE: A valid rerun of set_recruit_model will OVERWRITE the previous [RECRUIT] values.
+```
+
+## Reading or importing from AGEPRO input file (*.inp)
+
+```{r read-inp, eval = FALSE}
+# Load path of ageproR's included Example1 Input File
+inpfile <- system.file("extdata/Example1.INP", package = "ageproR")
+
+# Creates a new instance of agepro_inp_model class, wieh to default values,
+# and imports model data from the agepro input data file from 'inpfile'
+# Leaving the first parameter ('file') with a blank value will call for a file dialog window.
+test2 <- ageproR::import_agepro_model(inpfile)
+
+# The function import_agepro_model is similar to create_agepro_model, but a way to import data from
+# agepro input files without the nuances of agepro class R6class initializtion. 
+# This is functional combination of:
+# test2 <- ageproR::agepro_inp_model$new()
+# test2$read_inp(inpfile) 
+```
+
+Importing data from AGEPRO Input Files, especially with multiple recuitment models, readjusts the models number of recruits.
+
+### Setting Bootstrap Filepath when importing AGEPRO input data files 
+
+When importing agepro input data via `import_agepro_model` or `read_inp`, **ageproR** will give a WARNING 
+if the bootstrap file path non existant on the system. **ageproR** will to check if the bootstrap's 
+filepath is relative to the input file location.
+
+```{r inp-bootstrap-setup, eval = FALSE}
+# Load path of ageproR's included Example1 Bootstrap File
+bsnfile <- system.file("extdata/Example1.BSN", package = "ageproR")
+
+# Double check if the model's bootstrap filepath equals the intended "bsnpath"
+test2$bootstrap$bootstrap_file
+
+# If not, set the path:
+# test2$set_bootstrap_filename(bsnfile)
+```
+
+## Saving to AGEPRO Input File.
+
+By default, AGEPRO input files is saved in the `AGEPRO VERSION 4.25` format. 
+
+```{r write-inp, eval = FALSE}
+# Using the "test2" model .... 
+# Using tempfile() as example filepath
+outfile <- tempfile("example1_", fileext = ".inp")
+
+# Note: Leaving parameter blank may request a file dialog window.  
+test2$write_inp(outfile)
+```
+
+
+## Launch model
+
+Ensure that the model's "Export to R" option is enabled (`1`) before launching to the 
+AGEPRO calcuation engine. When this enabled flag is saved in the AGEPRO input file, it 
+allows AGEPRO to export output data as a Rdata file (`*.rdat`). 
+
+By default, `launch_model` creates a **Model Job** for each **agepro_model**
+run to the AGEPRO Caluclation Engine. Each Model Job will have a **Model Job Name**, by default, 
+is derived from the imported AGEPRO input file (otherwise it is *untitled*), an underscore, 
+and a timestamp string formatted in `YYYY-MM-DD_hh-mm-ss`. The **Model Job Name** is used to 
+create a **Model job directory**, by default, in the `~/AGEPRO` folder.
+
+Files in the **Model Job Directory** will named to the **Model Job Name** with the appropriate 
+file extensions:
+
+- `agepro_inp_model` data saved as a AGEPRO Input Data file
+- Copy of Models Bootstrap file
+- Output Files from the AGEPRO Calcuation Engine.
+
+```{r launch-model, eval = FALSE}
+# Using `test`from 'setting a new agepro_inp_model'
+test$options$export_df # Check "Export to R" option is enabled: should be 1
+launch_model(test)
+
+# Using `test2` from 'Reading or importing from AGEPRO input file (*.inp)'
+test2$options$export_df # Check "Export to R" option is enabled:  should be 1
+launch_model(test2)
+```

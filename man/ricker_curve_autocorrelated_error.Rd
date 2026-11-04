@@ -5,80 +5,76 @@
 \title{Ricker Curve with Autocorrelated Lognormal Error (Model #11)}
 \description{
 Ricker Curve with Autocorrelated Lognormal Error (Model #11)
-
-Ricker Curve with Autocorrelated Lognormal Error (Model #11)
 }
 \section{Super classes}{
-\code{\link[ageproR:recruit_model]{ageproR::recruit_model}} -> \code{\link[ageproR:parametric_curve]{ageproR::parametric_curve}} -> \code{\link[ageproR:parametric_autocorrelated_error]{ageproR::parametric_autocorrelated_error}} -> \code{ricker_curve_autocorrelated_error}
+\code{\link[ageproR:recruit_model]{recruit_model}} -> \code{\link[ageproR:parametric_curve]{parametric_curve}} -> \code{\link[ageproR:parametric_autocorrelated_error]{parametric_autocorrelated_error}} -> \code{ricker_curve_autocorrelated_error}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ricker_curve_autocorrelated_error-new}{\code{ricker_curve_autocorrelated_error$new()}}
-\item \href{#method-ricker_curve_autocorrelated_error-clone}{\code{ricker_curve_autocorrelated_error$clone()}}
+  \itemize{
+    \item \href{#method-ricker_curve_autocorrelated_error-initialize}{\code{ricker_curve_autocorrelated_error$new()}}
+    \item \href{#method-ricker_curve_autocorrelated_error-clone}{\code{ricker_curve_autocorrelated_error$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
+\if{html}{\out{<details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-inp_lines_recruit_data'><code>ageproR::parametric_autocorrelated_error$inp_lines_recruit_data()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="print"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-print'><code>ageproR::parametric_autocorrelated_error$print()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="read_inp_lines"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-read_inp_lines'><code>ageproR::parametric_autocorrelated_error$read_inp_lines()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="inp_lines_recruit_data"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-inp_lines_recruit_data'><code>parametric_autocorrelated_error$inp_lines_recruit_data()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="print"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-print'><code>parametric_autocorrelated_error$print()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="ageproR" data-topic="parametric_autocorrelated_error" data-id="read_inp_lines"><a href='../../ageproR/html/parametric_autocorrelated_error.html#method-parametric_autocorrelated_error-read_inp_lines'><code>parametric_autocorrelated_error$read_inp_lines()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ricker_curve_autocorrelated_error-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ricker_curve_autocorrelated_error-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes the Ricker Curve with Autocorrelated Error Model
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ricker_curve_autocorrelated_error$new(
+\if{html}{\out{<a id="method-ricker_curve_autocorrelated_error-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ricker_curve_autocorrelated_error-initialize}{}}}
+\subsection{\code{ricker_curve_autocorrelated_error$new()}}{
+  Initializes the Ricker Curve with Autocorrelated Error Model
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ricker_curve_autocorrelated_error$new(
   alpha = 0,
   beta = 0,
   variance = 0,
   phi = 0,
   log_residual = 0
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{alpha}}{\cr
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{alpha}}{\cr
 Stock Recruitment Parameter, alpha}
-
-\item{\code{beta}}{\cr
+      \item{\code{beta}}{\cr
 Stock Recruitment Parameter, beta}
-
-\item{\code{variance}}{\cr
+      \item{\code{variance}}{\cr
 variance}
-
-\item{\code{phi}}{\cr
+      \item{\code{phi}}{\cr
 Autocorrelation parameters}
-
-\item{\code{log_residual}}{\cr
+      \item{\code{log_residual}}{\cr
 Log-Scale Residual for the stock recruitment fit in the time prior to
 the projection}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ricker_curve_autocorrelated_error-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ricker_curve_autocorrelated_error-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ricker_curve_autocorrelated_error$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ricker_curve_autocorrelated_error$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ricker_curve_autocorrelated_error$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -21,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Eric Fletcher \email{eric.fletcher@noaa.gov}
   \item Jon Brodziak
 }
 
