@@ -8,6 +8,10 @@
 
 <!-- badges: end -->
 
+> \[!WARNING\]
+>
+> This is written for the upcoming release of **ageproR version 1.0.0**.
+
 **ageproR** is a R-package designed to handle input data to and from
 AGEPRO (Age Structured Projection Model) calculation engine.
 
