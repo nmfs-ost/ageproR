@@ -1251,6 +1251,7 @@ agepro_inp_model <- R6Class(
       }
 
       private$write_inpfile_version(overwrite_as_currentver)
+      withr::local_options(list(scipen = 999, OutDec = "."))
 
       withCallingHandlers(
         {
