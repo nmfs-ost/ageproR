@@ -17,10 +17,11 @@ test_that("write_inp writes numeric fields in decimal notation", {
   observations[1:2, 1] <- c(1e-8, 1e6)
   model$recruit$recruit_data[[1]]$observations <- observations
 
-  withr::local_options(list(scipen = -999, OutDec = ","))
+  withr::local_options(list(scipen = -9, OutDec = ","))
+  expect_equal(as.character(1e6), "1e+06")
   outfile <- tempfile(fileext = ".INP")
   model$write_inp(outfile)
-  expect_equal(getOption("scipen"), -999)
+  expect_equal(getOption("scipen"), -9)
   expect_equal(getOption("OutDec"), ",")
 
   lines <- readLines(outfile)
@@ -46,9 +47,9 @@ test_that("write_inp writes numeric fields in decimal notation", {
 test_that("write_inp restores numeric options after an error", {
   inpfile <- system.file("extdata", "Example1.INP", package = "ageproR")
   capture.output(model <- import_agepro_model(inpfile))
-  withr::local_options(list(scipen = -999, OutDec = ","))
+  withr::local_options(list(scipen = -9, OutDec = ","))
 
   expect_error(suppressWarnings(model$write_inp(file.path(tempfile(), "x.INP"))))
-  expect_equal(getOption("scipen"), -999)
+  expect_equal(getOption("scipen"), -9)
   expect_equal(getOption("OutDec"), ",")
 })
