@@ -1,3 +1,11 @@
+# ageproR (development version)
+
+- `write_inp()` writes numeric fields in decimal notation with a period decimal
+  separator, preserving text fields and restoring the caller's formatting options
+  on success or error.
+- Fixed numeric-formatting tests to use `scipen = -9`, a supported value that
+  forces scientific notation, instead of `-999`, which newer R versions clamp.
+
 # ageproR 0.9.1 (2026-06-01)
 
 - Fixes write_inp error when detecting options_flags (#109)
