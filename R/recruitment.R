@@ -351,9 +351,9 @@ recruitment <- R6Class(
         list(
           self$inp_keyword,
           paste(
-            self$recruit_scaling_factor,
-            self$ssb_scaling_factor,
-            self$max_recruit_obs,
+            private$format_numeric_string(self$recruit_scaling_factor),
+            private$format_numeric_string(self$ssb_scaling_factor),
+            private$format_numeric_string(self$max_recruit_obs),
             sep = delimiter
           ),
           # Append recruit list of recruit models as a single line
@@ -500,8 +500,8 @@ recruitment <- R6Class(
     #'
     json_list_object = function() {
       recruit_json_list_object <- list(
-        recFac = self$recruit_scaling_factor,
-        ssbFac = self$ssb_scaling_factor,
+        recFac = private$format_numeric_string(self$recruit_scaling_factor),
+        ssbFac = private$format_numeric_string(self$ssb_scaling_factor),
         maxRecObs = private$.max_recruit_obs,
         #list of model numbers
         type = unlist(self$recruit_model_num_list),
@@ -634,6 +634,12 @@ recruitment <- R6Class(
         private$.number_projection_years <- length(obs_years)
         private$.sequence_projection_years <- obs_years
       }
+    },
+
+    # Helper function to return numeric values without scientific/exponential notation.
+    format_numeric_string = function(x, ...) {
+      #Validate input
+      return(format(x, scientific = FALSE, trim = TRUE, ...))
     },
 
     #Module to printout Recruitment probability to Rconsole
