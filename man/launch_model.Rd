@@ -9,7 +9,8 @@ launch_model(
   out_dir,
   exe = "agepro.exe",
   append_job_dt = TRUE,
-  save_logfile = FALSE
+  save_logfile = FALSE,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ launch_model(
 \item{append_job_dt}{\link[base:logical]{Logical} option to append the date time stamp to the input files.}
 
 \item{save_logfile}{\link[base:logical]{Logical} option to log AGEPRO calcuation engine ouput to a logfile. FALSE by Default.}
+
+\item{...}{further arguments passed to or from other methods}
 }
 \description{
 This function takes the \link{agepro_inp_model} class,

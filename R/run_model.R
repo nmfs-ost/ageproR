@@ -93,6 +93,7 @@ run_model <- function(
 #' @param exe Path of the Agepro calcuation engine.
 #' @param append_job_dt [Logical][base::logical] option to append the date time stamp to the input files.
 #' @param save_logfile [Logical][base::logical] option to log AGEPRO calcuation engine ouput to a logfile. FALSE by Default.
+#' @template elipses
 #'
 #' @export
 #' @examples
@@ -116,7 +117,8 @@ launch_model <- function(
   out_dir,
   exe = "agepro.exe",
   append_job_dt = TRUE,
-  save_logfile = FALSE
+  save_logfile = FALSE,
+  ...
 ) {
   # Validate agepro_model
   assert_agepro_model_class(model)
@@ -146,7 +148,7 @@ launch_model <- function(
 
   # TODO: (Limited Character Length) Custom job names.
   # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
-  model_job_name <- set_job_name(model, type = "filename")
+  model_job_name <- set_job_name(model, ...)
 
   job_dir <- ifelse(
     append_job_dt,
