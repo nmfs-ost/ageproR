@@ -147,6 +147,9 @@ launch_model <- function(
   }
 
   # TODO: (Limited Character Length) Custom job names.
+  # Setting model job name is based on: (1) The input file name (type="filetype") or
+  # by the model's CASE_ID field (type="case_id"), if neither of these are available, "untitled"
+  # is used; (2) The timestamp of the job run is appended if append_job_dt is TRUE.
   # job_dir: <model_job_name>+"_"+(if enabled append_job_dt)<run_dt>
   model_job_name <- set_job_name(model, ...)
 
