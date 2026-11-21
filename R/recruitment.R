@@ -500,8 +500,8 @@ recruitment <- R6Class(
     #'
     json_list_object = function() {
       recruit_json_list_object <- list(
-        recFac = private$format_numeric_string(self$recruit_scaling_factor),
-        ssbFac = private$format_numeric_string(self$ssb_scaling_factor),
+        recFac = self$recruit_scaling_factor,
+        ssbFac = self$ssb_scaling_factor,
         maxRecObs = private$.max_recruit_obs,
         #list of model numbers
         type = unlist(self$recruit_model_num_list),
