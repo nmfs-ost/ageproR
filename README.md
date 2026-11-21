@@ -8,10 +8,6 @@
 
 <!-- badges: end -->
 
-> \[!WARNING\]
->
-> This is written for the upcoming release of **ageproR version 1.0.0**.
-
 **ageproR** is a R-package designed to handle input data to and from
 AGEPRO (Age Structured Projection Model) calculation engine.
 
@@ -31,8 +27,6 @@ These features will be implemented in future **ageproR** updates.
 - Fixed Recruitment Model
 - Empirical Cumulative Distribution Factor for w/ Linear Decline to Zero
 - Markov Matrix Recruitment Model
-- ~~Run AGEPRO models with the AGEPRO calculation engine within R.~~
-- ~~Exported AGEPRO output R data objects.~~
 
 ## AGEPRO input file format
 
@@ -45,7 +39,7 @@ Loading an input file with the `AGEPRO VERSION 4.0` format to
 launched to AGEPRO calcuation engine) in the `AGEPRO VERSION 4.25`
 format.
 
-**Models sent to the AGEPRO calualtion engine MUST be in the
+**Models sent to the AGEPRO calculation engine MUST be in the
 `AGEPRO VERSION 4.25` format**
 
 Please refer to the [*AGEPRO Reference
@@ -67,7 +61,7 @@ install.packages("remotes")
 remotes::install_github("nmfs-ost/ageproR")
 ```
 
-## Configuring ageproR with the AGEPRO calcuation engine
+## Configuring ageproR with the AGEPRO calculation engine
 
 ageproR requires the command line based [AGEPRO Calculation
 Engine](https://github.com/noaa-pifsc/AGEPRO) to run model projections.
@@ -75,9 +69,9 @@ Download the [AGEPRO calculation engine
 binary](https://github.com/noaa-pifsc/AGEPRO/releases) at the NOAA-PIFSC
 github repository.
 
-Store the AGEPRO calcuation engine binary to a folder location, this
+Store the AGEPRO calculation engine binary to a folder location, this
 will be the directory path used to connect ageproR with AGEPRO with each
-model launch. For convenience, you can set an user-level R envrionmental
+model launch. For convenience, you can set an user-level R environmental
 variable.
 
 ### Open `.Renviron` file
@@ -98,7 +92,9 @@ usethis::edit_r_environ()
 > backslashes (`\\`), not the standard single Windows backslashes (`\`).
 
 In `.Renviron`, add the line `AGEPRO_PATH` to *your directory where the
-AGEPRO calcuation binary is saved*. Save the changes.
+AGEPRO calculation binary is saved*. In this example, the AGEPRO
+(Calculation Engine) is located at `C://path//to//folder//AGEPRO.EXE`.
+Save the changes.
 
     AGEPRO_PATH="C://path//to//folder//AGEPRO.EXE"
 

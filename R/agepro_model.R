@@ -1251,7 +1251,6 @@ agepro_inp_model <- R6Class(
       }
 
       private$write_inpfile_version(overwrite_as_currentver)
-      withr::local_options(list(scipen = 999, OutDec = "."))
 
       withCallingHandlers(
         {
@@ -1285,6 +1284,9 @@ agepro_inp_model <- R6Class(
             self$options$get_inp_lines(delimiter),
             if (self$retroadjust$enable_retrospective_adjustments) {
               self$retroadjust$get_inp_lines(delimiter)
+            },
+            if (self$refpoint$enable_reference_points) {
+              self$refpoint$get_inp_lines(delimiter)
             },
             if (self$bounds$enable_max_bounds) {
               self$bounds$get_inp_lines(delimiter)

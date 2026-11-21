@@ -1,7 +1,7 @@
 Package: ageproR
 Type: Package
 Title: R package interface for AGEPRO (Age Structured Projection Model) data 
-Version: 0.9.1
+Version: 1.0.0-01
 Authors@R: c( 
   person("Eric", "Fletcher", email = "eric.fletcher@noaa.gov", 
     role = c("aut", "cre")),
@@ -65,4 +65,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/Needs/website: quarto
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1

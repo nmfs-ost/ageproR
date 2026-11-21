@@ -1,10 +1,105 @@
-# ageproR (development version)
+# ageproR 1.0.0 (2026-11-00 prerelease)
 
-- `write_inp()` writes numeric fields in decimal notation with a period decimal
-  separator, preserving text fields and restoring the caller's formatting options
-  on success or error.
-- Fixed numeric-formatting tests to use `scipen = -9`, a supported value that
-  forces scientific notation, instead of `-999`, which newer R versions clamp.
+This implements functionality with the AGEPRO calculation engine (#19). This update also include a function wrapper that create instances of agepro model classes, and one that imports data from AGEPRO input files to a new agepro model instance (#101). Improvements were made to input file handling, and example dataset was updated to the **AGEPRO v4.25 (Calculation Engine)** Example 1 dataset.
+
+- Integration with the AGEPRO (Calculation Engine): Launching AGEPRO Models or running the binary from R. (#19)
+  - **You Will Need to Install AGERPRO Calculation Engine on your system to work!!**
+  - **ageproWrapper**  <a href="#v1.0.0-note01" id="v1.0.0-disclose01"><sup>[^1]</sup></a> 
+    - Added option to log outputs from the AGEPRO calculation engine to text file. 
+    - Added method to handle multiple methods to return the AGEPRO calculation Binary: user defined path, user `.Renvrion` variable **`AGEPRO_PATH`**, or the default fallback: AGEPRO subdirectory of the home (`~`).   (#127)
+      - Added user environmental values (`.Renviron`) to store filepath of the AGEPRO calculation engine (`AGEPRO_PATH`) and output directory for logfiles (`LOG_OUTDIR`). 
+      - When **ageproR** loads and if `AGEPRO_PATH` is valid, prints out the path via packageStartupMessage. 
+      - See README section *Configure ageproR with the AGEPRO calculation engine* for more detail context for using this method.
+    - Consistent winslash ('/') when normalizing paths with `get_binary_path` and `get_logdir`
+  - added **`run_model`**
+    - Wrapper function to execute the AGEPRO Calculation Engine Binary with a AGEPRO Input File from R.
+  - added **`launch_model`**. 
+    - Gathers the agepro model (**agepro_inp_model**), supporting bootstrap file and saves it in a **Job Directory**. Launches into AGEPRO (via **`run_model`**).  AGEPRO ouput file ouputs are saved to the **job directory** . This is functionally similar to the "*launch AGEPRO model*" command used in **AGEPRO-GUI**. 
+    - **Job Directory** consists of a **Model Job Name** (and when `append_job_dt`is enabled: a underscore (`_`), and system datetime string in `YYYY-MM-DD_hh-mm-ss` format)
+      - By default, **Model Job Name** uses input file `filename`, specfically the basename sans extension of **agepro_inp_model's** `inp_filepath`. To use the model's **CASE_ID**, pass parameter `type="case_id"` through **`launch_model`**. If that value is NULL or a blank string, then it will be `untitled`. Detailed context of **Model Job** in README
+    - Code Documentation: Added link to [AGEPRO-GUI](https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI) 
+
+- Added classless agepro_model creation and import functions: `create_agepro_model` & `import_agepro_model` (#121) 
+
+- file.r
+   - Refactor file dialog manager code to handle Rconsole frontends (RStudio, Windows-Nativ, tcltk)  (#114). <a href="#v1.0.0-note2" id="v1.0.0-disclose02"><sup>[^2]</sup></a> 
+      - File dialog functions now have `interactive()` checks to prevent them activated in non-interactive R sessions (tests).
+      - Added cli Rconsole alert to a indicate file dialog window was opened. 
+      - Added `force_tcltk` logical parameter if tcltk is preferred. 
+   - moved `validate_filetype` from validate.R -> file.R (#113) 
+   - fix: **agepro_model**: removed outdated option flag references when writing to input file (#109)
+
+- agepro_model:  Can now **print** the contents of its own agepro_model type class.  #82
+  
+- case_id: 
+  - tweaks to format `case_id` keyword name value to inp_keyword `[CASEID]`  
+  - Added method to "sanitize" **case_id** model name string as a filename, if `case_id` was used as an alternative method to create a **Model Job Name** for **launch_model**
+
+- validations
+  - added **agepro_model** class type validations 
+  - check/assert model bootstrap: Bootstrap filepath validation used in **launch_model** & **run_model** 
+    - If **bootstrap** `boostrap_file` is a valid relative filepath (relative to the input file's location), it will reconstruct the full path of `bootstrap_file` using the input file's dirname, and save to AGEPRO input file.
+  - validation function refactoring (#112)
+     - move `validate_proj_years_parameter` as a private **projection_analyses** function
+     - rename `valiadate_map` -> `map_error` (util.R)
+     - move validate_filetype to file.r (#113)
+     
+- cli (R console) tweaks
+  - Parameter Tables (**Process Error** and **Harvest/Projection Analyses** Keyword Parameters)
+    - Emphasized parameter table rows text.  Added hashmarks `#` to Parameter Table row stats for visual clarity between the cli "info" alerts
+    - fix: Create the default blank parameter tables with `0` so they can be written to input file. (#123)
+  - Clarify "Read-only" warning messages for keyword parameters (**recruitment**, **general_params**) with active binding fields that are not settable, (#117)
+  - Updated warning messages to warn users loading `AGEPRO VERSION 4.0` input files to agepro models, that this format is not compatible with AGEPRO (calculation engine) version 4.25.
+  - Added missing **[BOOTSTRAP]** header when importing AGEPRO input files. 
+  - cli tweaks for keyword parameter consistency with the [AGEPRO Keyword Structure in the *AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/table3_keyword-struct.html)
+  - added yes/no prompts, with the option for default values. <a href="#v1.0.0-note03" id="v1.0.0-disclose03"><sup>[^3]</sup></a> 
+
+- Example Model: 
+  - Replace **Hawaii_UKU** (`AGEPRO VERSION 4.0`) with [AGEPRO (Calculation Engine) version 4.25](https://github.com/noaa-pifsc/AGEPRO) Example 1 Input File (_REDFISH - RECRUITMENT MODEL 14_) and supporting Bootstrap file.
+    - This example input file allows AGEPRO output data to be "export(ed) as a R data object" (`*.rdat`)
+  - Replaced the Hawaii_UKU example JSON input file, with the adaption of the **Example1 `AGEPRO VERSION 4.25`** agepro input file. 
+  - Updated Tests, Example documentation, and README to use the **AGEPRO (Calcualation Engine) version 4.25 Example 1** model. 
+    - Fixed code blocks (README, tests) to access Example1 files bundled inside the installed **ageproR** package via system calls (`system.file)`. (testthat fix:[#126](https://github.com/nmfs-ost/ageproR/issues/126)).
+
+- README changes : 
+  - Remove references of "Developing R package"
+  - Added Sections: 
+    - *Agepro Model Workflow Examples*
+    - *Configure ageproR with the AGEPRO calculation engine*
+    - *Launch Model* 
+  - Update all default input file format references to `AGEPRO VERSION 4.25`. **[AGEPRO v4.25 (Calculation Engine)](https://github.com/noaa-pifsc/AGEPRO/releases/tag/v4.25) will only launch models with the `AGEPRO VERSION 4.25` input file format**.
+  - Format detailed and informative code comments out of code blocks.
+  - Updated Agepro Reference Manual link to (https://nmfs-ost.github.io/agepro-ref-manual/)
+
+- Documentation
+   - NEWS.md: added parenthesis to the dates: Fixes an Positron markdown interpreter issue, intrperetating date as the "version" number.  
+   - Roxygen updated to 8.1.1
+   - Remove "internal" and utils R documentation Files (`*.Rd`) from ageproR-package help 
+
+- R script code reformatting with Air R formatter
+
+- bugfixes
+  - fix: Maintain notation for numerical values with large amount significant values, such as the recruitment scaling factor, from being converted to exponential/scentific notation. (#132, #131, #125). <a href="#v1.0.0-note04" id="v1.0.0-disclose04"><sup>[^4]</sup></a> 
+    - `write_inp()` writes numeric fields in decimal notation with a period decimal 
+      separator, preserving text fields and restoring the caller's formatting options
+      on success or error.
+  - fix: `REFPOINT` values are now writen to Agepro input file, what led to missing **Probabilty Threshold** in AGEPRO output file, with runs intended to have `REFPOINT` enabled. (#133)   
+  - fix: Before exiting `write_inp`, set  **agepro_inp_model** `inp_filepath` with the AGEPRO Input filepath used to write agepro model (**agepro_inp_model**) . 
+  - fix:  NULL `bootstrap_file` values is converted to an empty string before written to AGEPRO input file. (#124)
+  - fix: agepro_model: fixed `=` assignments operators, causing Air R Formatter errors
+  - fix: cli namespace fix with `div_keyword_header`
+  - typo fixes 
+
+> **Disclosure**:  
+> <ol>
+>   <li value="1" id="#v1.0.0-note01"> Gemini Enterprise 3.1 Pro was used as an code assistant to help draft a prototype logic structure in handling multiple methods (via custom path, a user environmental value with `.Renvrion` or, default subdirectory fallback on the home directory) in passing the binary filepath value to help ease repeated usage of a R package. @efletcherPIFSC adapted this to fit with the existing R package structure. <a href="#v1.0.0-disclose01">↩</a></li>  
+>   <li value="2" id="#v1.0.0-note02"> Gemini Enterprise 3.1 Pro was used as an code assistant to help draft logic handling with multiple R interactive interfaces (Rstudio, Windows-Native, TclTk) for the file dialog window manger. @efletcherPIFSC adapted this to fit within the existing R package structure. <a href="#v1.0.0-disclose02">↩</a>  </li>
+>   <li value="3" id="#v1.0.0-note03"> Gemini Enterprise 3.1 Pro was used as an code assistant to help draft out the logic behind the yes no R prompt including the option of a default choice,  @efletcherPIFSC adapted this to fit within the existing R package structure. <a href="#v1.0.0-disclose03">↩</a></li>
+>   <li value="4" id="#v1.0.0-note04"> Github Copilot was used as to automously branch, refactored the agepro_inp_model to include a procedure temporarily sets the users R's scientfic precsion format, added test cases, and a PR review (#130,#131). The changes made with #130-#132 were reverted for a solution that can be implmented within the ageproR package  (format_numeric_string) and is more compatible. Gemini Enterprise 3.1 Pro wad used as a code assistant to explain R's scientfic formatting logic and draft the logic behind  format_numeric_string. @efletcherPIFSC adapted this logic to replace the changes made with Github Copilot.<a href="#v1.0.0-disclose04">↩</a></li>
+> </ol>
+
+---
+
 
 # ageproR 0.9.1 (2026-06-01)
 
