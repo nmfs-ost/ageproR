@@ -6,24 +6,25 @@ This implements functionality with the AGEPRO calculation engine (#19). This upd
   - **You Will Need to Install AGERPRO Calculation Engine on your system to work!!**
   - **ageproWrapper**  <a href="#v1.0.0-note01" id="v1.0.0-disclose01"><sup>[^1]</sup></a> 
     - Added option to log outputs from the AGEPRO calculation engine to text file. 
-    - Added method to handle multiple methods to return the AGEPRO calculation Binary: custom path, user R environment variable, or the binary is in `~/AGEPRO` (#127)
+    - Added method to handle multiple methods to return the AGEPRO calculation Binary: user defined path, user `.Renvrion` variable **`AGEPRO_PATH`**, or the default fallback: AGEPRO subdirectory of the home (`~`).   (#127)
       - Added user environmental values (`.Renviron`) to store filepath of the AGEPRO calculation engine (`AGEPRO_PATH`) and output directory for logfiles (`LOG_OUTDIR`). 
-        - added `.Renviron` and `.Rprofile` to `.gitinore`
-      - When **ageproR** starts up, it will print out a packageStartupMessage. The message is based if the AGEPRO Calculation Binary filepath valid with the user R environmental value (`.Renviron`) `AGEPRO_PATH`.
+      - When **ageproR** loads and if `AGEPRO_PATH` is valid, prints out the path via packageStartupMessage. 
       - See README section *Configure ageproR with the AGEPRO calculation engine* for more detail context for using this method.
     - Consistent winslash ('/') when normalizing paths with `get_binary_path` and `get_logdir`
   - added **`run_model`**
     - Wrapper function to execute the AGEPRO Calculation Engine Binary with a AGEPRO Input File from R.
-  - added **`launch_model`**. Gathers **agepro_inp_model** (agepro_model with input datafile functions), launches it to AGEPRO (via **`run_model`**), and saves the output data in a single "Job Directory": consisting of a **Model Job Name**, a underscore (`_`), and system datetime string in `YYYY-MM-DD_hh-mm-ss` format. This is functionally similar to the "*launch AGEPRO model*" command used in AGEPRO-GUI. 
-    - By default, **Model Job Name** is the basename sans extension of **agepro_inp_model's** `inp_filepath`. If that value is NULL or a blank string, then it will be `untitled`. Detailed context of **Model Job** in README
+  - added **`launch_model`**. 
+    - Gathers the agepro model (**agepro_inp_model**), supporting bootstrap file and saves it in a **Job Directory**. Launches into AGEPRO (via **`run_model`**).  AGEPRO ouput file ouputs are saved to the **job directory** . This is functionally similar to the "*launch AGEPRO model*" command used in **AGEPRO-GUI**. 
+    - **Job Directory** consists of a **Model Job Name** (and when `append_job_dt`is enabled: a underscore (`_`), and system datetime string in `YYYY-MM-DD_hh-mm-ss` format)
+      - By default, **Model Job Name** uses input file `filename`, specfically the basename sans extension of **agepro_inp_model's** `inp_filepath`. To use the model's **CASE_ID**, pass parameter `type="case_id"` through **`launch_model`**. If that value is NULL or a blank string, then it will be `untitled`. Detailed context of **Model Job** in README
     - Code Documentation: Added link to [AGEPRO-GUI](https://nmfs-ost.github.io/noaa-fit/AGEPRO-GUI) 
 
 - Added classless agepro_model creation and import functions: `create_agepro_model` & `import_agepro_model` (#121) 
 
 - file.r
-   - Refactor file dialog manager code to handle  (w RStudio/Windows-Native/tcltk) PR #114. <a href="#v1.0.0-note2" id="v1.0.0-disclose02"><sup>[^2]</sup></a> 
-      - added interaction R session checks for functions that use the file dialog option
-      - Added Rconsole text to indicate a open file dialog window 
+   - Refactor file dialog manager code to handle Rconsole frontends (RStudio, Windows-Nativ, tcltk)  (#114). <a href="#v1.0.0-note2" id="v1.0.0-disclose02"><sup>[^2]</sup></a> 
+      - File dialog functions now have `interactive()` checks to prevent them activated in non-interactive R sessions (tests).
+      - Added cli Rconsole alert to a indicate file dialog window was opened. 
       - Added `force_tcltk` logical parameter if tcltk is preferred. 
    - moved `validate_filetype` from validate.R -> file.R (#113) 
    - fix: **agepro_model**: removed outdated option flag references when writing to input file (#109)
@@ -31,13 +32,13 @@ This implements functionality with the AGEPRO calculation engine (#19). This upd
 - agepro_model:  Can now **print** the contents of its own agepro_model type class.  #82
   
 - case_id: 
-  - tweaks to format `case_id` keyword name value to inp_keyword `[CASEID]` 
-  - Added method to "sanitize" the filename strings of the **case_id** model name. This is used if **case_id** was a alternative method used to create a **Model Job Name** for  **launch_model**
+  - tweaks to format `case_id` keyword name value to inp_keyword `[CASEID]`  
+  - Added method to "sanitize" **case_id** model name string as a filename, if `case_id` was used as an alternative method to create a **Model Job Name** for **launch_model**
 
 - validations
   - added **agepro_model** class type validations 
   - check/assert model bootstrap: Bootstrap filepath validation used in **launch_model** & **run_model** 
-    - If **bootstrap** `boostrap_file` is a valid relative filepath, it will reconstruct the full path of `bootstrap_file`, and save to  AGEPRO input file.
+    - If **bootstrap** `boostrap_file` is a valid relative filepath (relative to the input file's location), it will reconstruct the full path of `bootstrap_file` using the input file's dirname, and save to AGEPRO input file.
   - validation function refactoring (#112)
      - move `validate_proj_years_parameter` as a private **projection_analyses** function
      - rename `valiadate_map` -> `map_error` (util.R)
@@ -48,20 +49,20 @@ This implements functionality with the AGEPRO calculation engine (#19). This upd
     - Emphasized parameter table rows text.  Added hashmarks `#` to Parameter Table row stats for visual clarity between the cli "info" alerts
     - fix: Create the default blank parameter tables with `0` so they can be written to input file. (#123)
   - Clarify "Read-only" warning messages for keyword parameters (**recruitment**, **general_params**) with active binding fields that are not settable, (#117)
-  - Update warning messages, when importing `AGEPRO VERSION 4.0` input files, is not compatible with AGEPRO (version 4.2.5) calculation engine.
+  - Updated warning messages to warn users loading `AGEPRO VERSION 4.0` input files to agepro models, that this format is not compatible with AGEPRO (calculation engine) version 4.25.
   - Added missing **[BOOTSTRAP]** header when importing AGEPRO input files. 
-  - cli tweaks for consistency between keyword parameters and with the [AGEPRO Keyword Structure in the *AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/table3_keyword-struct.html)
-  - added yes/no prompt. These custom prompt has the option for default values. <a href="#v1.0.0-note03" id="v1.0.0-disclose03"><sup>[^3]</sup></a> 
-  - prints out system call message before running the AGEPRO calculation Engine.
+  - cli tweaks for keyword parameter consistency with the [AGEPRO Keyword Structure in the *AGEPRO Reference Manual*](https://nmfs-ost.github.io/agepro-ref-manual/table3_keyword-struct.html)
+  - added yes/no prompts, with the option for default values. <a href="#v1.0.0-note03" id="v1.0.0-disclose03"><sup>[^3]</sup></a> 
 
-- Example Model
-  - Replaced the (`AGEPRO VERSION 4.0`) Hawaii_UKU example input file dataset with the [AGEPRO Version 4.25](https://github.com/noaa-pifsc/AGEPRO) Example 1 input file dataset, and bootstrap file.
-    - Example1 allows AGEPRO output data to be "export(ed) as a R data object" (`*.rdat`)
-  - Replaced the JSON input file example of Hawaii_UKU, with the adaption of the **Example1 `AGEPRO VERSION 4.25`** agepro input file. 
-  - Tests, Example documentation, and README were updated to the Example1 model. 
-    - Code samples use `system.file` and use the Example1 files stored included in the package. (testthat fix:[#126](https://github.com/nmfs-ost/ageproR/issues/126)).
+- Example Model: 
+  - Replace **Hawaii_UKU** (`AGEPRO VERSION 4.0`) with [AGEPRO (Calculation Engine) version 4.25](https://github.com/noaa-pifsc/AGEPRO) Example 1 Input File (_REDFISH - RECRUITMENT MODEL 14_) and supporting Bootstrap file.
+    - This example input file allows AGEPRO output data to be "export(ed) as a R data object" (`*.rdat`)
+  - Replaced the Hawaii_UKU example JSON input file, with the adaption of the **Example1 `AGEPRO VERSION 4.25`** agepro input file. 
+  - Updated Tests, Example documentation, and README to use the **AGEPRO (Calcualation Engine) version 4.25 Example 1** model. 
+    - Fixed code blocks (README, tests) to access Example1 files bundled inside the installed **ageproR** package via system calls (`system.file)`. (testthat fix:[#126](https://github.com/nmfs-ost/ageproR/issues/126)).
 
-- README changes : Transition README Text from a "Developing R Package" to Release      
+- README changes : 
+  - Remove references of "Developing R package"
   - Added Sections: 
     - *Agepro Model Workflow Examples*
     - *Configure ageproR with the AGEPRO calculation engine*
@@ -71,27 +72,22 @@ This implements functionality with the AGEPRO calculation engine (#19). This upd
   - Updated Agepro Reference Manual link to (https://nmfs-ost.github.io/agepro-ref-manual/)
 
 - Documentation
-   - NEWS.md: added parenthesis to the dates, so that the Positron markdown Interpreter won't pick up the date as the "version" number.  
-   - Roxygen updated to 8.1.0
-   - Remove "internal" and utils functions R documentation Files (`*.Rd`) from ageproR-package help 
+   - NEWS.md: added parenthesis to the dates: Fixes an Positron markdown interpreter issue, intrperetating date as the "version" number.  
+   - Roxygen updated to 8.1.1
+   - Remove "internal" and utils R documentation Files (`*.Rd`) from ageproR-package help 
 
 - R script code reformatting with Air R formatter
 
 - bugfixes
   - fix: Maintain notation for numerical values with large amount significant values, such as the recruitment scaling factor, from being converted to exponential/scentific notation. (#132, #131, #125). <a href="#v1.0.0-note04" id="v1.0.0-disclose04"><sup>[^4]</sup></a> 
-    - A`write_inp()` writes numeric fields in decimal notation with a period decimal 
+    - `write_inp()` writes numeric fields in decimal notation with a period decimal 
       separator, preserving text fields and restoring the caller's formatting options
       on success or error.
-    - Fixed numeric-formatting tests to use `scipen = -9`, a supported value that
-      forces scientific notation, to be compatable with R 4.5.X and earlier. Starting with R 4.6.X and above, R clamps this value to `-999`.
-    - fix: `REFPOINT` values are now writen to Agepro input file: AGEPRO output files can now have **Probabilty Threshold** when `REFPOINTS` is used. (#133)   
-  - fix:  Any NULL `bootstrap_file` values is converted to an empty string before written to AGEPRO input file. (#124)
-  - cleanup bootstrap relative_inpfile implmentation
-  - fix: set_projection_years typo
-  - fix: agepro_model: fix `=` assignments, causing Air R Formatter errors
-  - fix: before finishing `write_inp`. set path used to write the AGEPRO input file to **agepro_inp_model** `inp_filepath` 
-  - fix: fixed **general_params** nline increment typo 
-  - fix: div_keyword_header : cli namespace fix
+  - fix: `REFPOINT` values are now writen to Agepro input file, what led to missing **Probabilty Threshold** in AGEPRO output file, with runs intended to have `REFPOINT` enabled. (#133)   
+  - fix: Before exiting `write_inp`, set  **agepro_inp_model** `inp_filepath` with the AGEPRO Input filepath used to write agepro model (**agepro_inp_model**) . 
+  - fix:  NULL `bootstrap_file` values is converted to an empty string before written to AGEPRO input file. (#124)
+  - fix: agepro_model: fixed `=` assignments operators, causing Air R Formatter errors
+  - fix: cli namespace fix with `div_keyword_header`
   - typo fixes 
 
 > **Disclosure**:  
