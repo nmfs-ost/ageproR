@@ -429,5 +429,5 @@ general_params <- R6Class(
       checkmate::assert_numeric(value, len = 1, .var.name = "seed")
       private$.seed <- value
     }
-  )
+  ), lock_objects = FALSE
 )
